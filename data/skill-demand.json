@@ -1,0 +1,786 @@
+{
+  "generatedAt": "2026-09-03T21:09:22.405Z",
+  "postingsRead": 931,
+  "demand": [
+    {
+      "skill": "compliance",
+      "count": 163,
+      "share": 0.17508055853920515,
+      "track": "unknown"
+    },
+    {
+      "skill": "governance",
+      "count": 123,
+      "share": 0.13211600429645542,
+      "track": "unknown"
+    },
+    {
+      "skill": "ai",
+      "count": 103,
+      "share": 0.11063372717508056,
+      "track": "data-ai"
+    },
+    {
+      "skill": "monitoring",
+      "count": 89,
+      "share": 0.09559613319011816,
+      "track": "unknown"
+    },
+    {
+      "skill": "regulatory",
+      "count": 74,
+      "share": 0.079484425349087,
+      "track": "grc"
+    },
+    {
+      "skill": "controls",
+      "count": 54,
+      "share": 0.05800214822771214,
+      "track": "grc"
+    },
+    {
+      "skill": "cybersecurity",
+      "count": 53,
+      "share": 0.05692803437164339,
+      "track": "security"
+    },
+    {
+      "skill": "analytics",
+      "count": 49,
+      "share": 0.05263157894736842,
+      "track": "data-ai"
+    },
+    {
+      "skill": "audit",
+      "count": 44,
+      "share": 0.047261009667024706,
+      "track": "grc"
+    },
+    {
+      "skill": "ticketing",
+      "count": 42,
+      "share": 0.045112781954887216,
+      "track": "unknown"
+    },
+    {
+      "skill": "saas",
+      "count": 36,
+      "share": 0.03866809881847476,
+      "track": "unknown"
+    },
+    {
+      "skill": "risk management",
+      "count": 34,
+      "share": 0.036519871106337275,
+      "track": "grc"
+    },
+    {
+      "skill": "python",
+      "count": 34,
+      "share": 0.036519871106337275,
+      "track": "data-ai"
+    },
+    {
+      "skill": "sql",
+      "count": 28,
+      "share": 0.03007518796992481,
+      "track": "data-ai"
+    },
+    {
+      "skill": "onboarding",
+      "count": 28,
+      "share": 0.03007518796992481,
+      "track": "unknown"
+    },
+    {
+      "skill": "observability",
+      "count": 27,
+      "share": 0.02900107411385607,
+      "track": "software"
+    },
+    {
+      "skill": "software engineering",
+      "count": 27,
+      "share": 0.02900107411385607,
+      "track": "software"
+    },
+    {
+      "skill": "backend",
+      "count": 26,
+      "share": 0.027926960257787327,
+      "track": "software"
+    },
+    {
+      "skill": "policy",
+      "count": 26,
+      "share": 0.027926960257787327,
+      "track": "grc"
+    },
+    {
+      "skill": "agile",
+      "count": 24,
+      "share": 0.02577873254564984,
+      "track": "software"
+    },
+    {
+      "skill": "troubleshooting",
+      "count": 23,
+      "share": 0.024704618689581095,
+      "track": "unknown"
+    },
+    {
+      "skill": "ci/cd",
+      "count": 23,
+      "share": 0.024704618689581095,
+      "track": "software"
+    },
+    {
+      "skill": "aws",
+      "count": 21,
+      "share": 0.022556390977443608,
+      "track": "software"
+    },
+    {
+      "skill": "kubernetes",
+      "count": 21,
+      "share": 0.022556390977443608,
+      "track": "infra"
+    },
+    {
+      "skill": "data science",
+      "count": 21,
+      "share": 0.022556390977443608,
+      "track": "data-ai"
+    },
+    {
+      "skill": "devops",
+      "count": 20,
+      "share": 0.021482277121374866,
+      "track": "infra"
+    },
+    {
+      "skill": "asset management",
+      "count": 18,
+      "share": 0.01933404940923738,
+      "track": "unknown"
+    },
+    {
+      "skill": "business continuity",
+      "count": 15,
+      "share": 0.01611170784103115,
+      "track": "grc"
+    },
+    {
+      "skill": "risk assessment",
+      "count": 15,
+      "share": 0.01611170784103115,
+      "track": "grc"
+    },
+    {
+      "skill": "privacy",
+      "count": 15,
+      "share": 0.01611170784103115,
+      "track": "grc"
+    },
+    {
+      "skill": "gcp",
+      "count": 15,
+      "share": 0.01611170784103115,
+      "track": "infra"
+    },
+    {
+      "skill": "java",
+      "count": 14,
+      "share": 0.015037593984962405,
+      "track": "software"
+    },
+    {
+      "skill": "storage",
+      "count": 13,
+      "share": 0.013963480128893663,
+      "track": "data-ai"
+    },
+    {
+      "skill": "disaster recovery",
+      "count": 13,
+      "share": 0.013963480128893663,
+      "track": "unknown"
+    },
+    {
+      "skill": "llm",
+      "count": 13,
+      "share": 0.013963480128893663,
+      "track": "data-ai"
+    },
+    {
+      "skill": "machine learning",
+      "count": 13,
+      "share": 0.013963480128893663,
+      "track": "data-ai"
+    },
+    {
+      "skill": "frontend",
+      "count": 12,
+      "share": 0.01288936627282492,
+      "track": "software"
+    },
+    {
+      "skill": "typescript",
+      "count": 12,
+      "share": 0.01288936627282492,
+      "track": "software"
+    },
+    {
+      "skill": "networking",
+      "count": 11,
+      "share": 0.011815252416756176,
+      "track": "unknown"
+    },
+    {
+      "skill": "information security",
+      "count": 11,
+      "share": 0.011815252416756176,
+      "track": "security"
+    },
+    {
+      "skill": "azure",
+      "count": 11,
+      "share": 0.011815252416756176,
+      "track": "infra"
+    },
+    {
+      "skill": "react",
+      "count": 11,
+      "share": 0.011815252416756176,
+      "track": "software"
+    },
+    {
+      "skill": "nosql",
+      "count": 11,
+      "share": 0.011815252416756176,
+      "track": "software"
+    },
+    {
+      "skill": "backup",
+      "count": 10,
+      "share": 0.010741138560687433,
+      "track": "unknown"
+    },
+    {
+      "skill": "sama",
+      "count": 10,
+      "share": 0.010741138560687433,
+      "track": "grc"
+    },
+    {
+      "skill": "docker",
+      "count": 10,
+      "share": 0.010741138560687433,
+      "track": "infra"
+    },
+    {
+      "skill": "technical support",
+      "count": 10,
+      "share": 0.010741138560687433,
+      "track": "unknown"
+    },
+    {
+      "skill": "git",
+      "count": 10,
+      "share": 0.010741138560687433,
+      "track": "software"
+    },
+    {
+      "skill": "scrum",
+      "count": 10,
+      "share": 0.010741138560687433,
+      "track": "software"
+    },
+    {
+      "skill": "internal audit",
+      "count": 10,
+      "share": 0.010741138560687433,
+      "track": "grc"
+    },
+    {
+      "skill": "data engineering",
+      "count": 10,
+      "share": 0.010741138560687433,
+      "track": "data-ai"
+    },
+    {
+      "skill": "javascript",
+      "count": 10,
+      "share": 0.010741138560687433,
+      "track": "software"
+    },
+    {
+      "skill": "soc",
+      "count": 9,
+      "share": 0.00966702470461869,
+      "track": "security"
+    },
+    {
+      "skill": "incident response",
+      "count": 9,
+      "share": 0.00966702470461869,
+      "track": "security"
+    },
+    {
+      "skill": "microservices",
+      "count": 9,
+      "share": 0.00966702470461869,
+      "track": "software"
+    },
+    {
+      "skill": "grc",
+      "count": 9,
+      "share": 0.00966702470461869,
+      "track": "grc"
+    },
+    {
+      "skill": "php",
+      "count": 9,
+      "share": 0.00966702470461869,
+      "track": "software"
+    },
+    {
+      "skill": "spark",
+      "count": 8,
+      "share": 0.008592910848549946,
+      "track": "data-ai"
+    },
+    {
+      "skill": "android",
+      "count": 8,
+      "share": 0.008592910848549946,
+      "track": "software"
+    },
+    {
+      "skill": "tableau",
+      "count": 8,
+      "share": 0.008592910848549946,
+      "track": "data-ai"
+    },
+    {
+      "skill": "itil",
+      "count": 8,
+      "share": 0.008592910848549946,
+      "track": "unknown"
+    },
+    {
+      "skill": "data privacy",
+      "count": 7,
+      "share": 0.007518796992481203,
+      "track": "grc"
+    },
+    {
+      "skill": "generative ai",
+      "count": 7,
+      "share": 0.007518796992481203,
+      "track": "data-ai"
+    },
+    {
+      "skill": "grafana",
+      "count": 7,
+      "share": 0.007518796992481203,
+      "track": "infra"
+    },
+    {
+      "skill": "data analysis",
+      "count": 7,
+      "share": 0.007518796992481203,
+      "track": "unknown"
+    },
+    {
+      "skill": "high availability",
+      "count": 7,
+      "share": 0.007518796992481203,
+      "track": "unknown"
+    },
+    {
+      "skill": "kafka",
+      "count": 7,
+      "share": 0.007518796992481203,
+      "track": "data-ai"
+    },
+    {
+      "skill": "threat intelligence",
+      "count": 7,
+      "share": 0.007518796992481203,
+      "track": "security"
+    },
+    {
+      "skill": "cissp",
+      "count": 7,
+      "share": 0.007518796992481203,
+      "track": "security"
+    },
+    {
+      "skill": "visualization",
+      "count": 7,
+      "share": 0.007518796992481203,
+      "track": "data-ai"
+    },
+    {
+      "skill": "power bi",
+      "count": 7,
+      "share": 0.007518796992481203,
+      "track": "data-ai"
+    },
+    {
+      "skill": "google cloud",
+      "count": 7,
+      "share": 0.007518796992481203,
+      "track": "cloud"
+    },
+    {
+      "skill": "iso 27001",
+      "count": 6,
+      "share": 0.00644468313641246,
+      "track": "grc"
+    },
+    {
+      "skill": "postgresql",
+      "count": 6,
+      "share": 0.00644468313641246,
+      "track": "software"
+    },
+    {
+      "skill": "prometheus",
+      "count": 6,
+      "share": 0.00644468313641246,
+      "track": "infra"
+    },
+    {
+      "skill": "nca",
+      "count": 6,
+      "share": 0.00644468313641246,
+      "track": "security"
+    },
+    {
+      "skill": "snowflake",
+      "count": 6,
+      "share": 0.00644468313641246,
+      "track": "data-ai"
+    },
+    {
+      "skill": "looker",
+      "count": 6,
+      "share": 0.00644468313641246,
+      "track": "data-ai"
+    },
+    {
+      "skill": "laravel",
+      "count": 6,
+      "share": 0.00644468313641246,
+      "track": "software"
+    },
+    {
+      "skill": "mlops",
+      "count": 6,
+      "share": 0.00644468313641246,
+      "track": "data-ai"
+    },
+    {
+      "skill": "hardware",
+      "count": 6,
+      "share": 0.00644468313641246,
+      "track": "unknown"
+    },
+    {
+      "skill": "vulnerability management",
+      "count": 5,
+      "share": 0.0053705692803437165,
+      "track": "security"
+    },
+    {
+      "skill": "terraform",
+      "count": 5,
+      "share": 0.0053705692803437165,
+      "track": "infra"
+    },
+    {
+      "skill": "sre",
+      "count": 5,
+      "share": 0.0053705692803437165,
+      "track": "infra"
+    },
+    {
+      "skill": "full stack",
+      "count": 5,
+      "share": 0.0053705692803437165,
+      "track": "software"
+    },
+    {
+      "skill": "nist",
+      "count": 5,
+      "share": 0.0053705692803437165,
+      "track": "grc"
+    },
+    {
+      "skill": "kotlin",
+      "count": 5,
+      "share": 0.0053705692803437165,
+      "track": "software"
+    },
+    {
+      "skill": "statistics",
+      "count": 5,
+      "share": 0.0053705692803437165,
+      "track": "data-ai"
+    },
+    {
+      "skill": "apache",
+      "count": 5,
+      "share": 0.0053705692803437165,
+      "track": "data-ai"
+    },
+    {
+      "skill": "mongodb",
+      "count": 5,
+      "share": 0.0053705692803437165,
+      "track": "data-ai"
+    },
+    {
+      "skill": "mysql",
+      "count": 5,
+      "share": 0.0053705692803437165,
+      "track": "software"
+    },
+    {
+      "skill": "airflow",
+      "count": 5,
+      "share": 0.0053705692803437165,
+      "track": "data-ai"
+    },
+    {
+      "skill": "cloud security",
+      "count": 5,
+      "share": 0.0053705692803437165,
+      "track": "security"
+    },
+    {
+      "skill": "gdpr",
+      "count": 5,
+      "share": 0.0053705692803437165,
+      "track": "grc"
+    },
+    {
+      "skill": "security+",
+      "count": 4,
+      "share": 0.004296455424274973,
+      "track": "security"
+    },
+    {
+      "skill": "pci dss",
+      "count": 4,
+      "share": 0.004296455424274973,
+      "track": "grc"
+    },
+    {
+      "skill": "devsecops",
+      "count": 4,
+      "share": 0.004296455424274973,
+      "track": "unknown"
+    },
+    {
+      "skill": "solutions architect",
+      "count": 4,
+      "share": 0.004296455424274973,
+      "track": "cloud"
+    },
+    {
+      "skill": "ruby",
+      "count": 4,
+      "share": 0.004296455424274973,
+      "track": "software"
+    },
+    {
+      "skill": "site reliability",
+      "count": 4,
+      "share": 0.004296455424274973,
+      "track": "infra"
+    },
+    {
+      "skill": "elk",
+      "count": 4,
+      "share": 0.004296455424274973,
+      "track": "infra"
+    },
+    {
+      "skill": "swift",
+      "count": 4,
+      "share": 0.004296455424274973,
+      "track": "software"
+    },
+    {
+      "skill": "ios",
+      "count": 4,
+      "share": 0.004296455424274973,
+      "track": "software"
+    },
+    {
+      "skill": "cisa",
+      "count": 4,
+      "share": 0.004296455424274973,
+      "track": "grc"
+    },
+    {
+      "skill": "fortinet",
+      "count": 4,
+      "share": 0.004296455424274973,
+      "track": "it-support"
+    },
+    {
+      "skill": "oci",
+      "count": 4,
+      "share": 0.004296455424274973,
+      "track": "data-ai"
+    },
+    {
+      "skill": "node.js",
+      "count": 4,
+      "share": 0.004296455424274973,
+      "track": "data-ai"
+    },
+    {
+      "skill": "etl",
+      "count": 4,
+      "share": 0.004296455424274973,
+      "track": "data-ai"
+    },
+    {
+      "skill": "cism",
+      "count": 4,
+      "share": 0.004296455424274973,
+      "track": "security"
+    },
+    {
+      "skill": "crisc",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "security"
+    },
+    {
+      "skill": "eks",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "infra"
+    },
+    {
+      "skill": "servicenow",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "unknown"
+    },
+    {
+      "skill": "s3",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "data-ai"
+    },
+    {
+      "skill": "ecc",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "grc"
+    },
+    {
+      "skill": "forensics",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "security"
+    },
+    {
+      "skill": "linux",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "security"
+    },
+    {
+      "skill": "data warehouse",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "data-ai"
+    },
+    {
+      "skill": "cisco",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "security"
+    },
+    {
+      "skill": "siem",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "security"
+    },
+    {
+      "skill": "splunk",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "security"
+    },
+    {
+      "skill": "bash",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "infra"
+    },
+    {
+      "skill": "powershell",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "security"
+    },
+    {
+      "skill": "endpoint",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "security"
+    },
+    {
+      "skill": "deep learning",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "data-ai"
+    },
+    {
+      "skill": "tensorflow",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "data-ai"
+    },
+    {
+      "skill": "pytorch",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "data-ai"
+    },
+    {
+      "skill": "next.js",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "data-ai"
+    },
+    {
+      "skill": "penetration testing",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "security"
+    },
+    {
+      "skill": "jenkins",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "infra"
+    },
+    {
+      "skill": "defender",
+      "count": 3,
+      "share": 0.00322234156820623,
+      "track": "security"
+    }
+  ]
+}

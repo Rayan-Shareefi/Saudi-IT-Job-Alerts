@@ -1,0 +1,32 @@
+name: Digest email
+
+on:
+  schedule:
+    # Every 3 days at 05:00 UTC = 08:00 Riyadh. Cron has no "every 3 days"
+    # operator that survives month boundaries, so this fires on fixed days of
+    # the month - 1st, 4th, 7th ... 28th - which is every third day apart from
+    # a 1-2 day gap at the turn of the month.
+    - cron: "0 5 1,4,7,10,13,16,19,22,25,28 * *"
+  workflow_dispatch:
+
+jobs:
+  digest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Send digest
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+          DIGEST_TO: ${{ secrets.DIGEST_TO }}
+          DIGEST_FROM: ${{ secrets.DIGEST_FROM }}
+          APP_URL: ${{ secrets.APP_URL }}
+        run: npx tsx scripts/digest.ts

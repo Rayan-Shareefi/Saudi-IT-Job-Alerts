@@ -1,0 +1,16 @@
+{
+  "name": "Saudi Job Alert",
+  "short_name": "Job Alert",
+  "description": "Riyadh technology roles, pulled from employer career systems before they reach the public boards.",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7f8fa",
+  "theme_color": "#0f766e",
+  "categories": ["business", "productivity"],
+  "icons": [
+    { "src": "/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" },
+    { "src": "/apple-icon.png", "sizes": "180x180", "type": "image/png" },
+    { "src": "/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

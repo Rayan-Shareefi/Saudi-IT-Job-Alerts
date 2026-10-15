@@ -1,0 +1,36 @@
+name: JSearch (weekly, capped)
+
+# JSearch bills one request per page against ~200/month per key. Six sweeps at
+# one page each, once a week, is ~26 requests a month. Never add JSearch to a
+# frequent schedule: the old nightly run exhausted the plan on 2026-10-11.
+
+on:
+  schedule:
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+concurrency:
+  group: jsearch
+  cancel-in-progress: false
+
+jobs:
+  jsearch:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: Run JSearch
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          JSEARCH_OPENWEBNINJA_KEY: ${{ secrets.JSEARCH_OPENWEBNINJA_KEY }}
+          JSEARCH_RAPIDAPI_KEY: ${{ secrets.JSEARCH_RAPIDAPI_KEY }}
+          JSEARCH_PAGES: "1"
+          APP_URL: ${{ secrets.APP_URL }}
+        run: npx tsx scripts/ingest.ts --kind jsearch

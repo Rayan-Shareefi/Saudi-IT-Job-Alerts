@@ -1,0 +1,1090 @@
+{
+  "auditedAt": "2026-09-02T23:03:40.690Z",
+  "findings": [
+    {
+      "sourceId": "lever-asfar",
+      "company": "Asfar",
+      "adapter": "lever",
+      "url": "https://asfar.com/careers/",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "lever-digital-government-authority",
+      "company": "Digital Government Authority",
+      "adapter": "lever",
+      "url": "https://dga.gov.sa/ar/join-us",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "bamboohr-national-cybersecurity-authority-nca",
+      "company": "National Cybersecurity Authority (NCA)",
+      "adapter": "bamboohr",
+      "url": "https://nca.gov.sa/en/careers/",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "bamboohr-seha-virtual-hospital",
+      "company": "Seha Virtual Hospital",
+      "adapter": "bamboohr",
+      "url": "https://svh.med.sa/careers",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://svh.med.sa/careers\nCall log:\n\u001b["
+    },
+    {
+      "sourceId": "workday-airbus",
+      "company": "Airbus",
+      "adapter": "workday",
+      "url": "https://www.airbus.com/en/careers",
+      "verdict": "listing-page",
+      "jobLinksFound": 39
+    },
+    {
+      "sourceId": "successfactors-opentext",
+      "company": "OpenText",
+      "adapter": "successfactors",
+      "url": "https://career17.sapsf.com/career?career_company=Opentext&lang=en_US&company=Opentext&site=&loginFlowRequired=true&_s.crb=dIuvc4bN%2bTSplRjH8gPZSWWyFfN%2bMXsaEZW8f21qMU8%3d",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "oraclecloud-dell-technologies",
+      "company": "Dell Technologies",
+      "adapter": "oraclecloud",
+      "url": "https://enterpriseplatform.dell.com/hcmUI/CandidateExperience/en/sites/careers",
+      "verdict": "landing-page",
+      "jobLinksFound": 2,
+      "suggestedUrl": "https://enterpriseplatform.dell.com/hcmUI/CandidateExperience/en/sites/careers/jobs?mode=location",
+      "suggestedJobLinks": 24,
+      "note": "\"Explore job opportunities\" leads to the real list"
+    },
+    {
+      "sourceId": "successfactors-sipchem",
+      "company": "Sipchem",
+      "adapter": "successfactors",
+      "url": "https://career23.sapsf.com/career?company=C0002480584P&site=&lang=en_GB&requestParams=b4j8PDDwZLKgts70qq193SB3E5x42m2Qz0rDQBDGx9bS9A%2biCN4En6DEtkLAg9pia6DFUlEQD3Gz%0aGdMt6266u2krgk%2bkDyE%2bgR59AfHgO7jVSyMOzBxmvvl%2bwzx%2bQUEr2BiTKamlhvHaCdGjPkkKxffn%0al63r1zzkOlDmkkQdQo1UPpTMSKEeSR7Nk4NDWER15ti6brNioCLItEVUD6fIUwWbV70fc05EXDsz%0aiol4%2f%2bnt4uNz%2b76bA5gndmvFQLl%2fGQyGpx2%2fd2xgVTOD6QQeIP87BQMO5QyF8aPlvjOWoa7PMLRY%0aLSkj%2fChJ%2bN2ypHBDuEY7t9IBS5AzkbGuDtv9nSFGTCE1BtaoVAo5MUyKIAsrNd1dr%2bG59YaVMe0L%0ag0oQfq5R%2fQcsUnmbEJE5ptp2Xbfe9Nw9rzmwjpQoRBUIneHoNNRUsdCaOFzGTPwROApjpi3dfmrx%0a1gwdRdBtzb8BxJmCrA%3d%3d&career_ns=subscribe&navBarLevel=MY%5fPROFILE&_s.crb=zJSDl8Z1cD1n4IO0OQcc5N9XNiBXxs9VMmmOx8YgdSI%3d",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "bamboohr-tech-mahindra",
+      "company": "Tech Mahindra",
+      "adapter": "bamboohr",
+      "url": "https://careers.techmahindra.com/",
+      "verdict": "no-openings",
+      "jobLinksFound": 2,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "workday-intel",
+      "company": "Intel",
+      "adapter": "workday",
+      "url": "https://intel.wd1.myworkdayjobs.com/External/page/6042070b79e01001f04fa9b468070000",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "lever-saudi-railways-sar",
+      "company": "Saudi Railways (SAR)",
+      "adapter": "lever",
+      "url": "https://www.sar.com.sa/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "workday-baker-hughes",
+      "company": "Baker Hughes",
+      "adapter": "workday",
+      "url": "https://careers.bakerhughes.com/global/en",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "recruitee-google",
+      "company": "Google",
+      "adapter": "recruitee",
+      "url": "https://www.google.com/about/careers/applications/",
+      "verdict": "listing-page",
+      "jobLinksFound": 9
+    },
+    {
+      "sourceId": "workday-vmware-by-broadcom",
+      "company": "VMware by Broadcom",
+      "adapter": "workday",
+      "url": "https://www.broadcom.com/company/careers",
+      "verdict": "landing-page",
+      "jobLinksFound": 0,
+      "suggestedUrl": "https://broadcom.wd1.myworkdayjobs.com/External_Career",
+      "suggestedJobLinks": 20,
+      "note": "\"Search Jobs\" leads to the real list"
+    },
+    {
+      "sourceId": "greenhouse-boston-consulting-group",
+      "company": "Boston Consulting Group",
+      "adapter": "greenhouse",
+      "url": "https://careers.bcg.com/global/en/",
+      "verdict": "landing-page",
+      "jobLinksFound": 0,
+      "suggestedUrl": "https://careers.bcg.com/global/en/search-results",
+      "suggestedJobLinks": 20,
+      "note": "\"View Jobs\" leads to the real list"
+    },
+    {
+      "sourceId": "greenhouse-pure-storage",
+      "company": "Pure Storage",
+      "adapter": "greenhouse",
+      "url": "https://www.everpuredata.com/company/careers.html",
+      "verdict": "landing-page",
+      "jobLinksFound": 2,
+      "suggestedUrl": "https://www.everpuredata.com/company/careers/opportunities.html",
+      "suggestedJobLinks": 325,
+      "note": "\"Search Jobs\" leads to the real list"
+    },
+    {
+      "sourceId": "lever-oliver-wyman",
+      "company": "Oliver Wyman",
+      "adapter": "lever",
+      "url": "https://www.oliverwyman.com/careers.html",
+      "verdict": "no-openings",
+      "jobLinksFound": 1,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "greenhouse-tata-consultancy-services",
+      "company": "Tata Consultancy Services",
+      "adapter": "greenhouse",
+      "url": "https://www.tcs.com/careers",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "HTTP 403"
+    },
+    {
+      "sourceId": "smartrecruiters-seera-group",
+      "company": "Seera Group",
+      "adapter": "smartrecruiters",
+      "url": "https://www.seera.sa/careers",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "HTTP 404"
+    },
+    {
+      "sourceId": "greenhouse-elastic",
+      "company": "Elastic",
+      "adapter": "greenhouse",
+      "url": "https://www.elastic.co/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 2,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "greenhouse-arabian-shield",
+      "company": "Arabian Shield",
+      "adapter": "greenhouse",
+      "url": "https://www.der.com.sa/careers",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.der.com.sa/careers\nCall log"
+    },
+    {
+      "sourceId": "oraclecloud-public-investment-fund-pif",
+      "company": "Public Investment Fund (PIF)",
+      "adapter": "oraclecloud",
+      "url": "https://www.pif.gov.sa/en/careers/",
+      "verdict": "listing-page",
+      "jobLinksFound": 3
+    },
+    {
+      "sourceId": "greenhouse-cloudflare",
+      "company": "Cloudflare",
+      "adapter": "greenhouse",
+      "url": "https://www.cloudflare.com/careers/jobs/",
+      "verdict": "listing-page",
+      "jobLinksFound": 25
+    },
+    {
+      "sourceId": "greenhouse-okta",
+      "company": "Okta",
+      "adapter": "greenhouse",
+      "url": "https://www.okta.com/company/careers/",
+      "verdict": "listing-page",
+      "jobLinksFound": 11
+    },
+    {
+      "sourceId": "ashby-confluent",
+      "company": "Confluent",
+      "adapter": "ashby",
+      "url": "https://www.confluent.io/careers/",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "HTTP 429"
+    },
+    {
+      "sourceId": "recruitee-meta",
+      "company": "Meta",
+      "adapter": "recruitee",
+      "url": "https://www.metacareers.com/jobsearch/",
+      "verdict": "listing-page",
+      "jobLinksFound": 11
+    },
+    {
+      "sourceId": "greenhouse-careem",
+      "company": "Careem",
+      "adapter": "greenhouse",
+      "url": "https://www.careem.com/en-AE/careers/",
+      "verdict": "landing-page",
+      "jobLinksFound": 0,
+      "suggestedUrl": "https://jobs.careem.com/",
+      "suggestedJobLinks": 10,
+      "note": "\"Explore roles\" leads to the real list"
+    },
+    {
+      "sourceId": "smartrecruiters-thales",
+      "company": "Thales",
+      "adapter": "smartrecruiters",
+      "url": "https://careers.thalesgroup.com/global/en",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "bamboohr-saudi-tourism-authority",
+      "company": "Saudi Tourism Authority",
+      "adapter": "bamboohr",
+      "url": "https://www.sta.gov.sa/en/careers/",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "bamboohr-sal-saudi-logistics",
+      "company": "SAL Saudi Logistics",
+      "adapter": "bamboohr",
+      "url": "https://sal.sa/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "bamboohr-saudi-german-health",
+      "company": "Saudi German Health",
+      "adapter": "bamboohr",
+      "url": "https://www.sghgroup.net/careers",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.sghgroup.net/careers\nCall l"
+    },
+    {
+      "sourceId": "bamboohr-almabani-general-contractors",
+      "company": "Almabani General Contractors",
+      "adapter": "bamboohr",
+      "url": "https://www.almabani.com/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "oraclecloud-general-entertainment-authority",
+      "company": "General Entertainment Authority",
+      "adapter": "oraclecloud",
+      "url": "https://www.gea.gov.sa/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "recruitee-alfa-technologies",
+      "company": "Alfa Technologies",
+      "adapter": "recruitee",
+      "url": "https://alfa-tech.sa/careers",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://alfa-tech.sa/careers\nCall log:\n"
+    },
+    {
+      "sourceId": "oraclecloud-savvy-games-group",
+      "company": "Savvy Games Group",
+      "adapter": "oraclecloud",
+      "url": "https://evth.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/savvy-careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "jsonld-nana",
+      "company": "Nana",
+      "adapter": "jsonld",
+      "url": "https://nana.sa/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "workday-adobe",
+      "company": "Adobe",
+      "adapter": "workday",
+      "url": "https://careers.adobe.com/us/en",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "successfactors-ericsson",
+      "company": "Ericsson",
+      "adapter": "successfactors",
+      "url": "https://career2.successfactors.eu/career?company=Ericsson&career_ns=job_application&src=Eightfold&career_job_req_id={{job_id}}&#34;,",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "successfactors-saudi-telecom-solutions",
+      "company": "Saudi Telecom Solutions",
+      "adapter": "successfactors",
+      "url": "https://career23.sapsf.com/career?site=&company=stcsstcsol&lang=en%5FGB&login_ns=register&career_ns=home&navBarLevel=MY_PROFILE",
+      "verdict": "landing-page",
+      "jobLinksFound": 0,
+      "suggestedUrl": "https://careers.solutions.com.sa/viewalljobs/",
+      "suggestedJobLinks": 6,
+      "note": "\"View All Jobs\" leads to the real list"
+    },
+    {
+      "sourceId": "workday-nasdaq-gulf-technology",
+      "company": "Nasdaq Gulf Technology",
+      "adapter": "workday",
+      "url": "https://www.nasdaq.com/about/careers",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.nasdaq.com/about/careers"
+    },
+    {
+      "sourceId": "lever-palantir",
+      "company": "Palantir",
+      "adapter": "lever",
+      "url": "https://www.palantir.com/careers/",
+      "verdict": "listing-page",
+      "jobLinksFound": 5
+    },
+    {
+      "sourceId": "browser-red-sea-global",
+      "company": "Red Sea Global",
+      "adapter": "llm",
+      "url": "https://www.redseaglobal.com/en/careers",
+      "verdict": "landing-page",
+      "jobLinksFound": 1,
+      "suggestedUrl": "https://careers.theredsea.sa/go/Job-Opportunities/7716923/",
+      "suggestedJobLinks": 29,
+      "note": "\"View opportunities opens in a new tab\" leads to the real list"
+    },
+    {
+      "sourceId": "browser-neom",
+      "company": "NEOM",
+      "adapter": "llm",
+      "url": "https://careers.neom.com/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-riyadh-air",
+      "company": "Riyadh Air",
+      "adapter": "llm",
+      "url": "https://www.riyadhair.com/en/careers",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "HTTP 403"
+    },
+    {
+      "sourceId": "browser-alat",
+      "company": "Alat",
+      "adapter": "llm",
+      "url": "https://alat.com/en/careers/",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "workday-genesys",
+      "company": "Genesys",
+      "adapter": "workday",
+      "url": "https://www.genesys.com/company/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "successfactors-sap-saudi-arabia",
+      "company": "SAP Saudi Arabia",
+      "adapter": "successfactors",
+      "url": "https://career5.successfactors.eu/career?career_company=SAP&lang=en_US&company=SAP&site=&loginFlowRequired=true&_s.crb=FPX8lbWGt3yk6uxsmGyYBKLyRl2Q6jqtQoTRBxl4aco%3d",
+      "verdict": "landing-page",
+      "jobLinksFound": 1,
+      "suggestedUrl": "https://jobs.sap.com/viewalljobs/",
+      "suggestedJobLinks": 52,
+      "note": "\"View all jobs\" leads to the real list"
+    },
+    {
+      "sourceId": "browser-sabic",
+      "company": "SABIC",
+      "adapter": "llm",
+      "url": "https://www.sabic.com/en/careers",
+      "verdict": "listing-page",
+      "jobLinksFound": 3
+    },
+    {
+      "sourceId": "successfactors-ericsson-saudi",
+      "company": "Ericsson Saudi",
+      "adapter": "successfactors",
+      "url": "https://career2.successfactors.eu/career?company=Ericsson&career_ns=job_application&src=Eightfold&career_job_req_id={{job_id}}&#34;,",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-saudi-electricity-company",
+      "company": "Saudi Electricity Company",
+      "adapter": "llm",
+      "url": "https://www.se.com.sa/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-sirar-by-stc",
+      "company": "sirar by stc",
+      "adapter": "llm",
+      "url": "https://www.sirar.com.sa/about-us/careers/",
+      "verdict": "landing-page",
+      "jobLinksFound": 0,
+      "suggestedUrl": "https://www.linkedin.com/company/sirarbystc/jobs/",
+      "suggestedJobLinks": 25,
+      "note": "\"See Jobs\" leads to the real list"
+    },
+    {
+      "sourceId": "browser-center3",
+      "company": "center3",
+      "adapter": "llm",
+      "url": "https://www.center3.com/careers",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "HTTP 401"
+    },
+    {
+      "sourceId": "browser-bahri",
+      "company": "Bahri",
+      "adapter": "llm",
+      "url": "https://www.bahri.sa/careers/",
+      "verdict": "no-openings",
+      "jobLinksFound": 2,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "greenhouse-canonical",
+      "company": "Canonical",
+      "adapter": "greenhouse",
+      "url": "https://canonical.com/careers/all",
+      "verdict": "listing-page",
+      "jobLinksFound": 315
+    },
+    {
+      "sourceId": "browser-zain-ksa",
+      "company": "Zain KSA",
+      "adapter": "llm",
+      "url": "https://sa.zain.com/about/careers/",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-stc",
+      "company": "stc",
+      "adapter": "llm",
+      "url": "https://careers.stc.com.sa/",
+      "verdict": "listing-page",
+      "jobLinksFound": 5
+    },
+    {
+      "sourceId": "browser-takamol-holding",
+      "company": "Takamol Holding",
+      "adapter": "llm",
+      "url": "https://www.takamolholding.com/en/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-thiqah",
+      "company": "Thiqah",
+      "adapter": "llm",
+      "url": "https://www.thiqah.sa/en/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-salam-integrated-telecom",
+      "company": "Salam (Integrated Telecom)",
+      "adapter": "llm",
+      "url": "https://salam.net/jobs",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-riyad-bank",
+      "company": "Riyad Bank",
+      "adapter": "llm",
+      "url": "https://careers.riyadbank.com/en/",
+      "verdict": "listing-page",
+      "jobLinksFound": 8
+    },
+    {
+      "sourceId": "browser-arab-national-bank",
+      "company": "Arab National Bank",
+      "adapter": "llm",
+      "url": "https://anb.com.sa/en/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-bank-albilad",
+      "company": "Bank Albilad",
+      "adapter": "llm",
+      "url": "https://www.bankalbilad.com.sa/ar/about/Pages/e-careers.aspx",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "oraclecloud-zensar",
+      "company": "Zensar",
+      "adapter": "oraclecloud",
+      "url": "https://www.zensar.com/careers",
+      "verdict": "listing-page",
+      "jobLinksFound": 3
+    },
+    {
+      "sourceId": "browser-nournet",
+      "company": "NourNet",
+      "adapter": "llm",
+      "url": "https://nour.net.sa/en/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-cipher-stc-group",
+      "company": "Cipher (stc group)",
+      "adapter": "llm",
+      "url": "https://www.cipher.com.sa/careers",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "HTTP 404"
+    },
+    {
+      "sourceId": "browser-al-rajhi-bank",
+      "company": "Al Rajhi Bank",
+      "adapter": "llm",
+      "url": "https://careers.alrajhibank.com.sa/ar/",
+      "verdict": "listing-page",
+      "jobLinksFound": 4
+    },
+    {
+      "sourceId": "browser-saudi-awwal-bank-sab",
+      "company": "Saudi Awwal Bank (SAB)",
+      "adapter": "llm",
+      "url": "https://www.sab.com/en/about-us/careers/",
+      "verdict": "listing-page",
+      "jobLinksFound": 3
+    },
+    {
+      "sourceId": "browser-alinma-bank",
+      "company": "Alinma Bank",
+      "adapter": "llm",
+      "url": "https://career.alinma.com/",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-bank-aljazira",
+      "company": "Bank AlJazira",
+      "adapter": "llm",
+      "url": "https://www.aljazirabank.com.sa/ar-sa/personal/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-sama-saudi-central-bank",
+      "company": "SAMA (Saudi Central Bank)",
+      "adapter": "llm",
+      "url": "https://www.sama.gov.sa/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "greenhouse-rubrik",
+      "company": "Rubrik",
+      "adapter": "greenhouse",
+      "url": "https://www.rubrik.com/company/careers",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "HTTP 403"
+    },
+    {
+      "sourceId": "browser-gulf-international-bank",
+      "company": "Gulf International Bank",
+      "adapter": "llm",
+      "url": "https://www.gib.com/en/careers-home-page",
+      "verdict": "no-openings",
+      "jobLinksFound": 1,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-tadawul-group",
+      "company": "Tadawul Group",
+      "adapter": "llm",
+      "url": "https://www.saudiexchange.sa/wps/portal/tadawul/careers",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "HTTP 403"
+    },
+    {
+      "sourceId": "browser-stc-pay",
+      "company": "stc pay",
+      "adapter": "llm",
+      "url": "https://stcpay.org/jobs",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-rasan",
+      "company": "Rasan",
+      "adapter": "llm",
+      "url": "https://rasan.com/careers",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "HTTP 404"
+    },
+    {
+      "sourceId": "browser-hungerstation",
+      "company": "HungerStation",
+      "adapter": "llm",
+      "url": "https://deliveryhero-1481174-gb-engb.sr-attrax.com/hungerstation-arabic",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-abdul-latif-jameel",
+      "company": "Abdul Latif Jameel",
+      "adapter": "llm",
+      "url": "https://alj.com/en/about/careers/",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-zatca",
+      "company": "ZATCA",
+      "adapter": "llm",
+      "url": "https://careers.zatca.gov.sa/?locale=ar_SA",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "successfactors-dynatrace",
+      "company": "Dynatrace",
+      "adapter": "successfactors",
+      "url": "https://career41.sapsf.com/careers?company=dynatracel&loginFlowRequired=true",
+      "verdict": "landing-page",
+      "jobLinksFound": 0,
+      "suggestedUrl": "https://www.dynatrace.com/careers/jobs/",
+      "suggestedJobLinks": 17,
+      "note": "\"All jobs\" leads to the real list"
+    },
+    {
+      "sourceId": "browser-jahez",
+      "company": "Jahez",
+      "adapter": "llm",
+      "url": "https://www.jahez.net/careers",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "HTTP 404"
+    },
+    {
+      "sourceId": "browser-ministry-of-communications-and-it",
+      "company": "Ministry of Communications and IT",
+      "adapter": "llm",
+      "url": "https://careers.mcit.gov.sa/",
+      "verdict": "listing-page",
+      "jobLinksFound": 4
+    },
+    {
+      "sourceId": "browser-salla",
+      "company": "Salla",
+      "adapter": "browser",
+      "url": "https://salla.com/careers",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "HTTP 404"
+    },
+    {
+      "sourceId": "browser-gosi",
+      "company": "GOSI",
+      "adapter": "llm",
+      "url": "https://www.gosi.gov.sa/en/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-kaust",
+      "company": "KAUST",
+      "adapter": "llm",
+      "url": "https://www.kaust.edu.sa/en/error/404?404;https://www.kaust.edu.sa:443/en/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-nupco",
+      "company": "NUPCO",
+      "adapter": "llm",
+      "url": "https://www.nupco.com/careers-and-training/careers/",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-pwc-middle-east",
+      "company": "PwC Middle East",
+      "adapter": "llm",
+      "url": "https://www.pwc.com/m1/en/careers.html",
+      "verdict": "listing-page",
+      "jobLinksFound": 7
+    },
+    {
+      "sourceId": "browser-kpmg-saudi-arabia",
+      "company": "KPMG Saudi Arabia",
+      "adapter": "llm",
+      "url": "https://kpmg.com/sa/en/careers.html",
+      "verdict": "listing-page",
+      "jobLinksFound": 3
+    },
+    {
+      "sourceId": "browser-bain-company",
+      "company": "Bain & Company",
+      "adapter": "llm",
+      "url": "https://careers.bain.com/",
+      "verdict": "no-openings",
+      "jobLinksFound": 2,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-tawuniya",
+      "company": "Tawuniya",
+      "adapter": "llm",
+      "url": "https://www.tawuniya.com/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-wipro",
+      "company": "Wipro",
+      "adapter": "llm",
+      "url": "https://careers.wipro.com/",
+      "verdict": "landing-page",
+      "jobLinksFound": 0,
+      "suggestedUrl": "https://careers.wipro.com/search/?searchResultView=LIST",
+      "suggestedJobLinks": 10,
+      "note": "\"Please visit our Job Search page to expl\" leads to the real list"
+    },
+    {
+      "sourceId": "browser-kacst",
+      "company": "KACST",
+      "adapter": "llm",
+      "url": "https://www.kacst.gov.sa/en/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-deloitte-middle-east",
+      "company": "Deloitte Middle East",
+      "adapter": "llm",
+      "url": "https://www.deloitte.com/middle-east/en/careers.html",
+      "verdict": "listing-page",
+      "jobLinksFound": 7
+    },
+    {
+      "sourceId": "browser-ey",
+      "company": "EY",
+      "adapter": "llm",
+      "url": "https://www.ey.com/en_sa/careers",
+      "verdict": "listing-page",
+      "jobLinksFound": 15
+    },
+    {
+      "sourceId": "browser-capgemini",
+      "company": "Capgemini",
+      "adapter": "llm",
+      "url": "https://www.capgemini.com/careers/",
+      "verdict": "listing-page",
+      "jobLinksFound": 15
+    },
+    {
+      "sourceId": "browser-infosys",
+      "company": "Infosys",
+      "adapter": "llm",
+      "url": "https://www.infosys.com/careers/",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "HTTP 403"
+    },
+    {
+      "sourceId": "browser-amazon-web-services",
+      "company": "Amazon Web Services",
+      "adapter": "llm",
+      "url": "https://www.amazon.jobs/en/",
+      "verdict": "no-openings",
+      "jobLinksFound": 2,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-microsoft",
+      "company": "Microsoft",
+      "adapter": "llm",
+      "url": "https://apply.careers.microsoft.com/careers",
+      "verdict": "listing-page",
+      "jobLinksFound": 10
+    },
+    {
+      "sourceId": "browser-oracle",
+      "company": "Oracle",
+      "adapter": "llm",
+      "url": "https://careers.oracle.com/en/sites/jobsearch",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-cisco",
+      "company": "Cisco",
+      "adapter": "llm",
+      "url": "https://careers.cisco.com/global/en",
+      "verdict": "listing-page",
+      "jobLinksFound": 3
+    },
+    {
+      "sourceId": "browser-nokia",
+      "company": "Nokia",
+      "adapter": "llm",
+      "url": "https://www.nokia.com/careers/",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "HTTP 403"
+    },
+    {
+      "sourceId": "browser-salesforce",
+      "company": "Salesforce",
+      "adapter": "llm",
+      "url": "https://www.salesforce.com/company/careers/jobs/",
+      "verdict": "unreachable",
+      "jobLinksFound": 0,
+      "note": "HTTP 403"
+    },
+    {
+      "sourceId": "browser-splunk",
+      "company": "Splunk",
+      "adapter": "llm",
+      "url": "https://careers.cisco.com/global/en/splunk",
+      "verdict": "landing-page",
+      "jobLinksFound": 0,
+      "suggestedUrl": "https://careers.cisco.com/global/en/splunk/india",
+      "suggestedJobLinks": 3,
+      "note": "\"See job openings\" leads to the real list"
+    },
+    {
+      "sourceId": "browser-ibm",
+      "company": "IBM",
+      "adapter": "llm",
+      "url": "https://www.ibm.com/careers/search",
+      "verdict": "listing-page",
+      "jobLinksFound": 5
+    },
+    {
+      "sourceId": "browser-hewlett-packard-enterprise",
+      "company": "Hewlett Packard Enterprise",
+      "adapter": "llm",
+      "url": "https://careers.hpe.com/us/en",
+      "verdict": "landing-page",
+      "jobLinksFound": 0,
+      "suggestedUrl": "https://careers.hpe.com/us/en/search-results",
+      "suggestedJobLinks": 13,
+      "note": "\"Search Jobs\" leads to the real list"
+    },
+    {
+      "sourceId": "browser-huawei",
+      "company": "Huawei",
+      "adapter": "llm",
+      "url": "https://career.huawei.com/reccampportal/portal5/index.html",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-siemens",
+      "company": "Siemens",
+      "adapter": "llm",
+      "url": "https://jobs.siemens.com/en_US/externaljobs/redirect",
+      "verdict": "landing-page",
+      "jobLinksFound": 1,
+      "suggestedUrl": "https://jobs.siemens.com/en_US/externaljobs/Home",
+      "suggestedJobLinks": 3,
+      "note": "\"Job Search\" leads to the real list"
+    },
+    {
+      "sourceId": "browser-check-point-software",
+      "company": "Check Point Software",
+      "adapter": "llm",
+      "url": "https://www.checkpoint.com/careers/",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-help-ag",
+      "company": "Help AG",
+      "adapter": "llm",
+      "url": "https://www.helpag.com/careers/",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-red-hat",
+      "company": "Red Hat",
+      "adapter": "llm",
+      "url": "https://www.redhat.com/en/jobs",
+      "verdict": "listing-page",
+      "jobLinksFound": 5
+    },
+    {
+      "sourceId": "browser-rapid7",
+      "company": "Rapid7",
+      "adapter": "llm",
+      "url": "https://careers.rapid7.com/",
+      "verdict": "landing-page",
+      "jobLinksFound": 0,
+      "suggestedUrl": "https://careers.rapid7.com/jobs/search",
+      "suggestedJobLinks": 17,
+      "note": "\"Search All Roles\" leads to the real list"
+    },
+    {
+      "sourceId": "browser-snb-capital",
+      "company": "SNB Capital",
+      "adapter": "llm",
+      "url": "https://career.snbcapital.com/",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-ejada-systems",
+      "company": "Ejada Systems",
+      "adapter": "llm",
+      "url": "https://careers.ejada.com/",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-perfect-presentation",
+      "company": "Perfect Presentation",
+      "adapter": "llm",
+      "url": "https://2p.com.sa/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-intigral",
+      "company": "Intigral",
+      "adapter": "llm",
+      "url": "https://www.intigral.net/jobs",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-royal-commission-for-alula",
+      "company": "Royal Commission for AlUla",
+      "adapter": "llm",
+      "url": "https://www.rcu.gov.sa/en/contact/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-jadwa-investment",
+      "company": "Jadwa Investment",
+      "adapter": "llm",
+      "url": "https://www.jadwa.com/en/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-saudia",
+      "company": "Saudia",
+      "adapter": "llm",
+      "url": "https://www.saudia.com/about-saudia/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-neo-leap",
+      "company": "Neo Leap",
+      "adapter": "llm",
+      "url": "https://neoleap.com.sa/en/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-al-moammar-information-systems",
+      "company": "Al Moammar Information Systems",
+      "adapter": "llm",
+      "url": "https://www.mis.com.sa/careers",
+      "verdict": "no-openings",
+      "jobLinksFound": 0,
+      "note": "page loads and lists nothing - probably genuinely empty"
+    },
+    {
+      "sourceId": "browser-neo-space-group",
+      "company": "Neo Space Group",
+      "adapter": "llm",
+      "url": "https://www.neospace.group/career/",
+      "verdict": "listing-page",
+      "jobLinksFound": 11
+    }
+  ]
+}

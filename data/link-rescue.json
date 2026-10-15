@@ -1,0 +1,769 @@
+{
+  "rescuedAt": "2026-09-02T22:12:55.866Z",
+  "results": [
+    {
+      "company": "Diriyah Company",
+      "originalUrl": "https://www.diriyah.sa/en/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.diriyah.sa/en/careers",
+      "note": "host refuses bots (HTTP 403)"
+    },
+    {
+      "company": "King Salman Park Foundation",
+      "originalUrl": "https://kingsalmanpark.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://kingsalmanpark.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "AMAALA",
+      "originalUrl": "https://www.amaala.com/en/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.amaala.com/en/careers",
+      "note": "host refuses bots (HTTP 403)"
+    },
+    {
+      "company": "Ceer Motors",
+      "originalUrl": "https://www.ceer.com.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Zamil Group",
+      "originalUrl": "https://www.zamil.com/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.zamil.com/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Saudi Water Authority",
+      "originalUrl": "https://www.swa.gov.sa/en/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.swa.gov.sa/en/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "center3",
+      "originalUrl": "https://www.center3.com/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.center3.com/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Salam (Integrated Telecom)",
+      "originalUrl": "https://salam.net/careers",
+      "outcome": "dead",
+      "note": "soft 404"
+    },
+    {
+      "company": "AlJammaz Technologies",
+      "originalUrl": "https://www.aljammaztechnologies.com/careers",
+      "outcome": "dead",
+      "note": "soft 404"
+    },
+    {
+      "company": "Cipher (stc group)",
+      "originalUrl": "https://www.cipher.com.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.cipher.com.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Arab National Bank",
+      "originalUrl": "https://anb.com.sa/en/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://anb.com.sa/en/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Tadawul Group",
+      "originalUrl": "https://www.saudiexchange.sa/wps/portal/tadawul/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.saudiexchange.sa/wps/portal/tadawul/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Saudi Payments",
+      "originalUrl": "https://www.saudipayments.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "stc pay",
+      "originalUrl": "https://stcpay.org/careers",
+      "outcome": "dead",
+      "note": "soft 404"
+    },
+    {
+      "company": "Rasan",
+      "originalUrl": "https://rasan.com/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://rasan.com/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Jahez",
+      "originalUrl": "https://www.jahez.net/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.jahez.net/careers",
+      "note": "host refuses bots (HTTP 403)"
+    },
+    {
+      "company": "Salla",
+      "originalUrl": "https://salla.com/careers",
+      "outcome": "ats-found",
+      "atsAdapter": "workable",
+      "atsHandle": "salla"
+    },
+    {
+      "company": "Mrsool",
+      "originalUrl": "https://mrsool.co/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://mrsool.co/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Ajlan & Bros",
+      "originalUrl": "https://ajlanbros.com/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://ajlanbros.com/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Monshaat",
+      "originalUrl": "https://www.monshaat.gov.sa/en/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.monshaat.gov.sa/en/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Tawuniya",
+      "originalUrl": "https://www.tawuniya.com/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.tawuniya.com/careers",
+      "note": "host refuses bots (HTTP 403)"
+    },
+    {
+      "company": "Seha Virtual Hospital",
+      "originalUrl": "https://svh.med.sa/careers",
+      "outcome": "ats-found",
+      "atsAdapter": "bamboohr",
+      "atsHandle": "svh"
+    },
+    {
+      "company": "General Electric",
+      "originalUrl": "https://jobs.gecareers.com/",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Confluent",
+      "originalUrl": "https://www.confluent.io/careers/",
+      "outcome": "ats-found",
+      "atsAdapter": "ashby",
+      "atsHandle": "confluent"
+    },
+    {
+      "company": "flynas",
+      "originalUrl": "https://www.flynas.com/en/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.flynas.com/en/careers",
+      "note": "host refuses bots (HTTP 403)"
+    },
+    {
+      "company": "Riyad Capital",
+      "originalUrl": "https://www.riyadcapital.com/en/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.riyadcapital.com/en/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Quara Finance",
+      "originalUrl": "https://www.quara.com/careers",
+      "outcome": "dead",
+      "note": "soft 404"
+    },
+    {
+      "company": "Bidaya Home Finance",
+      "originalUrl": "https://www.bidaya.com.sa/careers",
+      "outcome": "dead",
+      "note": "soft 404"
+    },
+    {
+      "company": "Forus",
+      "originalUrl": "https://forus.com.sa/careers",
+      "outcome": "ats-found",
+      "atsAdapter": "ashby",
+      "atsHandle": "forus"
+    },
+    {
+      "company": "Sukuk Capital",
+      "originalUrl": "https://sukuk.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://sukuk.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Saudi Venture Capital",
+      "originalUrl": "https://svc.com.sa/en/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://svc.com.sa/en/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Barq",
+      "originalUrl": "https://barq.io/careers",
+      "outcome": "dead",
+      "note": "soft 404"
+    },
+    {
+      "company": "Alinma Investment",
+      "originalUrl": "https://www.alinmainvestment.com/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "MedGulf",
+      "originalUrl": "https://www.medgulf.com.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.medgulf.com.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Arabian Shield",
+      "originalUrl": "https://www.der.com.sa/careers",
+      "outcome": "ats-found",
+      "atsAdapter": "greenhouse",
+      "atsHandle": "shield"
+    },
+    {
+      "company": "Allianz Saudi Fransi",
+      "originalUrl": "https://www.allianzsf.com/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Solidarity Saudi Takaful",
+      "originalUrl": "https://solidarity.com/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://solidarity.com/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Advanced Electronics Company",
+      "originalUrl": "https://www.aec.com.sa/careers",
+      "outcome": "ats-found",
+      "atsAdapter": "greenhouse",
+      "atsHandle": "aec"
+    },
+    {
+      "company": "Intigral",
+      "originalUrl": "https://www.intigral.net/careers",
+      "outcome": "dead",
+      "note": "soft 404"
+    },
+    {
+      "company": "Lucidya",
+      "originalUrl": "https://lucidya.com/careers",
+      "outcome": "ats-found",
+      "atsAdapter": "workable",
+      "atsHandle": "lucidya"
+    },
+    {
+      "company": "Naizak",
+      "originalUrl": "https://naizak.com/index.php/home/careers-2/",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Gulf IT",
+      "originalUrl": "https://gulfit.com/careers",
+      "outcome": "dead",
+      "note": "soft 404"
+    },
+    {
+      "company": "Manga Productions",
+      "originalUrl": "https://mangaproductions.net/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://mangaproductions.net/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "SURJ Sports Investment",
+      "originalUrl": "https://surj.com/careers",
+      "outcome": "dead",
+      "note": "soft 404"
+    },
+    {
+      "company": "SRJ Sports Investments",
+      "originalUrl": "https://srj.com/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://srj.com/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Ministry of Health",
+      "originalUrl": "https://www.moh.gov.sa/en/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.moh.gov.sa/en/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Ministry of Energy",
+      "originalUrl": "https://www.moenergy.gov.sa/ar/recruitment",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.moenergy.gov.sa/ar/recruitment",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Etimad",
+      "originalUrl": "https://etimad.sa/careers",
+      "outcome": "dead",
+      "note": "soft 404"
+    },
+    {
+      "company": "Local Content Authority",
+      "originalUrl": "https://www.lcgpa.gov.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.lcgpa.gov.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Astra Industrial",
+      "originalUrl": "https://www.astraindustrial.com/careers",
+      "outcome": "dead",
+      "note": "This operation was aborted"
+    },
+    {
+      "company": "Alkhorayef Group",
+      "originalUrl": "https://www.alkhorayef.com/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.alkhorayef.com/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Alturki Holding",
+      "originalUrl": "https://www.alturki.net/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.alturki.net/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Water and Electricity Company",
+      "originalUrl": "https://wec.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://wec.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Saudi German Health",
+      "originalUrl": "https://www.sghgroup.net/careers",
+      "outcome": "ats-found",
+      "atsAdapter": "bamboohr",
+      "atsHandle": "sgh"
+    },
+    {
+      "company": "National Guard Health Affairs",
+      "originalUrl": "https://ngha.med.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Magrabi Hospitals",
+      "originalUrl": "https://www.magrabi.com/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.magrabi.com/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "King Abdulaziz University",
+      "originalUrl": "https://www.kau.edu.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.kau.edu.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Saudi Electronic University",
+      "originalUrl": "https://www.seu.edu.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.seu.edu.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Tuwaiq Academy",
+      "originalUrl": "https://tuwaiq.edu.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://tuwaiq.edu.sa/careers",
+      "note": "host refuses bots (HTTP 403)"
+    },
+    {
+      "company": "United Electronics eXtra",
+      "originalUrl": "https://www.extra.com/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.extra.com/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Dur Hospitality",
+      "originalUrl": "https://www.dur.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.dur.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Seera Group",
+      "originalUrl": "https://www.seera.sa/careers",
+      "outcome": "ats-found",
+      "atsAdapter": "smartrecruiters",
+      "atsHandle": "seera"
+    },
+    {
+      "company": "Forcepoint",
+      "originalUrl": "https://www.forcepoint.com/company/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.forcepoint.com/company/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Aramco Digital",
+      "originalUrl": "https://www.aramcodigital.com/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.aramcodigital.com/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Emerson",
+      "originalUrl": "https://careers.emerson.com/",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "NADEC",
+      "originalUrl": "https://www.nadec.com.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Al Yamamah Steel",
+      "originalUrl": "https://www.alyamamahsteel.com/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Alessa Industries",
+      "originalUrl": "https://www.alessa.com.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "National Information Center",
+      "originalUrl": "https://nic.gov.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Advanced Communications and Electronics Systems",
+      "originalUrl": "https://www.aces.com.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Jacobs",
+      "originalUrl": "https://careers.jacobs.com/",
+      "outcome": "dead",
+      "note": "soft 404"
+    },
+    {
+      "company": "Saudi Export Development Authority",
+      "originalUrl": "https://saudiexports.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "National Center for Privatization",
+      "originalUrl": "https://www.ncp.gov.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.ncp.gov.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Saudi Contractors Authority",
+      "originalUrl": "https://sca.sa/careers",
+      "outcome": "ats-found",
+      "atsAdapter": "bamboohr",
+      "atsHandle": "sca"
+    },
+    {
+      "company": "National Center for Performance Measurement",
+      "originalUrl": "https://www.adaa.gov.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.adaa.gov.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Quality of Life Program",
+      "originalUrl": "https://www.vision2030.gov.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.vision2030.gov.sa/careers",
+      "note": "host refuses bots (HTTP 403)"
+    },
+    {
+      "company": "Saudi Standards Metrology Authority",
+      "originalUrl": "https://www.saso.gov.sa/en/careers",
+      "outcome": "url-fixed",
+      "workingUrl": "https://www.saso.gov.sa/ar/mediacenter/Pages/JoinOurTeam.aspx"
+    },
+    {
+      "company": "Saudi Food Bank",
+      "originalUrl": "https://etaam.org.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://etaam.org.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "National Housing Strategy Office",
+      "originalUrl": "https://www.housing.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Saudi Grains Organization",
+      "originalUrl": "https://www.sago.gov.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Saudi Egyptian Investment Company",
+      "originalUrl": "https://seic.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Tahakom Investments",
+      "originalUrl": "https://tahakominvestments.com/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Saudi Information Technology Academy",
+      "originalUrl": "https://sita.org.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Tonomus",
+      "originalUrl": "https://www.tonomus.neom.com/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Albilad Capital",
+      "originalUrl": "https://www.albiladcapital.com/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Yaqeen Capital",
+      "originalUrl": "https://www.yaqeen.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Osool and Bakheet Investment",
+      "originalUrl": "https://www.obic.com.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Tamweel Aloula",
+      "originalUrl": "https://www.tamweelaloula.com/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.tamweelaloula.com/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Saudi Home Loans",
+      "originalUrl": "https://www.saudihomeloans.com/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Amlak International",
+      "originalUrl": "https://www.amlak.com.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.amlak.com.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Deutsche Gulf Finance",
+      "originalUrl": "https://www.dgf.com.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Raqamyah",
+      "originalUrl": "https://raqamyah.com/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://raqamyah.com/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Baianat",
+      "originalUrl": "https://baianat.com.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Tweeq",
+      "originalUrl": "https://tweeq.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://tweeq.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Drahim",
+      "originalUrl": "https://drahim.sa/careers",
+      "outcome": "url-fixed",
+      "workingUrl": "https://drahim.sa/join"
+    },
+    {
+      "company": "Gulf Union Alahlia",
+      "originalUrl": "https://www.gulfunion-saudi.com/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "stc Bank",
+      "originalUrl": "https://stcbank.com.sa/careers",
+      "outcome": "url-fixed",
+      "workingUrl": "https://stcbank.com.sa/web/guest/job-application"
+    },
+    {
+      "company": "Cipher Saudi",
+      "originalUrl": "https://www.cipher.com.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.cipher.com.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Saudi Technology Ventures",
+      "originalUrl": "https://stv.vc/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://stv.vc/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Wa'ed Ventures Portfolio",
+      "originalUrl": "https://waedventures.com/careers",
+      "outcome": "dead",
+      "note": "soft 404"
+    },
+    {
+      "company": "Tarabut",
+      "originalUrl": "https://www.tarabut.com/careers",
+      "outcome": "url-fixed",
+      "workingUrl": "https://careers.tarabut.com/jobs/Careers"
+    },
+    {
+      "company": "Sadeem Technology",
+      "originalUrl": "https://sadeem.tech/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Alfa Technologies",
+      "originalUrl": "https://alfa-tech.sa/careers",
+      "outcome": "ats-found",
+      "atsAdapter": "recruitee",
+      "atsHandle": "alfa"
+    },
+    {
+      "company": "Rakiza",
+      "originalUrl": "https://rakiza.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Prince Sultan Military Medical City",
+      "originalUrl": "https://psmmc.med.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://psmmc.med.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Riyadh Schools",
+      "originalUrl": "https://www.riyadhschools.edu.sa/careers",
+      "outcome": "dead",
+      "note": "HTTP 404 for https://www.riyadhschools.edu.sa"
+    },
+    {
+      "company": "Al Bawani",
+      "originalUrl": "https://albawani.net/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://albawani.net/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "El Seif Engineering",
+      "originalUrl": "https://www.elseif.com/careers",
+      "outcome": "dead",
+      "note": "soft 404"
+    },
+    {
+      "company": "Freyssinet Saudi Arabia",
+      "originalUrl": "https://www.freyssinetsaudi.com/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Abdullah Al Othaim Investment",
+      "originalUrl": "https://www.othaim.com/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Saudi Cement",
+      "originalUrl": "https://www.saudicement.com.sa/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Saudi Steel Pipe",
+      "originalUrl": "https://www.sspc.com.sa/careers",
+      "outcome": "dead",
+      "note": "This operation was aborted"
+    },
+    {
+      "company": "Riyadh Cables",
+      "originalUrl": "https://www.riyadhcables.com/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "Saudi Arabian Trading and Construction",
+      "originalUrl": "https://www.satco.com.sa/careers",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.satco.com.sa/careers",
+      "note": "host alive, no careers page located"
+    },
+    {
+      "company": "Al Rashid Trading",
+      "originalUrl": "https://www.alrashidtrading.com/careers",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "NTT DATA",
+      "originalUrl": "https://careers.nttdata.com/",
+      "outcome": "dead",
+      "note": "fetch failed"
+    },
+    {
+      "company": "ZTE",
+      "originalUrl": "https://www.zte.com.cn/global/careers.html",
+      "outcome": "blocked-but-valid",
+      "workingUrl": "https://www.zte.com.cn/global/careers.html",
+      "note": "host alive, no careers page located"
+    }
+  ]
+}

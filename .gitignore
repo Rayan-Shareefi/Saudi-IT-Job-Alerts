@@ -1,0 +1,15 @@
+node_modules
+.next
+out
+.env
+.env.local
+*.log
+.DS_Store
+.vercel
+data/cache-*.json
+tsconfig.tsbuildinfo
+# the laptop's signed-in LinkedIn session (secondary account) - never commit
+.linkedin-profile/
+data/linkedin-debug/
+# the laptop worker log
+logs/

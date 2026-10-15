@@ -1,0 +1,176 @@
+@import "tailwindcss";
+
+/*
+ * Visual system
+ * -------------
+ * Dark by default, warm rather than blue-black.
+ *
+ * Fragments (usefragments.com) supplies the ground and the voice: their
+ * #171614 warm near-black and #f0ede9 warm off-white, flat surfaces defined by
+ * a hairline border rather than drop shadows, and a calm, low-chrome density.
+ * Every grey here carries a little yellow, which is what keeps a dark UI from
+ * reading as cold and clinical.
+ *
+ * coss.com/ui supplies the mechanics: a 10px corner radius (their
+ * --radius: 0.625rem), 36px control heights, the whisper-weight shadow used
+ * only where something genuinely lifts, and the semantic role names -
+ * success / warning / info / destructive - so a badge means something rather
+ * than just being a colour.
+ *
+ * The accent is amber. It needs DARK text on top, which is why --accent-on
+ * exists: hardcoding white on amber fails contrast badly, so nothing paints
+ * text on the accent without going through that token.
+ */
+
+@theme {
+  --font-sans: "Onest", ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, "Noto Sans Arabic", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+:root {
+  /* ground + surfaces - warm, never blue */
+  --bg: #171614;
+  --surface: #201e1b;
+  --surface-2: #272522;
+  --surface-3: #302d29;
+  --border: #34302a;
+  --border-strong: #45403a;
+
+  /* ink */
+  --ink: #f0ede9;
+  --ink-2: #b6b0a8;
+  --ink-3: #8d8780;
+
+  /* accent - amber */
+  --accent: #fbbf24;
+  --accent-hover: #fcd34d;
+  --accent-soft: #2e2413;
+  --accent-ink: #fcd34d;
+  --accent-on: #1f1d1a;
+
+  /* semantic roles, from coss/ui */
+  --success: #34d399;
+  --success-soft: #0a2e22;
+  --success-ink: #6ee7b7;
+  --info: #60a5fa;
+  --info-soft: #12243d;
+  --info-ink: #93c5fd;
+  --warn: #fbbf24;
+  --warn-soft: #2a2113;
+  --warn-ink: #fcd34d;
+  --danger: #f87171;
+  --danger-soft: #3a1c1c;
+  --danger-ink: #fca5a5;
+
+  /* shape + depth */
+  --radius: 10px;
+  --radius-lg: 14px;
+  --radius-sm: 8px;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
+  --shadow-md: 0 4px 12px -2px rgb(0 0 0 / 0.45), 0 2px 4px -2px rgb(0 0 0 / 0.35);
+  --control-h: 36px;
+
+  color-scheme: dark;
+}
+
+* {
+  border-color: var(--border);
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+}
+
+/*
+ * Fieldsets default to `min-width: min-content` and refuse to shrink, so a
+ * horizontally-scrolling chip rail inside one stretches the whole page instead
+ * of scrolling within itself.
+ */
+fieldset {
+  min-width: 0;
+  max-width: 100%;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  /* Safe-area padding so the iPhone home-screen app clears the notch. */
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* Long headlines break far better with this than with manual line breaks. */
+h1, h2, h3 {
+  text-wrap: pretty;
+}
+
+/* Respect the OS reduced-motion setting rather than animating regardless. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Visible keyboard focus everywhere, without the mouse-click halo. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+@utility surface {
+  background: var(--surface);
+  border: 1px solid var(--border);
+}
+
+/* A card that lifts slightly on hover - the only place shadow is used. */
+@utility card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: box-shadow 0.16s ease, border-color 0.16s ease;
+}
+.card:hover {
+  box-shadow: var(--shadow-md);
+  border-color: var(--border-strong);
+}
+
+/* Horizontal chip rails: scrollable on phones, no visible scrollbar. */
+@utility rail {
+  overflow-x: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  -webkit-overflow-scrolling: touch;
+}
+.rail::-webkit-scrollbar {
+  display: none;
+}
+
+/* Tabular figures keep counts from jittering as they update. */
+@utility nums {
+  font-variant-numeric: tabular-nums;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@utility fade-up {
+  animation: fade-up 0.28s ease-out both;
+}

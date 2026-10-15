@@ -1,0 +1,174 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: "Onest", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #171614; color: #f0ede9;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: #fbbf24; text-decoration: none; }
+    a:hover { color: #fcd34d; }
+    .nums { font-variant-numeric: tabular-nums; }
+    .card { background: #201e1b; border:1px solid #34302a; border-radius:14px; box-shadow:0 1px 2px 0 rgba(0,0,0,0.3); }
+    .pill { display:inline-flex; align-items:center; gap:5px; padding:3px 9px; border-radius:999px; font-size:11px; font-weight:600; white-space:nowrap; }
+    .dot { width:6px; height:6px; border-radius:999px; display:inline-block; }
+    .tab { display:inline-flex; align-items:center; height:36px; padding:0 14px; border-radius:10px;
+           border:1px solid #34302a; background: #201e1b; color:#b6b0a8; font-size:13px; font-weight:600; white-space:nowrap; }
+    .tab.on { background:#fbbf24; border-color:#fbbf24; color:#1f1d1a; }
+    .round { display:inline-flex; align-items:center; gap:5px; padding:10px 14px; border-radius:999px;
+             border:1px solid #34302a; background: #201e1b; color:#b6b0a8; font-size:12.5px; font-weight:500; white-space:nowrap; }
+    .round.on { background:#2e2413; border-color:#fbbf24; color:#fcd34d; }
+  </style>
+</helmet>
+
+<div style="width: 390px; min-height: 844px; background: #171614; display: flex; flex-direction: column; overflow: hidden">
+
+  <!-- header: no fake status bar, the real one renders above this -->
+  <div style="display:flex; align-items:center; justify-content:space-between; padding:10px 16px; border-bottom:1px solid #34302a; background:rgba(23,22,20,0.85)">
+    <div style="display:flex; align-items:center; gap:9px">
+      <div style="width:32px; height:32px; border-radius:10px; background:#fbbf24; color:#1f1d1a; display:grid; place-items:center; font-size:13px; font-weight:700; letter-spacing:-0.02em">SJ</div>
+      <div style="line-height:1.25">
+        <div style="font-size:14px; font-weight:700">Saudi Job Alert</div>
+        <div style="font-size:10.5px; color:#8d8780">Riyadh tech roles, first</div>
+      </div>
+    </div>
+    <div style="font-size:12.5px; font-weight:500; color:#b6b0a8">Sources</div>
+  </div>
+
+  <div style="padding:14px 16px 20px; display:flex; flex-direction:column; gap:12px">
+
+    <!-- stats, 2x2 on a phone -->
+    <div style="display:grid; grid-template-columns:repeat(2, minmax(0,1fr)); gap:8px">
+      <div class="card" style="border-radius:10px; padding:10px; text-align:center">
+        <div class="nums" style="font-size:18px; font-weight:700; letter-spacing:-0.02em; line-height:1">1,204</div>
+        <div style="margin-top:4px; font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:.04em; color:#8d8780">Active roles</div>
+      </div>
+      <div class="card" style="border-radius:10px; padding:10px; text-align:center">
+        <div class="nums" style="font-size:18px; font-weight:700; letter-spacing:-0.02em; line-height:1; color:#fbbf24">168</div>
+        <div style="margin-top:4px; font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:.04em; color:#8d8780">New this week</div>
+      </div>
+      <div class="card" style="border-radius:10px; padding:10px; text-align:center">
+        <div class="nums" style="font-size:18px; font-weight:700; letter-spacing:-0.02em; line-height:1">341</div>
+        <div style="margin-top:4px; font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:.04em; color:#8d8780">Confirmed Riyadh</div>
+      </div>
+      <div class="card" style="border-radius:10px; padding:10px; text-align:center">
+        <div class="nums" style="font-size:18px; font-weight:700; letter-spacing:-0.02em; line-height:1">612</div>
+        <div style="margin-top:4px; font-size:10px; font-weight:500; text-transform:uppercase; letter-spacing:.04em; color:#8d8780">From employer</div>
+      </div>
+    </div>
+
+    <!-- search now -->
+    <div class="card" style="border-radius:10px; padding:11px 13px; display:flex; align-items:center; justify-content:space-between; gap:8px">
+      <span style="font-size:12px; color:#b6b0a8">Collected <strong style="color:#f0ede9">14m ago</strong></span>
+      <span style="display:inline-flex; align-items:center; height:32px; padding:0 14px; border-radius:10px; background:#fbbf24; color:#1f1d1a; font-size:12.5px; font-weight:600">Search now</span>
+    </div>
+
+    <!-- tab rail: scrolls horizontally, clipped at the edge on purpose -->
+    <div style="display:flex; gap:6px; margin:0 -16px; padding:0 16px; overflow:hidden">
+      <span class="tab on">All company sources</span>
+      <span class="tab">Direct from employer</span>
+      <span class="tab">Career pa</span>
+    </div>
+
+    <!-- controls stack on a phone -->
+    <div style="display:flex; flex-direction:column; gap:8px">
+      <div style="display:flex; align-items:center; gap:8px; height:40px; padding:0 14px; border-radius:10px; border:1px solid #34302a; background:#201e1b">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8d8780" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg>
+        <span style="font-size:14px; color:#8d8780">Search title or company&hellip;</span>
+      </div>
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:8px">
+        <span style="display:inline-flex; align-items:center; justify-content:space-between; height:40px; padding:0 12px; border-radius:10px; border:1px solid #fbbf24; background:#2e2413; color:#fcd34d; font-size:13px; font-weight:600">Last 12 hours &#9662;</span>
+        <span style="display:inline-flex; align-items:center; justify-content:space-between; height:40px; padding:0 12px; border-radius:10px; border:1px solid #34302a; background: #201e1b; color:#b6b0a8; font-size:13px; font-weight:600">By company &#9662;</span>
+      </div>
+    </div>
+
+    <!-- chip rail -->
+    <div>
+      <div style="font-size:10.5px; font-weight:600; text-transform:uppercase; letter-spacing:.05em; color:#8d8780; margin-bottom:6px">Career track</div>
+      <div style="display:flex; gap:6px; margin:0 -16px; padding:0 16px; overflow:hidden">
+        <span class="round on">Cybersecurity <span style="opacity:.6">86</span></span>
+        <span class="round">Cloud <span style="opacity:.6">71</span></span>
+        <span class="round">Data</span>
+      </div>
+    </div>
+
+    <div style="font-size:12.5px; color:#b6b0a8"><strong style="color:#f0ede9" class="nums">47</strong> roles <span style="color:#8d8780">across 22 companies</span></div>
+
+    <!-- cards, single column -->
+    <div style="display:flex; flex-direction:column; gap:10px">
+
+      <div class="card" style="padding:15px">
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:8px">
+          <div style="flex:1; min-width:0">
+            <div style="display:flex; flex-wrap:wrap; gap:5px">
+              <span class="pill" style="background:#0a2e22; color:#6ee7b7"><span class="dot" style="background:#34d399"></span>Today</span>
+              <span class="pill" style="background:#2e2413; color:#fcd34d">Direct from employer</span>
+            </div>
+            <div style="margin-top:8px; font-size:15px; font-weight:600; letter-spacing:-0.01em; line-height:1.35">Cloud Security Engineer</div>
+            <div style="margin-top:3px; font-size:12.5px; font-weight:500; color:#b6b0a8">stc</div>
+            <div style="margin-top:5px; font-size:11.5px; color:#8d8780">Riyadh <span style="opacity:.5">&middot;</span> 3-5 yrs</div>
+            <div style="margin-top:4px; font-size:11px; color:#8d8780; display:flex; align-items:center; gap:4px">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <span>Posted</span><span class="nums">4h ago</span><span style="opacity:.5">&middot;</span><span class="nums">3 Sep, 09:40</span>
+            </div>
+            <div style="margin-top:10px; font-size:12px; font-weight:600; color:#fbbf24">View details</div>
+          </div>
+          <div style="width:30px; height:30px; display:grid; place-items:center; opacity:.45">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8d8780" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m3 0v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6"/><path d="M10 11v6M14 11v6"/></svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="card" style="padding:15px">
+        <div style="display:flex; flex-wrap:wrap; gap:5px">
+          <span class="pill" style="background:#2e2413; color:#fcd34d">7 open roles</span>
+          <span class="pill" style="background:#0a2e22; color:#6ee7b7"><span class="dot" style="background:#34d399"></span>3 new</span>
+        </div>
+        <div style="margin-top:8px; font-size:15px; font-weight:600; letter-spacing:-0.01em; line-height:1.35">Elm</div>
+        <div style="margin-top:5px; font-size:11.5px; color:#8d8780">Cybersecurity &middot; Cloud &middot; Data &amp; AI</div>
+        <div style="margin-top:4px; font-size:11px; color:#8d8780; display:flex; align-items:center; gap:4px">
+          <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          <span>Posted</span><span class="nums">2h ago</span><span style="opacity:.5">&middot;</span><span class="nums">3 Sep, 11:15</span>
+        </div>
+        <div style="margin-top:10px; font-size:12px; font-weight:600; color:#fbbf24">Open 7 roles in a new tab &rarr;</div>
+      </div>
+
+      <div class="card" style="padding:15px">
+        <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:8px">
+          <div style="flex:1; min-width:0">
+            <div style="display:flex; flex-wrap:wrap; gap:5px">
+              <span class="pill" style="background:#0a2e22; color:#6ee7b7"><span class="dot" style="background:#34d399"></span>Today</span>
+              <span class="pill" style="background:#2a2113; color:#fcd34d">Co-op</span>
+            </div>
+            <div style="margin-top:8px; font-size:15px; font-weight:600; letter-spacing:-0.01em; line-height:1.35">Co-op Trainee &mdash; Information Security</div>
+            <div style="margin-top:3px; font-size:12.5px; font-weight:500; color:#b6b0a8">Saudi Awwal Bank (SAB)</div>
+            <div style="margin-top:5px; font-size:11.5px; color:#8d8780">Riyadh <span style="opacity:.5">&middot;</span> Co-op training</div>
+            <div style="margin-top:4px; font-size:11px; color:#8d8780; display:flex; align-items:center; gap:4px">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+              <span>Found</span><span class="nums">7h ago</span><span style="opacity:.5">&middot;</span><span class="nums">3 Sep, 06:20</span>
+            </div>
+            <div style="margin-top:10px; font-size:12px; font-weight:600; color:#fbbf24">View details</div>
+          </div>
+          <div style="width:30px; height:30px; display:grid; place-items:center; opacity:.45">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#8d8780" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m3 0v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6"/><path d="M10 11v6M14 11v6"/></svg>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+</x-dc>
+</body>
+</html>

@@ -1,0 +1,4174 @@
+{
+  "checkedAt": "2026-09-03T18:47:58.749Z",
+  "findings": [
+    {
+      "company": "NEOM",
+      "currentUrl": "https://careers.neom.com/careers",
+      "secondaryUrls": [
+        "https://careers.neom.com/careers/join?domain=neom.com&hl=en"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Red Sea Global",
+      "currentUrl": "https://careers.theredsea.sa/go/Job-Opportunities/7716923/",
+      "secondaryUrls": [
+        "https://careers.theredsea.sa/go/Job-Opportunities/7716923/#content",
+        "https://careers.theredsea.sa/go/Job-Opportunities/7716923/#",
+        "https://careers.theredsea.sa/go/Job-Opportunities/7716923/?q=&sortColumn=referencedate&sortDirection=desc"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Qiddiya",
+      "currentUrl": "https://qiddiya.com/careers/",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://apply.workable.com/qiddiya-investment-company-1/",
+      "note": "careers page is a landing page; \"Explore jobs\" leads to the real listing"
+    },
+    {
+      "company": "Diriyah Company",
+      "currentUrl": "https://www.diriyah.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "ROSHN",
+      "currentUrl": "https://www.roshn.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Public Investment Fund (PIF)",
+      "currentUrl": "https://www.pif.gov.sa/en/careers/",
+      "secondaryUrls": [
+        "https://www.pif.gov.sa/en/private-sector-hub/explore-opportunities/",
+        "https://www.pif.gov.sa/en/careers/graduate-development-program/"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "New Murabba",
+      "currentUrl": "https://newmurabba.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "King Salman Park Foundation",
+      "currentUrl": "https://kingsalmanpark.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Soudah Development",
+      "currentUrl": "https://soudah.sa/work-with-us",
+      "secondaryUrls": [
+        "https://fa-eueh-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "AMAALA",
+      "currentUrl": "https://www.amaala.com/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Riyadh Air",
+      "currentUrl": "https://www.riyadhair.com/en/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "NHC (National Housing Company)",
+      "currentUrl": "https://www.nhc.sa/careers",
+      "secondaryUrls": [
+        "https://www.nhc.sa/ar/investment-opportunities"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Alat",
+      "currentUrl": "https://alat.com/en/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Ceer Motors",
+      "currentUrl": "https://www.ceer.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.ceer.com.sa/careers\nCall lo"
+    },
+    {
+      "company": "Lucid Motors",
+      "currentUrl": "https://lucidmotors.com/careers",
+      "secondaryUrls": [
+        "https://lucidmotors.com/careers/search"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Sanabil Investments",
+      "currentUrl": "https://www.sanabil.com/en/careers",
+      "secondaryUrls": [
+        "https://www.sanabil.com/en/program/3"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "SIRC (Saudi Investment Recycling)",
+      "currentUrl": "https://www.sirc.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Aramco",
+      "currentUrl": "https://www.aramco.com/en/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.aramco.com/en/careers\nCa"
+    },
+    {
+      "company": "SABIC",
+      "currentUrl": "https://www.sabic.com/en/careers",
+      "secondaryUrls": [
+        "https://www.sabic.com/en/careers/middle-east-africa/students-and-fresh-graduates"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://jobs.sabic.com/search/?searchby=location&createNewAlert=false&q=&locationsearch=&geolocation=&optionsFacetsDD_title=&optionsFacetsDD_dept=&optionsFacetsDD_department=",
+      "note": "careers page is a landing page; \"Apply Now\" leads to the real listing"
+    },
+    {
+      "company": "Ma'aden",
+      "currentUrl": "https://careers.maaden.com/gb/en",
+      "secondaryUrls": [
+        "https://careers.maaden.com/gb/en/jointalentcommunity",
+        "https://careers.maaden.com/gb/en/job/8595/Principal-Specialist-International-Research-Development-Scientist"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "ACWA Power",
+      "currentUrl": "https://careers.acwapower.com/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Electricity Company",
+      "currentUrl": "https://www.se.com.sa/careers",
+      "secondaryUrls": [
+        "https://www.se.com.sa/ar-SA/Whoweare/Column3/About-Company/Internal-Audit/"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Petro Rabigh",
+      "currentUrl": "https://www.petrorabigh.com/en/careers",
+      "secondaryUrls": [
+        "https://careers.petrorabigh.com/pages/university-college-co-op-program"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://careers.petrorabigh.com/",
+      "note": "redirects to a different page that does list jobs"
+    },
+    {
+      "company": "Sipchem",
+      "currentUrl": "https://www.sipchem.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Advanced Petrochemical",
+      "currentUrl": "https://careers.advancedpetrochem.com/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Bahri",
+      "currentUrl": "https://www.bahri.sa/careers/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Alfanar",
+      "currentUrl": "https://www.alfanar.com/company/careers",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://jobs.alfanar.com/alfanar/go/All-Openings/4442101/",
+      "note": "careers page is a landing page; \"START YOUR JOURNEY\" leads to the real listing"
+    },
+    {
+      "company": "Zamil Group",
+      "currentUrl": "https://www.zamil.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Nesma",
+      "currentUrl": "https://www.nesma.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Marafiq",
+      "currentUrl": "https://www.marafiq.com.sa/en/partnering-with-us/careers/life-at-marafiq/",
+      "secondaryUrls": [
+        "https://www.marafiq.com.sa/en/esg/governance/rule-5-establishing-sound-risk-management-and-internal-control-systems/"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Tarshid",
+      "currentUrl": "https://www.tarshid.com.sa/en/jobs",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Water Authority",
+      "currentUrl": "https://www.swa.gov.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "stc",
+      "currentUrl": "https://careers.stc.com.sa/",
+      "secondaryUrls": [
+        "https://careers.stc.com.sa/go/Cooperative-Training/7736023/",
+        "https://careers.stc.com.sa/go/Early-Career/7735923/",
+        "https://careers.stc.com.sa/content/COOP/?locale=en_US"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "solutions by stc",
+      "currentUrl": "https://careers.solutions.com.sa/",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://careers.solutions.com.sa/viewalljobs/",
+      "note": "careers page is a landing page; \"View All Jobs\" leads to the real listing"
+    },
+    {
+      "company": "sirar by stc",
+      "currentUrl": "https://www.linkedin.com/company/sirarbystc/jobs/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "center3",
+      "currentUrl": "https://www.center3.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 401"
+    },
+    {
+      "company": "Mobily",
+      "currentUrl": "https://careers.mobily.com.sa/en/sites/opportunities",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.waitForTimeout: Page crashed"
+    },
+    {
+      "company": "Zain KSA",
+      "currentUrl": "https://sa.zain.com/about/careers/",
+      "secondaryUrls": [
+        "https://sa.zain.com/about/join-zain/",
+        "https://sa.zain.com/about/co-op-program/"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "TAWAL",
+      "currentUrl": "https://www.tawal.com.sa/en/team",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://ialegs.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_2001",
+      "note": "careers page is a landing page; \"View Jobs\" leads to the real listing"
+    },
+    {
+      "company": "Elm",
+      "currentUrl": "https://elm.sa/ar/recruitment/sectors/Pages/default.aspx",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Thiqah",
+      "currentUrl": "https://www.thiqah.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Takamol Holding",
+      "currentUrl": "https://www.takamolholding.com/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Tahakom",
+      "currentUrl": "https://careers.tahakom.com/",
+      "secondaryUrls": [
+        "https://careers.tahakom.com/content/Learning-and-Development/?locale=ar_SA",
+        "https://careers.tahakom.com/lp/Cooperative%20Training%20ar/9064f865bd729606/?locale=ar_SA",
+        "https://careers.tahakom.com/go/Fresh-Graduates/7763523/"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "SITE (Saudi Information Technology Company)",
+      "currentUrl": "https://site.sa/en/join-us",
+      "secondaryUrls": [
+        "https://site.sa/join_us.fourth_section.trainees.email"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "NourNet",
+      "currentUrl": "https://nour.net.sa/en/careers",
+      "secondaryUrls": [
+        "https://nour.net.sa/connectivity/internet-service-provider-in-ksa/"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Salam (Integrated Telecom)",
+      "currentUrl": "https://salam.net/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Innovative Solutions",
+      "currentUrl": "https://www.is.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "AlJammaz Technologies",
+      "currentUrl": "https://www.aljammaztechnologies.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Cipher (stc group)",
+      "currentUrl": "https://www.cipher.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Unifonic",
+      "currentUrl": "https://www.unifonic.com/en/careers",
+      "secondaryUrls": [
+        "https://www.unifonic.com/en/solutions/engage-and-support?hsLang=en"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Quant",
+      "currentUrl": "https://quant.sa/careers",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://careers.quant.sa/jobs/Careers",
+      "note": "careers page is a landing page; \"Explore our current openings\" leads to the real listing"
+    },
+    {
+      "company": "Saudi National Bank (SNB)",
+      "currentUrl": "https://www.alahli.com/en/pages/about-us/careers",
+      "secondaryUrls": [
+        "https://www.alahli.com/en/pages/personal-banking/finance/international-transfer",
+        "https://www.alahli.com/en/pages/business/investments/international-brokerage",
+        "https://www.alahli.com/en/pages/corporate-banking/investments/international-brokerage"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Al Rajhi Bank",
+      "currentUrl": "https://careers.alrajhibank.com.sa/ar/",
+      "secondaryUrls": [
+        "https://careers.alrajhibank.com.sa/ar/international/job-search/",
+        "https://careers.alrajhibank.com.sa/en/international/job-search/",
+        "https://careers.alrajhibank.com.sa/en/internal-posts/"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Riyad Bank",
+      "currentUrl": "https://careers.riyadbank.com/en/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Awwal Bank (SAB)",
+      "currentUrl": "https://www.sab.com/en/about-us/careers/",
+      "secondaryUrls": [
+        "https://www.sab.com/en/personal/segments/international-banking/",
+        "https://www.sab.com/en/personal/payments-and-transfers/international-remittance/",
+        "https://www.sab.com/en/about-us/careers/graduate-opportunities/"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Banque Saudi Fransi",
+      "currentUrl": "https://www.alfransi.com.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Arab National Bank",
+      "currentUrl": "https://anb.com.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Alinma Bank",
+      "currentUrl": "https://career.alinma.com/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Bank Albilad",
+      "currentUrl": "https://www.bankalbilad.com.sa/ar/about/Pages/e-careers.aspx",
+      "secondaryUrls": [
+        "https://www.bankalbilad.com.sa/ar/about/Pages/Training.aspx"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Bank AlJazira",
+      "currentUrl": "https://www.aljazirabank.com.sa/ar-sa/personal/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Gulf International Bank",
+      "currentUrl": "https://www.gib.com/en/careers-home-page",
+      "secondaryUrls": [
+        "https://www.gib.com/en/jammaz-al-suhaimi-future-executive-graduate-programme"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://careers.gib.com/en/job-search-results/",
+      "note": "careers page is a landing page; \"Search for Jobs\" leads to the real listing"
+    },
+    {
+      "company": "SAMA (Saudi Central Bank)",
+      "currentUrl": "https://www.sama.gov.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Tadawul Group",
+      "currentUrl": "https://www.saudiexchange.sa/wps/portal/tadawul/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Saudi Payments",
+      "currentUrl": "https://www.saudipayments.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.saudipayments.sa/careers\nCa"
+    },
+    {
+      "company": "stc pay",
+      "currentUrl": "https://stcpay.org/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Tamara",
+      "currentUrl": "https://tamara.co/en-sa/careers",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tabby",
+      "currentUrl": "https://tabby.ai/en-AE/careers",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Lean Technologies",
+      "currentUrl": "https://www.leantech.me/uae/en/careers",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://jobs.ashbyhq.com/LeanTech/70aa6290-8d58-4749-9861-59675b1c8cb5",
+      "note": "careers page is a landing page; \"Senior Customer Success Manage\" leads to the real listing"
+    },
+    {
+      "company": "Rasan",
+      "currentUrl": "https://rasan.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Hala",
+      "currentUrl": "https://hala.com/careers",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://job-boards.greenhouse.io/hala",
+      "note": "careers page is a landing page; \"الوظائف\" leads to the real listing"
+    },
+    {
+      "company": "Geidea",
+      "currentUrl": "https://careers.geidea.net/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Moyasar",
+      "currentUrl": "https://moyasar.com/en/resources/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "PayTabs",
+      "currentUrl": "https://ai.paytabs.com/en/career/",
+      "secondaryUrls": [
+        "https://ai.paytabs.com/en/business-opportunities/",
+        "https://ai.paytabs.com/en/?post_type=job_listing&p=39506",
+        "https://ai.paytabs.com/en/?post_type=job_listing&p=39433"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Foodics",
+      "currentUrl": "https://www.foodics.com/careers/",
+      "secondaryUrls": [
+        "http://foodics.workable.com/",
+        "https://apply.workable.com/foodics/"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Jahez",
+      "currentUrl": "https://www.jahez.net/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "HungerStation",
+      "currentUrl": "https://deliveryhero-1481174-gb-engb.sr-attrax.com/hungerstation-arabic",
+      "secondaryUrls": [
+        "https://deliveryhero-1481174-gb-engb.sr-attrax.com/%D8%A8%D8%B1%D9%86%D8%A7%D9%85%D8%AC%20%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8%20%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%88%D9%86%D9%8A"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Nana",
+      "currentUrl": "https://nana.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Salla",
+      "currentUrl": "https://salla.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Zid",
+      "currentUrl": "https://zid.sa/en/jobs/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Mrsool",
+      "currentUrl": "https://mrsool.co/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Sary",
+      "currentUrl": "https://sary.zenats.com/en",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Almarai",
+      "currentUrl": "https://www.almarai.com/en/careers/",
+      "secondaryUrls": [
+        "https://career5.successfactors.eu/career?company=AlMaraiP",
+        "https://www.almarai.com/en/careers/employment-application-form",
+        "https://www.almarai.com/en/careers/cooperative-training"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Jarir Bookstore",
+      "currentUrl": "https://www.jarir.com/about-jarir/job-opportunities",
+      "secondaryUrls": [
+        "https://www.jarir.com/about-jarir/job-opportunities#"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Panda Retail",
+      "currentUrl": "https://www.panda.com.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Alshaya Group",
+      "currentUrl": "https://www.alshaya.com/en/careers/",
+      "secondaryUrls": [
+        "https://www.alshaya.com/en/careers/vacancies",
+        "https://www.alshaya.com/en/careers/#getjobOpportunities"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Abdul Latif Jameel",
+      "currentUrl": "https://alj.com/en/about/careers/",
+      "secondaryUrls": [
+        "https://alj.com/en/investments/international/",
+        "https://alj.com/en/about/careers/#early-careers"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Ajlan & Bros",
+      "currentUrl": "https://ajlanbros.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "SDAIA",
+      "currentUrl": "https://sdaia.gov.sa/ar/SDAIA/SdaiaStrategies/Pages/EmploymentStrategy.aspx",
+      "secondaryUrls": [
+        "https://sdaia.gov.sa/ar/Sectors/BuildingCapacity/Pages/CooperativeTraining.aspx"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "National Cybersecurity Authority (NCA)",
+      "currentUrl": "https://nca.gov.sa/en/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Digital Government Authority",
+      "currentUrl": "https://dga.gov.sa/ar/join-us",
+      "secondaryUrls": [
+        "https://dga.gov.sa/nomow-program"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Ministry of Communications and IT",
+      "currentUrl": "https://careers.mcit.gov.sa/",
+      "secondaryUrls": [
+        "https://careers.mcit.gov.sa/ar/saudi-arabia/jobs/%D8%A7%D9%84%D8%AA%D8%AF%D8%B1%D9%8A%D8%A8-%D8%A7%D9%84%D8%AA%D8%B9%D8%A7%D9%88%D9%86%D9%8A-1100084333/"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "ZATCA",
+      "currentUrl": "https://careers.zatca.gov.sa/?locale=ar_SA",
+      "secondaryUrls": [
+        "https://careers.zatca.gov.sa/content/Coop-and-Training-Programs-Arabic/?locale=ar_SA"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "GOSI",
+      "currentUrl": "https://www.gosi.gov.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Monshaat",
+      "currentUrl": "https://www.monshaat.gov.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "NUPCO",
+      "currentUrl": "https://www.nupco.com/careers-and-training/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Post (SPL)",
+      "currentUrl": "https://splonline.com.sa/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Mawani",
+      "currentUrl": "https://careers.mawani.gov.sa/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Railways (SAR)",
+      "currentUrl": "https://www.sar.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "GACA",
+      "currentUrl": "https://careers.gaca.gov.sa/",
+      "secondaryUrls": [
+        "https://careers.gaca.gov.sa/en/public/jobs",
+        "https://careers.gaca.gov.sa/en/auth/jobseeker/signup?id=68b4574dd171cfb256d5429d"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Human Resources Development Fund",
+      "currentUrl": "https://www.hrdf.org.sa/about/joinus/jobs/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "KAUST",
+      "currentUrl": "https://www.kaust.edu.sa/en/error/404?404;https://www.kaust.edu.sa:443/en/careers",
+      "secondaryUrls": [
+        "https://www.kaust.edu.sa/ar/study/student-central",
+        "https://www.kaust.edu.sa/docs/kaustlibraries/documents/downloads/kaust_student-handbook_25_26.pdf",
+        "https://www.kaust.edu.sa/en/about/green-campus"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "KACST",
+      "currentUrl": "https://www.kacst.gov.sa/en/careers",
+      "secondaryUrls": [
+        "https://www.kacst.gov.sa/ar/internal/about",
+        "https://www.kacst.gov.sa/ar/internal/overview",
+        "https://www.kacst.gov.sa/ar/internal/board-of-directors"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "KAPSARC",
+      "currentUrl": "https://www.kapsarc.org/work-with-us/job-opportunities/",
+      "secondaryUrls": [
+        "https://www.kapsarc.org/work-with-us/job-opportunities/#"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "KFUPM",
+      "currentUrl": "https://www.kfupm.edu.sa/about-us/connect/careers",
+      "secondaryUrls": [
+        "https://www.kfupm.edu.sa/study/undergraduate-concentrations-(cx)",
+        "https://www.kfupm.edu.sa/study/graduate-programs-ms",
+        "https://www.kfupm.edu.sa/study/international-students"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Alfaisal University",
+      "currentUrl": "https://jobs.alfaisal.edu/",
+      "secondaryUrls": [
+        "https://jobs.alfaisal.edu/col/"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Prince Sultan University",
+      "currentUrl": "https://psu.edu.sa/en/career",
+      "secondaryUrls": [
+        "https://psu.edu.sa/en/student-faculty",
+        "https://psu.edu.sa/en/Deanship-of-Student-Affairs",
+        "https://psu.edu.sa/en/graduate-studies-unit"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Bupa Arabia",
+      "currentUrl": "https://www.bupa.com.sa/en/careers",
+      "secondaryUrls": [
+        "https://www.bupa.com.sa/en/business-international/international-health-plan",
+        "https://www.bupa.com.sa/en/home",
+        "https://www.bupa.com.sa/en/careers#"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://careers.bupa.com.sa/en/job-search-results/",
+      "note": "careers page is a landing page; \"Career Portal\" leads to the real listing"
+    },
+    {
+      "company": "Tawuniya",
+      "currentUrl": "https://www.tawuniya.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Dr. Sulaiman Al Habib",
+      "currentUrl": "https://hmg.elevatus.io/jobs",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "King Faisal Specialist Hospital",
+      "currentUrl": "https://www.kfshrc.edu.sa/en/home/careers",
+      "secondaryUrls": [
+        "https://www.kfshrc.edu.sa/en/home/careers#",
+        "https://www.kfshrc.edu.sa/en/healthcare/international-patients",
+        "https://www.kfshrc.edu.sa/en/healthcare/international-patients/plan-your-journey"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Seha Virtual Hospital",
+      "currentUrl": "https://svh.med.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://svh.med.sa/careers\nCall log:\n\u001b["
+    },
+    {
+      "company": "Accenture",
+      "currentUrl": "https://www.accenture.com/sa-en/careers",
+      "secondaryUrls": [
+        "https://www.accenture.com/sa-en/careers/life-at-accenture/internships-students",
+        "https://www.accenture.com/sa-en/careers/life-at-accenture/entry-level"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Deloitte Middle East",
+      "currentUrl": "https://www.deloitte.com/middle-east/en/careers.html",
+      "secondaryUrls": [
+        "https://www.deloitte.com/middle-east/en/services/audit-assurance/services/controls-assurance.html?icid=top_accounting-internal-controls",
+        "https://www.deloitte.com/middle-east/en/services/tax/services/international-tax.html?icid=top_international-tax",
+        "https://www.deloitte.com/middle-east/en/careers/deloitte-life/impact-every-day/kiyadat-at-deloitte.html"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://middleeastjobs.deloitte.com/",
+      "note": "careers page is a landing page; \"Job search\" leads to the real listing"
+    },
+    {
+      "company": "PwC Middle East",
+      "currentUrl": "https://www.pwc.com/m1/en/careers.html",
+      "secondaryUrls": [
+        "https://www.pwc.com/m1/en/careers/graduates-and-undergraduates-careers.html",
+        "https://www.pwc.com/m1/en/careers/graduates.html",
+        "https://www.pwc.com/m1/en/careers/oman-nationals-careers.html"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "EY",
+      "currentUrl": "https://www.ey.com/en_sa/careers",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "KPMG Saudi Arabia",
+      "currentUrl": "https://kpmg.com/sa/en/careers.html",
+      "secondaryUrls": [
+        "https://kpmg.com/sa/en/careers/graduates.html",
+        "https://kpmg.com/sa/en/careers/coop-and-internship-programs.html"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "McKinsey & Company",
+      "currentUrl": "https://www.mckinsey.com/careers/home",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.mckinsey.com/careers/hom"
+    },
+    {
+      "company": "Boston Consulting Group",
+      "currentUrl": "https://careers.bcg.com/global/en/search-results",
+      "secondaryUrls": [
+        "https://careers.bcg.com/global/en/early-careers",
+        "https://careers.bcg.com/global/en/internship-opportunities",
+        "https://careers.bcg.com/global/en/on-campus"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Bain & Company",
+      "currentUrl": "https://careers.bain.com/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Oliver Wyman",
+      "currentUrl": "https://www.oliverwyman.com/careers.html",
+      "secondaryUrls": [
+        "https://www.oliverwyman.com/media-center/2023/mar/insider-oliver-wymans-shadow-boards-allow-collaborative-advisory-throughout-the-firm.html"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://careers.marsh.com/global/en/oliver-wyman-search",
+      "note": "careers page is a landing page; \"Apply Now\" leads to the real listing"
+    },
+    {
+      "company": "Kearney",
+      "currentUrl": "https://www.kearney.com/careers",
+      "secondaryUrls": [
+        "https://www.kearney.com/careers/opportunities",
+        "https://www.kearney.com/careers/interviewing"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Capgemini",
+      "currentUrl": "https://www.capgemini.com/careers/",
+      "secondaryUrls": [
+        "https://www.capgemini.com/careers/career-paths/students-and-graduates/"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://www.capgemini.com/careers/?page=1&size=11",
+      "note": "redirects to a different page that does list jobs"
+    },
+    {
+      "company": "Wipro",
+      "currentUrl": "https://careers.wipro.com/search/?searchResultView=LIST",
+      "secondaryUrls": [
+        "https://careers.wipro.com/content/Early-Careers/?locale=en_US",
+        "https://careers.wipro.com/talentcommunity/subscribe/?locale=en_US"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Infosys",
+      "currentUrl": "https://www.infosys.com/careers/",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Tata Consultancy Services",
+      "currentUrl": "https://www.tcs.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Tech Mahindra",
+      "currentUrl": "https://careers.techmahindra.com/",
+      "secondaryUrls": [
+        "https://careers.techmahindra.com/CurrentOpportunity.aspx",
+        "https://careers.techmahindra.com/BPSOpportunity.aspx",
+        "https://careers.techmahindra.com/Currentopportunity.aspx"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "HCLTech",
+      "currentUrl": "https://careers.hcltech.com/",
+      "secondaryUrls": [
+        "https://careers.hcltech.com/go/NonTPDemand/9558355/",
+        "https://careers.hcltech.com/talentcommunity/subscribe/?locale=en_US"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Atos",
+      "currentUrl": "https://atos.net/en/join-us",
+      "secondaryUrls": [
+        "https://atos.net/en/services/digital-applications/internet-of-things",
+        "https://atos.net/en/join-us/young-professionals-and-graduates",
+        "https://atos.net/en/join-us/interns-apprentices"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "DXC Technology",
+      "currentUrl": "https://careers.dxc.com/",
+      "secondaryUrls": [
+        "https://careers.dxc.com/profile/join/",
+        "https://careers.dxc.com/job-search-results/?category=Apprentice%20%26%20Interns",
+        "https://careers.dxc.com/profile/join"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Giza Systems",
+      "currentUrl": "https://www.gizasystems.com/careers",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://www.pulse-careers.com/",
+      "note": "careers page is a landing page; \"Careers\" leads to the real listing"
+    },
+    {
+      "company": "Injazat / Core42",
+      "currentUrl": "https://careers.core42.ai/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Microsoft",
+      "currentUrl": "https://apply.careers.microsoft.com/careers",
+      "secondaryUrls": [
+        "https://apply.careers.microsoft.com/careers/join"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://apply.careers.microsoft.com/careers?start=0&pid=1970393556972152&sort_by=timestamp",
+      "note": "redirects to a different page that does list jobs"
+    },
+    {
+      "company": "Amazon Web Services",
+      "currentUrl": "https://www.amazon.jobs/en/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Google",
+      "currentUrl": "https://www.google.com/about/careers/applications/",
+      "secondaryUrls": [
+        "https://www.google.com/about/careers/applications/students"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Oracle",
+      "currentUrl": "https://careers.oracle.com/en/sites/jobsearch",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SAP",
+      "currentUrl": "https://jobs.sap.com/",
+      "secondaryUrls": [
+        "https://jobs.sap.com/content/Students-and-Graduates/?locale=en_US",
+        "https://performancemanager5.successfactors.eu/sf/careers?company=SAP",
+        "https://jobs.sap.com/content/students/"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "IBM",
+      "currentUrl": "https://www.ibm.com/careers/search",
+      "secondaryUrls": [
+        "https://www.ibm.com/careers/career-opportunities",
+        "https://www.ibm.com/careers/internships"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Cisco",
+      "currentUrl": "https://careers.cisco.com/global/en",
+      "secondaryUrls": [
+        "https://careers.cisco.com/global/en/jointalentcommunity"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Dell Technologies",
+      "currentUrl": "https://enterpriseplatform.dell.com/hcmUI/CandidateExperience/en/sites/careers/jobs?mode=location",
+      "secondaryUrls": [
+        "https://enterpriseplatform.dell.com/hcmUI/CandidateExperience/en/sites/careers/join-talent-community",
+        "https://enterpriseplatform.dell.com/hcmUI/CandidateExperience/en/sites/careers/pages/internships/?mode=location",
+        "https://enterpriseplatform.dell.com/hcmUI/CandidateExperience/en/sites/careers/pages/recent-graduates/?mode=location"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Hewlett Packard Enterprise",
+      "currentUrl": "https://careers.hpe.com/us/en/search-results",
+      "secondaryUrls": [
+        "https://careers.hpe.com/us/en/students",
+        "https://careers.hpe.com/us/en/jointalentcommunity"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Huawei",
+      "currentUrl": "https://career.huawei.com/reccampportal/portal5/index.html",
+      "secondaryUrls": [
+        "https://career.huawei.com/reccampportal/portal5/campus-recruitment.html?v=20241208",
+        "https://career.huawei.com/reccampportal/campus4/pages/westernEurope/index.html?v=20241120",
+        "https://career.huawei.com/reccampportal/portal5/campus-recruitment.html"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Nokia",
+      "currentUrl": "https://www.nokia.com/careers/",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Ericsson",
+      "currentUrl": "https://jobs.ericsson.com/careers",
+      "secondaryUrls": [
+        "https://jobs.ericsson.com/careers/join?domain=ericsson.com",
+        "https://jobs.ericsson.com/careers/job/563121776746326",
+        "https://jobs.ericsson.com/careers/job/563121775776106"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://jobs.ericsson.com/careers?start=0&pid=563121776072318&sort_by=hot",
+      "note": "redirects to a different page that does list jobs"
+    },
+    {
+      "company": "Siemens",
+      "currentUrl": "https://jobs.siemens.com/en_US/externaljobs/Home",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Schneider Electric",
+      "currentUrl": "https://careers.se.com/life-at-schneider",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Honeywell",
+      "currentUrl": "https://careers.honeywell.com/en/sites/Honeywell",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "ABB",
+      "currentUrl": "https://careers.abb/global/en",
+      "secondaryUrls": [
+        "https://careers.abb/global/en/early-careers"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "General Electric",
+      "currentUrl": "https://jobs.gecareers.com/",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://jobs.gecareers.com/\nCall log:\n\u001b"
+    },
+    {
+      "company": "ServiceNow",
+      "currentUrl": "https://careers.servicenow.com/",
+      "secondaryUrls": [
+        "https://careers.servicenow.com/early-careers/"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Salesforce",
+      "currentUrl": "https://www.salesforce.com/company/careers/jobs/",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "VMware by Broadcom",
+      "currentUrl": "https://broadcom.wd1.myworkdayjobs.com/External_Career",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Red Hat",
+      "currentUrl": "https://www.redhat.com/en/jobs",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Nutanix",
+      "currentUrl": "https://careers.nutanix.com/en/",
+      "secondaryUrls": [
+        "https://careers.nutanix.com/en/student-programs/",
+        "https://careers.nutanix.com/en/jobs/?orderby=0&pagesize=20&page=1&radius=100&team=Sales&team=Sales%20Strategy%20%26%20Operations",
+        "https://careers.nutanix.com/en/jobs/?orderby=0&pagesize=20&page=1&radius=100&team=Engineering"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "NetApp",
+      "currentUrl": "https://careers.netapp.com/",
+      "secondaryUrls": [
+        "https://careers.netapp.com/category/internships-jobs/27600/8608640/1",
+        "https://careers.netapp.com/en/temporaryopportunities"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Pure Storage",
+      "currentUrl": "https://www.everpuredata.com/company/careers/opportunities.html",
+      "secondaryUrls": [
+        "https://www.everpuredata.com/company/careers/opportunities.html#",
+        "https://www.everpuredata.com/company/careers/opportunities.html#pathfinder",
+        "https://job-boards.greenhouse.io/purestorage/jobs/8027655"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Snowflake",
+      "currentUrl": "https://careers.snowflake.com/us/en",
+      "secondaryUrls": [
+        "https://careers.snowflake.com/us/en/jointalentcommunity",
+        "https://careers.snowflake.com/us/en/equal-opportunity"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Databricks",
+      "currentUrl": "https://www.databricks.com/company/careers/open-positions",
+      "secondaryUrls": [
+        "https://www.databricks.com/company/careers/university-recruiting",
+        "https://www.databricks.com/company/careers/engineering---pipeline/senior-software-engineer---database-engine-internals-8012809002",
+        "https://www.databricks.com/company/careers/engineering---pipeline/senior-software-engineer---database-engine-internals-6544383002"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "MongoDB",
+      "currentUrl": "https://www.mongodb.com/company/careers",
+      "secondaryUrls": [
+        "https://www.mongodb.com/company/careers/how-to-avoid-recruiting-scams",
+        "https://www.mongodb.com/students",
+        "https://www.mongodb.com/careers/departments/campus"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Elastic",
+      "currentUrl": "https://www.elastic.co/careers",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "GitLab",
+      "currentUrl": "https://about.gitlab.com/jobs/all-jobs/",
+      "secondaryUrls": [
+        "https://job-boards.greenhouse.io/gitlab/jobs/8642850002",
+        "https://job-boards.greenhouse.io/gitlab/jobs/8643077002",
+        "https://job-boards.greenhouse.io/gitlab/jobs/8700587002"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Atlassian",
+      "currentUrl": "https://www.atlassian.com/company/careers/all-jobs",
+      "secondaryUrls": [
+        "https://www.atlassian.com/company/careers/earlycareers",
+        "https://www.atlassian.com/company/careers/details/26275",
+        "https://www.atlassian.com/company/careers/details/26274"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "HashiCorp",
+      "currentUrl": "https://www.ibm.com/careers/search?q=hashicorp",
+      "secondaryUrls": [
+        "https://www.ibm.com/careers/career-opportunities",
+        "https://www.ibm.com/careers/internships"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Confluent",
+      "currentUrl": "https://www.confluent.io/careers/",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 429"
+    },
+    {
+      "company": "Cloudera",
+      "currentUrl": "https://www.cloudera.com/careers.html",
+      "secondaryUrls": [
+        "https://www.cloudera.com/about/news-and-blogs/press-releases/2026-08-19-cloudera-powers-the-agentic-ai-era-with-cloudera-anywhere-cloud.html?internal_keyplay=Cloud-Anywhere&internal_campaign=AWC---FY27-Q2-GLOBAL-VE-WebinarCloudera-Anywhere-Cloud-Launch&cid=701Ui000014pPxgIAE&internal_link=h10",
+        "https://www.cloudera.com/campaign/the-great-ai-re-architecture.html?internal_keyplay=AI-Anywhere&internal_campaign=Thought-Leadership-Reports---AlwaysOn-FY27-GLOBAL-CT-Report-Great-AI-Re-Architecture&cid=701Ui000017i9O3IAI&internal_link=WWW-Nav-u03-why",
+        "https://www.cloudera.com/events/webinars/cloudera-launch.html?internal_keyplay=Cloud-Anywhere&internal_campaign=AWC---FY27-Q2-GLOBAL-VE-WebinarCloudera-Anywhere-Cloud-Launch&cid=701Ui000014pPxgIAE&internal_link=WWW-Nav-u03-products"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://cloudera.wd5.myworkdayjobs.com/External_Career",
+      "note": "careers page is a landing page; \"Search jobs\" leads to the real listing"
+    },
+    {
+      "company": "Informatica",
+      "currentUrl": "https://www.salesforce.com/company/careers/jobs/?search=informatica&pagesize=20",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Palo Alto Networks",
+      "currentUrl": "https://jobs.paloaltonetworks.com/en",
+      "secondaryUrls": [
+        "https://jobs.paloaltonetworks.com/early-in-career",
+        "https://jobs.paloaltonetworks.com/en/Must-Know-Facts-from-an-Early-Career-Product-Manager",
+        "https://paloaltonetworks.wd5.myworkdayjobs.com/en-US/panwexternalcareers/introduceYourself?clientRequestID=06f06ca6dae2441d99391ed600fc2265"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Fortinet",
+      "currentUrl": "https://www.fortinet.com/corporate/careers",
+      "secondaryUrls": [
+        "https://www.fortinet.com/customers/coop"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "CrowdStrike",
+      "currentUrl": "https://www.crowdstrike.com/en-us/careers/",
+      "secondaryUrls": [
+        "https://crowdstrike.wd5.myworkdayjobs.com/crowdstrikecareers/page/56040874354a1000d20c322b45450000",
+        "https://www.crowdstrike.com/en-us/careers/university-interns/"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Splunk",
+      "currentUrl": "https://careers.cisco.com/global/en/splunk/india",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Check Point Software",
+      "currentUrl": "https://www.checkpoint.com/careers/",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://careers.checkpoint.com/index.php?m=cpcareers&a=search",
+      "note": "careers page is a landing page; \"Come Join Us\" leads to the real listing"
+    },
+    {
+      "company": "Trend Micro",
+      "currentUrl": "https://www.trendmicro.com/en_us/about/careers.html",
+      "secondaryUrls": [
+        "https://trendmicro.wd3.myworkdayjobs.com/External",
+        "https://www.trendmicro.com/zh_tw/about/careers.html"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Tenable",
+      "currentUrl": "https://www.tenable.com/careers",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Rapid7",
+      "currentUrl": "https://careers.rapid7.com/jobs/search",
+      "secondaryUrls": [
+        "https://careers.rapid7.com/emerging-talent"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Qualys",
+      "currentUrl": "https://www.qualys.com/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Zscaler",
+      "currentUrl": "https://www.zscaler.com/careers",
+      "secondaryUrls": [
+        "https://www.zscaler.com/products-and-solutions/zscaler-internet-access",
+        "https://www.zscaler.com/products-and-solutions/zero-trust-branch",
+        "https://www.zscaler.com/careers/search"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Netskope",
+      "currentUrl": "https://www.netskope.com/company/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Cloudflare",
+      "currentUrl": "https://www.cloudflare.com/careers/jobs/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "F5",
+      "currentUrl": "https://www.f5.com/company/careers",
+      "secondaryUrls": [
+        "https://www.f5.com/company/careers#internships",
+        "https://www.f5.com/company/careers/early-careers",
+        "https://ffive.wd5.myworkdayjobs.com/en-US/f5jobs/introduceYourself"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Akamai",
+      "currentUrl": "https://www.akamai.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Proofpoint",
+      "currentUrl": "https://www.proofpoint.com/us/company/careers",
+      "secondaryUrls": [
+        "https://www.proofpoint.com/us/solutions/higher-education-security",
+        "https://www.proofpoint.com/us/solutions/email-security-solutions-for-service-providers",
+        "https://proofpoint.wd5.myworkdayjobs.com/proofpointcareers"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Sophos",
+      "currentUrl": "https://www.sophos.com/en-us/company/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.sophos.com/en-us/company"
+    },
+    {
+      "company": "Kaspersky",
+      "currentUrl": "https://careers.kaspersky.com/",
+      "secondaryUrls": [
+        "https://careers.kaspersky.com/vacancies"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "SentinelOne",
+      "currentUrl": "https://www.sentinelone.com/careers/",
+      "secondaryUrls": [
+        "https://www.sentinelone.com/platform/platform-cybersecurity-for-k12-education/"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://www.sentinelone.com/careers/#cq=i1",
+      "note": "redirects to a different page that does list jobs"
+    },
+    {
+      "company": "Trellix",
+      "currentUrl": "https://careers.trellix.com/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Darktrace",
+      "currentUrl": "https://www.darktrace.com/careers",
+      "secondaryUrls": [
+        "https://darktrace.wd3.myworkdayjobs.com/DarktaceExternal"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://darktrace.wd3.myworkdayjobs.com/DarktaceExternal",
+      "note": "careers page is a landing page; \"Explore opportunities\" leads to the real listing"
+    },
+    {
+      "company": "Secureworks",
+      "currentUrl": "https://www.sophos.com/en-us/company/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.sophos.com/en-us/company"
+    },
+    {
+      "company": "Help AG",
+      "currentUrl": "https://www.helpag.com/careers/",
+      "secondaryUrls": [
+        "https://www.helpag.com/join-our-talent-community/"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "spiderSilk",
+      "currentUrl": "https://spidersilk.com/careers",
+      "secondaryUrls": [
+        "https://spidersilk.com/solutions/intelligence-platform"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "CyberKnight",
+      "currentUrl": "https://cyberknight.tech/about-us/jobs/",
+      "secondaryUrls": [
+        "https://cyberknight.tech/blog/cybersecurity-consultant/"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "SAMI (Saudi Arabian Military Industries)",
+      "currentUrl": "https://www.sami.com.sa/careers",
+      "secondaryUrls": [
+        "https://www.sami.com.sa/join-internship-program/"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Thales",
+      "currentUrl": "https://careers.thalesgroup.com/global/en",
+      "secondaryUrls": [
+        "https://careers.thalesgroup.com/global/en/studentandgraduates2",
+        "https://careers.thalesgroup.com/global/en/job/R0184857/Business-App-Support-Intern"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Airbus",
+      "currentUrl": "https://www.airbus.com/en/careers",
+      "secondaryUrls": [
+        "https://ag.wd3.myworkdayjobs.com/Airbus",
+        "https://www.airbus.com/aggp",
+        "https://www.airbus.com/en/careers/students-and-graduates/apprentices/apprenticeships-in-the-united-kingdom"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Boeing",
+      "currentUrl": "https://jobs.boeing.com/",
+      "secondaryUrls": [
+        "https://jobs.boeing.com/veterans",
+        "https://jobs.boeing.com/internships",
+        "https://jobs.boeing.com/Meet-Abbey-Carlson"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Lockheed Martin",
+      "currentUrl": "https://www.lockheedmartin.com/en-us/careers/index.html",
+      "secondaryUrls": [
+        "https://www.lockheedmartin.com/en-us/who-we-are/international.html",
+        "https://www.lockheedmartin.com/en-us/who-we-are/international/india.html",
+        "https://www.lockheedmartin.com/en-us/who-we-are/international/latin-america.html"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "RTX (Raytheon)",
+      "currentUrl": "https://careers.rtx.com/global/en",
+      "secondaryUrls": [
+        "https://careers.rtx.com/global/en/campusprograms",
+        "https://careers.rtx.com/global/en/search-results"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Northrop Grumman",
+      "currentUrl": "https://www.northropgrumman.com/careers",
+      "secondaryUrls": [
+        "https://www.northropgrumman.com/careers/students-and-entry-level-careers-start-a-career-of-purpose",
+        "https://www.northropgrumman.com/corporate-responsibility/reaffirmation-of-equal-employment-opportunity-and-affirmative-action-policies"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "L3Harris",
+      "currentUrl": "https://careers.l3harris.com/en",
+      "secondaryUrls": [
+        "https://careers.l3harris.com/new-grads-and-interns",
+        "https://careers.l3harris.com/international",
+        "https://careers.l3harris.com/new-grads-and-interns-jobs"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "BAE Systems",
+      "currentUrl": "https://jobs.baesystems.com/global/en",
+      "secondaryUrls": [
+        "https://jobs.baesystems.com/global/en/studentsandgraduates",
+        "https://jobs.baesystems.com/global/en/jointalentcommunity",
+        "https://jobs.baesystems.com/global/en/blogarticle/how-two-employees-turned-a-bae-systems-internship-into-a-fulltime-career"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Leonardo",
+      "currentUrl": "https://www.leonardo.com/en/careers",
+      "secondaryUrls": [
+        "https://www.leonardo.com/en/careers/work-with-us",
+        "https://www.leonardo.com/en/news-and-stories-detail/-/detail/missione-futuro-ifts",
+        "https://www.leonardo.com/en/careers/students-and-graduates"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Saudia",
+      "currentUrl": "https://www.saudia.com/about-saudia/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "flynas",
+      "currentUrl": "https://www.flynas.com/en/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "flyadeal",
+      "currentUrl": "https://www.flyadeal.com/en/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Matarat Holding",
+      "currentUrl": "https://careers.matarat.com.sa/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Riyadh Airports",
+      "currentUrl": "https://www.riyadhairports.com/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Jadwa Investment",
+      "currentUrl": "https://www.jadwa.com/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "SNB Capital",
+      "currentUrl": "https://career.snbcapital.com/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Riyad Capital",
+      "currentUrl": "https://www.riyadcapital.com/en/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Derayah Financial",
+      "currentUrl": "https://web.derayah.com/ar/join-us/",
+      "secondaryUrls": [
+        "https://web.derayah.com/ar/no-job-vacancies/",
+        "https://web.derayah.com/ar/no-gdp-vacancies/",
+        "https://web.derayah.com/ar/no-internship-vacancies/"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Alistithmar Capital",
+      "currentUrl": "https://www.icap.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Reinsurance",
+      "currentUrl": "https://saudire.net/career/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Nayifat Finance",
+      "currentUrl": "https://nayifat.com/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Emkan Finance",
+      "currentUrl": "https://www.emkanfinance.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Quara Finance",
+      "currentUrl": "https://www.quara.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Bidaya Home Finance",
+      "currentUrl": "https://www.bidaya.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Lendo",
+      "currentUrl": "https://www.lendo.sa/careers",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Manafa Capital",
+      "currentUrl": "https://manafa.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Tameed",
+      "currentUrl": "https://careers.ta3meed.com/jobs",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Forus",
+      "currentUrl": "https://forus.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Sukuk Capital",
+      "currentUrl": "https://sukuk.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Waed Ventures",
+      "currentUrl": "https://portfoliojobs.waed.com/jobs",
+      "secondaryUrls": [
+        "https://portfoliojobs.waed.com/talent-network"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Saudi Venture Capital",
+      "currentUrl": "https://svc.com.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Neo Leap",
+      "currentUrl": "https://neoleap.com.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Barq",
+      "currentUrl": "https://barq.io/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Alinma Investment",
+      "currentUrl": "https://www.alinmainvestment.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CONNECTION_REFUSED at https://www.alinmainvestment.com/caree"
+    },
+    {
+      "company": "Wamid",
+      "currentUrl": "https://www.wamid.sa/wps/portal/wamid/home",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://careers.tadawulgroup.sa/?lang=en",
+      "note": "careers page is a landing page; \"Careers\" leads to the real listing"
+    },
+    {
+      "company": "Muqassa",
+      "currentUrl": "https://careers.tadawulgroup.sa/?lang=en",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Edaa",
+      "currentUrl": "https://careers.tadawulgroup.sa/?lang=en",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Malath Insurance",
+      "currentUrl": "https://www.malath.com.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Walaa Insurance",
+      "currentUrl": "https://walaa.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "MedGulf",
+      "currentUrl": "https://www.medgulf.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Al Rajhi Takaful",
+      "currentUrl": "https://www.alrajhitakaful.com/ar/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Arabian Shield",
+      "currentUrl": "https://www.der.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.der.com.sa/careers\nCall log"
+    },
+    {
+      "company": "Allianz Saudi Fransi",
+      "currentUrl": "https://www.allianzsf.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://www.allianzsf.com/careers\nCa"
+    },
+    {
+      "company": "Solidarity Saudi Takaful",
+      "currentUrl": "https://solidarity.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Ejada Systems",
+      "currentUrl": "https://careers.ejada.com/",
+      "secondaryUrls": [
+        "https://careers.ejada.com/en/international/job-search/",
+        "https://careers.ejada.com/en/page/career-fairs/",
+        "https://careers.ejada.com/en/job-search-results/?trigger=emptype&emptype=6585"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Perfect Presentation",
+      "currentUrl": "https://2p.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Al Moammar Information Systems",
+      "currentUrl": "https://www.mis.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Advanced Electronics Company",
+      "currentUrl": "https://www.aec.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Intigral",
+      "currentUrl": "https://www.intigral.net/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Dawiyat",
+      "currentUrl": "https://www.dawiyat.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "GO Telecom",
+      "currentUrl": "https://www.go.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Arabsat",
+      "currentUrl": "https://www.arabsat.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Neo Space Group",
+      "currentUrl": "https://www.neospace.group/career/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Lucidya",
+      "currentUrl": "https://lucidya.com/careers",
+      "secondaryUrls": [
+        "https://www.lucidya.com/our-company/partners"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Intelmatix",
+      "currentUrl": "https://intelmatix.ai/company-careers.html",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Mozn",
+      "currentUrl": "https://www.mozn.ai/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Rewaa",
+      "currentUrl": "https://rewaa.com/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Tahaluf",
+      "currentUrl": "https://tahaluf.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Naizak",
+      "currentUrl": "https://naizak.com/index.php/home/careers-2/",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://naizak.com/index.php/hom"
+    },
+    {
+      "company": "Gulf IT",
+      "currentUrl": "https://gulfit.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Malomatia",
+      "currentUrl": "https://malomatia.com/careers/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Savvy Games Group",
+      "currentUrl": "https://evth.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/savvy-careers",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Manga Productions",
+      "currentUrl": "https://mangaproductions.net/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "SURJ Sports Investment",
+      "currentUrl": "https://surj.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "SRJ Sports Investments",
+      "currentUrl": "https://srj.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "MDLBEAST",
+      "currentUrl": "https://mdlbeast.com/about/careers",
+      "secondaryUrls": [
+        "https://mdlbeast.recruitee.com/"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "General Entertainment Authority",
+      "currentUrl": "https://www.gea.gov.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "webook",
+      "currentUrl": "https://webook.com/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Pro League",
+      "currentUrl": "https://iaazkf.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Royal Commission for AlUla",
+      "currentUrl": "https://www.rcu.gov.sa/en/contact/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Royal Commission for Riyadh City",
+      "currentUrl": "https://www.rcrc.gov.sa/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Ministry of Investment",
+      "currentUrl": "https://jobs.misa.gov.sa/ar/?locale=en_US",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Ministry of Health",
+      "currentUrl": "https://www.moh.gov.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Ministry of Energy",
+      "currentUrl": "https://www.moenergy.gov.sa/ar/recruitment",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Ministry of Tourism",
+      "currentUrl": "https://mt.gov.sa/en/careers",
+      "secondaryUrls": [
+        "https://mt.gov.sa/tourism-investment#investment-insights",
+        "https://mt.gov.sa/tourism-investment#financing-opportunities"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Saudi Tourism Authority",
+      "currentUrl": "https://www.sta.gov.sa/en/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "SFDA",
+      "currentUrl": "https://www.sfda.gov.sa/ar/career-vision-and-mission",
+      "secondaryUrls": [
+        "https://www.sfda.gov.sa/ar/international-cooperation"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "SASO",
+      "currentUrl": "https://www.saso.gov.sa/ar/mediacenter/Pages/JoinOurTeam.aspx",
+      "secondaryUrls": [
+        "https://www.saso.gov.sa/ar/eservices/Pages/international_cooperation.aspx",
+        "https://www.saso.gov.sa/ar/QualitySign/info/Pages/default.aspx"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "GASTAT",
+      "currentUrl": "https://careers.stats.gov.sa/",
+      "secondaryUrls": [
+        "https://careers.stats.gov.sa/ar/international/job-search/"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Authority for Intellectual Property",
+      "currentUrl": "https://www.saip.gov.sa/ar/contact-us/careers",
+      "secondaryUrls": [
+        "https://www.saip.gov.sa/ar/resources/lows-and-regulations/international-treaties"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Etimad",
+      "currentUrl": "https://etimad.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Local Content Authority",
+      "currentUrl": "https://www.lcgpa.gov.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Space Agency",
+      "currentUrl": "https://ssa.gov.sa/ar/careersLandingPage/?path=/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Communications Space and Technology Commission",
+      "currentUrl": "https://www.cst.gov.sa/about/career",
+      "secondaryUrls": [
+        "https://www.cst.gov.sa/ar/about/who-we-are/international-arena"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Industrial Development Fund",
+      "currentUrl": "https://www.sidf.gov.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "SATORP",
+      "currentUrl": "https://www.satorp.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Sadara Chemical",
+      "currentUrl": "https://www.sadara.com/careers",
+      "secondaryUrls": [
+        "https://www.sadara.com/students-graduates"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Luberef",
+      "currentUrl": "https://www.luberef.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "YASREF",
+      "currentUrl": "https://www.yasref.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Tasnee",
+      "currentUrl": "https://www.tasnee.com/about-us/careers",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://jobs.tasnee.com/search",
+      "note": "careers page is a landing page; \"Explore our opportunities\" leads to the real listing"
+    },
+    {
+      "company": "Saudi Ceramics",
+      "currentUrl": "https://www.saudiceramics.com/en/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Astra Industrial",
+      "currentUrl": "https://www.astraindustrial.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 522"
+    },
+    {
+      "company": "Alkhorayef Group",
+      "currentUrl": "https://www.alkhorayef.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Alturki Holding",
+      "currentUrl": "https://www.alturki.net/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Water and Electricity Company",
+      "currentUrl": "https://wec.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Mouwasat Medical Services",
+      "currentUrl": "https://www.mouwasat.com/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Dallah Health",
+      "currentUrl": "https://www.dallah-hospital.com/careers/index.html",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi German Health",
+      "currentUrl": "https://www.sghgroup.net/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.sghgroup.net/careers\nCall l"
+    },
+    {
+      "company": "Fakeeh Care Group",
+      "currentUrl": "https://careers.fakeeh.care/",
+      "secondaryUrls": [
+        "https://careers.fakeeh.care/internal"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "National Guard Health Affairs",
+      "currentUrl": "https://ngha.med.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://ngha.med.sa/careers\nCall log:\n\u001b"
+    },
+    {
+      "company": "King Fahad Medical City",
+      "currentUrl": "https://www.kfmc.med.sa/EN/Page/Pages/JoinUs.aspx",
+      "secondaryUrls": [
+        "https://www.kfmc.med.sa/EN/ATS/Pages/Internship.aspx%20"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Magrabi Hospitals",
+      "currentUrl": "https://www.magrabi.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "King Saud University",
+      "currentUrl": "https://dfpa.ksu.edu.sa/ar/jobs",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "King Abdulaziz University",
+      "currentUrl": "https://www.kau.edu.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Princess Nourah University",
+      "currentUrl": "https://pnu.edu.sa/en/jobs/Pages/default.aspx",
+      "secondaryUrls": [
+        "https://pnu.edu.sa/en/NouraStudents/Pages/default.aspx",
+        "https://pnu.edu.sa/en/International/Pages/default.aspx",
+        "https://pnu.edu.sa/en/NourahOpportunities/Pages/Invest-in-noura.aspx"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Electronic University",
+      "currentUrl": "https://www.seu.edu.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 504"
+    },
+    {
+      "company": "Misk Foundation",
+      "currentUrl": "https://misk.org.sa/careers/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tuwaiq Academy",
+      "currentUrl": "https://tuwaiq.edu.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Al Othaim Markets",
+      "currentUrl": "https://www.othaimmarkets.com/ar/about-us/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "BinDawood Holding",
+      "currentUrl": "https://www.bindawoodholding.com/careers",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "United Electronics eXtra",
+      "currentUrl": "https://www.extra.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Cenomi",
+      "currentUrl": "https://centers.cenomi.com/sa-en/careers/",
+      "secondaryUrls": [
+        "https://centers.cenomi.com/sa-en/opportunities-and-new-developments/"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Herfy Food Services",
+      "currentUrl": "https://herfy.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Dur Hospitality",
+      "currentUrl": "https://www.dur.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "SMSA Express",
+      "currentUrl": "https://www.smsaexpress.com/career",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Naqel Express",
+      "currentUrl": "https://www.naqelexpress.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Aramex",
+      "currentUrl": "https://www.aramex.com/ae/en/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Almajdouie",
+      "currentUrl": "https://www.almajdouie.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Seera Group",
+      "currentUrl": "https://www.seera.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Almosafer",
+      "currentUrl": "https://www.almosafer.com/ar/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Meta",
+      "currentUrl": "https://www.metacareers.com/jobsearch/",
+      "secondaryUrls": [
+        "https://www.metacareers.com/careerprograms/students/",
+        "https://www.metacareers.com/profile/footer_link/redirect/?page=equal_opportunity_policy"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Amazon",
+      "currentUrl": "https://www.amazon.jobs/en/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Careem",
+      "currentUrl": "https://jobs.careem.com/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Delivery Hero",
+      "currentUrl": "https://careers.deliveryhero.com/",
+      "secondaryUrls": [
+        "https://careers.deliveryhero.com/job/commercial-intern-in-santa-cruz-bolivia-jid-11029"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Visa",
+      "currentUrl": "https://corporate.visa.com/en/careers.html",
+      "secondaryUrls": [
+        "https://corporate.visa.com/en/careers/early-careers.html"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://visa.wd5.myworkdayjobs.com/Visa",
+      "note": "careers page is a landing page; \"Job Search\" leads to the real listing"
+    },
+    {
+      "company": "Mastercard",
+      "currentUrl": "https://careers.mastercard.com/us/en",
+      "secondaryUrls": [
+        "https://careers.mastercard.com/us/en/early-careers",
+        "https://careers.mastercard.com/us/en/talent-community",
+        "https://careers.mastercard.com/us/en/leadpage?formId=fe9ud95ciji7mu64uivgqno1te&eventScheduleId=632c94d5b0eadd2bfc76192a&utm_campaign=campus"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "PayPal",
+      "currentUrl": "https://careers.pypl.com/home/default.aspx",
+      "secondaryUrls": [
+        "https://careers.pypl.com/university-hiring/intern-hub/default.aspx",
+        "https://careers.pypl.com/university-hiring/University-Overview/default.aspx#university-job-tiles-container-interns"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Adobe",
+      "currentUrl": "https://careers.adobe.com/us/en",
+      "secondaryUrls": [
+        "https://careers.adobe.com/us/en/university",
+        "https://careers.adobe.com/us/en/jointalentcommunity"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Qualcomm",
+      "currentUrl": "https://careers.qualcomm.com/careers",
+      "secondaryUrls": [
+        "https://careers.qualcomm.com/careers/join"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://careers.qualcomm.com/careers?start=0&pid=446719884008&sort_by=timestamp",
+      "note": "redirects to a different page that does list jobs"
+    },
+    {
+      "company": "Intel",
+      "currentUrl": "https://intel.wd1.myworkdayjobs.com/External/page/6042070b79e01001f04fa9b468070000",
+      "secondaryUrls": [
+        "https://intel.wd1.myworkdayjobs.com/External/page/f7af6f4ab7131001ecc380a588ca0000",
+        "https://intel.wd1.myworkdayjobs.com/en-US/External/introduceYourself?landingPage=03340f04f5841001e516ffc97995000a",
+        "https://intel.wd1.myworkdayjobs.com/en-US/External/job/Ireland-Leixlip/Manufacturing-Technician_JR0284021?shared_id=NTA3OGJmNzQtNjNiOS00MWYyLWJlNDItYjdhMDAyM2I2OWVh"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "NVIDIA",
+      "currentUrl": "https://www.nvidia.com/en-us/about-nvidia/careers/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Lenovo",
+      "currentUrl": "https://jobs.lenovo.com/en_US/careers",
+      "secondaryUrls": [
+        "https://jobs.lenovo.com/en_US/careers/EarlyCareer",
+        "https://jobs.lenovo.com/en_US/careers/Internship",
+        "https://jobs.lenovo.com/en_US/careers/Locations"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Juniper Networks",
+      "currentUrl": "https://careers.hpe.com/juniper",
+      "secondaryUrls": [
+        "https://careers.hpe.com/us/en/students",
+        "https://careers.hpe.com/us/en/jointalentcommunity"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Veeam",
+      "currentUrl": "https://careers.veeam.com/",
+      "secondaryUrls": [
+        "https://careers.veeam.com/early-careers",
+        "https://careers.veeam.com/sales-careers",
+        "https://careers.veeam.com/costa-rica"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Commvault",
+      "currentUrl": "https://www.commvault.com/careers",
+      "secondaryUrls": [
+        "https://www.commvault.com/careers/internships"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "OpenText",
+      "currentUrl": "https://careers.opentext.com/us/en",
+      "secondaryUrls": [
+        "https://careers.opentext.com/us/en/studentsandgraduates",
+        "https://careers.opentext.com/us/en/jointalentcommunity"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Forcepoint",
+      "currentUrl": "https://www.forcepoint.com/company/careers",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://forcepoint.wd1.myworkdayjobs.com/external-careers",
+      "note": "careers page is a landing page; \"See All Jobs\" leads to the real listing"
+    },
+    {
+      "company": "Imperva",
+      "currentUrl": "https://www.imperva.com/company/careers/",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://careers.thalesgroup.com/global/en/search-results?keywords=imperva",
+      "note": "careers page is a landing page; \"Imperva Careers at Thales\" leads to the real listing"
+    },
+    {
+      "company": "Varonis",
+      "currentUrl": "https://www.varonis.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "CyberArk",
+      "currentUrl": "https://jobs.paloaltonetworks.com/en/",
+      "secondaryUrls": [
+        "https://jobs.paloaltonetworks.com/early-in-career",
+        "https://jobs.paloaltonetworks.com/en/Must-Know-Facts-from-an-Early-Career-Product-Manager",
+        "https://paloaltonetworks.wd5.myworkdayjobs.com/en-US/panwexternalcareers/introduceYourself?clientRequestID=06f06ca6dae2441d99391ed600fc2265"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Okta",
+      "currentUrl": "https://www.okta.com/company/careers/",
+      "secondaryUrls": [
+        "https://www.okta.com/company/careers/intern-program/"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "SailPoint",
+      "currentUrl": "https://www.sailpoint.com/company/careers/",
+      "secondaryUrls": [
+        "https://sailpoint.wd1.myworkdayjobs.com/SailPoint/jobs",
+        "https://www.sailpoint.com/company/careers/engineering",
+        "https://www.sailpoint.com/company/careers/sales"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Delinea",
+      "currentUrl": "https://delinea.com/careers",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://jobs.ashbyhq.com/delinea",
+      "note": "careers page is a landing page; \"Apply Today (EN)\" leads to the real listing"
+    },
+    {
+      "company": "Group-IB",
+      "currentUrl": "https://www.group-ib.com/careers/",
+      "secondaryUrls": [
+        "https://www.group-ib.com/careers/internship/",
+        "https://www.group-ib.com/careers/#vacancies"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Infoblox",
+      "currentUrl": "https://www.infoblox.com/company/careers/",
+      "secondaryUrls": [
+        "https://efpv.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/join-talent-community",
+        "https://www.infoblox.com/company/careers/#internship-program"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "SLB",
+      "currentUrl": "https://careers.slb.com/",
+      "secondaryUrls": [
+        "https://careers.slb.com/early-careers",
+        "https://careers.slb.com/early-careers/internships",
+        "https://careers.slb.com/experienced-roles"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Halliburton",
+      "currentUrl": "https://jobs.halliburton.com/",
+      "secondaryUrls": [
+        "https://jobs.halliburton.com/content/students-and-recent-graduates/?locale=en_US"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Baker Hughes",
+      "currentUrl": "https://careers.bakerhughes.com/global/en",
+      "secondaryUrls": [
+        "https://careers.bakerhughes.com/global/en/Early-Careers-BakerHughes"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Weatherford",
+      "currentUrl": "https://careers.weatherford.com/",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://careers.weatherford.com/#en/sites/CX_1",
+      "note": "redirects to a different page that does list jobs"
+    },
+    {
+      "company": "NOV",
+      "currentUrl": "https://www.nov.com/careers",
+      "secondaryUrls": [
+        "https://www.nov.com/careers/early-career-development"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Aramco Digital",
+      "currentUrl": "https://www.aramcodigital.com/careers",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://fa-exrn-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_3001",
+      "note": "careers page is a landing page; \"Apply Now\" leads to the real listing"
+    },
+    {
+      "company": "Siemens Energy",
+      "currentUrl": "https://jobs.siemens-energy.com/en_US/jobs",
+      "secondaryUrls": [
+        "https://jobs.siemens-energy.com/en_US/jobs/SearchJobsStudents"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Hitachi Energy",
+      "currentUrl": "https://www.hitachienergy.com/careers",
+      "secondaryUrls": [
+        "https://www.hitachienergy.com/careers/about-us/early-career",
+        "https://www.hitachienergy.com/careers/open-jobs?filterable1573558966-jobFunctionTags=workday-jobs%3Ajob-functions%2FIT_Telecom_Internet"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Emerson",
+      "currentUrl": "https://careers.emerson.com/",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://careers.emerson.com/\nCall log:\n"
+    },
+    {
+      "company": "Rockwell Automation",
+      "currentUrl": "https://www.rockwellautomation.com/en-us/careers.html",
+      "secondaryUrls": [
+        "https://www.rockwellautomation.com/en-us/company/careers/edge-student-early-career.html",
+        "https://www.rockwellautomation.com/en-us/company/careers/edge-student-early-career/edge-student-programs.html",
+        "https://www.rockwellautomation.com/en-us/company/careers/edge-student-early-career/edge-early-career.html"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Yokogawa",
+      "currentUrl": "https://www.yokogawa.com/about/careers/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Johnson Controls Arabia",
+      "currentUrl": "https://jobs.johnsoncontrols.com/",
+      "secondaryUrls": [
+        "https://jobs.johnsoncontrols.com/early-careers",
+        "https://jobs.johnsoncontrols.com/talent-community",
+        "https://jobs.johnsoncontrols.com/#"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://jobs.johnsoncontrols.com/job-search",
+      "note": "careers page is a landing page; \"Search Jobs\" leads to the real listing"
+    },
+    {
+      "company": "Alstom",
+      "currentUrl": "https://www.alstom.com/careers",
+      "secondaryUrls": [
+        "https://www.alstom.com/careers/students-graduates",
+        "https://www.alstom.com/careers#global-opportunities"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://jobsearch.alstom.com/",
+      "note": "careers page is a landing page; \"Job search\" leads to the real listing"
+    },
+    {
+      "company": "Saudi Business Machines",
+      "currentUrl": "https://www.sbm.com.sa/career-opportunities",
+      "secondaryUrls": [
+        "https://www.sbm.com.sa/career-opportunities#main-content",
+        "https://www.sbm.com.sa/career-opportunities#",
+        "https://www.sbm.com.sa/career/co-op-internship-application"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "National Water Company",
+      "currentUrl": "https://www.nwc.com.sa/AR/OurCompany/Careers/Pages/default.aspx",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "SAL Saudi Logistics",
+      "currentUrl": "https://sal.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Ground Services",
+      "currentUrl": "https://www.saudiags.com/career/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Savola Group",
+      "currentUrl": "https://www.savola.com/about-us/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "NADEC",
+      "currentUrl": "https://www.nadec.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://www.nadec.com.sa/careers"
+    },
+    {
+      "company": "Obeikan Investment Group",
+      "currentUrl": "https://www.obeikan.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Rawabi Holding",
+      "currentUrl": "https://careers.rawabi.com/",
+      "secondaryUrls": [
+        "https://careers.rawabi.com/en/saudi-arabia/jobs/internship-program-coop2026-5457946/"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Al Yamamah Steel",
+      "currentUrl": "https://www.alyamamahsteel.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.alyamamahsteel.com/careers\n"
+    },
+    {
+      "company": "Alessa Industries",
+      "currentUrl": "https://www.alessa.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CONNECTION_RESET at https://www.alessa.com.sa/careers\nCall l"
+    },
+    {
+      "company": "Saudi Arabian Mining Services",
+      "currentUrl": "https://careers.maaden.com/gb/en",
+      "secondaryUrls": [
+        "https://careers.maaden.com/gb/en/jointalentcommunity",
+        "https://careers.maaden.com/gb/en/job/8595/Principal-Specialist-International-Research-Development-Scientist"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Elm Academy",
+      "currentUrl": "https://elm.sa/ar/recruitment/sectors/Pages/default.aspx",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "National Information Center",
+      "currentUrl": "https://nic.gov.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://nic.gov.sa/careers\nCall "
+    },
+    {
+      "company": "Saudi Aramco Base Oil",
+      "currentUrl": "https://www.luberef.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Riyadh Metro (RCRC)",
+      "currentUrl": "https://www.rcrc.gov.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "KAUST Innovation",
+      "currentUrl": "https://www.kaust.edu.sa/en/error/404?404;https://www.kaust.edu.sa:443/en/careers",
+      "secondaryUrls": [
+        "https://www.kaust.edu.sa/ar/study/student-central",
+        "https://www.kaust.edu.sa/docs/kaustlibraries/documents/downloads/kaust_student-handbook_25_26.pdf",
+        "https://www.kaust.edu.sa/en/about/green-campus"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Saudi Aramco Shell Refinery",
+      "currentUrl": "https://www.sasref.com.sa/careers.html",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Nesma & Partners",
+      "currentUrl": "https://www.nesmapartners.com/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Almabani General Contractors",
+      "currentUrl": "https://www.almabani.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Readymix",
+      "currentUrl": "https://saudireadymix.com/join-us/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Arabian Drilling",
+      "currentUrl": "https://jobs.arabdrill.com/",
+      "secondaryUrls": [
+        "https://jobs.arabdrill.com/talentcommunity/subscribe/?locale=en_US"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://jobs.arabdrill.com/search",
+      "note": "careers page is a landing page; \"All Jobs\" leads to the real listing"
+    },
+    {
+      "company": "Advanced Communications and Electronics Systems",
+      "currentUrl": "https://www.aces.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.aces.com.sa/careers\nCall lo"
+    },
+    {
+      "company": "Bupa Labs",
+      "currentUrl": "https://www.bupa.com.sa/en/careers",
+      "secondaryUrls": [
+        "https://www.bupa.com.sa/en/careers#",
+        "https://www.bupa.com.sa/en/business-international/international-health-plan",
+        "https://www.bupa.com.sa/en/home"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://careers.bupa.com.sa/en/job-search-results/",
+      "note": "careers page is a landing page; \"Career Portal\" leads to the real listing"
+    },
+    {
+      "company": "Saudi Aramco Nabors Drilling",
+      "currentUrl": "https://www.sandsp.com/employment.html",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Petrofac",
+      "currentUrl": "https://www.petrofac.com/careers/",
+      "secondaryUrls": [
+        "https://www.petrofac.com/careers/early-careers/"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://www.petrofac.com/careers/find-a-job-at-petrofac",
+      "note": "careers page is a landing page; \"Find a job\" leads to the real listing"
+    },
+    {
+      "company": "Wood",
+      "currentUrl": "https://careers.woodgroup.com/",
+      "secondaryUrls": [
+        "https://ehif.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions?lastSelectedFacet=AttributeChar4&mode=location&selectedFlexFieldsFacets=%22AttributeChar4%7CGraduates%3BInterns%3BCo-op+%28placement+students%29%3BTrainees%22",
+        "https://careers.woodgroup.com/early-careers",
+        "https://ehif.fa.em2.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/tc-join"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Worley",
+      "currentUrl": "https://www.worley.com/en/careers",
+      "secondaryUrls": [
+        "https://www.worley.com/en/careers/our-programs/internship",
+        "https://www.worley.com/en/careers/our-programs/graduate",
+        "https://www.worley.com/en/careers/our-programs"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Jacobs",
+      "currentUrl": "https://careers.jacobs.com/",
+      "secondaryUrls": [
+        "https://careers.jacobs.com/en_US/careers/EarlyCareers",
+        "https://careers.jacobs.com/Talent"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://careers.jacobs.com/en_US/careers",
+      "note": "redirects to a different page that does list jobs"
+    },
+    {
+      "company": "AECOM",
+      "currentUrl": "https://aecom.com/careers/",
+      "secondaryUrls": [
+        "https://aecom.com/careers/graduates-and-early-careers/",
+        "https://aecom.com/h2opportunity/"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Parsons",
+      "currentUrl": "https://jobs.parsons.com/",
+      "secondaryUrls": [
+        "https://jobs.parsons.com/internships",
+        "https://jobs.parsons.com/career-search?search=intern",
+        "https://jobs.parsons.com/talent-community"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Hill International",
+      "currentUrl": "https://www.hillintl.com/careers/",
+      "secondaryUrls": [
+        "https://www.hillintl.com/operations-international/",
+        "https://www.hillintl.com/articles/hill-internationals-50-years-of-safety-leadership/",
+        "https://www.hillintl.com/careers/recent-graduates/"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Saudi Data and AI Authority Academy",
+      "currentUrl": "https://sdaia.gov.sa/ar/SDAIA/SdaiaStrategies/Pages/EmploymentStrategy.aspx",
+      "secondaryUrls": [
+        "https://sdaia.gov.sa/ar/Sectors/BuildingCapacity/Pages/CooperativeTraining.aspx"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "National Debt Management Center",
+      "currentUrl": "https://www.ndmc.gov.sa/ar/recruitment",
+      "secondaryUrls": [
+        "https://www.ndmc.gov.sa/ar/training-request"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Export Development Authority",
+      "currentUrl": "https://saudiexports.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://saudiexports.sa/careers\nCall lo"
+    },
+    {
+      "company": "National Center for Privatization",
+      "currentUrl": "https://www.ncp.gov.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Contractors Authority",
+      "currentUrl": "https://sca.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "National Center for Performance Measurement",
+      "currentUrl": "https://www.adaa.gov.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 503"
+    },
+    {
+      "company": "Quality of Life Program",
+      "currentUrl": "https://www.vision2030.gov.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Standards Metrology Authority",
+      "currentUrl": "https://www.saso.gov.sa/ar/mediacenter/Pages/JoinOurTeam.aspx",
+      "secondaryUrls": [
+        "https://www.saso.gov.sa/ar/eservices/Pages/international_cooperation.aspx",
+        "https://www.saso.gov.sa/ar/QualitySign/info/Pages/default.aspx"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "General Authority of Foreign Trade",
+      "currentUrl": "https://gaft.gov.sa/employment-and-training",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Food Bank",
+      "currentUrl": "https://etaam.org.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Real Estate General Authority",
+      "currentUrl": "https://rega.gov.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "National Housing Strategy Office",
+      "currentUrl": "https://www.housing.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.housing.sa/careers\nCall log"
+    },
+    {
+      "company": "Saudi Water Partnership Company",
+      "currentUrl": "https://www.sharakat.com.sa/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Grains Organization",
+      "currentUrl": "https://www.sago.gov.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.sago.gov.sa/careers\nCall lo"
+    },
+    {
+      "company": "Public Transport Authority",
+      "currentUrl": "https://tga.gov.sa/en/about-tga/recruitment",
+      "secondaryUrls": [
+        "https://tga.gov.sa/en/activities-services/activities/12"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Diriyah Gate Development Authority",
+      "currentUrl": "https://www.dgda.gov.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "King Abdullah Financial District",
+      "currentUrl": "https://www.kafd.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Boutique Group",
+      "currentUrl": "https://www.boutiquegroup.com/en/careers/",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://fa-eute-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1",
+      "note": "careers page is a landing page; \"Open roles\" leads to the real listing"
+    },
+    {
+      "company": "Asfar",
+      "currentUrl": "https://asfar.com/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Coffee Company",
+      "currentUrl": "https://www.saudicoffee.com/careers/",
+      "secondaryUrls": [
+        "https://www.saudicoffee.com/news/saudi-sip-of-excellence-competition-concludes-at-the-2025-international-coffee-exhibition/"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Halal Products Development Company",
+      "currentUrl": "https://hpdc.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Egyptian Investment Company",
+      "currentUrl": "https://seic.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://seic.sa/careers\nCall log:\n\u001b[2m "
+    },
+    {
+      "company": "Jada Fund of Funds",
+      "currentUrl": "https://www.jada.com.sa/career",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Real Estate Refinance Company",
+      "currentUrl": "https://srco.com.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Tahakom Investments",
+      "currentUrl": "https://tahakominvestments.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://tahakominvestments.com/careers\n"
+    },
+    {
+      "company": "Saudi Information Technology Academy",
+      "currentUrl": "https://sita.org.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://sita.org.sa/careers\nCall log:\n\u001b"
+    },
+    {
+      "company": "NEOM Tech and Digital",
+      "currentUrl": "https://careers.neom.com/careers",
+      "secondaryUrls": [
+        "https://careers.neom.com/careers/join?domain=neom.com&hl=en"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Tonomus",
+      "currentUrl": "https://www.tonomus.neom.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.tonomus.neom.com/careers\nCa"
+    },
+    {
+      "company": "Alat Semiconductors",
+      "currentUrl": "https://alat.com/en/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Humain",
+      "currentUrl": "https://www.humain.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Awwal Bank Digital",
+      "currentUrl": "https://www.sab.com/en/about-us/careers/",
+      "secondaryUrls": [
+        "https://www.sab.com/en/personal/segments/international-banking/",
+        "https://www.sab.com/en/personal/payments-and-transfers/international-remittance/",
+        "https://www.sab.com/en/about-us/careers/graduate-opportunities/"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Alrajhi Capital",
+      "currentUrl": "https://alrajhi-capital.sa/about-us/about-us-careers",
+      "secondaryUrls": [
+        "https://alrajhi-capital.sa/brokerage/brokerage-gulf-and-international-markets",
+        "https://alrajhi-capital.sa/-/media/Feature/AlRajhiCapital/PDFs/prospectus/2025/RSI---Debt-Conversion-EN.pdf"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Albilad Capital",
+      "currentUrl": "https://www.albiladcapital.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.albiladcapital.com/careers\n"
+    },
+    {
+      "company": "Yaqeen Capital",
+      "currentUrl": "https://www.yaqeen.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Osool and Bakheet Investment",
+      "currentUrl": "https://www.obic.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://www.obic.com.sa/careers\n"
+    },
+    {
+      "company": "SEDCO Capital",
+      "currentUrl": "https://sedcocapital.com/careers-landing/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Musharaka Capital",
+      "currentUrl": "https://musharaka.sa/en/contact/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Tamweel Aloula",
+      "currentUrl": "https://www.tamweelaloula.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Home Loans",
+      "currentUrl": "https://www.saudihomeloans.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://www.saudihomeloans.com/c"
+    },
+    {
+      "company": "Amlak International",
+      "currentUrl": "https://www.amlak.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Deutsche Gulf Finance",
+      "currentUrl": "https://www.dgf.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.dgf.com.sa/careers\nCall log"
+    },
+    {
+      "company": "Raqamyah",
+      "currentUrl": "https://raqamyah.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Tasheel Finance",
+      "currentUrl": "https://www.tasheelfinance.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Baianat",
+      "currentUrl": "https://baianat.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://baianat.com.sa/careers\nCall log"
+    },
+    {
+      "company": "Tweeq",
+      "currentUrl": "https://tweeq.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Drahim",
+      "currentUrl": "https://drahim.sa/join",
+      "secondaryUrls": [
+        "https://drahim.sa/edu"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Wataniya Insurance",
+      "currentUrl": "https://www.wataniya.com.sa/Wataniya_web/",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://careers.wataniya.com.sa/",
+      "note": "careers page is a landing page; \"الوظائف\" leads to the real listing"
+    },
+    {
+      "company": "ACIG Insurance",
+      "currentUrl": "https://www.acig.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Gulf Union Alahlia",
+      "currentUrl": "https://www.gulfunion-saudi.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.gulfunion-saudi.com/careers"
+    },
+    {
+      "company": "Saudi Enaya",
+      "currentUrl": "https://www.saudienaya.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "stc Bank",
+      "currentUrl": "https://stcbank.com.sa/web/guest/job-application",
+      "secondaryUrls": [
+        "https://stcbank.com.sa/web/guest/international-transfer"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Sahm Capital",
+      "currentUrl": "https://www.sahmcapital.com/about/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Cipher Saudi",
+      "currentUrl": "https://www.cipher.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Saudi Technology Ventures",
+      "currentUrl": "https://stv.vc/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Wa'ed Ventures Portfolio",
+      "currentUrl": "https://waedventures.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Tamkeen Technologies",
+      "currentUrl": "https://tamkeentech.sa/careers",
+      "secondaryUrls": [
+        "https://tamkeentech.sa/careers/open-opportunities"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Sary Technology",
+      "currentUrl": "https://sary.zenats.com/en",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Tarabut",
+      "currentUrl": "https://careers.tarabut.com/jobs/Careers",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Nearpay",
+      "currentUrl": "https://nearpay.io/career",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Ratio",
+      "currentUrl": "https://ratio.sa/jobs",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Sadeem Technology",
+      "currentUrl": "https://sadeem.tech/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://sadeem.tech/careers\nCall log:\n\u001b"
+    },
+    {
+      "company": "Takamol Business Services",
+      "currentUrl": "https://www.takamolholding.com/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Bayanat Al-Oula",
+      "currentUrl": "https://bayanat.sa/careers/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Alfa Technologies",
+      "currentUrl": "https://alfa-tech.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://alfa-tech.sa/careers\nCall log:\n"
+    },
+    {
+      "company": "Etihad Etisalat Digital",
+      "currentUrl": "https://careers.mobily.com.sa/en/sites/opportunities",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.waitForTimeout: Page crashed"
+    },
+    {
+      "company": "Saudi Telecom Solutions",
+      "currentUrl": "https://careers.solutions.com.sa/viewalljobs/",
+      "secondaryUrls": [
+        "https://careers.solutions.com.sa/go/Trainee/7764123/"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Rakiza",
+      "currentUrl": "https://rakiza.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://rakiza.sa/careers\nCall log:\n\u001b[2"
+    },
+    {
+      "company": "Nasdaq Gulf Technology",
+      "currentUrl": "https://www.nasdaq.com/about/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.nasdaq.com/about/careers"
+    },
+    {
+      "company": "Zain Business",
+      "currentUrl": "https://sa.zain.com/about/careers/",
+      "secondaryUrls": [
+        "https://sa.zain.com/about/join-zain/",
+        "https://sa.zain.com/about/co-op-program/"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Integrated Digital Systems",
+      "currentUrl": "https://www.ids.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Almana General Hospitals",
+      "currentUrl": "https://www.almanahospital.com.sa/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "National Medical Care",
+      "currentUrl": "https://care.med.sa/careers",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Sulaiman Al Rajhi University",
+      "currentUrl": "https://sr.zohorecruit.sa/jobs/Careers",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Alfaisal University Research",
+      "currentUrl": "https://jobs.alfaisal.edu/",
+      "secondaryUrls": [
+        "https://jobs.alfaisal.edu/col/"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Dar Al Hekma University",
+      "currentUrl": "https://www.dah.edu.sa/en/careers/pages/default.aspx",
+      "secondaryUrls": [
+        "https://www.dah.edu.sa/en/students/Pages/default.aspx",
+        "https://www.dah.edu.sa/en/about/Pages/Graduate-Studies-Research-and-Business-Division.aspx",
+        "https://www.dah.edu.sa/en/about/Pages/Students-and-Alumni-Relations-Division.aspx"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Al Yamamah University",
+      "currentUrl": "https://yu.edu.sa/about/",
+      "secondaryUrls": [
+        "https://yu.edu.sa/wp-content/uploads/2024/03/YU-Graduates-Attributes-2023-24.pdf",
+        "https://yu.edu.sa/academics/postgraduate/mba/",
+        "https://yu.edu.sa/academics/postgraduate/emba/"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://edugate.yu.edu.sa/yu/ui/guest/application_online/index/forwardNewApplicationOnlineIndex.faces;jsessionid=RXZolw3GjVdeJ0N8IoMPtNBVMkQUfH0RvRqlyDXY7yKLlHwv9FFK!-1396078192",
+      "note": "careers page is a landing page; \"Apply Now\" leads to the real listing"
+    },
+    {
+      "company": "Prince Sultan Military Medical City",
+      "currentUrl": "https://psmmc.med.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "King Khaled Eye Specialist Hospital",
+      "currentUrl": "https://kkesh.med.sa/careers",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Elm Education",
+      "currentUrl": "https://elm.sa/ar/recruitment/sectors/Pages/default.aspx",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Riyadh Schools",
+      "currentUrl": "https://www.riyadhschools.edu.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Saudi Arabian Parsons",
+      "currentUrl": "https://jobs.parsons.com/",
+      "secondaryUrls": [
+        "https://jobs.parsons.com/internships",
+        "https://jobs.parsons.com/career-search?search=intern",
+        "https://jobs.parsons.com/talent-community"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Al Bawani",
+      "currentUrl": "https://albawani.net/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "El Seif Engineering",
+      "currentUrl": "https://www.elseif.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Shibh Al Jazira Contracting",
+      "currentUrl": "https://sajco.com/careers/",
+      "secondaryUrls": [
+        "https://sajco.com/careers/#"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Freyssinet Saudi Arabia",
+      "currentUrl": "https://www.freyssinetsaudi.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.freyssinetsaudi.com/careers"
+    },
+    {
+      "company": "Saudi Pan Kingdom",
+      "currentUrl": "https://sapac.com.sa/careers/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Abdullah Al Othaim Investment",
+      "currentUrl": "https://www.othaim.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.othaim.com/careers\nCall log"
+    },
+    {
+      "company": "Al Fanar Electric",
+      "currentUrl": "https://www.alfanar.com/company/careers",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://jobs.alfanar.com/alfanar/go/All-Openings/4442101/",
+      "note": "careers page is a landing page; \"START YOUR JOURNEY\" leads to the real listing"
+    },
+    {
+      "company": "Middle East Paper Company",
+      "currentUrl": "https://www.mep.co/Website/En/careers/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Cement",
+      "currentUrl": "https://www.saudicement.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://www.saudicement.com.sa/caree"
+    },
+    {
+      "company": "Yamama Cement",
+      "currentUrl": "https://www.yamamacement.com/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Arabian Cement",
+      "currentUrl": "https://www.arabiancement.com/careers",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Steel Pipe",
+      "currentUrl": "https://www.sspc.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 522"
+    },
+    {
+      "company": "Zamil Steel",
+      "currentUrl": "https://www.zamilsteel.com/jobs",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Saudi Airlines Cargo",
+      "currentUrl": "https://www.saudiacargo.com/en/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Riyadh Cables",
+      "currentUrl": "https://www.riyadhcables.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.riyadhcables.com/careers\nCa"
+    },
+    {
+      "company": "Saudi Arabian Trading and Construction",
+      "currentUrl": "https://www.satco.com.sa/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Nesma Trading",
+      "currentUrl": "https://www.nesma.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Al Rashid Trading",
+      "currentUrl": "https://www.alrashidtrading.com/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_SSL_VERSION_OR_CIPHER_MISMATCH at https://www.alrashidtradin"
+    },
+    {
+      "company": "Bin Quraya",
+      "currentUrl": "https://www.binquraya.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Accenture Saudi Advanced Technology",
+      "currentUrl": "https://www.accenture.com/sa-en/careers",
+      "secondaryUrls": [
+        "https://www.accenture.com/sa-en/careers/life-at-accenture/internships-students",
+        "https://www.accenture.com/sa-en/careers/life-at-accenture/entry-level"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "IBM Saudi Arabia",
+      "currentUrl": "https://www.ibm.com/careers/search",
+      "secondaryUrls": [
+        "https://www.ibm.com/careers/career-opportunities",
+        "https://www.ibm.com/careers/internships"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Microsoft Arabia",
+      "currentUrl": "https://apply.careers.microsoft.com/careers",
+      "secondaryUrls": [
+        "https://apply.careers.microsoft.com/careers/join"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://apply.careers.microsoft.com/careers?start=0&pid=1970393556961344&sort_by=timestamp",
+      "note": "redirects to a different page that does list jobs"
+    },
+    {
+      "company": "Google Cloud Saudi",
+      "currentUrl": "https://www.google.com/about/careers/applications/",
+      "secondaryUrls": [
+        "https://www.google.com/about/careers/applications/students"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Oracle Saudi Arabia",
+      "currentUrl": "https://careers.oracle.com/en/sites/jobsearch",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "SAP Saudi Arabia",
+      "currentUrl": "https://jobs.sap.com/viewalljobs/",
+      "secondaryUrls": [
+        "https://jobs.sap.com/content/Students-and-Graduates/?locale=en_US",
+        "https://performancemanager5.successfactors.eu/sf/careers?company=SAP"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Cognizant",
+      "currentUrl": "https://careers.cognizant.com/global-en/",
+      "secondaryUrls": [
+        "https://careers.cognizant.com/global-en/pathways-to-cognizant/students-and-new-grads/",
+        "https://careers.cognizant.com/global-en/talent-community/",
+        "https://careers.cognizant.com/global-en/blog/life-at-cognizant/where-opportunities-truly-feel-equal-maria-s-life-at-cognizant/"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "LTIMindtree",
+      "currentUrl": "https://www.ltm.com/careers",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Zensar",
+      "currentUrl": "https://www.zensar.com/careers",
+      "secondaryUrls": [
+        "https://fa-etvl-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs",
+        "https://fa-etvl-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions/",
+        "https://fa-etvl-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?lastSelectedFacet=LOCATIONS&selectedLocationsFacet=300000000435067"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://fa-etvl-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs",
+      "note": "careers page is a landing page; \"Current Opportunities\" leads to the real listing"
+    },
+    {
+      "company": "NTT DATA",
+      "currentUrl": "https://careers.nttdata.com/",
+      "secondaryUrls": [],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Fujitsu",
+      "currentUrl": "https://global.fujitsu/en-global/careers",
+      "secondaryUrls": [
+        "https://global.fujitsu/en-global/careers#opportunities"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://www.jobs.global.fujitsu.com/search?searchResultView=LIST",
+      "note": "careers page is a landing page; \"View all jobs\" leads to the real listing"
+    },
+    {
+      "company": "Hitachi Vantara",
+      "currentUrl": "https://www.hitachivantara.com/en-us/company/careers",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Ericsson Saudi",
+      "currentUrl": "https://jobs.ericsson.com/careers",
+      "secondaryUrls": [
+        "https://jobs.ericsson.com/careers/join?domain=ericsson.com",
+        "https://jobs.ericsson.com/careers/job/563121776746326",
+        "https://jobs.ericsson.com/careers/job/563121775776106"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://jobs.ericsson.com/careers?start=0&pid=563121776072318&sort_by=hot",
+      "note": "redirects to a different page that does list jobs"
+    },
+    {
+      "company": "Nokia Saudi",
+      "currentUrl": "https://www.nokia.com/careers/",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "ZTE",
+      "currentUrl": "https://www.zte.com.cn/global/careers.html",
+      "secondaryUrls": [
+        "https://www.zte.com.cn/global/home_and_enterprise/campus_network.html"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Motorola Solutions",
+      "currentUrl": "https://www.motorolasolutions.com/en_us/about/careers.html",
+      "secondaryUrls": [
+        "https://www.motorolasolutions.com/en_us/solutions/safety-ecosystem/school-active-threat-use-case.html",
+        "https://www.motorolasolutions.com/en_us/about/careers.html#phnnav_internship-program",
+        "https://motorolasolutions.wd5.myworkdayjobs.com/Careers?q=Internship#xd_co_f=MGM2OTU4MzMtMGY5ZS00MWNiLTk1YTYtMmFmNGFlNDQ1ZmZk~"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://motorolasolutions.wd5.myworkdayjobs.com/Careers",
+      "note": "careers page is a landing page; \"Search jobs\" leads to the real listing"
+    },
+    {
+      "company": "Genesys",
+      "currentUrl": "https://www.genesys.com/company/careers",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Avaya",
+      "currentUrl": "https://www.avaya.com/en/about-avaya/careers/",
+      "secondaryUrls": [],
+      "status": "moved",
+      "replacementUrl": "https://careers.avaya.com/search/?createNewAlert=false&q=&optionsFacetsDD_title=&optionsFacetsDD_location=&optionsFacetsDD_department=Engineering",
+      "note": "careers page is a landing page; \"Explore engineering opportunit\" leads to the real listing"
+    },
+    {
+      "company": "Teradata",
+      "currentUrl": "https://careers.teradata.com/jobs",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SAS Institute",
+      "currentUrl": "https://www.sas.com/en_us/careers.html",
+      "secondaryUrls": [
+        "https://www.sas.com/en_us/learn/academic-programs/students.html",
+        "https://www.sas.com/en_us/careers/students-and-graduates/internships-and-fellowships.html",
+        "https://www.sas.com/en_us/careers/students-and-graduates/sas-academy.html"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Palantir",
+      "currentUrl": "https://www.palantir.com/careers/",
+      "secondaryUrls": [
+        "https://www.palantir.com/careers/students-and-early-talent/",
+        "https://www.palantir.com/careers/meritocracy-fellowship/"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Cloudflare Saudi",
+      "currentUrl": "https://www.cloudflare.com/careers/jobs/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Dynatrace",
+      "currentUrl": "https://www.dynatrace.com/careers/jobs/",
+      "secondaryUrls": [
+        "https://www.dynatrace.com/careers/early-careers/"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Datadog",
+      "currentUrl": "https://careers.datadoghq.com/",
+      "secondaryUrls": [
+        "https://careers.datadoghq.com/early-careers/",
+        "https://careers.datadoghq.com/early-careers"
+      ],
+      "status": "extra-found",
+      "note": "2 additional board(s) linked"
+    },
+    {
+      "company": "Splunk Saudi",
+      "currentUrl": "https://careers.cisco.com/global/en/splunk",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Nutanix Arabia",
+      "currentUrl": "https://careers.nutanix.com/en/",
+      "secondaryUrls": [
+        "https://careers.nutanix.com/en/student-programs/",
+        "https://careers.nutanix.com/en/jobs/?orderby=0&pagesize=20&page=1&radius=100&team=Sales&team=Sales%20Strategy%20%26%20Operations",
+        "https://careers.nutanix.com/en/jobs/?orderby=0&pagesize=20&page=1&radius=100&team=Engineering"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "Cohesity",
+      "currentUrl": "https://www.cohesity.com/careers/",
+      "secondaryUrls": [
+        "https://www.cohesity.com/careers/university-and-internship-program/"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Rubrik",
+      "currentUrl": "https://www.rubrik.com/company/careers",
+      "secondaryUrls": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Fortinet Saudi",
+      "currentUrl": "https://www.fortinet.com/corporate/careers",
+      "secondaryUrls": [
+        "https://www.fortinet.com/customers/coop"
+      ],
+      "status": "stale",
+      "note": "page loads but no longer looks like a vacancy list"
+    },
+    {
+      "company": "Mimecast",
+      "currentUrl": "https://careers.mimecast.com/en/",
+      "secondaryUrls": [
+        "https://careers.mimecast.com/en/teams/early-careers/"
+      ],
+      "status": "extra-found",
+      "note": "1 additional board(s) linked"
+    },
+    {
+      "company": "Cloudera Saudi",
+      "currentUrl": "https://www.cloudera.com/careers.html",
+      "secondaryUrls": [
+        "https://www.cloudera.com/about/news-and-blogs/press-releases/2026-08-19-cloudera-powers-the-agentic-ai-era-with-cloudera-anywhere-cloud.html?internal_keyplay=Cloud-Anywhere&internal_campaign=AWC---FY27-Q2-GLOBAL-VE-WebinarCloudera-Anywhere-Cloud-Launch&cid=701Ui000014pPxgIAE&internal_link=h10",
+        "https://www.cloudera.com/campaign/the-great-ai-re-architecture.html?internal_keyplay=AI-Anywhere&internal_campaign=Thought-Leadership-Reports---AlwaysOn-FY27-GLOBAL-CT-Report-Great-AI-Re-Architecture&cid=701Ui000017i9O3IAI&internal_link=WWW-Nav-u03-why",
+        "https://www.cloudera.com/events/webinars/cloudera-launch.html?internal_keyplay=Cloud-Anywhere&internal_campaign=AWC---FY27-Q2-GLOBAL-VE-WebinarCloudera-Anywhere-Cloud-Launch&cid=701Ui000014pPxgIAE&internal_link=WWW-Nav-u03-products"
+      ],
+      "status": "moved",
+      "replacementUrl": "https://cloudera.wd5.myworkdayjobs.com/External_Career",
+      "note": "careers page is a landing page; \"Search jobs\" leads to the real listing"
+    },
+    {
+      "company": "Red Hat Saudi",
+      "currentUrl": "https://www.redhat.com/en/jobs",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Canonical",
+      "currentUrl": "https://canonical.com/careers/all",
+      "secondaryUrls": [
+        "https://canonical.com/careers/early-careers",
+        "https://canonical.com/careers/6103331",
+        "https://canonical.com/careers/7048263"
+      ],
+      "status": "extra-found",
+      "note": "3 additional board(s) linked"
+    },
+    {
+      "company": "SUSE",
+      "currentUrl": "https://www.suse.com/careers/",
+      "secondaryUrls": [],
+      "status": "unchanged"
+    }
+  ]
+}

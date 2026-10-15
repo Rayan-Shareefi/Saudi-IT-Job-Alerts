@@ -1,0 +1,82 @@
+name: Ingest jobs
+
+# The frequent pass (company ATS boards + free APIs), and the runs started by
+# the "Search" buttons on the website. The slow browser pass is browser.yml.
+#
+# Free-minutes note: a PRIVATE repo has 2,000 Actions minutes a month. This
+# schedule (6 runs a day, ~3 minutes each) plus browser.yml stays under that.
+# A PUBLIC repo has unlimited minutes, and the jury step below then runs on
+# every pass.
+
+on:
+  schedule:
+    - cron: "15 */4 * * *"
+  workflow_dispatch:
+    inputs:
+      run_id:
+        description: "Run id from the website's button (leave empty for a manual run)"
+        required: false
+        default: ""
+      scope:
+        description: "company (employer boards) or api (search APIs)"
+        required: false
+        default: "company"
+
+concurrency:
+  group: ingest-${{ inputs.scope || 'scheduled' }}
+  cancel-in-progress: false
+
+jobs:
+  ingest:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    env:
+      NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+      NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+      SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+      JOOBLE_API_KEY: ${{ secrets.JOOBLE_API_KEY }}
+      CAREERJET_AFFID: ${{ secrets.CAREERJET_AFFID }}
+      APP_URL: ${{ secrets.APP_URL }}
+      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      RESEND_API_KEY: ${{ secrets.RESEND_API_KEY }}
+      DIGEST_TO: ${{ secrets.DIGEST_TO }}
+      DIGEST_FROM: ${{ secrets.DIGEST_FROM }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # A button run of the employer boards includes the browser-rendered ones.
+      - name: Cache Playwright browsers
+        if: inputs.run_id != '' && inputs.scope == 'company'
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+
+      - name: Install Chromium
+        if: inputs.run_id != '' && inputs.scope == 'company'
+        run: npx playwright install --with-deps chromium
+
+      # JSearch is never part of this workflow: it bills per request (see jsearch.yml).
+      - name: Run ingest
+        run: |
+          if [ -n "${{ inputs.run_id }}" ]; then
+            npx tsx scripts/ingest.ts --run-id "${{ inputs.run_id }}" --scope "${{ inputs.scope }}" --no-metered --order stale-first --deadline-min 45
+          else
+            npx tsx scripts/ingest.ts --skip-browser --no-metered --deadline-min 30
+          fi
+
+      - name: Time-sensitive alerts
+        run: npx tsx scripts/send-alerts.ts
+
+      # The jury on every pass only when minutes are unlimited (public repo).
+      - name: AI jury
+        if: github.event.repository.private == false
+        run: npx tsx scripts/judge.ts --max 40 --deadline-min 15

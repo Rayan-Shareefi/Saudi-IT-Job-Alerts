@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-label="Saudi Job Alert">
+  <defs>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#14b8a6"/>
+      <stop offset="100%" stop-color="#0891b2"/>
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="112" fill="url(#g)"/>
+  <path d="M256 116c-57 0-103 46-103 103v34h-14c-15 0-27 12-27 27v130c0 15 12 27 27 27h234c15 0 27-12 27-27V280c0-15-12-27-27-27h-14v-34c0-57-46-103-103-103zm0 46c31 0 57 26 57 57v34H199v-34c0-31 26-57 57-57z" fill="#fff" opacity=".95"/>
+  <circle cx="256" cy="352" r="26" fill="#0f766e"/>
+</svg>

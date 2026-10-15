@@ -1,0 +1,185 @@
+{
+  "probedAt": "2026-09-03T20:21:42.442Z",
+  "found": [
+    {
+      "company": "Ceer Motors",
+      "current": "https://www.ceer.com.sa/careers",
+      "candidate": "https://ceermotors.com/",
+      "status": 200
+    },
+    {
+      "company": "AlJammaz Technologies",
+      "current": "https://www.aljammaztechnologies.com/careers",
+      "candidate": "https://www.aljammaz.com/",
+      "status": 200
+    },
+    {
+      "company": "Saudi Payments",
+      "current": "https://www.saudipayments.sa/careers",
+      "candidate": "https://payments.org/",
+      "status": 200
+    },
+    {
+      "company": "Bidaya Home Finance",
+      "current": "https://www.bidaya.com.sa/careers",
+      "candidate": "https://bidaya.com/",
+      "status": 200
+    },
+    {
+      "company": "Quara Finance",
+      "current": "https://www.quara.com/careers",
+      "candidate": "https://quarafinance.com/ar/",
+      "status": 200
+    },
+    {
+      "company": "Barq",
+      "current": "https://barq.io/careers",
+      "candidate": "https://barq.com/",
+      "status": 200
+    },
+    {
+      "company": "Intigral",
+      "current": "https://www.intigral.net/careers",
+      "candidate": "https://intigral.com/",
+      "status": 200
+    },
+    {
+      "company": "Naizak",
+      "current": "https://naizak.com/index.php/home/careers-2/",
+      "candidate": "https://www.naizak.com/",
+      "status": 200
+    },
+    {
+      "company": "SURJ Sports Investment",
+      "current": "https://surj.com/careers",
+      "candidate": "https://surj.org/",
+      "status": 200
+    },
+    {
+      "company": "Etimad",
+      "current": "https://etimad.sa/careers",
+      "candidate": "https://etimad.co/",
+      "status": 200
+    },
+    {
+      "company": "Astra Industrial",
+      "current": "https://www.astraindustrial.com/careers",
+      "candidate": "https://astra.com/",
+      "status": 200
+    },
+    {
+      "company": "Alessa Industries",
+      "current": "https://www.alessa.com.sa/careers",
+      "candidate": "https://alessa.com/",
+      "status": 200
+    },
+    {
+      "company": "Emerson",
+      "current": "https://careers.emerson.com/",
+      "candidate": "https://www.emerson.com/en/corporate",
+      "status": 200
+    },
+    {
+      "company": "Saudi Export Development Authority",
+      "current": "https://saudiexports.sa/careers",
+      "candidate": "https://saudiexports.net/",
+      "status": 200
+    },
+    {
+      "company": "National Housing Strategy Office",
+      "current": "https://www.housing.sa/careers",
+      "candidate": "https://housing.com/",
+      "status": 200
+    },
+    {
+      "company": "General Electric",
+      "current": "https://jobs.gecareers.com/",
+      "candidate": "https://www.ge.com/",
+      "status": 200
+    },
+    {
+      "company": "Allianz Saudi Fransi",
+      "current": "https://www.allianzsf.com/careers",
+      "candidate": "https://www.allianz.sa/",
+      "status": 200
+    },
+    {
+      "company": "Jacobs",
+      "current": "https://careers.jacobs.com/en_US/careers",
+      "candidate": "https://www.jacobs.com/",
+      "status": 200
+    },
+    {
+      "company": "Advanced Communications and Electronics Systems",
+      "current": "https://www.aces.com.sa/careers",
+      "candidate": "https://www.advanced.com/",
+      "status": 200
+    },
+    {
+      "company": "Saudi Grains Organization",
+      "current": "https://www.sago.gov.sa/careers",
+      "candidate": "https://www.grains.com/",
+      "status": 200
+    },
+    {
+      "company": "Saudi Egyptian Investment Company",
+      "current": "https://seic.sa/careers",
+      "candidate": "https://egyptian-investment.com/",
+      "status": 200
+    },
+    {
+      "company": "Albilad Capital",
+      "current": "https://www.albiladcapital.com/careers",
+      "candidate": "https://www.albilad.com.sa/",
+      "status": 200
+    },
+    {
+      "company": "Yaqeen Capital",
+      "current": "https://www.yaqeen.sa/careers",
+      "candidate": "https://yaqeen.org/",
+      "status": 200
+    },
+    {
+      "company": "Baianat",
+      "current": "https://baianat.com.sa/careers",
+      "candidate": "https://www.baianat.com/",
+      "status": 200
+    },
+    {
+      "company": "Osool and Bakheet Investment",
+      "current": "https://www.obic.com.sa/careers",
+      "candidate": "https://www.osool.com/",
+      "status": 200
+    },
+    {
+      "company": "Sadeem Technology",
+      "current": "https://sadeem.tech/careers",
+      "candidate": "https://www.sadeem.com/",
+      "status": 200
+    },
+    {
+      "company": "El Seif Engineering",
+      "current": "https://www.elseif.com/careers",
+      "candidate": "https://elseif.com.sa/",
+      "status": 200
+    },
+    {
+      "company": "Freyssinet Saudi Arabia",
+      "current": "https://www.freyssinetsaudi.com/careers",
+      "candidate": "https://www.freyssinet.com/",
+      "status": 200
+    },
+    {
+      "company": "Abdullah Al Othaim Investment",
+      "current": "https://www.othaim.com/careers",
+      "candidate": "https://othaim.sa/",
+      "status": 200
+    },
+    {
+      "company": "Rakiza",
+      "current": "https://rakiza.sa/careers",
+      "candidate": "https://www.rakiza.org/",
+      "status": 200
+    }
+  ]
+}

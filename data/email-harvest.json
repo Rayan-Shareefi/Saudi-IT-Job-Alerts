@@ -1,0 +1,3813 @@
+{
+  "checkedAt": "2026-09-03T18:23:55.501Z",
+  "findings": [
+    {
+      "company": "NEOM",
+      "careersUrl": "https://careers.neom.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Red Sea Global",
+      "careersUrl": "https://careers.theredsea.sa/go/Job-Opportunities/7716923/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Qiddiya",
+      "careersUrl": "https://qiddiya.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Diriyah Company",
+      "careersUrl": "https://www.diriyah.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "ROSHN",
+      "careersUrl": "https://www.roshn.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Public Investment Fund (PIF)",
+      "careersUrl": "https://www.pif.gov.sa/en/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "New Murabba",
+      "careersUrl": "https://newmurabba.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "King Salman Park Foundation",
+      "careersUrl": "https://kingsalmanpark.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Soudah Development",
+      "careersUrl": "https://soudah.sa/work-with-us",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "AMAALA",
+      "careersUrl": "https://www.amaala.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Riyadh Air",
+      "careersUrl": "https://www.riyadhair.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "NHC (National Housing Company)",
+      "careersUrl": "https://www.nhc.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Alat",
+      "careersUrl": "https://alat.com/en/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Ceer Motors",
+      "careersUrl": "https://www.ceer.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.ceer.com.sa/caree"
+    },
+    {
+      "company": "Lucid Motors",
+      "careersUrl": "https://lucidmotors.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Sanabil Investments",
+      "careersUrl": "https://www.sanabil.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SIRC (Saudi Investment Recycling)",
+      "careersUrl": "https://www.sirc.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Aramco",
+      "careersUrl": "https://www.aramco.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.aramco.com/en/"
+    },
+    {
+      "company": "SABIC",
+      "careersUrl": "https://www.sabic.com/en/careers",
+      "existing": [
+        "recruitment@sabic.com"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Ma'aden",
+      "careersUrl": "https://careers.maaden.com/gb/en",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "ACWA Power",
+      "careersUrl": "https://careers.acwapower.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Electricity Company",
+      "careersUrl": "https://www.se.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Petro Rabigh",
+      "careersUrl": "https://www.petrorabigh.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Sipchem",
+      "careersUrl": "https://www.sipchem.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Advanced Petrochemical",
+      "careersUrl": "https://careers.advancedpetrochem.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Bahri",
+      "careersUrl": "https://www.bahri.sa/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Alfanar",
+      "careersUrl": "https://www.alfanar.com/company/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Zamil Group",
+      "careersUrl": "https://www.zamil.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Nesma",
+      "careersUrl": "https://www.nesma.com/careers",
+      "existing": [
+        "jobs@nesma.com"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Marafiq",
+      "careersUrl": "https://www.marafiq.com.sa/en/partnering-with-us/careers/life-at-marafiq/",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://www.marafiq.com.sa"
+    },
+    {
+      "company": "Tarshid",
+      "careersUrl": "https://www.tarshid.com.sa/en/jobs",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Water Authority",
+      "careersUrl": "https://www.swa.gov.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "stc",
+      "careersUrl": "https://careers.stc.com.sa/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "solutions by stc",
+      "careersUrl": "https://careers.solutions.com.sa/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "sirar by stc",
+      "careersUrl": "https://www.linkedin.com/company/sirarbystc/jobs/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "center3",
+      "careersUrl": "https://www.center3.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 401"
+    },
+    {
+      "company": "Mobily",
+      "careersUrl": "https://careers.mobily.com.sa/en/sites/opportunities",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.content: Target crashed "
+    },
+    {
+      "company": "Zain KSA",
+      "careersUrl": "https://sa.zain.com/about/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "TAWAL",
+      "careersUrl": "https://www.tawal.com.sa/en/team",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Elm",
+      "careersUrl": "https://elm.sa/ar/recruitment/sectors/Pages/default.aspx",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Thiqah",
+      "careersUrl": "https://www.thiqah.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Takamol Holding",
+      "careersUrl": "https://www.takamolholding.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tahakom",
+      "careersUrl": "https://careers.tahakom.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SITE (Saudi Information Technology Company)",
+      "careersUrl": "https://site.sa/en/join-us",
+      "existing": [
+        "careers@site.sa",
+        "trainee@site.sa"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "NourNet",
+      "careersUrl": "https://nour.net.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Salam (Integrated Telecom)",
+      "careersUrl": "https://salam.net/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Innovative Solutions",
+      "careersUrl": "https://www.is.com.sa/careers",
+      "existing": [
+        "careers@is.com.sa"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "AlJammaz Technologies",
+      "careersUrl": "https://www.aljammaztechnologies.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Cipher (stc group)",
+      "careersUrl": "https://www.cipher.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Unifonic",
+      "careersUrl": "https://www.unifonic.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Quant",
+      "careersUrl": "https://quant.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi National Bank (SNB)",
+      "careersUrl": "https://www.alahli.com/en/pages/about-us/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Al Rajhi Bank",
+      "careersUrl": "https://careers.alrajhibank.com.sa/ar/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Riyad Bank",
+      "careersUrl": "https://careers.riyadbank.com/en/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Awwal Bank (SAB)",
+      "careersUrl": "https://www.sab.com/en/about-us/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Banque Saudi Fransi",
+      "careersUrl": "https://www.alfransi.com.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Arab National Bank",
+      "careersUrl": "https://anb.com.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Alinma Bank",
+      "careersUrl": "https://career.alinma.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Bank Albilad",
+      "careersUrl": "https://www.bankalbilad.com.sa/ar/about/Pages/e-careers.aspx",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Bank AlJazira",
+      "careersUrl": "https://www.aljazirabank.com.sa/ar-sa/personal/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Gulf International Bank",
+      "careersUrl": "https://www.gib.com/en/careers-home-page",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SAMA (Saudi Central Bank)",
+      "careersUrl": "https://www.sama.gov.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tadawul Group",
+      "careersUrl": "https://www.saudiexchange.sa/wps/portal/tadawul/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Saudi Payments",
+      "careersUrl": "https://www.saudipayments.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.saudipayments.sa/"
+    },
+    {
+      "company": "stc pay",
+      "careersUrl": "https://stcpay.org/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tamara",
+      "careersUrl": "https://tamara.co/en-sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tabby",
+      "careersUrl": "https://tabby.ai/en-AE/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Lean Technologies",
+      "careersUrl": "https://www.leantech.me/uae/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Rasan",
+      "careersUrl": "https://rasan.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Hala",
+      "careersUrl": "https://hala.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Geidea",
+      "careersUrl": "https://careers.geidea.net/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Moyasar",
+      "careersUrl": "https://moyasar.com/en/resources/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "PayTabs",
+      "careersUrl": "https://ai.paytabs.com/en/career/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Foodics",
+      "careersUrl": "https://www.foodics.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Jahez",
+      "careersUrl": "https://www.jahez.net/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "HungerStation",
+      "careersUrl": "https://deliveryhero-1481174-gb-engb.sr-attrax.com/hungerstation-arabic",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Nana",
+      "careersUrl": "https://nana.sa/careers",
+      "existing": [
+        "careers@nana.sa"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Salla",
+      "careersUrl": "https://salla.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Zid",
+      "careersUrl": "https://zid.sa/en/jobs/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Mrsool",
+      "careersUrl": "https://mrsool.co/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Sary",
+      "careersUrl": "https://sary.zenats.com/en",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Almarai",
+      "careersUrl": "https://www.almarai.com/en/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Jarir Bookstore",
+      "careersUrl": "https://www.jarir.com/about-jarir/job-opportunities",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Panda Retail",
+      "careersUrl": "https://www.panda.com.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Alshaya Group",
+      "careersUrl": "https://www.alshaya.com/en/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 502"
+    },
+    {
+      "company": "Abdul Latif Jameel",
+      "careersUrl": "https://alj.com/en/about/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Ajlan & Bros",
+      "careersUrl": "https://ajlanbros.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SDAIA",
+      "careersUrl": "https://sdaia.gov.sa/ar/SDAIA/SdaiaStrategies/Pages/EmploymentStrategy.aspx",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "National Cybersecurity Authority (NCA)",
+      "careersUrl": "https://nca.gov.sa/en/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Digital Government Authority",
+      "careersUrl": "https://dga.gov.sa/ar/join-us",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Ministry of Communications and IT",
+      "careersUrl": "https://careers.mcit.gov.sa/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "ZATCA",
+      "careersUrl": "https://careers.zatca.gov.sa/?locale=ar_SA",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "GOSI",
+      "careersUrl": "https://www.gosi.gov.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Monshaat",
+      "careersUrl": "https://www.monshaat.gov.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "NUPCO",
+      "careersUrl": "https://www.nupco.com/careers-and-training/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Post (SPL)",
+      "careersUrl": "https://splonline.com.sa/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Mawani",
+      "careersUrl": "https://careers.mawani.gov.sa/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Railways (SAR)",
+      "careersUrl": "https://www.sar.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "GACA",
+      "careersUrl": "https://careers.gaca.gov.sa/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Human Resources Development Fund",
+      "careersUrl": "https://www.hrdf.org.sa/about/joinus/jobs/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "KAUST",
+      "careersUrl": "https://www.kaust.edu.sa/en/error/404?404;https://www.kaust.edu.sa:443/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "KACST",
+      "careersUrl": "https://www.kacst.gov.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "KAPSARC",
+      "careersUrl": "https://www.kapsarc.org/work-with-us/job-opportunities/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "KFUPM",
+      "careersUrl": "https://www.kfupm.edu.sa/about-us/connect/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Alfaisal University",
+      "careersUrl": "https://jobs.alfaisal.edu/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Prince Sultan University",
+      "careersUrl": "https://psu.edu.sa/en/career",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Bupa Arabia",
+      "careersUrl": "https://www.bupa.com.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tawuniya",
+      "careersUrl": "https://www.tawuniya.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Dr. Sulaiman Al Habib",
+      "careersUrl": "https://hmg.elevatus.io/jobs",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "King Faisal Specialist Hospital",
+      "careersUrl": "https://www.kfshrc.edu.sa/en/home/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Seha Virtual Hospital",
+      "careersUrl": "https://svh.med.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://svh.med.sa/careers\nCa"
+    },
+    {
+      "company": "Accenture",
+      "careersUrl": "https://www.accenture.com/sa-en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Deloitte Middle East",
+      "careersUrl": "https://www.deloitte.com/middle-east/en/careers.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "PwC Middle East",
+      "careersUrl": "https://www.pwc.com/m1/en/careers.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "EY",
+      "careersUrl": "https://www.ey.com/en_sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "KPMG Saudi Arabia",
+      "careersUrl": "https://kpmg.com/sa/en/careers.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "McKinsey & Company",
+      "careersUrl": "https://www.mckinsey.com/careers/home",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.mckinsey.com/c"
+    },
+    {
+      "company": "Boston Consulting Group",
+      "careersUrl": "https://careers.bcg.com/global/en/search-results",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Bain & Company",
+      "careersUrl": "https://careers.bain.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Oliver Wyman",
+      "careersUrl": "https://www.oliverwyman.com/careers.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Kearney",
+      "careersUrl": "https://www.kearney.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Capgemini",
+      "careersUrl": "https://www.capgemini.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Wipro",
+      "careersUrl": "https://careers.wipro.com/search/?searchResultView=LIST",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Infosys",
+      "careersUrl": "https://www.infosys.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Tata Consultancy Services",
+      "careersUrl": "https://www.tcs.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Tech Mahindra",
+      "careersUrl": "https://careers.techmahindra.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "HCLTech",
+      "careersUrl": "https://careers.hcltech.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Atos",
+      "careersUrl": "https://atos.net/en/join-us",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "DXC Technology",
+      "careersUrl": "https://careers.dxc.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Giza Systems",
+      "careersUrl": "https://www.gizasystems.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Injazat / Core42",
+      "careersUrl": "https://careers.core42.ai/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Microsoft",
+      "careersUrl": "https://apply.careers.microsoft.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Amazon Web Services",
+      "careersUrl": "https://www.amazon.jobs/en/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Google",
+      "careersUrl": "https://www.google.com/about/careers/applications/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Oracle",
+      "careersUrl": "https://careers.oracle.com/en/sites/jobsearch",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SAP",
+      "careersUrl": "https://jobs.sap.com/",
+      "existing": [
+        "careers@sap.com"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "IBM",
+      "careersUrl": "https://www.ibm.com/careers/search",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Cisco",
+      "careersUrl": "https://careers.cisco.com/global/en",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Dell Technologies",
+      "careersUrl": "https://enterpriseplatform.dell.com/hcmUI/CandidateExperience/en/sites/careers/jobs?mode=location",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Hewlett Packard Enterprise",
+      "careersUrl": "https://careers.hpe.com/us/en/search-results",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Huawei",
+      "careersUrl": "https://career.huawei.com/reccampportal/portal5/index.html",
+      "existing": [],
+      "discovered": [
+        {
+          "address": "career@huawei.com",
+          "purpose": "General applications"
+        }
+      ],
+      "status": "new-addresses",
+      "note": "1 not on file"
+    },
+    {
+      "company": "Nokia",
+      "careersUrl": "https://www.nokia.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Ericsson",
+      "careersUrl": "https://jobs.ericsson.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Siemens",
+      "careersUrl": "https://jobs.siemens.com/en_US/externaljobs/Home",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Schneider Electric",
+      "careersUrl": "https://careers.se.com/life-at-schneider",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Honeywell",
+      "careersUrl": "https://careers.honeywell.com/en/sites/Honeywell",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://careers.honeywell."
+    },
+    {
+      "company": "ABB",
+      "careersUrl": "https://careers.abb/global/en",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "General Electric",
+      "careersUrl": "https://jobs.gecareers.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://jobs.gecareers.com/\nC"
+    },
+    {
+      "company": "ServiceNow",
+      "careersUrl": "https://careers.servicenow.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Salesforce",
+      "careersUrl": "https://www.salesforce.com/company/careers/jobs/",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "VMware by Broadcom",
+      "careersUrl": "https://broadcom.wd1.myworkdayjobs.com/External_Career",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Red Hat",
+      "careersUrl": "https://www.redhat.com/en/jobs",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Nutanix",
+      "careersUrl": "https://careers.nutanix.com/en/",
+      "existing": [],
+      "discovered": [
+        {
+          "address": "recruiting-scams@nutanix.com",
+          "purpose": "General applications"
+        },
+        {
+          "address": "recruiting@nutanix.com",
+          "purpose": "General applications"
+        }
+      ],
+      "status": "new-addresses",
+      "note": "2 not on file"
+    },
+    {
+      "company": "NetApp",
+      "careersUrl": "https://careers.netapp.com/",
+      "existing": [
+        "careers@netapp.com"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Pure Storage",
+      "careersUrl": "https://www.everpuredata.com/company/careers/opportunities.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Snowflake",
+      "careersUrl": "https://careers.snowflake.com/us/en",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Databricks",
+      "careersUrl": "https://www.databricks.com/company/careers/open-positions",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "MongoDB",
+      "careersUrl": "https://www.mongodb.com/company/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Elastic",
+      "careersUrl": "https://www.elastic.co/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "GitLab",
+      "careersUrl": "https://about.gitlab.com/jobs/all-jobs/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Atlassian",
+      "careersUrl": "https://www.atlassian.com/company/careers/all-jobs",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "HashiCorp",
+      "careersUrl": "https://www.ibm.com/careers/search?q=hashicorp",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Confluent",
+      "careersUrl": "https://www.confluent.io/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 429"
+    },
+    {
+      "company": "Cloudera",
+      "careersUrl": "https://www.cloudera.com/careers.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Informatica",
+      "careersUrl": "https://www.salesforce.com/company/careers/jobs/?search=informatica&pagesize=20",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Palo Alto Networks",
+      "careersUrl": "https://jobs.paloaltonetworks.com/en",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Fortinet",
+      "careersUrl": "https://www.fortinet.com/corporate/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "CrowdStrike",
+      "careersUrl": "https://www.crowdstrike.com/en-us/careers/",
+      "existing": [
+        "recruiting@crowdstrike.com"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Splunk",
+      "careersUrl": "https://careers.cisco.com/global/en/splunk/india",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Check Point Software",
+      "careersUrl": "https://www.checkpoint.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Trend Micro",
+      "careersUrl": "https://www.trendmicro.com/en_us/about/careers.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tenable",
+      "careersUrl": "https://www.tenable.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Rapid7",
+      "careersUrl": "https://careers.rapid7.com/jobs/search",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Qualys",
+      "careersUrl": "https://www.qualys.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Zscaler",
+      "careersUrl": "https://www.zscaler.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Netskope",
+      "careersUrl": "https://www.netskope.com/company/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Cloudflare",
+      "careersUrl": "https://www.cloudflare.com/careers/jobs/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "F5",
+      "careersUrl": "https://www.f5.com/company/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Akamai",
+      "careersUrl": "https://www.akamai.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Proofpoint",
+      "careersUrl": "https://www.proofpoint.com/us/company/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Sophos",
+      "careersUrl": "https://www.sophos.com/en-us/company/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.sophos.com/en-"
+    },
+    {
+      "company": "Kaspersky",
+      "careersUrl": "https://careers.kaspersky.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SentinelOne",
+      "careersUrl": "https://www.sentinelone.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Trellix",
+      "careersUrl": "https://careers.trellix.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Darktrace",
+      "careersUrl": "https://www.darktrace.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Secureworks",
+      "careersUrl": "https://www.sophos.com/en-us/company/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.sophos.com/en-"
+    },
+    {
+      "company": "Help AG",
+      "careersUrl": "https://www.helpag.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "spiderSilk",
+      "careersUrl": "https://spidersilk.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "CyberKnight",
+      "careersUrl": "https://cyberknight.tech/about-us/jobs/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SAMI (Saudi Arabian Military Industries)",
+      "careersUrl": "https://www.sami.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Thales",
+      "careersUrl": "https://careers.thalesgroup.com/global/en",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Airbus",
+      "careersUrl": "https://www.airbus.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Boeing",
+      "careersUrl": "https://jobs.boeing.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Lockheed Martin",
+      "careersUrl": "https://www.lockheedmartin.com/en-us/careers/index.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "RTX (Raytheon)",
+      "careersUrl": "https://careers.rtx.com/global/en",
+      "existing": [],
+      "discovered": [
+        {
+          "address": "rtxrecruiting@rtx.com",
+          "purpose": "General applications"
+        }
+      ],
+      "status": "new-addresses",
+      "note": "1 not on file"
+    },
+    {
+      "company": "Northrop Grumman",
+      "careersUrl": "https://www.northropgrumman.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "L3Harris",
+      "careersUrl": "https://careers.l3harris.com/en",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "BAE Systems",
+      "careersUrl": "https://jobs.baesystems.com/global/en",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Leonardo",
+      "careersUrl": "https://www.leonardo.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudia",
+      "careersUrl": "https://www.saudia.com/about-saudia/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "flynas",
+      "careersUrl": "https://www.flynas.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "flyadeal",
+      "careersUrl": "https://www.flyadeal.com/en/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Matarat Holding",
+      "careersUrl": "https://careers.matarat.com.sa/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Riyadh Airports",
+      "careersUrl": "https://www.riyadhairports.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Jadwa Investment",
+      "careersUrl": "https://www.jadwa.com/en/careers",
+      "existing": [
+        "careers@jadwa.com"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SNB Capital",
+      "careersUrl": "https://career.snbcapital.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Riyad Capital",
+      "careersUrl": "https://www.riyadcapital.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Derayah Financial",
+      "careersUrl": "https://web.derayah.com/ar/join-us/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Alistithmar Capital",
+      "careersUrl": "https://www.icap.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Reinsurance",
+      "careersUrl": "https://saudire.net/career/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Nayifat Finance",
+      "careersUrl": "https://nayifat.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Emkan Finance",
+      "careersUrl": "https://www.emkanfinance.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Quara Finance",
+      "careersUrl": "https://www.quara.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Bidaya Home Finance",
+      "careersUrl": "https://www.bidaya.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Lendo",
+      "careersUrl": "https://www.lendo.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Manafa Capital",
+      "careersUrl": "https://manafa.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tameed",
+      "careersUrl": "https://careers.ta3meed.com/jobs",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Forus",
+      "careersUrl": "https://forus.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Sukuk Capital",
+      "careersUrl": "https://sukuk.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Waed Ventures",
+      "careersUrl": "https://portfoliojobs.waed.com/jobs",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Venture Capital",
+      "careersUrl": "https://svc.com.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Neo Leap",
+      "careersUrl": "https://neoleap.com.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Barq",
+      "careersUrl": "https://barq.io/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Alinma Investment",
+      "careersUrl": "https://www.alinmainvestment.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CONNECTION_REFUSED at https://www.alinmainvestment"
+    },
+    {
+      "company": "Wamid",
+      "careersUrl": "https://www.wamid.sa/wps/portal/wamid/home",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Muqassa",
+      "careersUrl": "https://careers.tadawulgroup.sa/?lang=en",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Edaa",
+      "careersUrl": "https://careers.tadawulgroup.sa/?lang=en",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Malath Insurance",
+      "careersUrl": "https://www.malath.com.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Walaa Insurance",
+      "careersUrl": "https://walaa.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "MedGulf",
+      "careersUrl": "https://www.medgulf.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Al Rajhi Takaful",
+      "careersUrl": "https://www.alrajhitakaful.com/ar/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Arabian Shield",
+      "careersUrl": "https://www.der.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.der.com.sa/career"
+    },
+    {
+      "company": "Allianz Saudi Fransi",
+      "careersUrl": "https://www.allianzsf.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://www.allianzsf.com/"
+    },
+    {
+      "company": "Solidarity Saudi Takaful",
+      "careersUrl": "https://solidarity.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Ejada Systems",
+      "careersUrl": "https://careers.ejada.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Perfect Presentation",
+      "careersUrl": "https://2p.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Al Moammar Information Systems",
+      "careersUrl": "https://www.mis.com.sa/careers",
+      "existing": [
+        "jobs@mis.com.sa"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Advanced Electronics Company",
+      "careersUrl": "https://www.aec.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Intigral",
+      "careersUrl": "https://www.intigral.net/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Dawiyat",
+      "careersUrl": "https://www.dawiyat.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "GO Telecom",
+      "careersUrl": "https://www.go.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Arabsat",
+      "careersUrl": "https://www.arabsat.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Neo Space Group",
+      "careersUrl": "https://www.neospace.group/career/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Lucidya",
+      "careersUrl": "https://lucidya.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Intelmatix",
+      "careersUrl": "https://intelmatix.ai/company-careers.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Mozn",
+      "careersUrl": "https://www.mozn.ai/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Rewaa",
+      "careersUrl": "https://rewaa.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tahaluf",
+      "careersUrl": "https://tahaluf.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Naizak",
+      "careersUrl": "https://naizak.com/index.php/home/careers-2/",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://naizak.com/ind"
+    },
+    {
+      "company": "Gulf IT",
+      "careersUrl": "https://gulfit.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Malomatia",
+      "careersUrl": "https://malomatia.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Savvy Games Group",
+      "careersUrl": "https://evth.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/savvy-careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Manga Productions",
+      "careersUrl": "https://mangaproductions.net/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "SURJ Sports Investment",
+      "careersUrl": "https://surj.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SRJ Sports Investments",
+      "careersUrl": "https://srj.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "MDLBEAST",
+      "careersUrl": "https://mdlbeast.com/about/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "General Entertainment Authority",
+      "careersUrl": "https://www.gea.gov.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "webook",
+      "careersUrl": "https://webook.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Pro League",
+      "careersUrl": "https://iaazkf.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Royal Commission for AlUla",
+      "careersUrl": "https://www.rcu.gov.sa/en/contact/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Royal Commission for Riyadh City",
+      "careersUrl": "https://www.rcrc.gov.sa/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Ministry of Investment",
+      "careersUrl": "https://jobs.misa.gov.sa/ar/?locale=en_US",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Ministry of Health",
+      "careersUrl": "https://www.moh.gov.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Ministry of Energy",
+      "careersUrl": "https://www.moenergy.gov.sa/ar/recruitment",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Ministry of Tourism",
+      "careersUrl": "https://mt.gov.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Tourism Authority",
+      "careersUrl": "https://www.sta.gov.sa/en/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SFDA",
+      "careersUrl": "https://www.sfda.gov.sa/ar/career-vision-and-mission",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SASO",
+      "careersUrl": "https://www.saso.gov.sa/ar/mediacenter/Pages/JoinOurTeam.aspx",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "GASTAT",
+      "careersUrl": "https://careers.stats.gov.sa/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Authority for Intellectual Property",
+      "careersUrl": "https://www.saip.gov.sa/ar/contact-us/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Etimad",
+      "careersUrl": "https://etimad.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Local Content Authority",
+      "careersUrl": "https://www.lcgpa.gov.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Space Agency",
+      "careersUrl": "https://ssa.gov.sa/ar/careersLandingPage/?path=/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Communications Space and Technology Commission",
+      "careersUrl": "https://www.cst.gov.sa/about/career",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Industrial Development Fund",
+      "careersUrl": "https://www.sidf.gov.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SATORP",
+      "careersUrl": "https://www.satorp.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Sadara Chemical",
+      "careersUrl": "https://www.sadara.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Luberef",
+      "careersUrl": "https://www.luberef.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "YASREF",
+      "careersUrl": "https://www.yasref.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tasnee",
+      "careersUrl": "https://www.tasnee.com/about-us/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Ceramics",
+      "careersUrl": "https://www.saudiceramics.com/en/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Astra Industrial",
+      "careersUrl": "https://www.astraindustrial.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 522"
+    },
+    {
+      "company": "Alkhorayef Group",
+      "careersUrl": "https://www.alkhorayef.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Alturki Holding",
+      "careersUrl": "https://www.alturki.net/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Water and Electricity Company",
+      "careersUrl": "https://wec.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Mouwasat Medical Services",
+      "careersUrl": "https://www.mouwasat.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Dallah Health",
+      "careersUrl": "https://www.dallah-hospital.com/careers/index.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi German Health",
+      "careersUrl": "https://www.sghgroup.net/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.sghgroup.net/care"
+    },
+    {
+      "company": "Fakeeh Care Group",
+      "careersUrl": "https://careers.fakeeh.care/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "National Guard Health Affairs",
+      "careersUrl": "https://ngha.med.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://ngha.med.sa/careers\nC"
+    },
+    {
+      "company": "King Fahad Medical City",
+      "careersUrl": "https://www.kfmc.med.sa/EN/Page/Pages/JoinUs.aspx",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Magrabi Hospitals",
+      "careersUrl": "https://www.magrabi.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "King Saud University",
+      "careersUrl": "https://dfpa.ksu.edu.sa/ar/jobs",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "King Abdulaziz University",
+      "careersUrl": "https://www.kau.edu.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Princess Nourah University",
+      "careersUrl": "https://pnu.edu.sa/en/jobs/Pages/default.aspx",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Electronic University",
+      "careersUrl": "https://www.seu.edu.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 504"
+    },
+    {
+      "company": "Misk Foundation",
+      "careersUrl": "https://misk.org.sa/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tuwaiq Academy",
+      "careersUrl": "https://tuwaiq.edu.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Al Othaim Markets",
+      "careersUrl": "https://www.othaimmarkets.com/ar/about-us/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "BinDawood Holding",
+      "careersUrl": "https://www.bindawoodholding.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "United Electronics eXtra",
+      "careersUrl": "https://www.extra.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Cenomi",
+      "careersUrl": "https://centers.cenomi.com/sa-en/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Herfy Food Services",
+      "careersUrl": "https://herfy.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Dur Hospitality",
+      "careersUrl": "https://www.dur.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "SMSA Express",
+      "careersUrl": "https://www.smsaexpress.com/career",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Naqel Express",
+      "careersUrl": "https://www.naqelexpress.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Aramex",
+      "careersUrl": "https://www.aramex.com/ae/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Almajdouie",
+      "careersUrl": "https://www.almajdouie.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Seera Group",
+      "careersUrl": "https://www.seera.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Almosafer",
+      "careersUrl": "https://www.almosafer.com/ar/careers",
+      "existing": [
+        "careers@almosafer.com"
+      ],
+      "discovered": [
+        {
+          "address": "u003ecareers@almosafer.com",
+          "purpose": "General applications"
+        }
+      ],
+      "status": "new-addresses",
+      "note": "1 not on file"
+    },
+    {
+      "company": "Meta",
+      "careersUrl": "https://www.metacareers.com/jobsearch/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Amazon",
+      "careersUrl": "https://www.amazon.jobs/en/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Careem",
+      "careersUrl": "https://jobs.careem.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Delivery Hero",
+      "careersUrl": "https://careers.deliveryhero.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Visa",
+      "careersUrl": "https://corporate.visa.com/en/careers.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Mastercard",
+      "careersUrl": "https://careers.mastercard.com/us/en",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "PayPal",
+      "careersUrl": "https://careers.pypl.com/home/default.aspx",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Adobe",
+      "careersUrl": "https://careers.adobe.com/us/en",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Qualcomm",
+      "careersUrl": "https://careers.qualcomm.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Intel",
+      "careersUrl": "https://intel.wd1.myworkdayjobs.com/External/page/6042070b79e01001f04fa9b468070000",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "NVIDIA",
+      "careersUrl": "https://www.nvidia.com/en-us/about-nvidia/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Lenovo",
+      "careersUrl": "https://jobs.lenovo.com/en_US/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Juniper Networks",
+      "careersUrl": "https://careers.hpe.com/juniper",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Veeam",
+      "careersUrl": "https://careers.veeam.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Commvault",
+      "careersUrl": "https://www.commvault.com/careers",
+      "existing": [],
+      "discovered": [
+        {
+          "address": "recruitingteam@commvault.com",
+          "purpose": "General applications"
+        }
+      ],
+      "status": "new-addresses",
+      "note": "1 not on file"
+    },
+    {
+      "company": "OpenText",
+      "careersUrl": "https://careers.opentext.com/us/en",
+      "existing": [
+        "hr@opentext.com"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Forcepoint",
+      "careersUrl": "https://www.forcepoint.com/company/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Imperva",
+      "careersUrl": "https://www.imperva.com/company/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Varonis",
+      "careersUrl": "https://www.varonis.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "CyberArk",
+      "careersUrl": "https://jobs.paloaltonetworks.com/en/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Okta",
+      "careersUrl": "https://www.okta.com/company/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SailPoint",
+      "careersUrl": "https://www.sailpoint.com/company/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Delinea",
+      "careersUrl": "https://delinea.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Group-IB",
+      "careersUrl": "https://www.group-ib.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Infoblox",
+      "careersUrl": "https://www.infoblox.com/company/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SLB",
+      "careersUrl": "https://careers.slb.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Halliburton",
+      "careersUrl": "https://jobs.halliburton.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Baker Hughes",
+      "careersUrl": "https://careers.bakerhughes.com/global/en",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Weatherford",
+      "careersUrl": "https://careers.weatherford.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "NOV",
+      "careersUrl": "https://www.nov.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Aramco Digital",
+      "careersUrl": "https://www.aramcodigital.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Siemens Energy",
+      "careersUrl": "https://jobs.siemens-energy.com/en_US/jobs",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Hitachi Energy",
+      "careersUrl": "https://www.hitachienergy.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Emerson",
+      "careersUrl": "https://careers.emerson.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://careers.emerson.com/\n"
+    },
+    {
+      "company": "Rockwell Automation",
+      "careersUrl": "https://www.rockwellautomation.com/en-us/careers.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Yokogawa",
+      "careersUrl": "https://www.yokogawa.com/about/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Johnson Controls Arabia",
+      "careersUrl": "https://jobs.johnsoncontrols.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Alstom",
+      "careersUrl": "https://www.alstom.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Business Machines",
+      "careersUrl": "https://www.sbm.com.sa/career-opportunities",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "National Water Company",
+      "careersUrl": "https://www.nwc.com.sa/AR/OurCompany/Careers/Pages/default.aspx",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SAL Saudi Logistics",
+      "careersUrl": "https://sal.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Ground Services",
+      "careersUrl": "https://www.saudiags.com/career/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Savola Group",
+      "careersUrl": "https://www.savola.com/about-us/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: Timeout 30000ms exceeded.\nCall log:\n\u001b[2m  - navigating to \""
+    },
+    {
+      "company": "NADEC",
+      "careersUrl": "https://www.nadec.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://www.nadec.com."
+    },
+    {
+      "company": "Obeikan Investment Group",
+      "careersUrl": "https://www.obeikan.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Rawabi Holding",
+      "careersUrl": "https://careers.rawabi.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Al Yamamah Steel",
+      "careersUrl": "https://www.alyamamahsteel.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.alyamamahsteel.co"
+    },
+    {
+      "company": "Alessa Industries",
+      "careersUrl": "https://www.alessa.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CONNECTION_RESET at https://www.alessa.com.sa/care"
+    },
+    {
+      "company": "Saudi Arabian Mining Services",
+      "careersUrl": "https://careers.maaden.com/gb/en",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Elm Academy",
+      "careersUrl": "https://elm.sa/ar/recruitment/sectors/Pages/default.aspx",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "National Information Center",
+      "careersUrl": "https://nic.gov.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://nic.gov.sa/car"
+    },
+    {
+      "company": "Saudi Aramco Base Oil",
+      "careersUrl": "https://www.luberef.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Riyadh Metro (RCRC)",
+      "careersUrl": "https://www.rcrc.gov.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "KAUST Innovation",
+      "careersUrl": "https://www.kaust.edu.sa/en/error/404?404;https://www.kaust.edu.sa:443/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Aramco Shell Refinery",
+      "careersUrl": "https://www.sasref.com.sa/careers.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Nesma & Partners",
+      "careersUrl": "https://www.nesmapartners.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Almabani General Contractors",
+      "careersUrl": "https://www.almabani.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Readymix",
+      "careersUrl": "https://saudireadymix.com/join-us/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Arabian Drilling",
+      "careersUrl": "https://jobs.arabdrill.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Advanced Communications and Electronics Systems",
+      "careersUrl": "https://www.aces.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.aces.com.sa/caree"
+    },
+    {
+      "company": "Bupa Labs",
+      "careersUrl": "https://www.bupa.com.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Aramco Nabors Drilling",
+      "careersUrl": "https://www.sandsp.com/employment.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Petrofac",
+      "careersUrl": "https://www.petrofac.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Wood",
+      "careersUrl": "https://careers.woodgroup.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Worley",
+      "careersUrl": "https://www.worley.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Jacobs",
+      "careersUrl": "https://careers.jacobs.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "AECOM",
+      "careersUrl": "https://aecom.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Parsons",
+      "careersUrl": "https://jobs.parsons.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Hill International",
+      "careersUrl": "https://www.hillintl.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Data and AI Authority Academy",
+      "careersUrl": "https://sdaia.gov.sa/ar/SDAIA/SdaiaStrategies/Pages/EmploymentStrategy.aspx",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "National Debt Management Center",
+      "careersUrl": "https://www.ndmc.gov.sa/ar/recruitment",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Export Development Authority",
+      "careersUrl": "https://saudiexports.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://saudiexports.sa/caree"
+    },
+    {
+      "company": "National Center for Privatization",
+      "careersUrl": "https://www.ncp.gov.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Contractors Authority",
+      "careersUrl": "https://sca.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "National Center for Performance Measurement",
+      "careersUrl": "https://www.adaa.gov.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Quality of Life Program",
+      "careersUrl": "https://www.vision2030.gov.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Standards Metrology Authority",
+      "careersUrl": "https://www.saso.gov.sa/ar/mediacenter/Pages/JoinOurTeam.aspx",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "General Authority of Foreign Trade",
+      "careersUrl": "https://gaft.gov.sa/employment-and-training",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Food Bank",
+      "careersUrl": "https://etaam.org.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Real Estate General Authority",
+      "careersUrl": "https://rega.gov.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "National Housing Strategy Office",
+      "careersUrl": "https://www.housing.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.housing.sa/career"
+    },
+    {
+      "company": "Saudi Water Partnership Company",
+      "careersUrl": "https://www.sharakat.com.sa/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Grains Organization",
+      "careersUrl": "https://www.sago.gov.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.sago.gov.sa/caree"
+    },
+    {
+      "company": "Public Transport Authority",
+      "careersUrl": "https://tga.gov.sa/en/about-tga/recruitment",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Diriyah Gate Development Authority",
+      "careersUrl": "https://www.dgda.gov.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "King Abdullah Financial District",
+      "careersUrl": "https://www.kafd.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Boutique Group",
+      "careersUrl": "https://www.boutiquegroup.com/en/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Asfar",
+      "careersUrl": "https://asfar.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Coffee Company",
+      "careersUrl": "https://www.saudicoffee.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Halal Products Development Company",
+      "careersUrl": "https://hpdc.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Egyptian Investment Company",
+      "careersUrl": "https://seic.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://seic.sa/careers\nCall "
+    },
+    {
+      "company": "Jada Fund of Funds",
+      "careersUrl": "https://www.jada.com.sa/career",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Real Estate Refinance Company",
+      "careersUrl": "https://srco.com.sa/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tahakom Investments",
+      "careersUrl": "https://tahakominvestments.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://tahakominvestments.co"
+    },
+    {
+      "company": "Saudi Information Technology Academy",
+      "careersUrl": "https://sita.org.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://sita.org.sa/careers\nC"
+    },
+    {
+      "company": "NEOM Tech and Digital",
+      "careersUrl": "https://careers.neom.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tonomus",
+      "careersUrl": "https://www.tonomus.neom.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.tonomus.neom.com/"
+    },
+    {
+      "company": "Alat Semiconductors",
+      "careersUrl": "https://alat.com/en/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Humain",
+      "careersUrl": "https://www.humain.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Awwal Bank Digital",
+      "careersUrl": "https://www.sab.com/en/about-us/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Alrajhi Capital",
+      "careersUrl": "https://alrajhi-capital.sa/about-us/about-us-careers",
+      "existing": [
+        "careers@alrajhi-capital.sa"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Albilad Capital",
+      "careersUrl": "https://www.albiladcapital.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.albiladcapital.co"
+    },
+    {
+      "company": "Yaqeen Capital",
+      "careersUrl": "https://www.yaqeen.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Osool and Bakheet Investment",
+      "careersUrl": "https://www.obic.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://www.obic.com.s"
+    },
+    {
+      "company": "SEDCO Capital",
+      "careersUrl": "https://sedcocapital.com/careers-landing/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Musharaka Capital",
+      "careersUrl": "https://musharaka.sa/en/contact/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tamweel Aloula",
+      "careersUrl": "https://www.tamweelaloula.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Home Loans",
+      "careersUrl": "https://www.saudihomeloans.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CERT_COMMON_NAME_INVALID at https://www.saudihomel"
+    },
+    {
+      "company": "Amlak International",
+      "careersUrl": "https://www.amlak.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Deutsche Gulf Finance",
+      "careersUrl": "https://www.dgf.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.dgf.com.sa/career"
+    },
+    {
+      "company": "Raqamyah",
+      "careersUrl": "https://raqamyah.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Tasheel Finance",
+      "careersUrl": "https://www.tasheelfinance.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Baianat",
+      "careersUrl": "https://baianat.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://baianat.com.sa/career"
+    },
+    {
+      "company": "Tweeq",
+      "careersUrl": "https://tweeq.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Drahim",
+      "careersUrl": "https://drahim.sa/join",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Wataniya Insurance",
+      "careersUrl": "https://www.wataniya.com.sa/Wataniya_web/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "ACIG Insurance",
+      "careersUrl": "https://www.acig.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Gulf Union Alahlia",
+      "careersUrl": "https://www.gulfunion-saudi.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.gulfunion-saudi.c"
+    },
+    {
+      "company": "Saudi Enaya",
+      "careersUrl": "https://www.saudienaya.com/careers",
+      "existing": [
+        "career@saudienaya.com"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "stc Bank",
+      "careersUrl": "https://stcbank.com.sa/web/guest/job-application",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Sahm Capital",
+      "careersUrl": "https://www.sahmcapital.com/about/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Cipher Saudi",
+      "careersUrl": "https://www.cipher.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Saudi Technology Ventures",
+      "careersUrl": "https://stv.vc/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Wa'ed Ventures Portfolio",
+      "careersUrl": "https://waedventures.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tamkeen Technologies",
+      "careersUrl": "https://tamkeentech.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Sary Technology",
+      "careersUrl": "https://sary.zenats.com/en",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Tarabut",
+      "careersUrl": "https://careers.tarabut.com/jobs/Careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Nearpay",
+      "careersUrl": "https://nearpay.io/career",
+      "existing": [],
+      "discovered": [
+        {
+          "address": "hr@nearpay.io",
+          "purpose": "General applications"
+        }
+      ],
+      "status": "new-addresses",
+      "note": "1 not on file"
+    },
+    {
+      "company": "Ratio",
+      "careersUrl": "https://ratio.sa/jobs",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Sadeem Technology",
+      "careersUrl": "https://sadeem.tech/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://sadeem.tech/careers\nC"
+    },
+    {
+      "company": "Takamol Business Services",
+      "careersUrl": "https://www.takamolholding.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Bayanat Al-Oula",
+      "careersUrl": "https://bayanat.sa/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Alfa Technologies",
+      "careersUrl": "https://alfa-tech.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://alfa-tech.sa/careers\n"
+    },
+    {
+      "company": "Etihad Etisalat Digital",
+      "careersUrl": "https://careers.mobily.com.sa/en/sites/opportunities",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.content: Target crashed "
+    },
+    {
+      "company": "Saudi Telecom Solutions",
+      "careersUrl": "https://careers.solutions.com.sa/viewalljobs/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Rakiza",
+      "careersUrl": "https://rakiza.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://rakiza.sa/careers\nCal"
+    },
+    {
+      "company": "Nasdaq Gulf Technology",
+      "careersUrl": "https://www.nasdaq.com/about/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_HTTP2_PROTOCOL_ERROR at https://www.nasdaq.com/abo"
+    },
+    {
+      "company": "Zain Business",
+      "careersUrl": "https://sa.zain.com/about/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Integrated Digital Systems",
+      "careersUrl": "https://www.ids.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Almana General Hospitals",
+      "careersUrl": "https://www.almanahospital.com.sa/en/careers",
+      "existing": [
+        "career@almanahospital.com.sa"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "National Medical Care",
+      "careersUrl": "https://care.med.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Sulaiman Al Rajhi University",
+      "careersUrl": "https://sr.zohorecruit.sa/jobs/Careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Alfaisal University Research",
+      "careersUrl": "https://jobs.alfaisal.edu/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Dar Al Hekma University",
+      "careersUrl": "https://www.dah.edu.sa/en/careers/pages/default.aspx",
+      "existing": [
+        "jobs@dah.edu.sa"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Al Yamamah University",
+      "careersUrl": "https://yu.edu.sa/about/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Prince Sultan Military Medical City",
+      "careersUrl": "https://psmmc.med.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "King Khaled Eye Specialist Hospital",
+      "careersUrl": "https://kkesh.med.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Elm Education",
+      "careersUrl": "https://elm.sa/ar/recruitment/sectors/Pages/default.aspx",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Riyadh Schools",
+      "careersUrl": "https://www.riyadhschools.edu.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Saudi Arabian Parsons",
+      "careersUrl": "https://jobs.parsons.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Al Bawani",
+      "careersUrl": "https://albawani.net/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "El Seif Engineering",
+      "careersUrl": "https://www.elseif.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Shibh Al Jazira Contracting",
+      "careersUrl": "https://sajco.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Freyssinet Saudi Arabia",
+      "careersUrl": "https://www.freyssinetsaudi.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.freyssinetsaudi.c"
+    },
+    {
+      "company": "Saudi Pan Kingdom",
+      "careersUrl": "https://sapac.com.sa/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Abdullah Al Othaim Investment",
+      "careersUrl": "https://www.othaim.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.othaim.com/career"
+    },
+    {
+      "company": "Al Fanar Electric",
+      "careersUrl": "https://www.alfanar.com/company/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Middle East Paper Company",
+      "careersUrl": "https://www.mep.co/Website/En/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Cement",
+      "careersUrl": "https://www.saudicement.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_CONNECTION_TIMED_OUT at https://www.saudicement.co"
+    },
+    {
+      "company": "Yamama Cement",
+      "careersUrl": "https://www.yamamacement.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Arabian Cement",
+      "careersUrl": "https://www.arabiancement.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Steel Pipe",
+      "careersUrl": "https://www.sspc.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 522"
+    },
+    {
+      "company": "Zamil Steel",
+      "careersUrl": "https://www.zamilsteel.com/jobs",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Saudi Airlines Cargo",
+      "careersUrl": "https://www.saudiacargo.com/en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Riyadh Cables",
+      "careersUrl": "https://www.riyadhcables.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_NAME_NOT_RESOLVED at https://www.riyadhcables.com/"
+    },
+    {
+      "company": "Saudi Arabian Trading and Construction",
+      "careersUrl": "https://www.satco.com.sa/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 404"
+    },
+    {
+      "company": "Nesma Trading",
+      "careersUrl": "https://www.nesma.com/careers",
+      "existing": [
+        "jobs@nesma.com"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Al Rashid Trading",
+      "careersUrl": "https://www.alrashidtrading.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "page.goto: net::ERR_SSL_VERSION_OR_CIPHER_MISMATCH at https://www.alra"
+    },
+    {
+      "company": "Bin Quraya",
+      "careersUrl": "https://www.binquraya.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Accenture Saudi Advanced Technology",
+      "careersUrl": "https://www.accenture.com/sa-en/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "IBM Saudi Arabia",
+      "careersUrl": "https://www.ibm.com/careers/search",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Microsoft Arabia",
+      "careersUrl": "https://apply.careers.microsoft.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Google Cloud Saudi",
+      "careersUrl": "https://www.google.com/about/careers/applications/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Oracle Saudi Arabia",
+      "careersUrl": "https://careers.oracle.com/en/sites/jobsearch",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SAP Saudi Arabia",
+      "careersUrl": "https://jobs.sap.com/viewalljobs/",
+      "existing": [
+        "careers@sap.com"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Cognizant",
+      "careersUrl": "https://careers.cognizant.com/global-en/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "LTIMindtree",
+      "careersUrl": "https://www.ltm.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Zensar",
+      "careersUrl": "https://www.zensar.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "NTT DATA",
+      "careersUrl": "https://careers.nttdata.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Fujitsu",
+      "careersUrl": "https://global.fujitsu/en-global/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Hitachi Vantara",
+      "careersUrl": "https://www.hitachivantara.com/en-us/company/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Ericsson Saudi",
+      "careersUrl": "https://jobs.ericsson.com/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Nokia Saudi",
+      "careersUrl": "https://www.nokia.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "ZTE",
+      "careersUrl": "https://www.zte.com.cn/global/careers.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Motorola Solutions",
+      "careersUrl": "https://www.motorolasolutions.com/en_us/about/careers.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Genesys",
+      "careersUrl": "https://www.genesys.com/company/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Avaya",
+      "careersUrl": "https://www.avaya.com/en/about-avaya/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Teradata",
+      "careersUrl": "https://careers.teradata.com/jobs",
+      "existing": [],
+      "discovered": [
+        {
+          "address": "global.careers@teradata.com",
+          "purpose": "General applications"
+        }
+      ],
+      "status": "new-addresses",
+      "note": "1 not on file"
+    },
+    {
+      "company": "SAS Institute",
+      "careersUrl": "https://www.sas.com/en_us/careers.html",
+      "existing": [],
+      "discovered": [
+        {
+          "address": "recruitingsupport@sas.com",
+          "purpose": "General applications"
+        },
+        {
+          "address": "careersaccessibility@sas.com",
+          "purpose": "General applications"
+        }
+      ],
+      "status": "new-addresses",
+      "note": "2 not on file"
+    },
+    {
+      "company": "Palantir",
+      "careersUrl": "https://www.palantir.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Cloudflare Saudi",
+      "careersUrl": "https://www.cloudflare.com/careers/jobs/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Dynatrace",
+      "careersUrl": "https://www.dynatrace.com/careers/jobs/",
+      "existing": [],
+      "discovered": [
+        {
+          "address": "careers@dynatrace.com",
+          "purpose": "General applications"
+        }
+      ],
+      "status": "new-addresses",
+      "note": "1 not on file"
+    },
+    {
+      "company": "Datadog",
+      "careersUrl": "https://careers.datadoghq.com/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Splunk Saudi",
+      "careersUrl": "https://careers.cisco.com/global/en/splunk",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Nutanix Arabia",
+      "careersUrl": "https://careers.nutanix.com/en/",
+      "existing": [],
+      "discovered": [
+        {
+          "address": "recruiting-scams@nutanix.com",
+          "purpose": "General applications"
+        },
+        {
+          "address": "recruiting@nutanix.com",
+          "purpose": "General applications"
+        }
+      ],
+      "status": "new-addresses",
+      "note": "2 not on file"
+    },
+    {
+      "company": "Cohesity",
+      "careersUrl": "https://www.cohesity.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Rubrik",
+      "careersUrl": "https://www.rubrik.com/company/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unreachable",
+      "note": "HTTP 403"
+    },
+    {
+      "company": "Fortinet Saudi",
+      "careersUrl": "https://www.fortinet.com/corporate/careers",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Mimecast",
+      "careersUrl": "https://careers.mimecast.com/en/",
+      "existing": [
+        "careers@mimecast.com"
+      ],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Cloudera Saudi",
+      "careersUrl": "https://www.cloudera.com/careers.html",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Red Hat Saudi",
+      "careersUrl": "https://www.redhat.com/en/jobs",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "Canonical",
+      "careersUrl": "https://canonical.com/careers/all",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    },
+    {
+      "company": "SUSE",
+      "careersUrl": "https://www.suse.com/careers/",
+      "existing": [],
+      "discovered": [],
+      "status": "unchanged"
+    }
+  ]
+}

@@ -1,0 +1,136 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Onest:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <style>
+    body { margin:0; font-family:"Onest", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+           background:#272522; color:#f0ede9; -webkit-font-smoothing:antialiased; }
+    a { color:#fbbf24; text-decoration:none; } a:hover { color:#fcd34d; }
+    .nums { font-variant-numeric: tabular-nums; }
+    .sheet { background: #201e1b; border:1px solid #34302a; border-radius:14px;
+             box-shadow:0 4px 12px -2px rgba(0,0,0,.45), 0 2px 4px -2px rgba(0,0,0,.35); }
+    .field { height:36px; border-radius:8px; border:1px solid #34302a; background:#272522;
+             display:flex; align-items:center; padding:0 12px; font-size:13px; color:#8d8780; }
+    .btn { height:36px; border-radius:8px; display:inline-flex; align-items:center;
+           padding:0 16px; font-size:13px; font-weight:600; }
+    .pill { display:inline-flex; align-items:center; gap:5px; padding:3px 9px; border-radius:999px;
+            font-size:11px; font-weight:600; white-space:nowrap; }
+    .dot { width:6px; height:6px; border-radius:999px; display:inline-block; }
+    .label { font-size:12px; font-weight:600; color:#b6b0a8; }
+  </style>
+</helmet>
+
+<div style="width: 1000px; min-height: 760px; background:#272522; padding: 36px; display:flex; flex-direction:column; gap:28px">
+
+  <div>
+    <div style="font-size:19px; font-weight:700; letter-spacing:-0.01em">Removing a posting</div>
+    <div style="margin-top:5px; font-size:13px; color:#b6b0a8; max-width:680px; line-height:1.6">
+      A posting that has gone from the source can be taken off the board. The row is flagged rather
+      than deleted, because the collector upserts on every run &mdash; a hard delete would be undone
+      a few hours later and the removal would look like it never worked.
+    </div>
+  </div>
+
+  <div style="display:flex; gap:28px; align-items:flex-start">
+
+    <!-- the dialog -->
+    <div class="sheet" style="width: 420px; padding:20px">
+      <div style="font-size:15px; font-weight:700">Remove this posting?</div>
+      <div style="margin-top:6px; font-size:13px; line-height:1.6; color:#b6b0a8">
+        <strong style="color:#f0ede9">Cloud Security Engineer</strong> at stc. It comes off the
+        board and stays off, even after the next collection run.
+      </div>
+
+      <div style="margin-top:16px">
+        <div class="label">Reason (optional)</div>
+        <div class="field" style="margin-top:5px">Link is dead, role filled&hellip;</div>
+      </div>
+
+      <div style="margin-top:12px">
+        <div class="label">Removal key</div>
+        <div class="field" style="margin-top:5px; color:#f0ede9; letter-spacing:.18em">&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;</div>
+        <div style="margin-top:5px; font-size:11px; color:#8d8780">Asked once, then remembered in this browser.</div>
+      </div>
+
+      <div style="margin-top:18px; display:flex; justify-content:flex-end; gap:8px">
+        <span class="btn" style="background:#272522; border:1px solid #34302a; color:#b6b0a8">Cancel</span>
+        <span class="btn" style="background:#f87171; color:#fff">Remove</span>
+      </div>
+    </div>
+
+    <!-- rationale -->
+    <div style="flex:1; display:flex; flex-direction:column; gap:14px">
+
+      <div class="sheet" style="padding:16px; box-shadow:0 1px 2px 0 rgba(0,0,0,.3)">
+        <div style="font-size:13px; font-weight:700">Why a key</div>
+        <div style="margin-top:5px; font-size:12.5px; line-height:1.6; color:#b6b0a8">
+          The board is readable by anyone with the link, and this writes to the database. The key is
+          typed once and kept in your browser &mdash; never compiled into the page, which would hand
+          it to every visitor and gate nothing.
+        </div>
+      </div>
+
+      <div class="sheet" style="padding:16px; box-shadow:0 1px 2px 0 rgba(0,0,0,.3)">
+        <div style="font-size:13px; font-weight:700">Why a flag, not a delete</div>
+        <div style="margin-top:5px; font-size:12.5px; line-height:1.6; color:#b6b0a8">
+          Collection upserts on <span style="font-family:'JetBrains Mono',monospace; font-size:11.5px; background:#272522; padding:1px 5px; border-radius:4px">(source_id, external_id)</span>
+          and sets the row active every time it sees the posting. A deleted row simply comes back.
+          The flag is a column the collector never writes, so it survives.
+        </div>
+      </div>
+
+      <div class="sheet" style="padding:16px; box-shadow:0 1px 2px 0 rgba(0,0,0,.3)">
+        <div style="font-size:13px; font-weight:700">It also stops the email</div>
+        <div style="margin-top:5px; font-size:12.5px; line-height:1.6; color:#b6b0a8">
+          Removed postings are excluded from the digest query too, so a role you have already
+          struck off does not arrive in the next email three days later.
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- the detail popup, with the remove control in place -->
+  <div>
+    <div style="font-size:14px; font-weight:700; margin-bottom:10px">Where the control lives</div>
+    <div class="sheet" style="width:560px; overflow:hidden">
+      <div style="display:flex; align-items:flex-start; justify-content:space-between; gap:12px; padding:18px; border-bottom:1px solid #34302a">
+        <div style="min-width:0">
+          <div style="display:flex; flex-wrap:wrap; gap:6px">
+            <span class="pill" style="background:#0a2e22; color:#6ee7b7"><span class="dot" style="background:#34d399"></span>Today</span>
+            <span class="pill" style="background:#2e2413; color:#fcd34d">Direct from employer</span>
+          </div>
+          <div style="margin-top:9px; font-size:18px; font-weight:700; letter-spacing:-0.01em; line-height:1.3">Cloud Security Engineer</div>
+          <div style="margin-top:4px; font-size:13px; font-weight:500; color:#b6b0a8">stc</div>
+        </div>
+        <div style="display:flex; gap:5px; flex-shrink:0">
+          <div style="width:30px; height:30px; border-radius:8px; display:grid; place-items:center; background:#3a1c1c; color:#fca5a5">
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M8 6V4a1 1 0 0 1 1-1h6a1 1 0 0 1 1 1v2m3 0v14a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V6"/><path d="M10 11v6M14 11v6"/></svg>
+          </div>
+          <div style="width:30px; height:30px; border-radius:8px; display:grid; place-items:center; background:#272522; color:#b6b0a8; font-size:18px; line-height:1">&times;</div>
+        </div>
+      </div>
+      <div style="padding:18px; display:grid; grid-template-columns:1fr 1fr; gap:7px; font-size:12.5px">
+        <div><span style="color:#8d8780">Location</span> <span style="color:#b6b0a8">Riyadh, Saudi Arabia</span></div>
+        <div><span style="color:#8d8780">Experience</span> <span style="color:#b6b0a8">3-5 yrs</span></div>
+        <div><span style="color:#8d8780">Source</span> <span style="color:#b6b0a8">stc &mdash; Workday</span></div>
+        <div><span style="color:#8d8780">Posted</span> <span style="color:#b6b0a8" class="nums">3 Sep, 09:40 &middot; 4h ago</span></div>
+      </div>
+      <div style="padding:0 18px 18px">
+        <div style="height:44px; border-radius:10px; background:#fbbf24; color:#1f1d1a; display:grid; place-items:center; font-size:13.5px; font-weight:600">Apply on jobs.stc.com.sa &rarr;</div>
+      </div>
+    </div>
+  </div>
+
+</div>
+</x-dc>
+</body>
+</html>

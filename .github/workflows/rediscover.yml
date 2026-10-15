@@ -1,0 +1,29 @@
+name: Rediscover sources
+
+on:
+  schedule:
+    # Monthly. Companies migrate between ATS vendors, and boards that had no
+    # openings during the last pass (and were therefore skipped) get picked up.
+    - cron: "0 3 1 * *"
+  workflow_dispatch:
+
+jobs:
+  discover:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - run: npx playwright install --with-deps chromium
+      - run: npx tsx scripts/discover-ats.ts
+      - name: Commit refreshed registry
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/discovered.json
+          git diff --staged --quiet || git commit -m "chore: refresh discovered sources"
+          git push

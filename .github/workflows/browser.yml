@@ -1,0 +1,77 @@
+name: Company sites (nightly)
+
+# The slow pass: every employer career page that needs a real browser, then
+# the jury, duplicates, states and the Site report.
+#
+# Private repo (2,000 free minutes a month): one shard that stops starting
+# sources after 30 minutes; --order stale-first means whatever did not fit
+# tonight goes first tomorrow, so every site is still covered every few days.
+# Public repo (unlimited minutes): six shards in parallel cover every site
+# every night. The switch is automatic.
+
+on:
+  schedule:
+    - cron: "30 22 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: browser
+  cancel-in-progress: false
+
+env:
+  NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
+  NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
+  SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+  APP_URL: ${{ secrets.APP_URL }}
+  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+  GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+
+jobs:
+  shard:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        shard: ${{ fromJSON(github.event.repository.private == false && '[1,2,3,4,5,6]' || '[1]') }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
+      - run: npx playwright install --with-deps chromium
+      - name: Company boards, shard ${{ matrix.shard }}
+        run: |
+          COUNT=${{ github.event.repository.private == false && '6' || '1' }}
+          DEADLINE=${{ github.event.repository.private == false && '45' || '30' }}
+          npx tsx scripts/ingest.ts --scope company --no-metered --order stale-first \
+            --shard "${{ matrix.shard }}/$COUNT" --deadline-min "$DEADLINE" --no-review --trigger nightly
+
+  finalize:
+    needs: shard
+    if: always()
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+      - run: npm ci
+      - name: AI jury
+        run: npx tsx scripts/judge.ts --max ${{ github.event.repository.private == false && '150' || '40' }} --deadline-min ${{ github.event.repository.private == false && '30' || '8' }} --no-apply
+      - name: Duplicates and states
+        run: |
+          npx tsx scripts/dedupe.ts --show 0
+          npx tsx scripts/reclassify.ts
+      - name: Site report
+        run: |
+          npx tsx scripts/coverage.ts
+          npx tsx scripts/diagnose-sources.ts
