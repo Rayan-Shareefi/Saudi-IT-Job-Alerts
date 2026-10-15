@@ -158,7 +158,9 @@ export async function loadBoard(tab: BoardTab): Promise<BoardJob[]> {
       if (tab === "company") q = q.in("source_kind", COMPANY_KINDS);
       if (tab === "linkedin") q = q.in("source_kind", LINKEDIN_KINDS);
       if (tab === "boards") q = q.in("source_kind", BOARD_KINDS);
-      if (tab === "unclassified") q = q.eq("review_state", "unclassified");
+      // "pending" only exists between a run's write and its recompute; if a run
+      // stops in between, those postings must still be visible somewhere.
+      if (tab === "unclassified") q = q.in("review_state", ["unclassified", "pending"]);
       if (tab === "review") q = q.eq("review_state", "needs_review");
       if (tab === "senior") q = q.eq("review_state", "hidden").eq("hidden_reason", "experience_5plus");
       if (tab === "hidden") q = q.eq("review_state", "hidden").neq("hidden_reason", "experience_5plus");
@@ -212,7 +214,7 @@ export async function tabCounts(): Promise<Record<BoardTab, number>> {
         if (COMPANY_KINDS.includes(r.source_kind)) counts.company++;
         if (LINKEDIN_KINDS.includes(r.source_kind)) counts.linkedin++;
         if (BOARD_KINDS.includes(r.source_kind)) counts.boards++;
-      } else if (r.review_state === "unclassified") counts.unclassified++;
+      } else if (r.review_state === "unclassified" || r.review_state === "pending") counts.unclassified++;
       else if (r.review_state === "needs_review") counts.review++;
       else if (r.review_state === "hidden" && r.hidden_reason === "experience_5plus") counts.senior++;
       else if (r.review_state === "hidden") counts.hidden++;

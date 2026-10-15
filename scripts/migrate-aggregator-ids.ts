@@ -42,6 +42,8 @@ function stableId(r: Row): string {
 }
 
 const STABLE = /^(cj|jb|js|li|url):/;
+/** Search-result rows retire after this long unseen (db.ts deactivateMissing). */
+const SEARCH_WINDOW_MS = 10 * 86_400_000;
 
 async function main(): Promise<void> {
   const db = supabaseAdmin();
@@ -73,14 +75,29 @@ async function main(): Promise<void> {
       [...list].sort((a, b) => a.first_seen_at.localeCompare(b.first_seen_at))[0];
     const earliest = list.reduce((a, b) => (a.first_seen_at <= b.first_seen_at ? a : b)).first_seen_at;
     const latest = list.reduce((a, b) => (a.last_seen_at >= b.last_seen_at ? a : b));
-    if (keeper.external_id !== target || keeper.first_seen_at !== earliest) {
+    /*
+     * Live if any copy was seen within the search-result window - the same
+     * age rule deactivateMissing applies to these sources. Not "if any copy
+     * is active": the first version used that, and when the keeper was an
+     * inactive row already on the stable id it was never reactivated while
+     * its active copies were retired, so ~400 live postings went dark until
+     * this was re-run.
+     */
+    const live = Date.now() - new Date(latest.last_seen_at).getTime() < SEARCH_WINDOW_MS;
+    if (
+      keeper.external_id !== target ||
+      keeper.first_seen_at !== earliest ||
+      keeper.is_active !== live ||
+      new Date(keeper.last_seen_at).getTime() !== new Date(latest.last_seen_at).getTime()
+    ) {
       updates.push({
         id: keeper.id,
         change: {
           external_id: target,
           first_seen_at: earliest,
           last_seen_at: latest.last_seen_at,
-          is_active: list.some((r) => r.is_active),
+          is_active: live,
+          duplicate_of: null,
         },
       });
       if (keeper.external_id !== target) rekey++;
@@ -98,6 +115,8 @@ async function main(): Promise<void> {
   console.log(`${rows.length} aggregator rows, ${groups.size} distinct postings`);
   console.log(`re-keyed : ${rekey}`);
   console.log(`collapsed: ${retire} copies (deactivated, pointing at the kept row)`);
+  console.log(`kept rows to update (id, dates, live/retired): ${updates.length - retire}`);
+  console.log(`  of which become live again: ${updates.filter((u) => u.change.is_active === true).length}`);
   if (DRY) return console.log("--dry given; nothing written");
 
   // Copies first, so the keeper's new external_id never collides with an

@@ -229,13 +229,12 @@ npm run fix:bytes         # repair regex escapes mangled by shell edits
 13. **Migrations re-run cannot be assumed safe.** `db-push.ts` now records
     applied files in `schema_migrations` and applies only new ones.
 
-## State on 2026-10-14
+## State on 2026-10-15
 
 ```
-active postings 948 (after collapsing ~33,000 churned aggregator copies)
-verified (All jobs) 29   5+ years 29   Unclassified 332   Review 3   Hidden 402
-model readings cached 222   enabled sources 520
-tests 494 cases, verify 28/29 (the digest check passes after the next deploy)
+active postings 1,294 (after collapsing ~35,000 churned aggregator copies)
+verified (All jobs) 56   5+ years 36   Unclassified 534   Review 5   Hidden 663
+tests 494 cases
 ```
 
 Re-measure: `npm run reclassify -- --dry`, `npm run verify`.
