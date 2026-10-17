@@ -50,6 +50,7 @@ npm run reclassify      # recompute states from stored rows; no fetching, no mod
 npm run dedupe          # rebuild duplicate groups
 npm run judge           # the AI jury (free models), --max N
 npm run llm:check       # which free models work right now
+npm run llm:upgrade     # weekly on the laptop: newer free models that pass every canary
 npm run doctor          # is this machine ready to be the laptop worker
 npm run ingest -- --no-metered   # collection without JSearch
 npm run fix:bytes       # repair regex escapes mangled by shell heredocs
