@@ -84,12 +84,18 @@ command again.
 
 ## 7. Install the worker and check everything
 
-Open PowerShell **as Administrator** (right-click > Run as administrator):
+Open the project folder in File Explorer, then **File > Open Windows
+PowerShell > Open Windows PowerShell as administrator** (it opens already in
+the right folder), and run:
 
 ```
-cd "$HOME\Saudi Job Alert"
 powershell -ExecutionPolicy Bypass -File scripts\laptop\install-worker.ps1
 ```
+
+It ends with green **RUNNING** and the first log lines, or red **NOT
+INSTALLED** with the reason. If Windows refuses to run the task without a
+password, it opens a Windows box for your laptop sign-in password, which Task
+Scheduler keeps (the project never sees it). Safe to run again at any time.
 
 Then, in a normal PowerShell window:
 
