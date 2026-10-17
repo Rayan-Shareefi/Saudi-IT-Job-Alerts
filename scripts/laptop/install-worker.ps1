@@ -82,12 +82,23 @@ function StartFresh() {
   Start-ScheduledTask -TaskName $name
 }
 
-# First choice: no password stored at all (S4U).
-$principal = New-ScheduledTaskPrincipal -UserId $user -LogonType S4U -RunLevel Limited
-Register-ScheduledTask -TaskName $name -Action $action -Trigger $trigger -Settings $settings -Principal $principal -Force | Out-Null
-StartFresh
+# The launcher's Restart, with the task already installed: restarting is
+# enough, and re-registering could ask for the Windows password again.
+$running = $false
+if ($FromLauncher -and (Get-ScheduledTask -TaskName $name -ErrorAction SilentlyContinue)) {
+  StartFresh
+  $running = Started
+}
 
-if (-not (Started)) {
+if (-not $running) {
+  # First choice: no password stored at all (S4U).
+  $principal = New-ScheduledTaskPrincipal -UserId $user -LogonType S4U -RunLevel Limited
+  Register-ScheduledTask -TaskName $name -Action $action -Trigger $trigger -Settings $settings -Principal $principal -Force | Out-Null
+  StartFresh
+  $running = Started
+}
+
+if (-not $running) {
   $code = "0x{0:X8}" -f (Get-ScheduledTask -TaskName $name | Get-ScheduledTaskInfo).LastTaskResult
   Write-Host ""
   Write-Host "Windows would not start it without your password (result $code)." -ForegroundColor Yellow
