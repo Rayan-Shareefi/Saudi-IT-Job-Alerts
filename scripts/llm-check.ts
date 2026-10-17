@@ -13,7 +13,7 @@
  *
  * Spends at most ~10 requests of free quota.
  */
-import "dotenv/config";
+import "./load-env";
 import { envStr } from "../src/lib/env";
 import { jurorPrompt } from "../src/lib/judge/prompt";
 import { jurors, ollamaAvailable, seniors, type JudgeProvider } from "../src/lib/judge/providers";

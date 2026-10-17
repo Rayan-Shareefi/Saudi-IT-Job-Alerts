@@ -7,7 +7,7 @@
  * Reversible by construction: copies get duplicate_of, nothing is deleted,
  * and every run starts from scratch. See src/lib/dedupe.ts for the guards.
  */
-import "dotenv/config";
+import "./load-env";
 import { rebuildDuplicates } from "../src/lib/dedupe";
 
 const DRY = process.argv.includes("--dry");

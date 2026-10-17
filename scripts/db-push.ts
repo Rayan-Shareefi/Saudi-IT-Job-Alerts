@@ -9,7 +9,7 @@
  *   npx tsx scripts/db-push.ts
  *   npx tsx scripts/db-push.ts --print   # just show the SQL to paste manually
  */
-import "dotenv/config";
+import "./load-env";
 import { readdirSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import { Client } from "pg";

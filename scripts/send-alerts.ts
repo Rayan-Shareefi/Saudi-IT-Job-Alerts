@@ -8,7 +8,7 @@
  * (alerted_at) and the daily cap lives in the shared budget, so two callers
  * never double-send.
  */
-import "dotenv/config";
+import "./load-env";
 import { sendTimeSensitiveAlerts } from "../src/lib/alerts";
 
 sendTimeSensitiveAlerts()

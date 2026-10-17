@@ -13,7 +13,7 @@
  *   npx tsx scripts/harvest-emails.ts --p 2       # priority 1-2 only
  *   npx tsx scripts/harvest-emails.ts --limit 40
  */
-import "dotenv/config";
+import "./load-env";
 import { writeFileSync } from "node:fs";
 import {
   COMPANIES,

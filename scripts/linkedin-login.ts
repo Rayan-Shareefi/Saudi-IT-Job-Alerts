@@ -11,7 +11,7 @@
  * If LINKEDIN_EMAIL / LINKEDIN_PASSWORD are in .env.local they are typed in
  * for you; a verification code or CAPTCHA is always left to you.
  */
-import "dotenv/config";
+import "./load-env";
 import { chromium } from "playwright";
 import { PROFILE_DIR } from "../src/lib/adapters/linkedin-posts";
 import { envStr } from "../src/lib/env";

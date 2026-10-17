@@ -9,7 +9,7 @@
  *
  * Runs from GitHub Actions on a schedule; safe to run by hand any time.
  */
-import "dotenv/config";
+import "./load-env";
 import { writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { renderDigest } from "../src/lib/email";
 import { jobsForDigest } from "../src/lib/db";

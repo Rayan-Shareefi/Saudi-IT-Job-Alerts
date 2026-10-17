@@ -22,11 +22,11 @@
  * worker, and every step runs the code currently on disk (a long-lived process
  * holds the code it started with - HANDOVER §8).
  */
-import "dotenv/config";
+import "./load-env";
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
-import { envFlag, envInt } from "../src/lib/env";
+import { envFlag, envInt, envStr } from "../src/lib/env";
 import { finishRun, latestRun, markStalled, queuedRuns, startRun } from "../src/lib/runs";
 import { sendSystemAlert, sendTimeSensitiveAlerts } from "../src/lib/alerts";
 import { sleep } from "../src/lib/http";
@@ -62,11 +62,18 @@ function head(): string {
   return spawnSync("git", ["rev-parse", "HEAD"], { encoding: "utf8", windowsHide: true }).stdout?.trim() ?? "";
 }
 
+/*
+ * The scheduled task has no desktop, so a credential prompt (a private repo,
+ * an expired sign-in) would wait forever for a click nobody can make. Fail
+ * fast instead; the worker carries on with the code on disk.
+ */
+const GIT_NO_PROMPT = { ...process.env, GIT_TERMINAL_PROMPT: "0", GCM_INTERACTIVE: "never" };
+
 function selfUpdate(): void {
   if (!existsSync(".git")) return;
   const before = head();
   const lockBefore = existsSync("package-lock.json") ? readFileSync("package-lock.json", "utf8") : "";
-  const pull = spawnSync("git", ["pull", "--ff-only"], { stdio: "inherit", windowsHide: true });
+  const pull = spawnSync("git", ["pull", "--ff-only"], { stdio: "inherit", windowsHide: true, env: GIT_NO_PROMPT, timeout: 5 * 60_000 });
   if (pull.status !== 0) {
     log("git pull failed (local changes?) - carrying on with the code on disk");
     return;
@@ -134,6 +141,14 @@ async function cycle(): Promise<void> {
 
 async function main(): Promise<void> {
   log(`worker starting (cycle every ${CYCLE_MS / 60_000} min)`);
+  // Without these every database call fails, and a failure cannot be written
+  // to the database - so say it here, where the log is the only witness.
+  const missing = ["NEXT_PUBLIC_SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"].filter((k) => !envStr(k));
+  if (missing.length) {
+    log(`MISSING ${missing.join(", ")} - put .env.local in ${process.cwd()} (run: npm run doctor). Retrying in 10 minutes.`);
+    await sleep(10 * 60_000);
+    process.exit(1); // the task restarts it, re-reading .env.local
+  }
   let nextCycle = 0;
   for (;;) {
     try {

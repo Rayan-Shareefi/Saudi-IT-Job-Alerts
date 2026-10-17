@@ -21,7 +21,7 @@
  */
 // Needed for the accepted-URL overrides below: without it isConfigured() is
 // false when this runs from the CLI and your decisions are silently skipped.
-import "dotenv/config";
+import "./load-env";
 import { writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { COMPANIES, isGlobalEmployer, type CompanySeed } from "../src/lib/sources/companies";
 import { acceptedUrlOverrides, isConfigured } from "../src/lib/db";

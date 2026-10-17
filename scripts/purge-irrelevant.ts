@@ -19,7 +19,7 @@
  * removed_reason "rule:purge-irrelevant", never deleted. A rule that turns out wrong
  * can then be undone - deleted rows were gone for good (HANDOVER §6).
  */
-import "dotenv/config";
+import "./load-env";
 import { fetchAllRows, isConfigured, supabaseAdmin } from "../src/lib/db";
 import { judgePosting } from "../src/lib/plausible";
 import { judgeRelevance } from "../src/lib/relevance";

@@ -63,6 +63,8 @@ Single source: `npx tsx scripts/ingest.ts --source <id> --dry`
   nothing). Edit regexes with the editor tool, then `npm run fix:bytes`.
 - PostgREST silently caps responses at 1000 rows - use `fetchAllRows`.
 - Treat a blank env var as unset: `envStr()` from `src/lib/env.ts`, never `??`.
+- Scripts start with `import "./load-env"` (.env.local, then .env), never
+  `"dotenv/config"`: that reads .env only, and the laptop has only .env.local.
 - `DETAIL_SCRIPT` (generic.ts) and the LinkedIn post extractor are strings,
   not functions: esbuild's `__name` breaks `page.evaluate(fn)`.
 - The browser pane in the desktop app does not draw when hidden, so streamed

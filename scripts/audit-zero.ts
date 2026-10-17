@@ -18,7 +18,7 @@
  *   npx tsx scripts/audit-zero.ts            # all zero-yield sources
  *   npx tsx scripts/audit-zero.ts --limit 40
  */
-import "dotenv/config";
+import "./load-env";
 import { writeFileSync } from "node:fs";
 import { sourceHealth, isConfigured } from "../src/lib/db";
 import { sourceById } from "../src/lib/sources/registry";

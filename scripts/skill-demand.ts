@@ -14,7 +14,7 @@
  *
  *   npx tsx scripts/skill-demand.ts
  */
-import "dotenv/config";
+import "./load-env";
 import { writeFileSync } from "node:fs";
 import { fetchAllRows, isConfigured, supabasePublic } from "../src/lib/db";
 import { skillsInText } from "../src/lib/resume";

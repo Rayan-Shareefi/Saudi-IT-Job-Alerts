@@ -9,7 +9,7 @@
  * registry); this attaches a concrete fix to each and stores it in the
  * database so the deployed site shows it without a redeploy.
  */
-import "dotenv/config";
+import "./load-env";
 import { readFileSync } from "node:fs";
 import { supabaseAdmin } from "../src/lib/db";
 

@@ -11,7 +11,7 @@
  * Free models only, every call through the shared budget (src/lib/budget.ts).
  * Each posting text is read once per prompt version; re-runs cost nothing.
  */
-import "dotenv/config";
+import "./load-env";
 import { judgeScope } from "../src/lib/scope";
 import { recompute, recomputeStates, loadActiveRows } from "../src/lib/review";
 import { judgeOne, loadJudgements, recentExamples, votesFor, warmUp, AUDIT_SAMPLE, type JuryStats } from "../src/lib/judge/run";

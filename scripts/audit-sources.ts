@@ -10,7 +10,7 @@
  *   npx tsx scripts/audit-sources.ts --report     # report only, change nothing
  *   npx tsx scripts/audit-sources.ts --skip-browser
  */
-import "dotenv/config";
+import "./load-env";
 import { readFileSync, writeFileSync } from "node:fs";
 import { ADAPTERS } from "../src/lib/adapters";
 import { enrich } from "../src/lib/classify";

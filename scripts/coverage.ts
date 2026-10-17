@@ -16,7 +16,7 @@
  *
  * Writes data/coverage.json, which the Human Intervene tab reads.
  */
-import "dotenv/config";
+import "./load-env";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { COMPANIES, allCareersEmails } from "../src/lib/sources/companies";
 import { sourceHealth, isConfigured } from "../src/lib/db";

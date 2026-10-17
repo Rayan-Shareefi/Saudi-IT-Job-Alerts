@@ -19,7 +19,7 @@
  * new watch does not flood the inbox. Anything new afterwards becomes a
  * coop_signals row, which the next alert email sends once.
  */
-import "dotenv/config";
+import "./load-env";
 import { createHash } from "node:crypto";
 import { supabaseAdmin } from "../src/lib/db";
 import { getText, sleep } from "../src/lib/http";

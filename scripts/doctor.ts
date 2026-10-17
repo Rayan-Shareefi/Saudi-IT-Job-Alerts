@@ -6,7 +6,7 @@
  *
  * Run it on the laptop after setup, and whenever something seems off.
  */
-import "dotenv/config";
+import "./load-env";
 import { spawnSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { envStr } from "../src/lib/env";

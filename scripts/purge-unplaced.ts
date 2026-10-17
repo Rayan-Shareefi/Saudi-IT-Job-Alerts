@@ -24,7 +24,7 @@
  * removed_reason "rule:purge-unplaced", never deleted. A rule that turns out wrong
  * can then be undone - deleted rows were gone for good (HANDOVER §6).
  */
-import "dotenv/config";
+import "./load-env";
 import { existsSync, readFileSync } from "node:fs";
 import { fetchAllRows, isConfigured, supabaseAdmin } from "../src/lib/db";
 import { nameSaysSaudi } from "../src/lib/sources/companies";

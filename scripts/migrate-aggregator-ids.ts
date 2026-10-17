@@ -15,7 +15,7 @@
  *
  * Idempotent: rows already on a stable id are left alone.
  */
-import "dotenv/config";
+import "./load-env";
 import { contentId, jsearchIdFor } from "../src/lib/adapters/aggregators";
 import { fetchAllRows, supabaseAdmin } from "../src/lib/db";
 

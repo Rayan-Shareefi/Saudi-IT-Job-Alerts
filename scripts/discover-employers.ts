@@ -20,7 +20,7 @@
  * No search engine is scraped and no bot protection is bypassed: a site that
  * refuses is recorded as "blocked" and stays covered by LinkedIn and JSearch.
  */
-import "dotenv/config";
+import "./load-env";
 import { companyKey } from "../src/lib/company-key";
 import { fetchAllRows, supabaseAdmin } from "../src/lib/db";
 import { getText, request } from "../src/lib/http";

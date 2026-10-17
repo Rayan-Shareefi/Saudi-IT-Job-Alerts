@@ -14,7 +14,7 @@
  * destroyed real vacancies (HANDOVER §6). Now a rule fix plus a re-run brings
  * back whatever the old rule wrongly hid.
  */
-import "dotenv/config";
+import "./load-env";
 import { recomputeStates } from "../src/lib/review";
 
 const DRY = process.argv.includes("--dry");

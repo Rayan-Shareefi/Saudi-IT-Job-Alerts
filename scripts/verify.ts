@@ -8,7 +8,7 @@
  *
  *   npx tsx scripts/verify.ts
  */
-import "dotenv/config";
+import "./load-env";
 import { readFileSync, readdirSync } from "node:fs";
 import { join } from "node:path";
 import {

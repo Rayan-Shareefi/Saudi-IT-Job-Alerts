@@ -16,7 +16,7 @@
  * writes data/cache-sample-jobs.json, so the pipeline can be exercised before any
  * account exists.
  */
-import "dotenv/config";
+import "./load-env";
 import { writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { orderStaleFirst, runIngest, runSource } from "../src/lib/ingest";
 import { ALL_SOURCES, dynamicSources, enabledSources, sourceById, sourceStats } from "../src/lib/sources/registry";
