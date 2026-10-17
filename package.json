@@ -55,6 +55,7 @@
     "test:judge": "tsx scripts/test-judge.ts",
     "judge": "tsx scripts/judge.ts",
     "llm:check": "tsx scripts/llm-check.ts",
+    "llm:upgrade": "tsx scripts/llm-upgrade.ts",
     "test:dedupe": "tsx scripts/test-dedupe.ts",
     "dedupe": "tsx scripts/dedupe.ts",
     "sites:diagnose": "tsx scripts/diagnose-sources.ts",

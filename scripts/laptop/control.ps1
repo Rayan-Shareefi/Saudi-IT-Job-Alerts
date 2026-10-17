@@ -83,8 +83,13 @@ function Show-Keys() {
 }
 
 function Paint($l) {
-  if ($l -match "FAIL|failed|error|Error|refused|MISSING|NOT INSTALLED") { Say $l Red }
+  # Counters that are zero ("failed : 0", "errors (0)") are good news, not red.
+  if ($l -match "^\s*\w[\w ]*:\s*0\b" -or $l -match "\(0\)") { Say $l Gray }
+  # Waiting is not breaking: skips, a spent free quota, LinkedIn saying "slow down".
+  # ...and so are the AI models' passing hiccups, which the jury works around.
+  elseif ($l -match "\bskip\b|skipped|slow down|pausing until|resting for the rest|quota|model errors|^\s+\d+x ") { Say $l Yellow }
   elseif ($l -match "needs you") { Say $l Magenta }
+  elseif ($l -match "\bFAIL\b|failed|[Ee]rror|MISSING|NOT INSTALLED") { Say $l Red }
   elseif ($l -match " ADD ") { Say $l Green }
   elseif ($l -match "^\[[^\]]+\] > ") { Say $l Cyan }
   elseif ($l -match "exited 0") { Say $l Green }

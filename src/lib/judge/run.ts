@@ -2,7 +2,7 @@ import { supabaseAdmin, fetchAllRows } from "../db";
 import { judgeScope, type ScopeResult } from "../scope";
 import { arbitrateScope } from "../state";
 import { PROMPT_VERSION, jurorPrompt, seniorPrompt, type Example } from "./prompt";
-import { jurors, ollamaAvailable, seniors, type JudgeProvider } from "./providers";
+import { jurors, loadModelChoices, ollamaAvailable, seniors, type JudgeProvider } from "./providers";
 import { parseAnswer, verifyAnswer } from "./verify";
 import { ProviderQuotaHit, ProviderUnavailable, type Answer, type JudgeInput, type Role, type Vote } from "./types";
 
@@ -221,9 +221,9 @@ export async function judgeOne(
   return votes;
 }
 
-/** Prepare providers that need an async check (the laptop's Ollama). */
+/** Prepare providers that need an async check: the laptop's Ollama, and the models the weekly check chose. */
 export async function warmUp(): Promise<{ jurors: string[]; seniors: string[] }> {
-  await ollamaAvailable();
+  await Promise.all([ollamaAvailable(), loadModelChoices()]);
   return {
     jurors: jurors().filter((p) => p.available()).map((p) => `${p.id} (${p.model})`),
     seniors: seniors().filter((p) => p.available()).map((p) => `${p.id} (${p.model})`),

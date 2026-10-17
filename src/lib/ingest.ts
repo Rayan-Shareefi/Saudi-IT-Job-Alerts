@@ -325,7 +325,10 @@ export async function runSource(
       err instanceof QuotaExceeded ||
       err instanceof MissingLlmKey ||
       // A spent free-tier day is not breakage; tomorrow it works again.
-      message.includes("free quota reached");
+      message.includes("free quota reached") ||
+      // LinkedIn asking us to slow down is the rule working, not breakage
+      // (named, not imported: linkedin.ts must not load for every run).
+      (err instanceof Error && err.name === "LinkedInRefused");
     return {
       ...base,
       ok: skipped,

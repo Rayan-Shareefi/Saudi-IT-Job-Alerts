@@ -245,7 +245,7 @@ async function main(): Promise<void> {
   console.log(`relevant      : ${totals.kept}`);
   console.log(`new           : ${totals.inserted}`);
   console.log(`failed        : ${totals.failed}`);
-  console.log(`skipped       : ${totals.skipped} (missing optional API key)`);
+  console.log(`skipped       : ${totals.skipped} (no key, free quota spent, or LinkedIn asked us to wait)`);
   const deferred = fastSummary.deferred + slowSummary.deferred;
   if (deferred > 0) console.log(`deferred      : ${deferred} (deadline reached; they lead the next stale-first run)`);
   console.log(`elapsed       : ${Math.round((fastSummary.durationMs + slowSummary.durationMs) / 1000)}s`);

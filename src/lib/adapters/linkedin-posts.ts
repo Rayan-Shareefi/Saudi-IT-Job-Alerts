@@ -67,22 +67,80 @@ interface ScrapedPost {
   links: string[];
 }
 
-/** In-page extraction, as a string: esbuild's __name helper breaks evaluate(fn) (HANDOVER §5.3). */
-const EXTRACT = `(() => {
+/**
+ * In-page extraction, as a string: esbuild's __name helper breaks
+ * evaluate(fn) (HANDOVER §5.3). Exported for scripts/test-linkedin.ts.
+ *
+ * A post is any block that carries exactly one activity id - in an attribute
+ * (data-urn, data-id, data-chameleon-result-urn, ...) or in a link to
+ * /feed/update/urn:li:activity:<id> - and some text. The first version knew
+ * only the data-urn markup of older pages and found 0 posts on 6 searches on
+ * the laptop (2026-10-17); LinkedIn changes this markup often, so no single
+ * class name or attribute is relied on. A block holding several ids is a
+ * list, not a post, and is skipped.
+ */
+export const EXTRACT = `(() => {
+  const URN = /urn:li:activity:(\\d{8,})/;
+  const ALL = /urn:li:activity:\\d{8,}/g;
+  const idOf = (n) => {
+    for (const a of n.attributes) { const m = a.value.match(URN); if (m) return m[1]; }
+    const link = n.querySelector('a[href*="urn:li:activity:"]');
+    const m = link ? (link.getAttribute('href') || '').match(URN) : null;
+    return m ? m[1] : null;
+  };
   const out = [];
-  const nodes = document.querySelectorAll('[data-urn^="urn:li:activity:"], [data-id^="urn:li:activity:"]');
-  for (const n of nodes) {
-    const urn = n.getAttribute('data-urn') || n.getAttribute('data-id') || '';
-    const textEl = n.querySelector('.update-components-text, .feed-shared-inline-show-more-text, .feed-shared-text');
-    const text = (textEl ? textEl.innerText : n.innerText || '').trim();
-    const actorLink = n.querySelector('a.update-components-actor__meta-link, a.update-components-actor__image, .update-components-actor a');
-    const href = actorLink ? actorLink.getAttribute('href') || '' : '';
-    const nameEl = n.querySelector('.update-components-actor__title span[aria-hidden="true"], .update-components-actor__name span[aria-hidden="true"], .update-components-actor__title');
-    const isCompany = /\\/company\\//.test(href);
-    const links = [...(textEl ? textEl.querySelectorAll('a[href]') : [])].map(a => a.href).filter(h => !/linkedin\\.com\\/(in|feed|search|company)\\//.test(h));
-    out.push({ urn, text, companyName: isCompany && nameEl ? nameEl.innerText.trim() : null, links });
+  const seen = new Set();
+  const blocks = document.querySelectorAll('[data-urn], [data-id], [data-chameleon-result-urn], [role="article"], [data-view-name], main li');
+  for (const n of blocks) {
+    const id = idOf(n);
+    if (!id || seen.has(id)) continue;
+    if (new Set(n.outerHTML.match(ALL) || []).size > 1) continue;
+    const textEl = n.querySelector('.update-components-text, .feed-shared-inline-show-more-text, .feed-shared-text, [data-view-name*="commentary"]');
+    const text = ((textEl ? textEl.innerText : n.innerText) || '').trim();
+    if (text.length < 40) continue;
+    seen.add(id);
+    // The author, only when it is a company page linked in the header - a
+    // company mentioned inside the text is not the author, and a person's
+    // name is never kept.
+    const companyLink = n.querySelector('.update-components-actor a[href*="/company/"], a.update-components-actor__meta-link[href*="/company/"], a[href*="/company/"]');
+    const inHeader = companyLink && (!textEl || (companyLink.compareDocumentPosition(textEl) & Node.DOCUMENT_POSITION_FOLLOWING));
+    const nameEl = n.querySelector('.update-components-actor__title span[aria-hidden="true"], .update-components-actor__name span[aria-hidden="true"]');
+    const companyName = inHeader ? (((nameEl ? nameEl.innerText : companyLink.innerText) || '').split('\\n')[0].trim() || null) : null;
+    const links = [...(textEl || n).querySelectorAll('a[href]')]
+      .map(a => a.href)
+      .filter(h => /^https?:/.test(h) && !/linkedin\\.com\\/(in|feed|search|company|posts|groups|hashtag)\\//.test(h) && !/linkedin\\.com\\/?$/.test(h));
+    out.push({ urn: 'urn:li:activity:' + id, text, companyName, links });
   }
   return out;
+})()`;
+
+/**
+ * What the page is made of, when no post was recognised on it: counts and
+ * attribute names only - never text, names or links - saved with the run so
+ * the extractor can be fixed from another machine.
+ */
+export const STRUCTURE = `(() => {
+  const count = (s) => document.querySelectorAll(s).length;
+  const urnAttrs = {};
+  for (const el of document.querySelectorAll('*')) {
+    for (const a of el.attributes) {
+      const m = a.value.match(/urn:li:([a-zA-Z_]+)/);
+      if (m) { const k = a.name + ':' + m[1]; urnAttrs[k] = (urnAttrs[k] || 0) + 1; }
+    }
+  }
+  const views = {};
+  for (const el of document.querySelectorAll('[data-view-name]')) { const v = el.getAttribute('data-view-name'); views[v] = (views[v] || 0) + 1; }
+  return {
+    path: location.pathname,
+    articles: count('[role="article"]'),
+    mainListItems: count('main li'),
+    updateLinks: count('a[href*="/feed/update/"]'),
+    activityLinks: count('a[href*="urn:li:activity:"]'),
+    textBlocks: count('.update-components-text, .feed-shared-inline-show-more-text, .feed-shared-text'),
+    noResults: /no results found/i.test((document.body.innerText || '').slice(0, 20000)),
+    urnAttrs,
+    views: Object.fromEntries(Object.entries(views).sort((a, b) => b[1] - a[1]).slice(0, 15)),
+  };
 })()`;
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
@@ -127,7 +185,13 @@ export const linkedinPosts = async (source: SourceDefinition): Promise<RawJob[]>
 
     const posts = new Map<string, ScrapedPost>();
     const maxSearches = envInt("LINKEDIN_POST_SEARCHES", 6);
+    let pagesRead = 0;
+    let structure: unknown = null;
     for (const q of SEARCHES.slice(0, maxSearches)) {
+      // Two pages with nothing recognised: the layout is the problem, and
+      // more page views would only spend the account's goodwill.
+      if (pagesRead >= 2 && posts.size === 0) break;
+      pagesRead++;
       const url =
         `https://www.linkedin.com/search/results/content/?keywords=${encodeURIComponent(q)}` +
         `&datePosted=%22past-week%22&sortBy=%22date_posted%22`;
@@ -145,12 +209,23 @@ export const linkedinPosts = async (source: SourceDefinition): Promise<RawJob[]>
       }
       const found = (await page.evaluate(EXTRACT)) as ScrapedPost[];
       for (const p of found) if (p.urn && p.text && !posts.has(p.urn)) posts.set(p.urn, p);
+      if (found.length === 0 && structure === null) structure = await page.evaluate(STRUCTURE).catch(() => null);
+      console.log(`  "${q}": ${found.length} post(s) on the page`);
       await sleep(6000 + Math.random() * 6000);
     }
 
+    if (posts.size === 0) {
+      throw new Error(
+        `no posts recognised on ${pagesRead} search page(s) - LinkedIn's page layout may have changed; ` +
+          `page structure (counts only) saved for the fix: ${JSON.stringify(structure).slice(0, 1200)}`,
+      );
+    }
+
     const out: RawJob[] = [];
+    let hiring = 0;
     for (const p of posts.values()) {
       if (!HIRING.test(p.text)) continue;
+      hiring++;
       const title = postTitle(p.text);
       if (!title) continue;
       const id = p.urn.match(/activity:(\d+)/)?.[1] ?? p.urn;
@@ -167,6 +242,7 @@ export const linkedinPosts = async (source: SourceDefinition): Promise<RawJob[]>
         publisher: "LinkedIn post",
       });
     }
+    console.log(`  LinkedIn posts: ${posts.size} read, ${hiring} about hiring, ${out.length} name a role (those go to the checker)`);
     return out;
   } finally {
     await context.close();

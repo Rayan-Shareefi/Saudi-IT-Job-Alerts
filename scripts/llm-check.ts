@@ -6,39 +6,18 @@
  *
  * Free models are renamed, retired and re-limited without notice (Google cut
  * Gemini's free tier in December 2025). This lists what each key can reach,
- * then runs three canary postings with known answers through every configured
- * juror and the senior reviewer, and checks the answers through the same
- * evidence check the jury uses. A model that fails its canaries should be
- * replaced (GEMINI_MODEL, GEMMA_MODEL, GROQ_MODEL, GROQ_SENIOR_MODEL, OLLAMA_MODEL).
+ * then runs the canary postings with known answers (judge/canaries.ts) through
+ * every configured juror and the senior reviewer, and checks the answers
+ * through the same evidence check the jury uses.
  *
- * Spends at most ~10 requests of free quota.
+ * Spends ~7 requests of free quota per model. `npm run llm:upgrade` uses the
+ * same canaries to move to newer models by itself (weekly, on the laptop);
+ * docs/ai-models.md explains both.
  */
 import "./load-env";
 import { envStr } from "../src/lib/env";
-import { jurorPrompt } from "../src/lib/judge/prompt";
-import { jurors, ollamaAvailable, seniors, type JudgeProvider } from "../src/lib/judge/providers";
-import { parseAnswer, verifyAnswer } from "../src/lib/judge/verify";
-
-const CANARIES = [
-  {
-    name: "SOC analyst (in, 2 years)",
-    title: "Security Operations Analyst",
-    text: "Responsibilities: Monitor SIEM alerts in Microsoft Sentinel and triage security incidents. Escalate confirmed incidents to Tier 2. Requirements: 2+ years of experience in a security operations center. Location: Riyadh, Saudi Arabia.",
-    want: { scope: "in", years: 2 },
-  },
-  {
-    name: "data engineer on Azure (out)",
-    title: "Data Engineer",
-    text: "Responsibilities: Build ETL pipelines in Azure Data Factory and Databricks, model data in Synapse and publish Power BI reports. Requirements: 3 years of experience in data engineering. Location: Riyadh.",
-    want: { scope: "out", years: 3 },
-  },
-  {
-    name: "cookie banner (not a job)",
-    title: "Manage Preferences",
-    text: "We use cookies to improve your experience. Strictly necessary cookies are always active. Accept all or manage your preferences.",
-    want: { scope: "out", years: null, notJob: true },
-  },
-];
+import { runCanaries } from "../src/lib/judge/canaries";
+import { jurors, loadModelChoices, ollamaAvailable, seniors, type JudgeProvider } from "../src/lib/judge/providers";
 
 async function listGemini(): Promise<void> {
   const key = envStr("GEMINI_API_KEY");
@@ -60,34 +39,15 @@ async function listGroq(): Promise<void> {
 }
 
 async function canary(p: JudgeProvider): Promise<void> {
-  let ok = 0;
-  const notes: string[] = [];
-  for (const c of CANARIES) {
-    try {
-      const raw = await p.call(jurorPrompt({ title: c.title, company: "Canary Co", location: "Riyadh", text: c.text, textQuality: "full" }));
-      const a = parseAnswer(raw);
-      if (!a) {
-        notes.push(`${c.name}: unparseable reply`);
-        continue;
-      }
-      const v = verifyAnswer(a, { title: c.title, text: c.text, location: "Riyadh" }, { provider: p.id, model: p.model, role: "juror" });
-      const scopeOk = v.scope === c.want.scope;
-      const yearsOk = c.want.years === null || v.minYears === c.want.years;
-      if (scopeOk && yearsOk) ok++;
-      else notes.push(`${c.name}: scope=${v.scope} years=${v.minYears} bad-quotes=${v.hallucinated}`);
-    } catch (err) {
-      notes.push(`${c.name}: ${err instanceof Error ? err.message.slice(0, 120) : String(err)}`);
-      break;
-    }
-  }
-  console.log(`  ${p.id.padEnd(14)} ${p.model.padEnd(28)} ${ok}/${CANARIES.length}${notes.length ? `  - ${notes.join("; ")}` : ""}`);
+  const r = await runCanaries(p);
+  console.log(`  ${p.id.padEnd(16)} ${p.model.padEnd(28)} ${r.passed}/${r.total}${r.notes.length ? `  - ${r.notes.join("; ")}` : ""}`);
 }
 
 async function main(): Promise<void> {
   console.log("Models each key can use:\n");
   await listGemini();
   await listGroq();
-  const local = await ollamaAvailable();
+  const [local] = await Promise.all([ollamaAvailable(), loadModelChoices()]);
   console.log(`Ollama   : ${local ? `running (${envStr("OLLAMA_URL") ?? "http://127.0.0.1:11434"})` : "not running on this machine"}`);
 
   console.log("\nCanary postings (answers checked by the evidence check):\n");

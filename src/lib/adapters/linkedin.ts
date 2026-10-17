@@ -48,9 +48,14 @@ const HEADERS = {
   accept: "text/html,application/xhtml+xml",
 };
 
+/**
+ * LinkedIn said stop. Not a fault: the run stops as asked, ingest records it
+ * as a skip (the stored listings stay), and the laptop worker waits longer
+ * before each next try (local-worker.ts).
+ */
 export class LinkedInRefused extends Error {
   constructor(why: string) {
-    super(`LinkedIn refused (${why}); stopped for this run, not retried`);
+    super(`LinkedIn asked us to slow down (${why}) - stopped as asked; the laptop tries again later`);
     this.name = "LinkedInRefused";
   }
 }

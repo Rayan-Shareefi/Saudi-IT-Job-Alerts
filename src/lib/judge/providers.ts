@@ -125,9 +125,11 @@ function liveModel(id: string, models: string[]): string | null {
   return models.find((m) => !retired.has(`${id}:${m}`)) ?? null;
 }
 
-/** The env choice first, then the defaults it did not name. */
-function chain(fromEnv: string | undefined, defaults: string[]): string[] {
-  return fromEnv ? [fromEnv, ...defaults.filter((m) => m !== fromEnv)] : defaults;
+/** The preferred models first (a pinned env choice, then the weekly check's), then the defaults they did not name. */
+function chain(defaults: string[], ...preferred: Array<string | undefined>): string[] {
+  const out: string[] = [];
+  for (const m of [...preferred, ...defaults]) if (m && !out.includes(m)) out.push(m);
+  return out;
 }
 
 /*
@@ -164,6 +166,11 @@ function geminiProvider(id: string, budget: BudgetName, models: string[], role: 
       const key = envStr("GEMINI_API_KEY");
       if (!key) throw new ProviderUnavailable(id, "GEMINI_API_KEY not set");
       let waits = 0;
+      // Any model, including ones that do not exist yet: a request it refuses
+      // is asked again once in the plainest form (no JSON schema - Gemma
+      // refuses it), and an answer cut off at the limit once with twice the room.
+      let plain = !structured;
+      let limit = 4000;
       for (;;) {
         const model = liveModel(id, models);
         if (!model) throw new ProviderUnavailable(id, `none of ${models.join(", ")} is available - run npm run llm:check`);
@@ -178,10 +185,8 @@ function geminiProvider(id: string, budget: BudgetName, models: string[], role: 
             generationConfig: {
               temperature: 0,
               // Thinking models spend output tokens on reasoning before answering.
-              maxOutputTokens: 4000,
-              ...(structured
-                ? { responseMimeType: "application/json", responseSchema: role === "senior" ? SENIOR_SCHEMA : ANSWER_SCHEMA }
-                : {}),
+              maxOutputTokens: limit,
+              ...(plain ? {} : { responseMimeType: "application/json", responseSchema: role === "senior" ? SENIOR_SCHEMA : ANSWER_SCHEMA }),
             },
           },
           { "x-goog-api-key": key },
@@ -200,12 +205,21 @@ function geminiProvider(id: string, budget: BudgetName, models: string[], role: 
           continue;
         }
         if (status >= 500) throw serverError(id, status, text, json);
+        if (status === 400 && !plain) {
+          plain = true;
+          continue;
+        }
         if (status >= 400) throw new Error(`${id} HTTP ${status}: ${briefly(text, json)}`);
         answered(id);
         // Gemma 4 and the thinking Gemini models return their reasoning as
         // separate parts flagged `thought`; only the answer parts are the reply.
-        const parts = (json as { candidates?: Array<{ content?: { parts?: Array<{ text?: string; thought?: boolean }> } }> })?.candidates?.[0]?.content?.parts ?? [];
-        return parts.filter((p) => !p.thought).map((p) => p.text ?? "").join("");
+        const candidate = (json as { candidates?: Array<{ finishReason?: string; content?: { parts?: Array<{ text?: string; thought?: boolean }> } }> })?.candidates?.[0];
+        const reply = (candidate?.content?.parts ?? []).filter((p) => !p.thought).map((p) => p.text ?? "").join("");
+        if (candidate?.finishReason === "MAX_TOKENS" && limit < 8000 && !jsonObjectIn(reply)) {
+          limit = 8000;
+          continue;
+        }
+        return reply;
       }
     },
   };
@@ -224,7 +238,11 @@ function groqProvider(id: string, budget: BudgetName, models: string[], role: Ro
     async call(prompt) {
       const key = envStr("GROQ_API_KEY");
       if (!key) throw new ProviderUnavailable(id, "GROQ_API_KEY not set");
-      let jsonMode = true;
+      // Any model, including ones that do not exist yet: a request it refuses
+      // is asked again once in the plainest form (no JSON mode, no reasoning
+      // options), and an answer cut off at the limit once with twice the room.
+      let plain = false;
+      let limit = 4000;
       let waits = 0;
       for (;;) {
         const model = liveModel(id, models);
@@ -232,7 +250,7 @@ function groqProvider(id: string, budget: BudgetName, models: string[], role: Ro
         // Groq's free tier binds on tokens; ~4 characters per token, plus the
         // reply - which for a reasoning model includes its thinking. Settled
         // to the real count once Groq answers.
-        const estimate = Math.ceil(prompt.length / 3.5) + 2500;
+        const estimate = Math.ceil(prompt.length / 3.5 + limit / 1.6);
         await spend(budget, id, estimate);
         await pace(id, 2500);
         const { status, json, text } = await postJson(
@@ -243,9 +261,9 @@ function groqProvider(id: string, budget: BudgetName, models: string[], role: Ro
             // gpt-oss and qwen3 think before answering, inside this limit: at
             // 1200 the answer was cut off and JSON mode refused it (HTTP 400
             // "Failed to generate JSON", 2026-10-17).
-            max_tokens: 4000,
-            ...(jsonMode ? { response_format: { type: "json_object" } } : {}),
-            ...(/qwen3/i.test(model) ? { reasoning_format: "hidden" } : {}),
+            max_tokens: limit,
+            ...(plain ? {} : { response_format: { type: "json_object" } }),
+            ...(!plain && /qwen3/i.test(model) ? { reasoning_format: "hidden" } : {}),
             messages: [{ role: "user", content: prompt }],
           },
           { authorization: `Bearer ${key}` },
@@ -266,19 +284,23 @@ function groqProvider(id: string, budget: BudgetName, models: string[], role: Ro
           retired.add(`${id}:${model}`);
           continue;
         }
-        if (status === 400 && (error?.code === "json_validate_failed" || error?.failed_generation !== undefined)) {
-          // JSON mode rejected what the model wrote; it is often a readable
-          // answer anyway (text around it, a trailing comma).
-          if (error?.failed_generation && jsonObjectIn(error.failed_generation)) return error.failed_generation;
-          if (jsonMode) {
-            jsonMode = false; // once more, with JSON asked for in the prompt only
-            continue;
-          }
-        }
+        // JSON mode rejected what the model wrote; it is often a readable
+        // answer anyway (text around it, a trailing comma).
+        if (status === 400 && error?.failed_generation && jsonObjectIn(error.failed_generation)) return error.failed_generation;
         if (status >= 500) throw serverError(id, status, text, json);
+        if (status === 400 && !plain) {
+          plain = true; // once more, with JSON asked for in the prompt only
+          continue;
+        }
         if (status >= 400) throw new Error(`${id} HTTP ${status}: ${briefly(text, json)}`);
         answered(id);
-        return (json as { choices?: Array<{ message?: { content?: string } }> })?.choices?.[0]?.message?.content ?? "";
+        const choice = (json as { choices?: Array<{ finish_reason?: string; message?: { content?: string } }> })?.choices?.[0];
+        const reply = choice?.message?.content ?? "";
+        if (choice?.finish_reason === "length" && limit < 8000 && !jsonObjectIn(reply)) {
+          limit = 8000;
+          continue;
+        }
+        return reply;
       }
     },
   };
@@ -336,29 +358,84 @@ function ollamaProvider(): JudgeProvider {
 
 /* --------------------------------- registry -------------------------------- */
 
+/** The roles whose model the weekly check (scripts/llm-upgrade.ts) may change. */
+export const MODEL_ROLES = ["gemini", "gemma", "groq", "groq-senior", "gemini-senior"] as const;
+export type ModelRole = (typeof MODEL_ROLES)[number];
+
+/** What each role starts from when nothing is pinned or chosen. */
+export const DEFAULT_MODELS: Record<ModelRole, string[]> = {
+  gemini: ["gemini-flash-lite-latest", "gemini-3.5-flash-lite", "gemini-2.5-flash-lite"],
+  // gemma-4-31b-it answered HTTP 500 to every request on 2026-10-13.
+  gemma: ["gemma-4-26b-a4b-it", "gemma-4-31b-it"],
+  // llama-3.3-70b-versatile was retired by Groq on 2026-10-17.
+  groq: ["openai/gpt-oss-20b", "qwen/qwen3.8-27b"],
+  "groq-senior": ["openai/gpt-oss-120b"],
+  "gemini-senior": ["gemini-3.5-flash", "gemini-3-flash-preview", "gemini-flash-latest"],
+};
+
+/** A model pinned by hand in .env.local / GitHub / Vercel. Pinned beats chosen. */
+export const PIN_VAR: Record<ModelRole, string> = {
+  gemini: "GEMINI_MODEL",
+  gemma: "GEMMA_MODEL",
+  groq: "GROQ_MODEL",
+  "groq-senior": "GROQ_SENIOR_MODEL",
+  "gemini-senior": "GEMINI_SENIOR_MODEL",
+};
+
+/*
+ * The weekly check's choices, from the database so every machine - GitHub,
+ * the laptop, Vercel - uses the same models without editing any setting.
+ * Loaded once per process (warmUp); without them, the defaults.
+ */
+let chosen: Partial<Record<ModelRole, string>> = {};
+
+export async function loadModelChoices(): Promise<Partial<Record<ModelRole, string>>> {
+  try {
+    const { supabaseAdmin } = await import("../db");
+    const { data } = await supabaseAdmin().from("model_choices").select("role,model");
+    chosen = Object.fromEntries((data ?? []).map((r) => [String(r.role), String(r.model)])) as Partial<Record<ModelRole, string>>;
+  } catch {
+    chosen = {}; // no table yet, or no database: the defaults
+  }
+  return chosen;
+}
+
+/** The models a role tries, in order. */
+export function modelsFor(role: ModelRole): string[] {
+  return chain(DEFAULT_MODELS[role], envStr(PIN_VAR[role]), chosen[role]);
+}
+
+/** One role on a given list of models - the weekly check tries candidates this way. */
+export function providerFor(role: ModelRole, models: string[]): JudgeProvider {
+  switch (role) {
+    case "gemini":
+      return geminiProvider("gemini", "gemini", models, "juror", true, 4500);
+    case "gemma":
+      // Gemma refuses Gemini's JSON mode; it is asked for JSON in the prompt.
+      return geminiProvider("gemma", "gemma", models, "juror", false, 2500);
+    case "groq":
+      return groqProvider("groq", "groq", models, "juror");
+    case "groq-senior":
+      return groqProvider("groq-senior", "groq-senior", models, "senior");
+    case "gemini-senior":
+      return geminiProvider("gemini-senior", "gemini", models, "senior", true, 4500);
+  }
+}
+
 export function jurors(): JudgeProvider[] {
-  return [
-    ollamaProvider(),
-    geminiProvider("gemini", "gemini", chain(envStr("GEMINI_MODEL"), ["gemini-flash-lite-latest", "gemini-3.5-flash-lite", "gemini-2.5-flash-lite"]), "juror", true, 4500),
-    // Gemma rejects Gemini's JSON mode; it is asked for JSON in the prompt.
-    // gemma-4-31b-it answered HTTP 500 to every request on 2026-10-13.
-    geminiProvider("gemma", "gemma", chain(envStr("GEMMA_MODEL"), ["gemma-4-26b-a4b-it", "gemma-4-31b-it"]), "juror", false, 2500),
-    // llama-3.3-70b-versatile was retired by Groq on 2026-10-17.
-    groqProvider("groq", "groq", chain(envStr("GROQ_MODEL"), ["openai/gpt-oss-20b", "qwen/qwen3.8-27b"]), "juror"),
-  ];
+  return [ollamaProvider(), providerFor("gemini", modelsFor("gemini")), providerFor("gemma", modelsFor("gemma")), providerFor("groq", modelsFor("groq"))];
 }
 
 /**
- * Strongest free model first, then a chain of Gemini Flash models. On
- * 2026-10-13 every Flash model answered "high demand" (503) to some requests;
- * a failure moves to the next model rather than leaving a dispute undecided.
+ * Strongest free model first, then a chain of Gemini Flash models, each its
+ * own provider: on 2026-10-13 every Flash model answered "high demand" (503)
+ * to some requests, and a failure moves to the next one rather than leaving a
+ * dispute undecided.
  */
 export function seniors(): JudgeProvider[] {
-  const gemini = envStr("GEMINI_SENIOR_MODEL")
-    ? [envStr("GEMINI_SENIOR_MODEL") as string]
-    : ["gemini-3.5-flash", "gemini-3-flash-preview", "gemini-flash-latest"];
+  const gemini = envStr(PIN_VAR["gemini-senior"]) ? [envStr(PIN_VAR["gemini-senior"]) as string] : modelsFor("gemini-senior");
   return [
-    groqProvider("groq-senior", "groq-senior", chain(envStr("GROQ_SENIOR_MODEL"), ["openai/gpt-oss-120b"]), "senior"),
+    providerFor("groq-senior", modelsFor("groq-senior")),
     ...gemini.map((m, i) => geminiProvider(i === 0 ? "gemini-senior" : `gemini-senior-${i + 1}`, "gemini", [m], "senior", true, 4500)),
   ];
 }

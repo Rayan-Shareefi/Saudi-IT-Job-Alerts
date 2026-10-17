@@ -75,7 +75,7 @@ cloud work, and the date the full posting was read.
 | Search button says "queued" for a long time | Neither GitHub nor the laptop picked it up | Check `GH_DISPATCH_TOKEN` on Vercel, or that the laptop is on |
 | A run shows "stopped responding" | The machine running it went quiet | Press the button again |
 | Nothing new for days | Something upstream changed | On the laptop: `npm run doctor`, then `npm run llm:check` |
-| `llm:check` shows a model failing its canaries | A free model was renamed or retired (each provider already moves to its next default by itself) | If every default is gone, set a working name from its list (`GEMINI_MODEL`, `GEMMA_MODEL`, `GROQ_MODEL`, `GROQ_SENIOR_MODEL`) in `.env.local`, GitHub secrets and Vercel |
+| `llm:check` shows a model failing its canaries | A free model was renamed or retired (each provider moves to its next model by itself, and the weekly `llm:upgrade` picks a tested replacement) | Usually nothing. See [docs/ai-models.md](docs/ai-models.md) for keys, pinning and undoing a change |
 | A real job was hidden | A rule or the reviewers got it wrong | Keep it from the Hidden tab; that fixes it permanently |
 | A wrong job is shown | Same | Hide it |
 | GitHub email "All jobs have failed" | A workflow failed | Open the run on GitHub, Actions tab; the failing step says why |
@@ -188,6 +188,7 @@ npm run reclassify        # recompute states (no fetching, no model calls); --dr
 npm run dedupe            # rebuild duplicate groups; --dry to preview
 npm run judge             # run the AI jury; --max N, --deadline-min N
 npm run llm:check         # which free models work right now (canary postings)
+npm run llm:upgrade       # move to newer free models that pass every canary (weekly on the laptop; --dry to preview)
 npm run doctor            # is this machine ready to be the worker
 npm run ingest -- --no-metered        # collection without JSearch
 npm run digest:preview    # write data/digest-preview.html

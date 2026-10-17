@@ -34,6 +34,7 @@ import { envFlag, envInt, envStr } from "../src/lib/env";
 import { finishRun, latestRun, markStalled, queuedRuns, startRun } from "../src/lib/runs";
 import { sendSystemAlert, sendTimeSensitiveAlerts } from "../src/lib/alerts";
 import { PROFILE_DIR } from "../src/lib/adapters/linkedin-posts";
+import { supabaseAdmin } from "../src/lib/db";
 import { sleep } from "../src/lib/http";
 
 const ONCE = process.argv.includes("--once");
@@ -56,6 +57,12 @@ interface WorkerState {
   lastCycleAt?: string;
   linkedinJobsAt?: string;
   linkedinPostsAt?: string;
+  /** LinkedIn job listings asked us to slow down this many times in a row. */
+  linkedinRefusals?: number;
+  /** No LinkedIn job listings before this time (after a refusal). */
+  linkedinJobsPauseUntil?: string;
+  /** The weekly AI model check (scripts/llm-upgrade.ts). */
+  llmUpgradeAt?: string;
 }
 
 function readState(): WorkerState {
@@ -82,12 +89,40 @@ function minutesSince(iso: string | undefined): number {
 
 /** True if LinkedIn may be asked now; otherwise logs why not. */
 function linkedinTurn(key: "linkedinJobsAt" | "linkedinPostsAt", label: string): boolean {
-  const ago = minutesSince(readState()[key]);
+  const state = readState();
+  const pause = key === "linkedinJobsAt" && state.linkedinJobsPauseUntil ? new Date(state.linkedinJobsPauseUntil).getTime() : 0;
+  if (pause > Date.now()) {
+    log(`${label}: LinkedIn asked us to slow down - pausing until ${clock(pause)}`);
+    return false;
+  }
+  const ago = minutesSince(state[key]);
   if (ago * 60_000 < LINKEDIN_GAP_MS) {
     log(`${label}: asked ${Math.round(ago)} min ago - LinkedIn is asked at most once an hour, skipping`);
     return false;
   }
   return true;
+}
+
+/*
+ * After LinkedIn asks us to slow down, wait longer before each next try - 3,
+ * 6, 12, then 24 hours - and back to normal after the first success. On
+ * 2026-10-17 the laptop was refused on its first request of every cycle
+ * while the PC on the same day was answered: asking every two hours only
+ * keeps a limit like that in place.
+ */
+async function afterLinkedinJobs(): Promise<void> {
+  const { data } = await supabaseAdmin().from("source_health").select("error").eq("source_id", "linkedin-riyadh").maybeSingle();
+  const refused = /asked us to slow down/i.test(String(data?.error ?? ""));
+  const state = readState();
+  if (!refused) {
+    if (state.linkedinRefusals) writeState({ linkedinRefusals: 0, linkedinJobsPauseUntil: undefined });
+    return;
+  }
+  const n = (state.linkedinRefusals ?? 0) + 1;
+  const hours = Math.min(24, 3 * 2 ** (n - 1));
+  const until = Date.now() + hours * 3_600_000;
+  writeState({ linkedinRefusals: n, linkedinJobsPauseUntil: new Date(until).toISOString() });
+  log(`LinkedIn asked us to slow down (${n} time(s) in a row) - next LinkedIn jobs try in ${hours} h, at ${clock(until)}. Not a fault; LinkedIn jobs also arrive through JSearch.`);
 }
 
 function log(s: string): void {
@@ -172,6 +207,7 @@ async function cycle(): Promise<void> {
     if (envFlag("LINKEDIN_ENABLED") && linkedinTurn("linkedinJobsAt", "LinkedIn jobs")) {
       writeState({ linkedinJobsAt: new Date().toISOString() });
       step("LinkedIn jobs", "scripts/ingest.ts", ["--source", "linkedin-riyadh"], 60);
+      await afterLinkedinJobs().catch(() => {});
     }
     if (envFlag("LINKEDIN_POSTS_ENABLED") && linkedinTurn("linkedinPostsAt", "LinkedIn hiring posts")) {
       // Without a saved session nothing is sent to LinkedIn, so it is not a turn.
@@ -194,6 +230,12 @@ async function cycle(): Promise<void> {
     });
     if (sent) log(`alerted ${sent} time-sensitive item(s)`);
     await companyPassIfGithubMissed();
+    // Weekly: move to newer free AI models, only ones that pass every test
+    // posting (docs/ai-models.md). Recorded first, so a crash cannot repeat it.
+    if (minutesSince(readState().llmUpgradeAt) > 7 * 24 * 60) {
+      writeState({ llmUpgradeAt: new Date().toISOString() });
+      step("AI model check (weekly)", "scripts/llm-upgrade.ts", [], 30);
+    }
     if (tracker) await finishRun(tracker.id, "done");
   } catch (err) {
     log(`cycle failed: ${err instanceof Error ? err.message : err}`);

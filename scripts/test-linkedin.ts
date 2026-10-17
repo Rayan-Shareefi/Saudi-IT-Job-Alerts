@@ -9,7 +9,7 @@
  */
 import { readFileSync } from "node:fs";
 import { parseDetail, parseSearch } from "../src/lib/adapters/linkedin";
-import { postTitle } from "../src/lib/adapters/linkedin-posts";
+import { EXTRACT, STRUCTURE, postTitle } from "../src/lib/adapters/linkedin-posts";
 
 let total = 0;
 let failures = 0;
@@ -45,5 +45,66 @@ check(
 check("a post that names no role gets no title", postTitle("Great day at the conference! #cybersecurity #Riyadh") === null);
 check("Arabic role line", postTitle("نعلن عن فرصة تدريب تعاوني\nمطلوب متدرب في الأمن السيبراني") !== null);
 
-console.log(`linkedin: ${total - failures}/${total} correct`);
-if (failures > 0) process.exit(1);
+/*
+ * The hiring-posts extractor in a real browser, on three layouts. The first
+ * version knew only the older data-urn markup and found 0 posts on the
+ * laptop (2026-10-17). Names and texts below are made up.
+ */
+async function domTests(): Promise<void> {
+  const { chromium } = await import("playwright");
+  const browser = await chromium.launch();
+  try {
+    const page = await browser.newPage();
+    const run = async (html: string) => {
+      await page.setContent(`<html><body><main>${html}</main></body></html>`);
+      return (await page.evaluate(EXTRACT)) as Array<{ urn: string; text: string; companyName: string | null; links: string[] }>;
+    };
+    const body = "We are hiring a SOC Analyst in Riyadh. Apply here: ";
+
+    // 1. The older markup: data-urn on the post, actor block with a company link.
+    const older = await run(`
+      <div data-urn="urn:li:activity:7200000000000000001">
+        <div class="update-components-actor"><a class="update-components-actor__meta-link" href="https://www.linkedin.com/company/acme/">
+          <span class="update-components-actor__title"><span aria-hidden="true">Acme Security</span></span></a></div>
+        <div class="update-components-text">${body}<a href="https://forms.gle/abc123">form</a></div>
+      </div>`);
+    check("older layout: one post found", older.length === 1, JSON.stringify(older));
+    check("older layout: company author kept", older[0]?.companyName === "Acme Security", String(older[0]?.companyName));
+    check("older layout: the apply form link kept", older[0]?.links.includes("https://forms.gle/abc123") === true, JSON.stringify(older[0]?.links));
+
+    // 2. A newer markup: no data-urn, the id only in a link; a list wraps both posts.
+    const newer = await run(`
+      <ul data-view-name="search-results">
+        <li><div role="article">
+          <a href="https://www.linkedin.com/company/beta-cloud/">Beta Cloud</a>
+          <p>${body}cloud engineers too, join our team in Riyadh!</p>
+          <a href="https://www.linkedin.com/feed/update/urn:li:activity:7200000000000000002/">2h</a>
+        </div></li>
+        <li><div role="article">
+          <a href="https://www.linkedin.com/in/some-person/">Some Person</a>
+          <p>Proud of my team today. Our new cybersecurity programme starts next month in Riyadh.</p>
+          <a href="https://www.linkedin.com/feed/update/urn:li:activity:7200000000000000003/">1d</a>
+        </div></li>
+      </ul>`);
+    check("newer layout: both posts found, the list itself is not a post", newer.length === 2, JSON.stringify(newer.map((p) => p.urn)));
+    check("newer layout: ids read from the links", newer.map((p) => p.urn).join(",") === "urn:li:activity:7200000000000000002,urn:li:activity:7200000000000000003");
+    check("newer layout: company author kept", newer[0]?.companyName === "Beta Cloud", String(newer[0]?.companyName));
+    check("newer layout: a person's name is never kept", newer[1]?.companyName === null, String(newer[1]?.companyName));
+
+    // 3. A page with no posts at all: nothing invented, and the structure report has no text.
+    const none = await run(`<div><h2>No results found</h2><p>Try different keywords, like cybersecurity jobs in Riyadh.</p></div>`);
+    check("no posts on the page -> nothing found", none.length === 0, JSON.stringify(none));
+    const structure = (await page.evaluate(STRUCTURE)) as Record<string, unknown>;
+    check("structure report: counts only", structure.noResults === true && !JSON.stringify(structure).includes("Try different"), JSON.stringify(structure));
+  } finally {
+    await browser.close();
+  }
+}
+
+domTests()
+  .catch((err) => check("browser tests ran", false, err instanceof Error ? err.message : String(err)))
+  .then(() => {
+    console.log(`linkedin: ${total - failures}/${total} correct`);
+    if (failures > 0) process.exit(1);
+  });
+
