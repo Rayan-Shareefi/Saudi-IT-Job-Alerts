@@ -45,7 +45,7 @@ const HIRING = /\b(hiring|we('| a)re looking|join (our|the) team|vacanc|open (ro
 
 export class LinkedInChallenge extends Error {
   constructor(why: string) {
-    super(`LinkedIn needs you: ${why}. Run "npm run linkedin:login" on the laptop and sign in once.`);
+    super(`LinkedIn needs you: ${why}. On the laptop, open "Saudi Job Alert" (desktop) and press L to sign in.`);
     this.name = "LinkedInChallenge";
   }
 }

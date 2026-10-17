@@ -97,18 +97,24 @@ INSTALLED** with the reason. If Windows refuses to run the task without a
 password, it opens a Windows box for your laptop sign-in password, which Task
 Scheduler keeps (the project never sees it). Safe to run again at any time.
 
-Then, in a normal PowerShell window:
-
-```
-cd "$HOME\Saudi Job Alert"
-npm run doctor
-```
-
-Every line should say `ok`. Anything marked `!!` says what to do.
-
 ## Day to day
 
-Nothing. The log is `logs\worker.log` in the project folder if you are curious.
+Nothing: the worker runs in the background and starts by itself after every
+reboot. To watch it, double-click **Saudi Job Alert** on the desktop (the
+first run of `Saudi Job Alert.cmd` in the project folder adds that shortcut).
+It starts the worker if it is not running, offers the LinkedIn sign-in if it
+is missing, and shows the log live in colour. Keys in that window:
+
+| Key | Does |
+|---|---|
+| L | LinkedIn sign-in (secondary account) |
+| N | run a cycle now instead of waiting up to 2 hours |
+| R | restart the worker |
+| D | check everything (keys, Ollama, LinkedIn, database) |
+| Q | close the window - the worker keeps running |
+
+Typing commands yourself: PowerShell refuses `npm` on a fresh Windows (script
+policy). Type `npm.cmd` instead, e.g. `npm.cmd run doctor`.
 
 - **Turn it off:** `Stop-ScheduledTask SaudiJobAlertWorker` (Administrator PowerShell)
 - **Turn it back on:** `Start-ScheduledTask SaudiJobAlertWorker`

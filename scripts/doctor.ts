@@ -105,7 +105,7 @@ async function main(): Promise<void> {
   // LinkedIn session
   console.log("\nLinkedIn:");
   if (existsSync(PROFILE_DIR)) ok("saved session folder present (.linkedin-profile)");
-  else info("no saved session yet - run once: npm run linkedin:login");
+  else info("no saved session yet - open \"Saudi Job Alert\" (desktop) and press L");
 
   // Windows: power and the scheduled task
   if (process.platform === "win32") {

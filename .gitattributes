@@ -1,2 +1,6 @@
 # Auto detect text files and perform LF normalization
 * text=auto
+
+# Windows scripts run under cmd / Windows PowerShell: keep CRLF.
+*.cmd text eol=crlf
+*.ps1 text eol=crlf

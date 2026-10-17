@@ -21,20 +21,74 @@
  * Each step is a separate child process: a crash in one step never stops the
  * worker, and every step runs the code currently on disk (a long-lived process
  * holds the code it started with - HANDOVER §8).
+ *
+ * The schedule survives restarts (logs/worker-state.json), LinkedIn is asked at
+ * most once an hour, and the launcher (Saudi Job Alert.cmd) shows this log live
+ * and can ask for a cycle now (logs/run-now).
  */
 import "./load-env";
 import { spawnSync } from "node:child_process";
-import { existsSync, readFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { envFlag, envInt, envStr } from "../src/lib/env";
 import { finishRun, latestRun, markStalled, queuedRuns, startRun } from "../src/lib/runs";
 import { sendSystemAlert, sendTimeSensitiveAlerts } from "../src/lib/alerts";
+import { PROFILE_DIR } from "../src/lib/adapters/linkedin-posts";
 import { sleep } from "../src/lib/http";
 
 const ONCE = process.argv.includes("--once");
 const CYCLE_MS = envInt("WORKER_CYCLE_MIN", 120) * 60_000;
 const POLL_MS = 2 * 60_000;
 const TSX = join(process.cwd(), "node_modules", "tsx", "dist", "cli.mjs");
+
+/*
+ * Kept on disk so a restart (a self-update, a reboot, the launcher's Restart)
+ * resumes the schedule instead of starting a cycle at once - otherwise every
+ * restart would ask LinkedIn again. The launcher's "run now" key drops the
+ * RUN_NOW file, picked up within one poll.
+ */
+const STATE_FILE = join("logs", "worker-state.json");
+const RUN_NOW = join("logs", "run-now");
+/** LinkedIn is asked at most this often, whatever triggers a cycle. */
+const LINKEDIN_GAP_MS = 60 * 60_000;
+
+interface WorkerState {
+  lastCycleAt?: string;
+  linkedinJobsAt?: string;
+  linkedinPostsAt?: string;
+}
+
+function readState(): WorkerState {
+  try {
+    return JSON.parse(readFileSync(STATE_FILE, "utf8")) as WorkerState;
+  } catch {
+    return {};
+  }
+}
+
+function writeState(change: Partial<WorkerState>): void {
+  try {
+    mkdirSync("logs", { recursive: true });
+    writeFileSync(STATE_FILE, JSON.stringify({ ...readState(), ...change }, null, 2));
+  } catch {
+    /* the schedule is a courtesy; never stop the worker over it */
+  }
+}
+
+/** Minutes since a stored time, or Infinity if never. */
+function minutesSince(iso: string | undefined): number {
+  return iso ? (Date.now() - new Date(iso).getTime()) / 60_000 : Infinity;
+}
+
+/** True if LinkedIn may be asked now; otherwise logs why not. */
+function linkedinTurn(key: "linkedinJobsAt" | "linkedinPostsAt", label: string): boolean {
+  const ago = minutesSince(readState()[key]);
+  if (ago * 60_000 < LINKEDIN_GAP_MS) {
+    log(`${label}: asked ${Math.round(ago)} min ago - LinkedIn is asked at most once an hour, skipping`);
+    return false;
+  }
+  return true;
+}
 
 function log(s: string): void {
   console.log(`[${new Date().toISOString().slice(0, 19).replace("T", " ")}] ${s}`);
@@ -109,17 +163,25 @@ async function companyPassIfGithubMissed(): Promise<void> {
 }
 
 async function cycle(): Promise<void> {
+  // Before the run is tracked: an update restarts the worker right here, and
+  // the fresh copy runs this cycle (lastCycleAt is not written yet).
+  selfUpdate();
+  writeState({ lastCycleAt: new Date().toISOString() });
   const tracker = await startRun("worker", "schedule", "laptop");
   try {
-    selfUpdate();
-    if (envFlag("LINKEDIN_ENABLED")) step("LinkedIn jobs", "scripts/ingest.ts", ["--source", "linkedin-riyadh"], 60);
-    if (envFlag("LINKEDIN_POSTS_ENABLED")) {
+    if (envFlag("LINKEDIN_ENABLED") && linkedinTurn("linkedinJobsAt", "LinkedIn jobs")) {
+      writeState({ linkedinJobsAt: new Date().toISOString() });
+      step("LinkedIn jobs", "scripts/ingest.ts", ["--source", "linkedin-riyadh"], 60);
+    }
+    if (envFlag("LINKEDIN_POSTS_ENABLED") && linkedinTurn("linkedinPostsAt", "LinkedIn hiring posts")) {
+      // Without a saved session nothing is sent to LinkedIn, so it is not a turn.
+      if (existsSync(PROFILE_DIR)) writeState({ linkedinPostsAt: new Date().toISOString() });
       const code = step("LinkedIn hiring posts", "scripts/ingest.ts", ["--source", "linkedin-posts"], 40);
       if (code !== 0) {
         await sendSystemAlert(
           "linkedin",
           "LinkedIn needs you",
-          "The laptop could not read LinkedIn hiring posts - usually the session expired or LinkedIn asked for a verification step. On the laptop, run: npm run linkedin:login",
+          "The laptop could not read LinkedIn hiring posts - usually it has not been signed in yet, the session expired, or LinkedIn asked for a verification step. On the laptop, double-click \"Saudi Job Alert\" on the desktop and press L to sign in.",
         );
       }
     }
@@ -149,20 +211,34 @@ async function main(): Promise<void> {
     await sleep(10 * 60_000);
     process.exit(1); // the task restarts it, re-reading .env.local
   }
-  let nextCycle = 0;
+  const last = readState().lastCycleAt;
+  let nextCycle = last ? new Date(last).getTime() + CYCLE_MS : 0;
+  if (nextCycle > Date.now()) log(`resuming the schedule: next cycle at ${clock(nextCycle)} (press N in the launcher to run now)`);
   for (;;) {
     try {
       await pickUpQueued();
+      if (existsSync(RUN_NOW)) {
+        unlinkSync(RUN_NOW);
+        log("run-now requested");
+        nextCycle = 0;
+      }
       if (Date.now() >= nextCycle) {
         await cycle();
         nextCycle = Date.now() + CYCLE_MS;
+        log(`cycle finished - next at ${clock(nextCycle)}; checking for button runs every 2 min`);
       }
     } catch (err) {
       log(`loop error: ${err instanceof Error ? err.message : err}`);
     }
     if (ONCE) return;
-    await sleep(POLL_MS);
+    // Sleep in short steps so a run-now request is noticed within seconds.
+    for (let waited = 0; waited < POLL_MS && !existsSync(RUN_NOW); waited += 5000) await sleep(5000);
   }
+}
+
+/** Local wall-clock time, for log lines a person reads. */
+function clock(ms: number): string {
+  return new Date(ms).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
 }
 
 main().catch((err) => {

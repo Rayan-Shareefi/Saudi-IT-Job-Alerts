@@ -17,11 +17,21 @@
 # Then it checks that the worker really started, and says so plainly.
 #
 # To remove it:  Unregister-ScheduledTask -TaskName SaudiJobAlertWorker -Confirm:$false
+#
+# -FromLauncher: started by the launcher (Saudi Job Alert.cmd) in its own
+# administrator window, which closes at the end - so pause on a failure.
+
+param([switch]$FromLauncher)
 
 $ErrorActionPreference = "Stop"
 $name = "SaudiJobAlertWorker"
 
-function Fail($msg) { Write-Host ""; Write-Host "NOT INSTALLED: $msg" -ForegroundColor Red; exit 1 }
+function Fail($msg) {
+  Write-Host ""
+  Write-Host "NOT INSTALLED: $msg" -ForegroundColor Red
+  if ($FromLauncher) { Read-Host "Press Enter to close" | Out-Null }
+  exit 1
+}
 
 $admin = ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)
 if (-not $admin) { Fail "this PowerShell is not 'as administrator'. Close it, open one with Run as administrator, and run this again." }
@@ -66,6 +76,8 @@ function StartFresh() {
   Get-CimInstance Win32_Process -Filter "Name = 'node.exe'" -ErrorAction SilentlyContinue |
     Where-Object { $_.CommandLine -like "*local-worker.ts*" } |
     ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
+  # The log only grows; start afresh past 20 MB, keeping the previous one.
+  if ((Test-Path $log) -and (Get-Item $log).Length -gt 20MB) { Move-Item $log (Join-Path $repo "logs\worker.old.log") -Force }
   $script:startedAt = Get-Date
   Start-ScheduledTask -TaskName $name
 }
@@ -93,8 +105,10 @@ if (-not (Started)) {
   }
 }
 
-Start-Sleep -Seconds 15
 Write-Host ""
 Write-Host "RUNNING. It starts by itself after every reboot; no window is normal." -ForegroundColor Green
+if ($FromLauncher) { Start-Sleep -Seconds 3; exit 0 }
+Write-Host "To watch it live, double-click 'Saudi Job Alert' on the desktop (or Saudi Job Alert.cmd in $repo)."
+Start-Sleep -Seconds 15
 Write-Host "Last log lines ($log):"
 Get-Content $log -Tail 8

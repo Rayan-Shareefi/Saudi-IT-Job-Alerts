@@ -46,6 +46,12 @@ async function main(): Promise<void> {
 }
 
 main().catch((err) => {
-  console.error(err);
+  const msg = err instanceof Error ? err.message : String(err);
+  // The worker holds the same browser profile while it reads hiring posts.
+  if (/ProcessSingleton|already in use|lock/i.test(msg)) {
+    console.error("The worker is reading LinkedIn with this profile right now. Try again in a few minutes.");
+  } else {
+    console.error(err);
+  }
   process.exit(1);
 });
