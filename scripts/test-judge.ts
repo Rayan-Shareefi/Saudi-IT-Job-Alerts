@@ -9,7 +9,8 @@
  * delete a real one, and something other than a model must check their work.
  */
 import { detectExperience } from "../src/lib/experience";
-import { verifyAnswer } from "../src/lib/judge/verify";
+import { jsonObjectIn, parseAnswer, verifyAnswer } from "../src/lib/judge/verify";
+import { perMinuteWait } from "../src/lib/judge/providers";
 import type { Answer, Vote } from "../src/lib/judge/types";
 import { judgeScope, type ScopeResult } from "../src/lib/scope";
 import { arbitrateScope, decideState, type StateInput } from "../src/lib/state";
@@ -170,6 +171,30 @@ check("senior title, no years -> unclassified", st(input({ title: "Senior SOC An
 check("years the rules missed, found by a model -> used", st(input({ experience: detectExperience("SOC Analyst", "Monitor alerts."), votes: [vote("in", { minYears: 6, yearsEvidence: "six years in a SOC" })] })), "hidden:experience_5plus");
 check("out of scope by rules and models -> hidden", st(input({ title: "Software Engineer", scope: rules("out", "leaning"), votes: [vote("out"), vote("out")] })), "hidden:out_of_scope");
 check("models disagree -> review tab", st(input({ scope: rules("unclear", "leaning"), votes: [vote("in"), vote("out")] })), "needs_review");
+
+// Reading model replies (2026-10-17: Gemma replies came back "unparseable" and
+// Groq's JSON mode refused gpt-oss answers; the reader must find the answer
+// wherever it sits, and must still refuse a reply that is cut off).
+{
+  const ans = { is_job_posting: true, scope: "in", scope_quotes: ["monitor SIEM alerts"], min_years: 2 };
+  const scopeOf = (raw: string) => parseAnswer(raw)?.scope ?? null;
+  check("reply: bare JSON", scopeOf(JSON.stringify(ans)), "in");
+  check("reply: in a ```json fence", scopeOf("```json\n" + JSON.stringify(ans, null, 2) + "\n```"), "in");
+  check("reply: reasoning with braces before it, a note after", scopeOf(`The role {SOC} needs {SIEM}. Answer:\n${JSON.stringify(ans)}\nNote: {done}`), "in");
+  check("reply: trailing commas", scopeOf('{"is_job_posting": true, "scope": "in", "focus": ["SOC",],}'), "in");
+  check("reply: braces inside a string", scopeOf('{"is_job_posting": true, "scope": "out", "out_reason": "text with } and { inside"}'), "out");
+  check("reply: cut off -> refused", scopeOf('{"is_job_posting": true, "scope": "in", "scope_quotes": ["monit'), null);
+  check("reply: empty -> refused", scopeOf(""), null);
+  check("reply: an object without the answer keys -> refused", scopeOf('{"note": "I cannot tell"}'), null);
+  check("senior reply found inside prose", jsonObjectIn(`ok ${JSON.stringify({ ...ans, decision: "add" })} end`) !== null, true);
+}
+
+// A 429: wait out a per-minute limit, stop for a daily one.
+check("429 per minute (Groq TPM) -> wait", perMinuteWait('{"error":{"message":"Rate limit reached for model `openai/gpt-oss-120b` on tokens per minute (TPM): Limit 8000, Used 6100, Requested 4200. Please try again in 17.85s."}}'), 18850);
+check("429 per day (Groq TPD) -> stop", perMinuteWait('{"error":{"message":"Rate limit reached on tokens per day (TPD): Limit 200000. Please try again in 7m12s."}}'), null);
+check("429 Gemini per minute -> wait", perMinuteWait('{"error":{"code":429,"details":[{"retryDelay":"37s"}]}}'), 38000);
+check("429 Gemini per day -> stop", perMinuteWait('{"error":{"message":"Quota exceeded for metric: GenerateRequestsPerDayPerProjectPerModel-FreeTier","details":[{"retryDelay":"37s"}]}}'), null);
+check("429 that says nothing -> stop", perMinuteWait("Too Many Requests"), null);
 
 console.log(`\njudge: ${total - failures}/${total} correct`);
 if (failures > 0) process.exit(1);

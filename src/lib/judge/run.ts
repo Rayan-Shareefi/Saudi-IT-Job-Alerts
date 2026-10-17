@@ -154,7 +154,8 @@ export async function judgeOne(
       ctx.stats.byProvider[p.id] = (ctx.stats.byProvider[p.id] ?? 0) + 1;
       const answer = parseAnswer(raw);
       if (!answer) {
-        ctx.stats.errors.push(`${p.id}: unparseable reply for "${row.title.slice(0, 40)}"`);
+        const start = raw.replace(/\s+/g, " ").trim().slice(0, 70);
+        ctx.stats.errors.push(`${p.id}: unparseable reply for "${row.title.slice(0, 40)}" (began: ${start || "empty"})`);
         return null;
       }
       const vote = verifyAnswer(answer, { title: row.title, text: row.description_text ?? "", location: row.location_text }, { provider: p.id, model: p.model, role: p.role });

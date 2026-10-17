@@ -15,6 +15,7 @@ import { llm } from "./llm";
 import { careerjet, jooble, jsearch } from "./aggregators";
 import { linkedin } from "./linkedin";
 import { linkedinPosts } from "./linkedin-posts";
+import { workableSearch } from "./workable-search";
 
 export const ADAPTERS: Record<string, Adapter> = {
   // company-hosted applicant tracking systems
@@ -45,6 +46,8 @@ export const ADAPTERS: Record<string, Adapter> = {
   linkedin,
   // company hiring posts, secondary account, laptop only
   "linkedin-posts": linkedinPosts,
+  // every employer hiring in Riyadh through Workable (public search, free)
+  "workable-search": workableSearch,
 };
 
 export type { Adapter };

@@ -21,6 +21,7 @@ export type Provider =
   | "groq"
   | "groq-senior"
   | "linkedin"
+  | "workable"
   | "resend-alert"
   | "resend-system";
 
@@ -40,6 +41,8 @@ function caps(): Record<Provider, Cap> {
     groq: { period: "day", requests: envInt("BUDGET_GROQ_DAY", 900), tokens: envInt("BUDGET_GROQ_TOKENS_DAY", 180_000) },
     "groq-senior": { period: "day", requests: envInt("BUDGET_GROQ_SENIOR_DAY", 300), tokens: envInt("BUDGET_GROQ_SENIOR_TOKENS_DAY", 180_000) },
     linkedin: { period: "day", requests: envInt("BUDGET_LINKEDIN_DAY", 250), tokens: 0 },
+    // Workable public search: ~27 requests a run; no published limit, so stay modest.
+    workable: { period: "day", requests: envInt("BUDGET_WORKABLE_DAY", 150), tokens: 0 },
     // Instant alerts: Resend free is 100/day; alerts are capped at 20 so the
     // digest and system mails always fit (see HANDOVER, email maths).
     "resend-alert": { period: "day", requests: envInt("BUDGET_ALERT_EMAILS_DAY", 20), tokens: 0 },
@@ -83,6 +86,32 @@ export async function reserve(provider: Provider, use: { requests?: number; toke
 }
 
 /** What has been used this period, for the UI ("JSearch: 12 of 150 this month"). */
+/**
+ * Correct a reservation: the tokens a provider reports it really used instead
+ * of the estimate reserved before the call (Groq returns them with every
+ * answer), or a request handed back when the provider turned it away. Never
+ * refused - it records what happened. Without it the day's cap filled with
+ * estimates: on 2026-10-17 the senior reviewer stopped at "179k of 180k
+ * tokens" while Groq itself still allowed 999 more requests.
+ */
+export async function adjust(provider: Provider, change: { requests?: number; tokens?: number }): Promise<void> {
+  const requests = Math.round(change.requests ?? 0);
+  const tokens = Math.round(change.tokens ?? 0);
+  if (!requests && !tokens) return;
+  try {
+    await supabaseAdmin().rpc("bump_usage", {
+      p_provider: provider,
+      p_period: periodKey(caps()[provider].period),
+      p_requests: requests,
+      p_tokens: tokens,
+      p_cap_requests: 0,
+      p_cap_tokens: 0,
+    });
+  } catch {
+    /* a correction is best effort; the cap still holds */
+  }
+}
+
 export async function usage(provider: Provider): Promise<{ requests: number; tokens: number; cap: Cap }> {
   const cap = caps()[provider];
   try {

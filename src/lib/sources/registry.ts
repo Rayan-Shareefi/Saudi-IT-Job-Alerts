@@ -78,6 +78,17 @@ export const AGGREGATOR_SOURCES: SourceDefinition[] = [
     region: "ksa",
     enabled: true,
   },
+  {
+    // Every employer hiring in Riyadh through Workable, tracked or not; the
+    // untracked ones become candidates for discover-employers.
+    id: "workable-riyadh",
+    label: "Workable",
+    kind: "aggregator",
+    adapter: "workable-search",
+    handle: "Riyadh",
+    region: "ksa",
+    enabled: true,
+  },
 ];
 
 /* -------------------------------------------------------------------------- */

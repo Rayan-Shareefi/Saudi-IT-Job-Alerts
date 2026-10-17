@@ -168,13 +168,57 @@ export function verifyAnswer(
 }
 
 /** Parse a model's reply into an Answer, tolerating code fences and chatter. */
-export function parseAnswer(raw: string): Answer | null {
-  const start = raw.indexOf("{");
-  const end = raw.lastIndexOf("}");
-  if (start < 0 || end <= start) return null;
+/** JSON.parse, forgiving the one slip models make most: a trailing comma. */
+function parseLoosely(s: string): unknown {
   try {
-    const obj = JSON.parse(raw.slice(start, end + 1)) as Partial<Answer>;
-    if (typeof obj.is_job_posting !== "boolean" || typeof obj.scope !== "string") return null;
+    return JSON.parse(s);
+  } catch {
+    try {
+      return JSON.parse(s.replace(/,\s*([}\]])/g, "$1"));
+    } catch {
+      return null;
+    }
+  }
+}
+
+/**
+ * The answer object in a model's reply, wherever it sits: alone, in a ```json
+ * fence, after reasoning that itself contains braces, or followed by a note.
+ * The first object that parses and carries `key` wins. "First { to last }"
+ * alone failed on replies like that (2026-10-17, Gemma).
+ */
+export function jsonObjectIn(raw: string, key = "scope"): Record<string, unknown> | null {
+  const has = (v: unknown): v is Record<string, unknown> => typeof v === "object" && v !== null && !Array.isArray(v) && key in v;
+  const whole = parseLoosely(raw.slice(raw.indexOf("{"), raw.lastIndexOf("}") + 1));
+  if (has(whole)) return whole;
+  for (let start = raw.indexOf("{"); start >= 0; start = raw.indexOf("{", start + 1)) {
+    let depth = 0;
+    let inString = false;
+    let escaped = false;
+    for (let i = start; i < raw.length; i++) {
+      const ch = raw[i];
+      if (inString) {
+        if (escaped) escaped = false;
+        else if (ch === "\\") escaped = true;
+        else if (ch === '"') inString = false;
+        continue;
+      }
+      if (ch === '"') inString = true;
+      else if (ch === "{") depth++;
+      else if (ch === "}" && --depth === 0) {
+        const obj = parseLoosely(raw.slice(start, i + 1));
+        if (has(obj)) return obj;
+        break;
+      }
+    }
+  }
+  return null;
+}
+
+export function parseAnswer(raw: string): Answer | null {
+  try {
+    const obj = jsonObjectIn(raw, "is_job_posting") as Partial<Answer> | null;
+    if (!obj || typeof obj.is_job_posting !== "boolean" || typeof obj.scope !== "string") return null;
     return {
       is_job_posting: obj.is_job_posting,
       not_job_reason: obj.not_job_reason ?? null,

@@ -85,6 +85,7 @@ function Show-Keys() {
 function Paint($l) {
   if ($l -match "FAIL|failed|error|Error|refused|MISSING|NOT INSTALLED") { Say $l Red }
   elseif ($l -match "needs you") { Say $l Magenta }
+  elseif ($l -match " ADD ") { Say $l Green }
   elseif ($l -match "^\[[^\]]+\] > ") { Say $l Cyan }
   elseif ($l -match "exited 0") { Say $l Green }
   elseif ($l -match "exited \d") { Say $l Yellow }

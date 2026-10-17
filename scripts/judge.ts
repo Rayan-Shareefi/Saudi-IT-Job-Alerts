@@ -109,8 +109,18 @@ async function main(): Promise<void> {
   if (stats.spent.length) console.log(`out of free quota for now: ${stats.spent.join(", ")}`);
   if (stats.unavailable.length) console.log(`unavailable: ${stats.unavailable.join("; ")}`);
   if (stats.errors.length) {
-    console.log(`errors (${stats.errors.length}):`);
-    for (const e of stats.errors.slice(0, 10)) console.log(`  ${e}`);
+    // Grouped: nine identical "HTTP 500" lines say less than "9x HTTP 500".
+    const groups = new Map<string, { n: number; example: string }>();
+    for (const e of stats.errors) {
+      const key = e.replace(/ for ".*$/, "");
+      const g = groups.get(key) ?? { n: 0, example: e };
+      g.n++;
+      groups.set(key, g);
+    }
+    console.log(`model errors (${stats.errors.length}) - one model failing on one posting; the other models still read it:`);
+    for (const [key, g] of [...groups].sort((a, b) => b[1].n - a[1].n).slice(0, 8)) {
+      console.log(`  ${String(g.n).padStart(3)}x ${g.n > 1 && key !== g.example ? `${key} - e.g. ${g.example.slice(key.length).trim()}` : g.example}`);
+    }
   }
 
   if (!has("no-apply")) {

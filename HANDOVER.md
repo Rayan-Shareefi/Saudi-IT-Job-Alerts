@@ -75,7 +75,7 @@ cloud work, and the date the full posting was read.
 | Search button says "queued" for a long time | Neither GitHub nor the laptop picked it up | Check `GH_DISPATCH_TOKEN` on Vercel, or that the laptop is on |
 | A run shows "stopped responding" | The machine running it went quiet | Press the button again |
 | Nothing new for days | Something upstream changed | On the laptop: `npm run doctor`, then `npm run llm:check` |
-| `llm:check` shows a model failing its canaries | A free model was renamed or retired | Set a working name from its list (`GEMINI_MODEL`, `GEMMA_MODEL`, `GROQ_MODEL`, `GROQ_SENIOR_MODEL`) in `.env.local`, GitHub secrets and Vercel |
+| `llm:check` shows a model failing its canaries | A free model was renamed or retired (each provider already moves to its next default by itself) | If every default is gone, set a working name from its list (`GEMINI_MODEL`, `GEMMA_MODEL`, `GROQ_MODEL`, `GROQ_SENIOR_MODEL`) in `.env.local`, GitHub secrets and Vercel |
 | A real job was hidden | A rule or the reviewers got it wrong | Keep it from the Hidden tab; that fixes it permanently |
 | A wrong job is shown | Same | Hide it |
 | GitHub email "All jobs have failed" | A workflow failed | Open the run on GitHub, Actions tab; the failing step says why |
@@ -248,9 +248,12 @@ Re-measure: `npm run reclassify -- --dry`, `npm run verify`.
 2. **LinkedIn posts** selectors (`linkedin-posts.ts`) are untested against a
    signed-in page until the laptop is set up; run once with `LINKEDIN_DEBUG=1`
    and adjust if no posts are found.
-3. **Company list expansion**: `npm run employers:discover` adds employers found
-   through LinkedIn / JSearch automatically; check `employer_candidates` for the
-   ones it could not resolve.
+3. **Company list expansion**: `npm run employers:discover` (every laptop cycle,
+   25 companies at most) adds employers found through LinkedIn, JSearch, Careerjet,
+   Jooble and Workable's Riyadh search (`workable-riyadh`, free, ~27 requests a
+   run). A board is added only when it shows real postings in Saudi Arabia;
+   companies without one are looked at again after 30 days. Check
+   `employer_candidates` for the ones it could not resolve.
 4. **Private repo minutes**: while the repo is private the nightly scan is one
    30-minute shard. Making it public switches to six parallel shards
    automatically.

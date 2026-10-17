@@ -267,7 +267,7 @@ export async function existingExternalIds(
  * cycle, and it is self-healing.
  */
 /** Search results, not complete lists: retired by age, never by one absence. */
-export const SEARCH_RESULT_KINDS = ["jsearch", "jooble", "careerjet", "linkedin", "linkedin-post", "indeed"];
+export const SEARCH_RESULT_KINDS = ["jsearch", "jooble", "careerjet", "linkedin", "linkedin-post", "indeed", "aggregator"];
 const SEARCH_RESULT_MAX_UNSEEN_DAYS = 10;
 
 export async function deactivateMissing(

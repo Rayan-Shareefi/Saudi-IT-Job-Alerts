@@ -56,6 +56,8 @@ const SOURCE_RANK: Record<string, number> = {
   jooble: 4,
   careerjet: 5,
   "linkedin-post": 6,
+  // Workable search: the employer's own posting, in full, via Workable's board.
+  aggregator: 2,
 };
 const QUALITY_RANK: Record<string, number> = { full: 0, partial: 1, snippet: 2, none: 3 };
 

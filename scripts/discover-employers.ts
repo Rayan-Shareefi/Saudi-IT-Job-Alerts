@@ -1,13 +1,13 @@
 /**
  * Find employers the board does not track yet, and add them.
  *
- *   npm run employers:discover            # find candidates, try up to 6
+ *   npm run employers:discover            # find candidates, try up to 25 (20 min)
  *   npm run employers:discover -- --dry   # report only
  *
  * The user's example: STC posts a security job on LinkedIn, but STC's own
  * careers site is not being checked. So, for every company behind a verified
- * or unclassified cyber/cloud vacancy from LinkedIn, JSearch, Careerjet or
- * Jooble that is not in the registry:
+ * or unclassified cyber/cloud vacancy from LinkedIn, JSearch, Careerjet,
+ * Jooble or Workable's Riyadh search that is not in the registry:
  *
  *   1. record it as a candidate (employer_candidates);
  *   2. find its site: the domain of the employer's own apply link, or the
@@ -15,7 +15,12 @@
  *   3. find its job board: an ATS linked from the careers page (the same
  *      markup sniff and verified slug probe as sources:discover);
  *   4. add it (dynamic_sources) ONLY if the board returns at least one real
- *      posting. A guess that returns nothing is recorded, not added.
+ *      posting in Saudi Arabia. A guess that returns nothing is recorded, not
+ *      added, and looked at again after 30 days.
+ *
+ * Every run - the search button, the schedule, the laptop - reads the added
+ * boards (registry.dynamicSources), and every posting from them goes through
+ * the same rules, jury and evidence check as any other before it is shown.
  *
  * No search engine is scraped and no bot protection is bypassed: a site that
  * refuses is recorded as "blocked" and stays covered by LinkedIn and JSearch.
@@ -31,8 +36,12 @@ import { isPlausiblePosting } from "../src/lib/plausible";
 import { matchSignatures, probeSlugs } from "./discover-ats";
 
 const DRY = process.argv.includes("--dry");
-const PER_RUN = Number(process.argv[process.argv.indexOf("--max") + 1]) || 6;
-const SEARCH_KINDS = ["linkedin", "linkedin-post", "jsearch", "careerjet", "jooble"];
+const PER_RUN = Number(process.argv[process.argv.indexOf("--max") + 1]) || 25;
+/** Stop starting new companies after this long; the rest wait for the next run. */
+const DEADLINE_MS = 20 * 60_000;
+/** A company with no board found is looked at again after this long. */
+const RECHECK_MS = 30 * 86_400_000;
+const SEARCH_KINDS = ["linkedin", "linkedin-post", "jsearch", "careerjet", "jooble", "aggregator"];
 const NOT_EMPLOYER_HOST = /linkedin\.|indeed\.|bayt\.|glassdoor\.|careerjet|jooble|jobviewtrack|google\.|naukrigulf|gulftalent|tanqeeb|wuzzuf|forms\.|greenhouse\.io|lever\.co|workable\.com|myworkdayjobs|smartrecruiters|ashbyhq|bamboohr|recruitee|successfactors|oraclecloud|taleo/i;
 const SAUDI = /saudi|riyadh|\bksa\b|jeddah|dammam|khobar|الرياض|السعودية|المملكة/i;
 const CAREERS_PATHS = ["/careers", "/en/careers", "/careers/", "/jobs", "/join-us", "/en/join-us", "/about/careers", "/ar/careers"];
@@ -84,7 +93,44 @@ async function homepageOf(name: string, rows: Row[]): Promise<string | null> {
   return null;
 }
 
-async function findBoard(seed: CompanySeed, home: string): Promise<{ adapter: string; handle: string; careersUrl: string } | null> {
+interface Board {
+  adapter: string;
+  handle: string;
+  careersUrl: string;
+  /** Read off the careers page, or confirmed on an ATS API under the company's name. */
+  via: "page" | "probe";
+}
+
+/**
+ * How many real postings in Saudi Arabia the board returns. A board is added
+ * only above zero: same name is not same company - "Master Works" (a Riyadh
+ * IT firm) matched masterworks.com, a US art-investment company.
+ */
+async function saudiPostings(name: string, key: string, board: Board): Promise<number> {
+  const source = {
+    id: `auto-${board.adapter}-${key}`.slice(0, 80),
+    label: name,
+    company: name,
+    kind: board.adapter === "browser" ? "career-page" : "ats",
+    adapter: board.adapter,
+    handle: board.handle,
+    region: "ksa",
+    needsBrowser: board.adapter === "browser",
+    enabled: true,
+  } as const;
+  try {
+    const adapter = ADAPTERS[board.adapter];
+    const postings = adapter ? await adapter(source as never) : [];
+    return postings
+      .filter((p) => isPlausiblePosting(p.title, p.descriptionText, p.url))
+      .filter((p) => SAUDI.test(`${p.locationText ?? ""} ${p.title}`)).length;
+  } catch (err) {
+    console.log(`  ${name.padEnd(36)} ${board.adapter} board did not load (${err instanceof Error ? err.message.slice(0, 60) : err})`);
+    return 0;
+  }
+}
+
+async function findBoard(seed: CompanySeed, home: string): Promise<Board | null> {
   // An ATS linked or embedded from the careers page.
   for (const path of CAREERS_PATHS) {
     const url = `${home}${path}`;
@@ -93,10 +139,10 @@ async function findBoard(seed: CompanySeed, home: string): Promise<{ adapter: st
       if (!res.ok) continue;
       const html = await res.text();
       const found = matchSignatures(html, { ...seed, careersUrl: url });
-      if (found.length) return { adapter: found[0].adapter, handle: found[0].handle, careersUrl: url };
+      if (found.length) return { adapter: found[0].adapter, handle: found[0].handle, careersUrl: url, via: "page" };
       // A careers page with no ATS: read by the browser adapter.
       if (/vacanc|open (positions|roles)|job openings|current openings|وظائف|الوظائف الشاغرة/i.test(html)) {
-        return { adapter: "browser", handle: url, careersUrl: url };
+        return { adapter: "browser", handle: url, careersUrl: url, via: "page" };
       }
     } catch {
       /* next path */
@@ -104,7 +150,7 @@ async function findBoard(seed: CompanySeed, home: string): Promise<{ adapter: st
   }
   // A verified slug on a public ATS API (requires real postings and a name match).
   const probed = await probeSlugs(seed).catch(() => []);
-  if (probed.length) return { adapter: probed[0].adapter, handle: probed[0].handle, careersUrl: home };
+  if (probed.length) return { adapter: probed[0].adapter, handle: probed[0].handle, careersUrl: home, via: "probe" };
   return null;
 }
 
@@ -135,8 +181,13 @@ async function main(): Promise<void> {
   console.log(`${byCompany.size} employer(s) behind cyber/cloud postings are not tracked yet`);
 
   // Record or refresh every candidate.
-  const { data: existing } = await db.from("employer_candidates").select("company_key,status");
+  const { data: existing } = await db.from("employer_candidates").select("company_key,status,checked_at");
   const status = new Map((existing ?? []).map((e) => [String(e.company_key), String(e.status)]));
+  const checkedAt = new Map((existing ?? []).map((e) => [String(e.company_key), e.checked_at ? new Date(String(e.checked_at)).getTime() : 0]));
+  const due = (key: string) => {
+    const s = status.get(key) ?? "new";
+    return s === "new" || (s === "no-careers-site" && Date.now() - (checkedAt.get(key) ?? 0) > RECHECK_MS);
+  };
   if (!DRY) {
     for (const [key, c] of byCompany) {
       await db.from("employer_candidates").upsert(
@@ -146,57 +197,94 @@ async function main(): Promise<void> {
     }
   }
 
+  const waiting = [...byCompany.keys()].filter(due).length;
   const todo = [...byCompany.entries()]
-    .filter(([key]) => (status.get(key) ?? "new") === "new")
+    .filter(([key]) => due(key))
     .sort((a, b) => b[1].rows.length - a[1].rows.length)
     .slice(0, PER_RUN);
+  console.log(`${waiting} waiting to be checked; checking ${todo.length} now (most cyber/cloud postings first)`);
 
+  const started = Date.now();
+  let added = 0;
+  let checked = 0;
   for (const [key, c] of todo) {
-    const seed: CompanySeed = { name: c.name, careersUrl: "", sector: "technology" as CompanySeed["sector"], priority: 2 };
-    const home = await homepageOf(c.name, c.rows);
-    if (!home) {
-      console.log(`  ${c.name.padEnd(36)} no website found`);
-      if (!DRY) await db.from("employer_candidates").update({ status: "no-careers-site", note: "no website found from its postings or name" }).eq("company_key", key);
-      continue;
+    if (Date.now() - started > DEADLINE_MS) {
+      console.log(`  time limit reached - the other ${todo.length - checked} wait for the next run`);
+      break;
     }
-    const board = await findBoard(seed, home);
+    checked++;
+    const now = new Date().toISOString();
+    const seed: CompanySeed = { name: c.name, careersUrl: "", sector: "technology" as CompanySeed["sector"], priority: 2 };
+    const byName = (): Promise<Board | null> =>
+      probeSlugs(seed)
+        .then((p) => (p.length ? { adapter: p[0].adapter, handle: p[0].handle, careersUrl: `its ${p[0].adapter} board "${p[0].handle}"`, via: "probe" as const } : null))
+        .catch(() => null);
+    // Found through Workable's search, so it hires on an ATS: ask for its
+    // board by name first. Guessing the website first went to the wrong
+    // page for JODAYN and Master-Works (2026-10-17).
+    const viaAts = c.rows.some((r) => r.source_kind === "aggregator");
+    let home: string | null = null;
+    let board = viaAts ? await byName() : null;
     if (!board) {
-      console.log(`  ${c.name.padEnd(36)} ${home} - no job board found`);
-      if (!DRY) await db.from("employer_candidates").update({ status: "no-careers-site", website: home, note: "site found, no job board on it" }).eq("company_key", key);
+      home = await homepageOf(c.name, c.rows);
+      // No website found is not the end: many employers answer on a public
+      // ATS API under their own name.
+      board = home ? await findBoard(seed, home) : viaAts ? null : await byName();
+    }
+    let real = board ? await saudiPostings(c.name, key, board) : 0;
+    // A careers page with nothing Saudi on it may be another company's or one
+    // the browser cannot read; the ATS under the company's name is the second
+    // chance.
+    if (board && real === 0 && board.via === "page" && !viaAts) {
+      const second = await byName();
+      const n = second ? await saudiPostings(c.name, key, second) : 0;
+      if (second && n > 0) {
+        board = second;
+        real = n;
+      }
+    }
+    if (!board) {
+      console.log(`  ${c.name.padEnd(36)} ${home ? `${home} - no job board found` : "no website or job board found"}`);
+      if (!DRY) {
+        await db
+          .from("employer_candidates")
+          .update({ status: "no-careers-site", ...(home ? { website: home } : {}), note: home ? "site found, no job board on it" : "no website found from its postings or name, no ATS under its name", checked_at: now })
+          .eq("company_key", key);
+      }
       continue;
     }
 
-    // Validate: the board must return at least one real posting before it is added.
     const id = `auto-${board.adapter}-${key}`.slice(0, 80);
-    const source = { id, label: c.name, company: c.name, kind: board.adapter === "browser" ? "career-page" : "ats", adapter: board.adapter, handle: board.handle, region: "ksa", needsBrowser: board.adapter === "browser", enabled: true } as const;
-    let real = 0;
-    try {
-      const adapter = ADAPTERS[board.adapter];
-      const postings = adapter ? await adapter(source as never) : [];
-      const plausible = postings.filter((p) => isPlausiblePosting(p.title, p.descriptionText, p.url));
-      /*
-       * Same name is not same company: "Master Works" (a Riyadh IT firm)
-       * matched masterworks.com, a US art-investment company. A board is only
-       * this employer's if it actually hires in Saudi Arabia.
-       */
-      const saudi = plausible.filter((p) => SAUDI.test(`${p.locationText ?? ""} ${p.title}`));
-      real = saudi.length;
-    } catch (err) {
-      console.log(`  ${c.name.padEnd(36)} ${board.adapter} board did not load (${err instanceof Error ? err.message.slice(0, 60) : err})`);
-    }
+    const kind = board.adapter === "browser" ? "career-page" : "ats";
     if (real === 0) {
-      if (!DRY) await db.from("employer_candidates").update({ status: "no-careers-site", website: home, note: `board at ${board.careersUrl} returned no real postings` }).eq("company_key", key);
+      console.log(`  ${c.name.padEnd(36)} ${board.adapter} board has no real postings in Saudi Arabia - not added`);
+      if (!DRY) {
+        await db
+          .from("employer_candidates")
+          .update({ status: "no-careers-site", ...(home ? { website: home } : {}), note: `board at ${board.careersUrl} returned no real postings`, checked_at: now })
+          .eq("company_key", key);
+      }
       continue;
     }
     console.log(`  ${c.name.padEnd(36)} ADD ${board.adapter} ${board.handle} (${real} real postings)`);
+    added++;
     if (!DRY) {
       await db.from("dynamic_sources").upsert(
-        { id, company: c.name, label: c.name, kind: source.kind, adapter: board.adapter, handle: board.handle, region: "ksa", needs_browser: source.needsBrowser, found_via: c.rows[0].source_kind, evidence: `${real} postings on ${board.careersUrl}` },
+        { id, company: c.name, label: c.name, kind, adapter: board.adapter, handle: board.handle, region: "ksa", needs_browser: board.adapter === "browser", found_via: c.rows[0].source_kind, evidence: `${real} postings on ${board.careersUrl}` },
         { onConflict: "id" },
       );
-      await db.from("employer_candidates").update({ status: "added", website: home, note: `added ${board.adapter} ${board.handle}` }).eq("company_key", key);
+      await db
+        .from("employer_candidates")
+        .update({ status: "added", ...(home ? { website: home } : {}), note: `added ${board.adapter} ${board.handle}`, checked_at: now })
+        .eq("company_key", key);
     }
   }
+
+  const total = DRY ? null : (await dynamicSources()).length;
+  console.log(
+    `\nchecked ${checked}, added ${added}${total !== null ? ` - ${total} employer board(s) found automatically so far, searched on every run` : ""}` +
+      (waiting - checked > 0 ? `; ${waiting - checked} still waiting` : ""),
+  );
 }
 
 main().catch((err) => {
