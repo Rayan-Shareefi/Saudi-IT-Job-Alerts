@@ -122,7 +122,7 @@ function Restart-Into-New-Code() {
 
 function Show-Schedule() {
   try {
-    $state = Get-Content (Join-Path $repo "logs\worker-state.json") -Raw | ConvertFrom-Json
+    $state = Get-Content (Join-Path $repo "logs\worker-state.json") -Raw -ErrorAction Stop | ConvertFrom-Json
     if ($state.lastCycleAt) {
       $last = [DateTime]::Parse($state.lastCycleAt).ToLocalTime()
       $next = $last.AddMinutes(120)
