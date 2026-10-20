@@ -122,6 +122,7 @@ export type SourceKind =
   | "careerjet" // Careerjet API
   | "linkedin" // LinkedIn job listings (public, no login)
   | "linkedin-post" // a company "we are hiring" post on LinkedIn
+  | "telegram" // a Saudi job channel's post on Telegram (public channel page, no login)
   | "indeed" // Indeed, where it arrives as its own source
   | "aggregator" // any future multi-company API
   | "job-board" // classic board (Bayt, GulfTalent...)

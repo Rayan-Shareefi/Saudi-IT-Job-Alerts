@@ -69,6 +69,7 @@ cloud work, and the date the full posting was read.
 | **Jooble, Careerjet** | Their free APIs |
 | **Sabbar** | Its public job sitemap (robots.txt allows it), then the job pages; twice a day |
 | **Workable** | Its free public job search, every employer hiring in Riyadh through Workable |
+| **Telegram** | Saudi job channels @ewdifh, @cd4cd, @jobzaty, @fu1sa through their public channel pages (no login). Only posts about technology or training are kept; the linked article is read where the site allows it (jobzaty.com, wdeftksa.com), the post's picture (OCR) otherwise. Change the list with `TELEGRAM_CHANNELS=handle,handle` |
 | **Company sites** | ~530 employer boards and career pages, plus the ones the worker discovers |
 
 Every posting from every platform goes through the same rules, jury and
@@ -257,6 +258,11 @@ npm run fix:bytes         # repair regex escapes mangled by shell edits
 16. **JSearch answers in Arabic for Saudi searches**: 3 results with only
     relative dates ("قبل ١٥ يومًا"); with `language=en`, 10 with exact dates.
     Dates are read in every form (`relative-date.ts`).
+19. **Programme titles were rejected as institution names.** "Summer Internship
+    Program", "COOP Training Program", "Tamheer Program" matched the institution
+    rule ("... Program") on every source until 2026-10-21. A programme word now
+    lets a title through (`PROGRAMME`, plausible.ts), and announcements read
+    their Arabic text for relevance (`announcesOpenings`).
 18. **"Cannot read properties of undefined (reading 'length')" in webpack's
     WasmHash** during `npm run build` is a stale `.next` cache (left by a dev
     server): delete `.next` and build again.

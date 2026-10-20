@@ -104,6 +104,14 @@ const MUST_REJECT: Array<[string, string]> = [
   ["College of Engineering", "Alfaisal, a faculty not a job"],
   ["College of Engineering & Architecture", "Al Yamamah"],
   ["Research Ethics Unit", "Princess Nourah department"],
+  // Still institutions after programmes were let through (2026-10-21).
+  ["King Saud University", "an institution"],
+  ["Graduate School of Business", "an institution, though it says graduate"],
+  // Arabic headings and news that only look like announcements.
+  ["وظائف شاغرة", "a careers-page heading"],
+  ["الوظائف المتاحة", "a careers-page heading"],
+  ["الهيئة تعلن إطلاق منصة التوظيف الجديدة", "news about a platform, not an opening"],
+  ["(وظائف)", "a bare label in brackets"],
   ["Research Services Unit", "Princess Nourah department"],
   ["Humanities Colleges", "Princess Nourah department"],
   ["Alfaisal University Preparatory Program", "a programme, not a role"],
@@ -191,6 +199,23 @@ const MUST_KEEP: Array<[string, string]> = [
   ["متدرب تعاوني - الأمن السيبراني", "co-op trainee"],
   ["فني شبكات", "network technician"],
   ["COOP Training التدريب التعاوني", "mixed script, co-op listing"],
+  // Programmes were rejected as institution names until 2026-10-21 - on every source.
+  ["Summer Internship Program", "a programme, not an institution"],
+  ["COOP Training Program", "co-op programme"],
+  ["Cooperative Training Program 2026", "co-op programme with its year"],
+  ["Graduate Development Programme", "graduate programme"],
+  ["Tamheer Program", "Tamheer on-the-job training"],
+  // Telegram announcements (2026-10-21), real headlines.
+  ["شركة علم تعلن بدء التسجيل في برنامج التدريب التعاوني 2027 (دفعة يناير)", "Elm's co-op programme, @cd4cd"],
+  ["المركز الوطني لنظم الموارد الحكومية يعلن برنامج استكشف للتدريب التعاوني", "a co-op programme"],
+  ["تكافل الراجحي تعلن برنامج تدريب لحديثي التخرج", "graduate training programme"],
+  ["أكاديمية الطاقة والمياه تعلن برنامج تدريب منتهي بالتوظيف في جميع مناطق المملكة", "training ending in employment"],
+  ["شركة NHC تعلن 14 وظيفة شاغرة", "an employer announcing vacancies"],
+  ["فتح التوظيف لدى شركة بنده في عدة مجالات.", "openings announced at an employer"],
+  ["وظائف بنك الجزيرة (في جميع المناطق):", "an employer's vacancies"],
+  ["عاجل | أرامكو السعودية تعلن (توظيف مباشر 2026) بعدة مدن:", "direct hiring announced"],
+  ["هيئة الزكاة والضريبة والجمارك (وظائف لحملة البكالوريوس فأعلى بالرياض):", "an employer, then (jobs ...)"],
+  ["عاجل إكسبو 2030 الرياض (وظائف شاغرة):", "an employer, then (vacancies)"],
   // Real roles that mention an institution or a department must survive.
   ["Lecturer, Alfaisal University", "a role AT an institution"],
   ["IT Support Specialist - College of Engineering", "a role in a faculty"],

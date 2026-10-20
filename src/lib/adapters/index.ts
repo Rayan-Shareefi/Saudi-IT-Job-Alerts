@@ -17,6 +17,7 @@ import { linkedin } from "./linkedin";
 import { linkedinPosts } from "./linkedin-posts";
 import { workableSearch } from "./workable-search";
 import { sabbar } from "./sabbar";
+import { telegram } from "./telegram";
 
 export const ADAPTERS: Record<string, Adapter> = {
   // company-hosted applicant tracking systems
@@ -51,6 +52,8 @@ export const ADAPTERS: Record<string, Adapter> = {
   "workable-search": workableSearch,
   // Sabbar, a Saudi job platform: its public job sitemap, then the job pages
   sabbar,
+  // Saudi job channels on Telegram (public channel pages), with their articles
+  telegram,
 };
 
 export type { Adapter };

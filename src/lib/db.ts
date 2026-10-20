@@ -6,7 +6,7 @@ import type { EnrichedJob, IngestResult, JobRecord, SourceDefinition } from "./t
  * Each carries already-syndicated listings, so mixing them in would bury the
  * employer-board postings that arrive first.
  */
-export const AGGREGATOR_KINDS = ["jsearch", "jooble", "careerjet", "aggregator"] as const;
+export const AGGREGATOR_KINDS = ["jsearch", "jooble", "careerjet", "aggregator", "telegram"] as const;
 
 /* -------------------------------------------------------------------------- */
 /* clients                                                                     */
@@ -269,7 +269,7 @@ export async function existingExternalIds(
  * cycle, and it is self-healing.
  */
 /** Search results, not complete lists: retired by age, never by one absence. */
-export const SEARCH_RESULT_KINDS = ["jsearch", "jooble", "careerjet", "linkedin", "linkedin-post", "indeed", "aggregator"];
+export const SEARCH_RESULT_KINDS = ["jsearch", "jooble", "careerjet", "linkedin", "linkedin-post", "indeed", "aggregator", "telegram"];
 const SEARCH_RESULT_MAX_UNSEEN_DAYS = 10;
 
 export async function deactivateMissing(

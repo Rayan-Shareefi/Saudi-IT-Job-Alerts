@@ -16,7 +16,7 @@
  * director "just in case" is not caution, it is noise.
  */
 
-import { namesARole } from "./plausible";
+import { announcesOpenings, namesARole } from "./plausible";
 
 /* -------------------------------------------------------------------------- */
 /* positive signals                                                            */
@@ -160,9 +160,18 @@ export function judgeRelevance(
    * and people's names were admitted on the strength of the page around them.
    */
   const body = (description ?? "").slice(0, 4000);
-  if (body && namesARole(t)) {
+  /*
+   * A programme or vacancy announcement names no role either, but it is an
+   * opening, and its text lists the fields it takes - usually in Arabic. Elm's
+   * co-op programme reached Telegram as "شركة علم تعلن بدء التسجيل في برنامج
+   * التدريب التعاوني" and was dropped here as not technical (2026-10-21). So
+   * for those titles the text is read too, Arabic terms counting; the scope
+   * check still decides whether it is security or cloud work.
+   */
+  if (body && (namesARole(t) || announcesOpenings(t))) {
     const hits = new Set<string>();
     for (const m of body.matchAll(new RegExp(IT_TERM.source, "gi"))) hits.add(m[0].toLowerCase());
+    for (const m of body.matchAll(new RegExp(IT_TERM_AR.source, "g"))) hits.add(m[0]);
     if (hits.size >= 3) return { ok: true };
   }
 

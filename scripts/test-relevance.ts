@@ -128,6 +128,25 @@ function main(): void {
     ["Follow us", IT_PAGE, false, "a social link on an IT-dense careers page (2026-10-13)"],
     ["Ahmed Al-Harbi", IT_PAGE, false, "a person's name on an IT-dense careers page"],
     ["Specialist II", IT_PAGE, true, "names a role; the dense page is then evidence"],
+    // Announcements (Telegram, 2026-10-21): read through their Arabic text.
+    [
+      "شركة علم تعلن بدء التسجيل في برنامج التدريب التعاوني 2027 (دفعة يناير)",
+      "برنامج التدريب التعاوني لطلاب الجامعات في تخصصات: تقنية المعلومات، الأمن السيبراني، نظم المعلومات، علوم الحاسب. الموقع: الرياض.",
+      true,
+      "Elm's co-op programme for IT and security students",
+    ],
+    [
+      "شركة المراعي تعلن فتح باب التوظيف",
+      "في عدة مجالات: المبيعات، المحاسبة، التسويق، الموارد البشرية، تقنية المعلومات.",
+      false,
+      "vacancies across fields, one of them IT: not enough",
+    ],
+    [
+      "الهيئة تعلن إطلاق منصة رقمية جديدة",
+      "المنصة تعتمد على الحوسبة السحابية وتقنية المعلومات والأمن السيبراني وقواعد البيانات.",
+      false,
+      "news about a platform, however technical its text",
+    ],
   ];
   console.log(`\nBody fallback (${BODY_CASES.length})\n`);
   for (const [title, body, want, why] of BODY_CASES) {

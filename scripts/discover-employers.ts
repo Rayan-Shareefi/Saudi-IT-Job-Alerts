@@ -41,7 +41,7 @@ const PER_RUN = Number(process.argv[process.argv.indexOf("--max") + 1]) || 25;
 const DEADLINE_MS = 20 * 60_000;
 /** A company with no board found is looked at again after this long. */
 const RECHECK_MS = 30 * 86_400_000;
-const SEARCH_KINDS = ["linkedin", "linkedin-post", "jsearch", "careerjet", "jooble", "aggregator"];
+const SEARCH_KINDS = ["linkedin", "linkedin-post", "jsearch", "careerjet", "jooble", "aggregator", "telegram"];
 const NOT_EMPLOYER_HOST = /linkedin\.|indeed\.|bayt\.|glassdoor\.|careerjet|jooble|jobviewtrack|google\.|naukrigulf|gulftalent|tanqeeb|wuzzuf|forms\.|greenhouse\.io|lever\.co|workable\.com|myworkdayjobs|smartrecruiters|ashbyhq|bamboohr|recruitee|successfactors|oraclecloud|taleo/i;
 const SAUDI = /saudi|riyadh|\bksa\b|jeddah|dammam|khobar|الرياض|السعودية|المملكة/i;
 const CAREERS_PATHS = ["/careers", "/en/careers", "/careers/", "/jobs", "/join-us", "/en/join-us", "/about/careers", "/ar/careers"];
@@ -173,7 +173,7 @@ async function main(): Promise<void> {
   const byCompany = new Map<string, { name: string; rows: Row[] }>();
   for (const r of rows) {
     const key = companyKey(r.company);
-    if (!key || key.length < 3 || tracked.has(key) || /^(unknown|hiringpost|confidential|clientof)/.test(key)) continue;
+    if (!key || key.length < 3 || tracked.has(key) || /^(unknown|hiringpost|confidential|clientof|telegram)/.test(key)) continue;
     const entry = byCompany.get(key) ?? { name: r.company, rows: [] };
     entry.rows.push(r);
     byCompany.set(key, entry);

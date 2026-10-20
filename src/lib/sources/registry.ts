@@ -100,6 +100,17 @@ export const AGGREGATOR_SOURCES: SourceDefinition[] = [
     region: "ksa",
     enabled: true,
   },
+  {
+    // Saudi job channels on Telegram (@jobzaty, @cd4cd, @ewdifh, @fu1sa):
+    // their public channel pages, and the articles they link to.
+    id: "telegram-channels",
+    label: "Telegram",
+    kind: "telegram",
+    adapter: "telegram",
+    handle: "channels",
+    region: "ksa",
+    enabled: true,
+  },
 ];
 
 /* -------------------------------------------------------------------------- */

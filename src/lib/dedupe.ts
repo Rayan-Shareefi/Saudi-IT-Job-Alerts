@@ -61,6 +61,8 @@ const SOURCE_RANK: Record<string, number> = {
   "linkedin-post": 6,
   // Workable search: the employer's own posting, in full, via Workable's board.
   aggregator: 2,
+  // A channel's announcement of someone else's vacancy: last choice for the card.
+  telegram: 7,
 };
 const QUALITY_RANK: Record<string, number> = { full: 0, partial: 1, snippet: 2, none: 3 };
 

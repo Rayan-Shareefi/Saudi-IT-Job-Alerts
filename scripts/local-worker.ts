@@ -225,7 +225,7 @@ async function githubMissedCompanies(): Promise<boolean> {
  * every four hours, so the laptop reads only the ones nobody has read in the
  * last three - it fills gaps instead of asking every site twice.
  */
-const PLATFORMS = ["workable-riyadh", "sabbar-riyadh", "jooble-riyadh", "careerjet-riyadh"];
+const PLATFORMS = ["workable-riyadh", "sabbar-riyadh", "telegram-channels", "jooble-riyadh", "careerjet-riyadh"];
 
 async function stalePlatforms(): Promise<string[]> {
   const { data } = await supabaseAdmin().from("source_health").select("source_id,last_run_at").in("source_id", PLATFORMS);
@@ -302,7 +302,7 @@ async function plan(full: boolean): Promise<Planned[]> {
   }
   const platforms = await stalePlatforms().catch(() => PLATFORMS);
   if (platforms.length) {
-    steps.push({ key: "platforms", name: `Job platforms (${platforms.map((p) => p.replace(/-riyadh$/, "")).join(", ")})`, script: "scripts/ingest.ts", args: ["--source", platforms.join(",")], timeoutMin: 45 });
+    steps.push({ key: "platforms", name: `Job platforms (${platforms.map((p) => p.replace(/-(riyadh|channels)$/, "")).join(", ")})`, script: "scripts/ingest.ts", args: ["--source", platforms.join(",")], timeoutMin: 45 });
   }
   if (full || (await githubMissedCompanies().catch(() => false))) {
     if (!full) log("no successful company-board pass in 26h - running it here");

@@ -155,6 +155,7 @@ function arabicWithNoRole(t: string): boolean {
   if (/\b(co-?op|coop|training|internship|intern|trainee|graduate|apprentice|tamheer)\b/i.test(t)) {
     return false;
   }
+  if (PROGRAMME.test(t) || ARABIC_VACANCY_ANNOUNCEMENT.test(t)) return false;
   if (ARABIC_NOT_A_ROLE.test(t)) return true;
   // No role noun in either script and no other evidence: a heading or a notice.
   return true;
@@ -175,6 +176,34 @@ function arabicWithNoRole(t: string): boolean {
  */
 const INSTITUTION_NAME =
   /^(the\s+)?[\w'&.,\/\- ]{0,48}\b(universit(y|ies)|colleges?|institutes?|academ(y|ies)|schools?|facult(y|ies)|hospitals?|centres?|centers?|authorit(y|ies)|ministr(y|ies)|commissions?|foundations?|departments?|units?|divisions?|directorates?|programmes?|programs?)\b[\w'&.,\/\- ]{0,48}$/i;
+
+/**
+ * A training programme is an opening, whatever it is called. "Summer
+ * Internship Program", "COOP Training Program", "Cooperative Training Program
+ * 2026" and "Tamheer Program" were all rejected as institution names - on
+ * every source - until 2026-10-21: the user's first priority, silently
+ * dropped. Arabic forms included, for the same announcements on Telegram and
+ * LinkedIn ("برنامج التدريب التعاوني", "تدريب منتهي بالتوظيف").
+ */
+const PROGRAMME =
+  /\b(co-?op|coop|cooperative training|internships?|interns?|trainees?|graduates?(?!\s+(school|studies|college))|apprentice(ship)?s?|tamheer)\b|تدريب تعاوني|التدريب التعاوني|تعاوني|تمهير|حديثي التخرج|منتهي بالتوظيف|برنامج تدريب|برامج تدريب|فرصة تدريبية|فرص تدريبية|تدريب على رأس العمل/i;
+
+/**
+ * An employer announcing openings is an opening: "شركة NHC تعلن 14 وظيفة
+ * شاغرة", "فتح التوظيف لدى شركة بنده", "وظائف بنك الجزيرة". The bare headings
+ * a careers page carries ("وظائف شاغرة", "الوظائف المتاحة") still are not.
+ */
+const ARABIC_VACANCY_ANNOUNCEMENT =
+  /(تعلن|يعلن|توفر|يوفر|تفتح|يفتح|فتح|تطرح|طرح)[^.]{0,80}(وظائف|وظيفة|فرص وظيفية|فرصة وظيفية|فرص عمل|فرص توظيف|توظيف مباشر|باب التوظيف|التوظيف لدى|التوظيف في)|^وظائف\s+(?:شاغرة\s+)?(?:لدى\s+|في\s+)?\S+\s+\S+|[^\s(]{2,}.{0,60}\(\s*(?:وظائف|وظيفة)[\s)]/;
+
+/**
+ * A title that announces openings without naming one role: a training
+ * programme, or an employer announcing vacancies. Its text says which fields
+ * it takes, so relevance.ts reads the text for those titles too.
+ */
+export function announcesOpenings(title: string): boolean {
+  return PROGRAMME.test(title) || ARABIC_VACANCY_ANNOUNCEMENT.test(title);
+}
 
 /**
  * Site furniture that survived the earlier rules.
@@ -447,7 +476,7 @@ export function judgePosting(
   if (arabicWithNoRole(t)) return { ok: false, reason: "Arabic text that names no role" };
   if (PAGE_FURNITURE.test(t)) return { ok: false, reason: "page furniture, not a vacancy" };
   if (CJK_SCRIPT.test(t)) return { ok: false, reason: "advertised in a non-Saudi market" };
-  if (INSTITUTION_NAME.test(t) && !CONTAINS_ROLE_WORD.test(t)) {
+  if (INSTITUTION_NAME.test(t) && !CONTAINS_ROLE_WORD.test(t) && !PROGRAMME.test(t)) {
     return { ok: false, reason: "an institution's name, not a role" };
   }
 

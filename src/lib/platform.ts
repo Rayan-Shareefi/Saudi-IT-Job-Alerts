@@ -17,6 +17,7 @@ const KNOWN: Array<[RegExp, string]> = [
   [/jooble/i, "Jooble"],
   [/sabbar|صب[اّ]ر/i, "Sabbar"],
   [/workable/i, "Workable"],
+  [/telegram/i, "Telegram"],
   [/careerjet/i, "Careerjet"],
   [/gulftalent/i, "GulfTalent"],
   [/tanqeeb/i, "Tanqeeb"],
@@ -34,6 +35,7 @@ export function platformOf(kind: string, sourceLabel: string, publisher: string 
   if (kind === "ats" || kind === "career-page") return "Company site";
   if (kind === "linkedin") return "LinkedIn";
   if (kind === "linkedin-post") return "LinkedIn post";
+  if (kind === "telegram") return "Telegram";
   if (publisher && (kind === "jsearch" || kind === "aggregator" || kind === "jooble")) return platformName(publisher);
   return platformName(sourceLabel);
 }

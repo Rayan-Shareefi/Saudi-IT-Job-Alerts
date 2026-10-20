@@ -58,7 +58,7 @@ export interface BoardJob {
 
 const COMPANY_KINDS = ["ats", "career-page"];
 const LINKEDIN_KINDS = ["linkedin", "linkedin-post"];
-const BOARD_KINDS = ["jsearch", "jooble", "careerjet", "indeed", "aggregator"];
+const BOARD_KINDS = ["jsearch", "jooble", "careerjet", "indeed", "aggregator", "telegram"];
 
 const LIST_COLUMNS =
   "id,title,company,url,apply_url,apply_kind,source_kind,source_label,publisher,location_text,city," +
