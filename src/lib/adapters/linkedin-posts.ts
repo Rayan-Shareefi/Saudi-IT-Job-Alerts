@@ -3,6 +3,7 @@ import { join } from "node:path";
 import { envFlag, envInt, envStr } from "../env";
 import { sleep } from "../http";
 import { namesARole } from "../plausible";
+import { imageText, stopOcr } from "../ocr";
 import type { RawJob, SourceDefinition } from "../types";
 import { MissingCredential } from "./aggregators";
 
@@ -65,6 +66,8 @@ interface ScrapedPost {
   text: string;
   companyName: string | null;
   links: string[];
+  /** The post's own pictures (not profile photos), for OCR. */
+  images: string[];
 }
 
 /**
@@ -109,7 +112,14 @@ export const EXTRACT = `(() => {
     const links = [...(textEl || n).querySelectorAll('a[href]')]
       .map(a => a.href)
       .filter(h => /^https?:/.test(h) && !/linkedin\\.com\\/(in|feed|search|company|posts|groups|hashtag)\\//.test(h) && !/linkedin\\.com\\/?$/.test(h));
-    out.push({ urn: 'urn:li:activity:' + id, text, companyName, links });
+    // The post's pictures: large ones from LinkedIn's media host, outside the
+    // author header (that is the profile photo).
+    const images = [...n.querySelectorAll('img')]
+      .filter(img => !img.closest('.update-components-actor') && (img.naturalWidth || img.width || 0) >= 300)
+      .map(img => img.currentSrc || img.src || '')
+      .filter(src => /^https:\\/\\/media\\.licdn\\.com\\//.test(src))
+      .slice(0, 2);
+    out.push({ urn: 'urn:li:activity:' + id, text, companyName, links, images });
   }
   return out;
 })()`;
@@ -223,10 +233,32 @@ export const linkedinPosts = async (source: SourceDefinition): Promise<RawJob[]>
 
     const out: RawJob[] = [];
     let hiring = 0;
+    let read = 0;
+    const ocrBudget = envInt("LINKEDIN_OCR_MAX", 15);
     for (const p of posts.values()) {
-      if (!HIRING.test(p.text)) continue;
+      /*
+       * A picture and two sentences: the announcement is often only in the
+       * picture. Its printed text is read (OCR, ocr.ts) when the post's own
+       * text is short or names no role, and added to the post - so the rules
+       * and the jury read it, and quote it, like any other text.
+       */
+      let text = p.text;
+      if (p.images.length && read < ocrBudget && (text.length < 600 || !HIRING.test(text) || !postTitle(text))) {
+        for (const src of p.images) {
+          if (read >= ocrBudget) break;
+          read++;
+          try {
+            const res = await page.request.get(src, { timeout: 30000 });
+            const words = res.ok() ? await imageText(Buffer.from(await res.body())) : null;
+            if (words) text = `${text}\n\n[Text in the post's picture]\n${words}`;
+          } catch {
+            /* the picture would not load; the post's own text stands */
+          }
+        }
+      }
+      if (!HIRING.test(text)) continue;
       hiring++;
-      const title = postTitle(p.text);
+      const title = postTitle(text);
       if (!title) continue;
       const id = p.urn.match(/activity:(\d+)/)?.[1] ?? p.urn;
       out.push({
@@ -235,16 +267,17 @@ export const linkedinPosts = async (source: SourceDefinition): Promise<RawJob[]>
         title,
         company: p.companyName ?? "Hiring post",
         locationText: "",
-        descriptionText: p.text.slice(0, 6000),
+        descriptionText: text.slice(0, 9000),
         url: `https://www.linkedin.com/feed/update/urn:li:activity:${id}/`,
         applyUrl: p.links[0] ?? null,
         postedAt: null,
         publisher: "LinkedIn post",
       });
     }
-    console.log(`  LinkedIn posts: ${posts.size} read, ${hiring} about hiring, ${out.length} name a role (those go to the checker)`);
+    console.log(`  LinkedIn posts: ${posts.size} read, ${hiring} about hiring, ${out.length} name a role (those go to the checker); ${read} picture(s) read`);
     return out;
   } finally {
+    await stopOcr();
     await context.close();
   }
 };

@@ -59,12 +59,17 @@ async function main(): Promise<void> {
 
   let sources: SourceDefinition[];
   if (single) {
-    const s = sourceById(single) ?? (await dynamicSources()).find((d) => d.id === single);
-    if (!s) {
-      console.error(`unknown source "${single}"`);
-      process.exit(1);
+    // One source, or several: --source workable-riyadh,sabbar-riyadh
+    const dynamic = await dynamicSources();
+    sources = [];
+    for (const id of single.split(",").map((s) => s.trim()).filter(Boolean)) {
+      const s = sourceById(id) ?? dynamic.find((d) => d.id === id);
+      if (!s) {
+        console.error(`unknown source "${id}"`);
+        process.exit(1);
+      }
+      sources.push(s);
     }
-    sources = [s];
   } else {
     // Plus employers the worker discovered and added by itself.
     const dynamic = configured ? await dynamicSources() : [];

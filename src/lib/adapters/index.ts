@@ -16,6 +16,7 @@ import { careerjet, jooble, jsearch } from "./aggregators";
 import { linkedin } from "./linkedin";
 import { linkedinPosts } from "./linkedin-posts";
 import { workableSearch } from "./workable-search";
+import { sabbar } from "./sabbar";
 
 export const ADAPTERS: Record<string, Adapter> = {
   // company-hosted applicant tracking systems
@@ -48,6 +49,8 @@ export const ADAPTERS: Record<string, Adapter> = {
   "linkedin-posts": linkedinPosts,
   // every employer hiring in Riyadh through Workable (public search, free)
   "workable-search": workableSearch,
+  // Sabbar, a Saudi job platform: its public job sitemap, then the job pages
+  sabbar,
 };
 
 export type { Adapter };

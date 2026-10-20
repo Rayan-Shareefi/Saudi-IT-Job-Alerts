@@ -89,6 +89,17 @@ export const AGGREGATOR_SOURCES: SourceDefinition[] = [
     region: "ksa",
     enabled: true,
   },
+  {
+    // Sabbar, a Saudi job platform: its public job sitemap (robots.txt allows
+    // it), then the job pages that look like security, cloud or student roles.
+    id: "sabbar-riyadh",
+    label: "Sabbar",
+    kind: "aggregator",
+    adapter: "sabbar",
+    handle: "Riyadh",
+    region: "ksa",
+    enabled: true,
+  },
 ];
 
 /* -------------------------------------------------------------------------- */

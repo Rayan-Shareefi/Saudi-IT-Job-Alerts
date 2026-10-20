@@ -77,9 +77,60 @@ function LinkedIn-Login() {
 }
 
 function Show-Keys() {
-  Say "Keys:  L = LinkedIn sign-in   N = run a cycle now   R = restart worker   D = check everything   Q = close this window" DarkCyan
+  Say "Keys:  N = search now   F = full search (every company site too, ~2 h)   L = LinkedIn sign-in" DarkCyan
+  Say "       U = update now   R = restart worker   D = check everything   Q = close this window" DarkCyan
   Say "Closing this window does not stop the worker." DarkGray
   Line
+}
+
+$loopMarker = Join-Path $repo "logs\loop-installed"
+
+# Downloads the latest version. Run here, in your own Windows session, where
+# GitHub sign-in works even while the repository is private; the worker in
+# the background cannot sign in, so without this it would keep old code.
+function Update-Code() {
+  if (-not (Test-Path (Join-Path $repo ".git"))) { return $false }
+  Say "Checking for updates..." DarkGray
+  $before = (& git -C $repo rev-parse HEAD 2>$null)
+  $out = (& git -C $repo pull --ff-only 2>&1 | Out-String)
+  $pulled = $LASTEXITCODE
+  $after = (& git -C $repo rev-parse HEAD 2>$null)
+  if ($pulled -ne 0) {
+    $last = ($out.Trim() -split "`r?`n")[-1]
+    Say "Could not update this time ($last). It tries again next time you open this." Yellow
+    return $false
+  }
+  if ($before -eq $after) { Say "Up to date." DarkGray; return $false }
+  Say "Updated to the latest version." Green
+  if (& git -C $repo diff --name-only $before $after -- package-lock.json) {
+    Say "Installing updated packages (a few minutes)..." Yellow
+    & npm.cmd ci | Out-Host
+  }
+  return $true
+}
+
+# The worker restarts itself into new code when asked (logs\restart), since
+# the background task runs it in a restart loop.
+function Restart-Into-New-Code() {
+  if (Test-Path $loopMarker) {
+    New-Item -ItemType File -Force (Join-Path $repo "logs\restart") | Out-Null
+    Say "Restarting the worker into the new version (within a minute)." Green
+  } else {
+    Install-Or-Restart
+  }
+}
+
+function Show-Schedule() {
+  try {
+    $state = Get-Content (Join-Path $repo "logs\worker-state.json") -Raw | ConvertFrom-Json
+    if ($state.lastCycleAt) {
+      $last = [DateTime]::Parse($state.lastCycleAt).ToLocalTime()
+      $next = $last.AddMinutes(120)
+      Say ("Last search started {0:HH:mm}; next one around {1:HH:mm}. Press N to search now." -f $last, $next) Gray
+    }
+  } catch {
+    # no schedule yet: the first search starts as soon as the worker does
+  }
 }
 
 function Paint($l) {
@@ -91,6 +142,8 @@ function Paint($l) {
   elseif ($l -match "needs you") { Say $l Magenta }
   elseif ($l -match "\bFAIL\b|failed|[Ee]rror|MISSING|NOT INSTALLED") { Say $l Red }
   elseif ($l -match " ADD ") { Say $l Green }
+  # The time estimates: the plan, its finish time, and time left in long steps.
+  elseif ($l -match "search plan:|this search takes about|min left - done around") { Say $l Cyan }
   elseif ($l -match "^\[[^\]]+\] > ") { Say $l Cyan }
   elseif ($l -match "exited 0") { Say $l Green }
   elseif ($l -match "exited \d") { Say $l Yellow }
@@ -109,8 +162,13 @@ function Handle-Key() {
     "L" { LinkedIn-Login }
     "N" {
       New-Item -ItemType File -Force (Join-Path $repo "logs\run-now") | Out-Null
-      Say ">> Asked the worker for a cycle now - it starts within a few seconds (or after the current step)." Yellow
+      Say ">> Asked for a search now - it starts within a few seconds (or after the current step) and prints its time estimate." Yellow
     }
+    "F" {
+      New-Item -ItemType File -Force (Join-Path $repo "logs\run-full") | Out-Null
+      Say ">> Asked for a full search - every platform and every company site. It prints its time estimate when it starts." Yellow
+    }
+    "U" { if (Update-Code) { Restart-Into-New-Code } }
     "R" { Install-Or-Restart }
     "D" { Line; Node-Script "scripts\doctor.ts" | Out-Null; Line }
     "Q" { return $false }
@@ -190,7 +248,17 @@ if (-not (Test-Path $tsx)) {
   & npm.cmd ci
 }
 
-if (Worker-Running) { Say "Worker: running in the background." Green } else { Install-Or-Restart }
+$updated = Update-Code
+if (-not (Test-Path $loopMarker)) {
+  Say "One-time upgrade of the background task, so updates restart the worker by themselves." Yellow
+  Install-Or-Restart
+} elseif (-not (Worker-Running)) {
+  Install-Or-Restart
+} else {
+  Say "Worker: running in the background." Green
+  if ($updated) { Restart-Into-New-Code }
+}
+Show-Schedule
 
 if ((Env-Flag "LINKEDIN_POSTS_ENABLED") -and -not (Test-Path (Join-Path $repo ".linkedin-profile"))) {
   Say "LinkedIn hiring posts need a one-time sign-in on this laptop." Magenta

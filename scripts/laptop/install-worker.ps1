@@ -48,8 +48,22 @@ if (-not ((Test-Path (Join-Path $repo ".env.local")) -or (Test-Path (Join-Path $
 New-Item -ItemType Directory -Force (Join-Path $repo "logs") | Out-Null
 $log = Join-Path $repo "logs\worker.log"
 
-$command = "/c `"`"$node`" `"$tsx`" scripts\local-worker.ts >> logs\worker.log 2>&1`""
-$action = New-ScheduledTaskAction -Execute "cmd.exe" -Argument $command -WorkingDirectory $repo
+# The task runs a small loop that starts the worker again whenever it exits -
+# after updating itself, after the launcher asks for a restart, after a crash.
+# Task Scheduler's own "restart on failure" does not do this: it never fires
+# for a program that exits by itself. The loop is passed encoded, so it is
+# held in memory and a later "git pull" cannot change it while it runs.
+$q = [char]34
+$inner = "/c $q$q$node$q $q$tsx$q scripts\local-worker.ts >> logs\worker.log 2>&1$q"
+$loop = @"
+Set-Location -LiteralPath '$($repo.Replace("'", "''"))'
+while (`$true) {
+  Start-Process -FilePath 'cmd.exe' -ArgumentList '$($inner.Replace("'", "''"))' -NoNewWindow -Wait
+  Start-Sleep -Seconds 15
+}
+"@
+$encoded = [Convert]::ToBase64String([Text.Encoding]::Unicode.GetBytes($loop))
+$action = New-ScheduledTaskAction -Execute "powershell.exe" -Argument "-NoProfile -NonInteractive -WindowStyle Hidden -ExecutionPolicy Bypass -EncodedCommand $encoded" -WorkingDirectory $repo
 $trigger = New-ScheduledTaskTrigger -AtStartup
 $settings = New-ScheduledTaskSettingsSet `
   -AllowStartIfOnBatteries `
@@ -73,8 +87,9 @@ function Started() {
 
 function StartFresh() {
   Stop-ScheduledTask -TaskName $name -ErrorAction SilentlyContinue
-  Get-CimInstance Win32_Process -Filter "Name = 'node.exe'" -ErrorAction SilentlyContinue |
-    Where-Object { $_.CommandLine -like "*local-worker.ts*" } |
+  # The loop and the worker it started, old or new style, so only one runs.
+  Get-CimInstance Win32_Process -ErrorAction SilentlyContinue |
+    Where-Object { ($_.Name -eq "node.exe" -and $_.CommandLine -like "*local-worker.ts*") -or ($_.Name -eq "powershell.exe" -and $_.CommandLine -like "*-EncodedCommand $encoded*") } |
     ForEach-Object { Stop-Process -Id $_.ProcessId -Force -ErrorAction SilentlyContinue }
   # The log only grows; start afresh past 20 MB, keeping the previous one.
   if ((Test-Path $log) -and (Get-Item $log).Length -gt 20MB) { Move-Item $log (Join-Path $repo "logs\worker.old.log") -Force }
@@ -82,13 +97,17 @@ function StartFresh() {
   Start-ScheduledTask -TaskName $name
 }
 
-# The launcher's Restart, with the task already installed: restarting is
-# enough, and re-registering could ask for the Windows password again.
+# The launcher's Restart, with the task already installed the current way
+# (the restart loop): restarting is enough, and re-registering could ask for
+# the Windows password again. A task from before the loop is replaced.
 $running = $false
-if ($FromLauncher -and (Get-ScheduledTask -TaskName $name -ErrorAction SilentlyContinue)) {
+$existing = Get-ScheduledTask -TaskName $name -ErrorAction SilentlyContinue
+$current = $existing -and ($existing.Actions | Where-Object { $_.Execute -eq "powershell.exe" -and $_.Arguments -like "*$encoded*" })
+if ($FromLauncher -and $current) {
   StartFresh
   $running = Started
 }
+if ($existing -and -not $current) { Write-Host "Updating the scheduled task to the restart loop (one time)." }
 
 if (-not $running) {
   # First choice: no password stored at all (S4U).
@@ -118,6 +137,9 @@ if (-not $running) {
 
 Write-Host ""
 Write-Host "RUNNING. It starts by itself after every reboot; no window is normal." -ForegroundColor Green
+# Tells the launcher the task runs the restart loop, so an update can restart
+# the worker without asking Windows for permission again.
+Set-Content -Path (Join-Path $repo "logs\loop-installed") -Value (Get-Date -Format o) -Encoding ascii
 if ($FromLauncher) { Start-Sleep -Seconds 3; exit 0 }
 Write-Host "To watch it live, double-click 'Saudi Job Alert' on the desktop (or Saudi Job Alert.cmd in $repo)."
 Start-Sleep -Seconds 15

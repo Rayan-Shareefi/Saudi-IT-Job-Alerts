@@ -13,6 +13,7 @@ import { reserve } from "../budget";
 import { companyKey, shortHash, titleKey } from "../company-key";
 import { envStr } from "../env";
 import { normalize } from "../text";
+import { relativeToIso } from "../relative-date";
 import { getJson, htmlToText, toIso } from "../http";
 import type { RawJob, SourceDefinition } from "../types";
 import type { Adapter } from "./ats";
@@ -194,9 +195,14 @@ interface JSearchJob {
   job_description?: string;
   job_apply_link?: string;
   job_google_link?: string;
-  job_posted_at_datetime_utc?: string;
+  job_posted_at_datetime_utc?: string | null;
+  job_posted_at_timestamp?: number | null;
+  /** Relative, and in Arabic for Saudi results: "قبل ١٥ يومًا", "4 days ago". */
+  job_posted_at?: string | null;
   job_employment_type?: string;
   job_publisher?: string;
+  /** Every site Google found the same posting on: LinkedIn, Indeed, Bayt, Glassdoor... */
+  apply_options?: Array<{ publisher?: string; apply_link?: string; is_direct?: boolean }>;
   job_required_experience?: { required_experience_in_months?: number | null };
 }
 
@@ -293,15 +299,26 @@ const JSEARCH_PAGES = (() => {
  * Short phrases, more of them. Overlap between sweeps costs nothing - results
  * are deduplicated by job_id - so breadth is the only thing being bought.
  */
-export const JSEARCH_SWEEPS: Array<{ query: string; internOnly?: boolean }> = [
-  // Security + cloud only since 2026-10-13. Six sweeps at one page is six
-  // requests a run; the weekly schedule keeps a month under ~30 of ~200.
+export const JSEARCH_SWEEPS: Array<{ query: string; internOnly?: boolean; arabic?: boolean }> = [
+  /*
+   * Security + cloud only since 2026-10-13. Ten sweeps at one page is ten
+   * requests a run; twice a week keeps a month near ~87 of the 150 budget.
+   *
+   * English sweeps ask for English results: left to the Saudi default,
+   * "cybersecurity in Riyadh" returned 3 postings from small Arabic boards
+   * with no dates; with language=en, 10 - mostly LinkedIn, with exact dates
+   * (2026-10-20). One Arabic sweep keeps the Arabic-only postings.
+   */
   { query: "cybersecurity in Riyadh" },
   { query: "SOC analyst in Riyadh" },
   { query: "information security GRC in Riyadh" },
+  { query: "penetration tester in Riyadh" },
   { query: "cloud engineer in Riyadh" },
+  { query: "cloud security in Riyadh" },
   { query: "devops engineer in Riyadh" },
   { query: "cybersecurity internship in Riyadh", internOnly: true },
+  { query: "cybersecurity graduate program Saudi Arabia" },
+  { query: "أمن سيبراني الرياض", arabic: true },
 ];
 
 /**
@@ -425,6 +442,7 @@ export const jsearch: Adapter = async (source) => {
     const query =
       `/search-v2?query=${encodeURIComponent(sweep.query)}` +
       `&num_pages=${JSEARCH_PAGES}&country=sa&date_posted=week` +
+      (sweep.arabic ? "" : "&language=en") +
       (sweep.internOnly ? "&employment_types=INTERN" : "");
 
     let body: unknown;
@@ -519,9 +537,15 @@ export const jsearch: Adapter = async (source) => {
         // something the posting said - and would be quoted back as evidence.
         descriptionText: htmlToText(j.job_description),
         url: applyLink,
-        postedAt: toIso(j.job_posted_at_datetime_utc),
+        // The exact time when JSearch has it; otherwise its relative text
+        // ("قبل ١٥ يومًا"), which was all it gave for many Saudi results.
+        postedAt:
+          toIso(j.job_posted_at_datetime_utc) ??
+          (j.job_posted_at_timestamp ? new Date(j.job_posted_at_timestamp * 1000).toISOString() : null) ??
+          relativeToIso(j.job_posted_at),
         employmentType: j.job_employment_type ?? null,
         publisher: j.job_publisher ?? null,
+        listedOn: [...new Set((j.apply_options ?? []).map((o) => (o.publisher ?? "").trim()).filter(Boolean))],
       });
     }
   }

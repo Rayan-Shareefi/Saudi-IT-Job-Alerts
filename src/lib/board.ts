@@ -40,6 +40,8 @@ export interface BoardJob {
   lastRefreshedAt: string | null;
   closesAt: string | null;
   alsoOn: AlsoOn[];
+  /** Other sites the same posting is listed on, as its source reported (JSearch). */
+  listedOn: string[];
   textQuality: string | null;
   textFetchedAt: string | null;
   reviewState: string;
@@ -61,7 +63,7 @@ const BOARD_KINDS = ["jsearch", "jooble", "careerjet", "indeed", "aggregator"];
 const LIST_COLUMNS =
   "id,title,company,url,apply_url,apply_kind,source_kind,source_label,publisher,location_text,city," +
   "experience_band,min_years,max_years,experience_source,experience_evidence,focus,scope,scope_evidence," +
-  "posted_at,first_seen_at,last_refreshed_at,closes_at,also_on,text_quality,text_fetched_at,review_state," +
+  "posted_at,first_seen_at,last_refreshed_at,closes_at,also_on,listed_on,text_quality,text_fetched_at,review_state," +
   "hidden_reason,decision_note,decided_by,human_override,is_active,tracks,primary_track";
 
 type Row = Record<string, unknown>;
@@ -92,6 +94,7 @@ function toBoardJob(r: Row): BoardJob {
     lastRefreshedAt: (r.last_refreshed_at as string) ?? null,
     closesAt: (r.closes_at as string) ?? null,
     alsoOn: (r.also_on as AlsoOn[]) ?? [],
+    listedOn: (r.listed_on as string[]) ?? [],
     textQuality: (r.text_quality as string) ?? null,
     textFetchedAt: (r.text_fetched_at as string) ?? null,
     reviewState: String(r.review_state ?? "pending"),

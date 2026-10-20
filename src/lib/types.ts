@@ -144,6 +144,8 @@ export interface RawJob {
   employmentType?: string | null;
   /** The board a syndicated posting came from (JSearch: LinkedIn, Indeed, Bayt...). */
   publisher?: string | null;
+  /** Other sites the same posting is listed on, where the source says (JSearch's apply options). */
+  listedOn?: string[];
   /** Where the Apply button goes, when that differs from the posting URL. */
   applyUrl?: string | null;
 }

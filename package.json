@@ -41,7 +41,7 @@
     "test:matching": "tsx scripts/test-matching.ts",
     "skills:demand": "tsx scripts/skill-demand.ts",
     "test:secondary": "tsx scripts/test-secondary.ts",
-    "test": "npm run test:plausible && npm run test:relevance && npm run test:location && npm run test:experience && npm run test:scope && npm run test:judge && npm run test:dedupe && npm run test:linkedin && npm run test:matching && npm run test:secondary && npm run test:llm && npm run test:digest",
+    "test": "npm run test:plausible && npm run test:relevance && npm run test:location && npm run test:experience && npm run test:scope && npm run test:judge && npm run test:dedupe && npm run test:linkedin && npm run test:matching && npm run test:secondary && npm run test:llm && npm run test:digest && npm run test:dates",
     "test:relevance": "tsx scripts/test-relevance.ts",
     "purge:irrelevant": "tsx scripts/purge-irrelevant.ts",
     "sources:dedupe": "tsx scripts/dedupe-companies.ts",
@@ -60,6 +60,8 @@
     "dedupe": "tsx scripts/dedupe.ts",
     "sites:diagnose": "tsx scripts/diagnose-sources.ts",
     "test:linkedin": "tsx scripts/test-linkedin.ts",
+    "test:ocr": "tsx scripts/test-ocr.ts",
+    "test:dates": "tsx scripts/test-dates.ts",
     "linkedin:login": "tsx scripts/linkedin-login.ts",
     "coop:watch": "tsx scripts/coop-watch.ts",
     "employers:discover": "tsx scripts/discover-employers.ts",
@@ -80,7 +82,8 @@
     "pg": "^8.23.0",
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
-    "resend": "^4.8.0"
+    "resend": "^4.8.0",
+    "tesseract.js": "^5.1.1"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4.1.13",

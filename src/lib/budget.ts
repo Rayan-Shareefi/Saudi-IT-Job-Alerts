@@ -22,6 +22,8 @@ export type Provider =
   | "groq-senior"
   | "linkedin"
   | "workable"
+  | "sabbar"
+  | "sabbar-sitemap"
   | "resend-alert"
   | "resend-system";
 
@@ -43,6 +45,9 @@ function caps(): Record<Provider, Cap> {
     linkedin: { period: "day", requests: envInt("BUDGET_LINKEDIN_DAY", 250), tokens: 0 },
     // Workable public search: ~27 requests a run; no published limit, so stay modest.
     workable: { period: "day", requests: envInt("BUDGET_WORKABLE_DAY", 150), tokens: 0 },
+    // Sabbar: its 7 MB job list twice a day, and the job pages opened from it.
+    "sabbar-sitemap": { period: "day", requests: 2, tokens: 0 },
+    sabbar: { period: "day", requests: envInt("BUDGET_SABBAR_DAY", 200), tokens: 0 },
     // Instant alerts: Resend free is 100/day; alerts are capped at 20 so the
     // digest and system mails always fit (see HANDOVER, email maths).
     "resend-alert": { period: "day", requests: envInt("BUDGET_ALERT_EMAILS_DAY", 20), tokens: 0 },

@@ -21,15 +21,17 @@ A personal job board for co-op, internships and entry-level work in
   data / AI, IT support, plain IT audit and *selling* security are out.
 - Roles that ask for 5+ years go to their own tab, never "All jobs".
 - Nothing older than 30 days, unless its stated deadline is still ahead.
-- One card per vacancy, with "Also on LinkedIn / Indeed / ..." badges.
+- One card per vacancy. Every card names the platform it was found on, and a
+  **Duplicate** badge names every platform the same vacancy appeared on.
+- Ordered by when a job was **posted**, never by when it was found.
 - Free. No paid service anywhere.
 
 ## Where things run
 
 | Machine | What it does | When |
 |---|---|---|
-| **GitHub Actions** | Company job boards and free APIs; the nightly scan of every company career page; the 3-day email; JSearch once a week | On a schedule, and when you press a Search button |
-| **The laptop** | LinkedIn listings and hiring posts, the local AI reviewer, co-op watch, finding new employers, instant alerts; covers the nightly scan if GitHub misses it | Always on; every 2 hours |
+| **GitHub Actions** | Company job boards and the free platforms; the nightly scan of every company career page; the 3-day email; JSearch twice a week | On a schedule, and when you press a Search button |
+| **The laptop** | LinkedIn listings and hiring posts (pictures read too), the platforms GitHub has not read in 3 hours, the local AI reviewer, co-op watch, finding new employers, instant alerts; every company site on request (launcher **F**) or if GitHub misses a day | Always on; every 2 hours. Watch it with **Saudi Job Alert** on the desktop |
 | **Vercel** | The website | Always |
 | **Supabase** | The database | Always |
 
@@ -39,7 +41,7 @@ Laptop setup: [docs/laptop-setup.md](docs/laptop-setup.md).
 
 | Tab | What is in it | What you do |
 |---|---|---|
-| **All jobs** | Every verified vacancy. Order: time-sensitive, recommended, co-op, internship, then newest | Apply. Pressing Apply also saves the job |
+| **All jobs** | Every verified vacancy. Order: time-sensitive, recommended, co-op, internship, then the rest - each group newest *posting* first, undated ones last | Apply. Pressing Apply also saves the job |
 | **Saved** | Everything you saved or applied to. Never removed automatically | Remove when done |
 | **Company sites / LinkedIn / Job boards** | All jobs, split by where the best copy came from | - |
 | **Unclassified** | Could not be proven either way: only a snippet was readable, location or kind of work not stated, or not reviewed yet | Keep or Hide when you have a minute; it teaches the reviewers |
@@ -57,6 +59,21 @@ the newest.
 **Every claim on a card is quoted.** Open a card ("Details") to see why it is
 there: the sentence stating the years, the duties that make it security or
 cloud work, and the date the full posting was read.
+
+## Where the jobs come from
+
+| Platform | How it is read |
+|---|---|
+| **LinkedIn** | Public listings (no login) from the laptop, a few searches per pass; hiring posts with the secondary account, including the text in post pictures (OCR, `src/lib/ocr.ts`). Also arrives through JSearch |
+| **Indeed, Glassdoor, Bayt, Naukrigulf** | They block automated readers (security checks; Naukrigulf's data needs its app's private ids), so through **JSearch** (Google's job listings), twice a week. A JSearch result also says which other sites carry the same job |
+| **Jooble, Careerjet** | Their free APIs |
+| **Sabbar** | Its public job sitemap (robots.txt allows it), then the job pages; twice a day |
+| **Workable** | Its free public job search, every employer hiring in Riyadh through Workable |
+| **Company sites** | ~530 employer boards and career pages, plus the ones the worker discovers |
+
+Every posting from every platform goes through the same rules, jury and
+evidence check. A company found on a platform but not tracked is looked up and
+its own board added (`discover-employers`).
 
 ## Your routine
 
@@ -228,7 +245,23 @@ npm run fix:bytes         # repair regex escapes mangled by shell edits
     never appears there; verify UI with headless Playwright
     (`npm run ui:check`, with the dev server running).
 13. **Migrations re-run cannot be assumed safe.** `db-push.ts` now records
-    applied files in `schema_migrations` and applies only new ones.
+    applied files in `schema_migrations` and applies only new ones. A new table
+    needs its `grant ... to service_role` (0015 fixed 0014).
+14. **Task Scheduler's "restart on failure" never fires for a program that
+    exits by itself.** The worker exits to load new code, so the task runs it
+    inside a restart loop (install-worker.ps1); the first design would have
+    stopped for good after its first self-update.
+15. **A refusal must not lose what was read.** The LinkedIn reader threw on
+    the first 429 and stored nothing for four days at ~150 requests a day; it
+    now keeps the listings read and reports the run as partial.
+16. **JSearch answers in Arabic for Saudi searches**: 3 results with only
+    relative dates ("قبل ١٥ يومًا"); with `language=en`, 10 with exact dates.
+    Dates are read in every form (`relative-date.ts`).
+18. **"Cannot read properties of undefined (reading 'length')" in webpack's
+    WasmHash** during `npm run build` is a stale `.next` cache (left by a dev
+    server): delete `.next` and build again.
+17. **The worker cannot 'git pull' a private repo** (no desktop to sign in).
+    The launcher updates it from your session; a public repo removes the issue.
 
 ## State on 2026-10-15
 
@@ -246,9 +279,9 @@ Re-measure: `npm run reclassify -- --dry`, `npm run verify`.
    the laptop's Ollama running it clears in a few days. Most of it is Careerjet
    snippets, which stay unclassified unless the same vacancy is found with its
    full text elsewhere.
-2. **LinkedIn posts** selectors (`linkedin-posts.ts`) are untested against a
-   signed-in page until the laptop is set up; run once with `LINKEDIN_DEBUG=1`
-   and adjust if no posts are found.
+2. **LinkedIn posts** are found by any attribute or link carrying a post id; if
+   none is recognised the run fails with the page's structure (counts only) in
+   source_health.error - read it there to adjust `EXTRACT`.
 3. **Company list expansion**: `npm run employers:discover` (every laptop cycle,
    25 companies at most) adds employers found through LinkedIn, JSearch, Careerjet,
    Jooble and Workable's Riyadh search (`workable-riyadh`, free, ~27 requests a

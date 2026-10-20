@@ -15,7 +15,7 @@ Read it before changing any rule, adapter or the checker.
 2. **The app stays free.** No paid API or service. Every quota goes through
    `src/lib/budget.ts`.
 3. **JSearch is metered** (~200 requests/month per key, one per page). Never
-   in a frequent schedule (`jsearch.yml` is weekly). Test with
+   in a frequent schedule (`jsearch.yml` runs twice a week, ~87 of the 150 cap). Test with
    `npm run test:jsearch` - the local mock, zero real requests.
 4. **Do not bypass bot protection.** Blocked sites go to the Site report and
    are covered through LinkedIn / JSearch. LinkedIn: public listings (no

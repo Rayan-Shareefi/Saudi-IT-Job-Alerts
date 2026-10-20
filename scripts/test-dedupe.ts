@@ -138,6 +138,36 @@ expectGroups("a recruiter's posting with the same link but a different role is n
   }
 }
 
-const total = 19;
+/* ---- programme stated in the text, not the title (2026-10-20) --------------- */
+// The real pair: COGNNA on Workable as "Security Engineer - Intern", on Sabbar
+// as "Security Engineer" with the internship only in the posting.
+const COGNNA_TEXT =
+  "Security Engineer - Intern. COGNNA is redefining modern cybersecurity with Nexus, our Agentic AI SOC platform. You will support the SOC team, tune detections, investigate alerts and automate response playbooks. Education: currently pursuing or recently completed a degree in cybersecurity or computer science.";
+expectGroups("COGNNA: same internship on Workable and Sabbar, title shortened", [
+  row({ company: "COGNNA", source_id: "workable-riyadh", source_kind: "aggregator", source_label: "Workable", title: "Security Engineer - Intern", experience_band: "internship", description_text: COGNNA_TEXT }),
+  row({ company: "Cognna", source_id: "sabbar-riyadh", source_kind: "aggregator", source_label: "Sabbar", title: "Security Engineer", experience_band: "internship", description_text: COGNNA_TEXT }),
+], 1, 1);
+expectGroups("must not merge: an internship and a regular role with the same title", [
+  row({ company: "COGNNA", source_id: "workable-riyadh", source_kind: "aggregator", title: "Security Engineer - Intern", experience_band: "internship", description_text: COGNNA_TEXT }),
+  row({ company: "COGNNA", source_id: "sabbar-riyadh", source_kind: "aggregator", title: "Security Engineer", experience_band: "1-2", description_text: COGNNA_TEXT }),
+], 0);
+expectGroups("must not merge: a co-op and an internship with the same title", [
+  row({ company: "Acme", source_id: "workable-riyadh", source_kind: "aggregator", title: "SOC Analyst - Co-op", experience_band: "coop", description_text: SOC_TEXT }),
+  row({ company: "Acme", source_id: "sabbar-riyadh", source_kind: "aggregator", title: "SOC Analyst", experience_band: "internship", description_text: SOC_TEXT }),
+], 0);
+
+// The readable copy is the card: a LinkedIn listing we could not open loses to
+// the same job's full text from JSearch, whatever the source ranks.
+{
+  const li = row({ source_id: "linkedin-riyadh", source_kind: "linkedin", source_label: "LinkedIn", text_quality: "none", description_text: "" });
+  const js = row({ source_id: "jsearch-riyadh", source_kind: "jsearch", source_label: "JSearch", publisher: "LinkedIn", text_quality: "full", description_text: SOC_TEXT });
+  const g = groupDuplicates([li, js])[0];
+  if (!g || g.primary.id !== js.id) {
+    failures++;
+    console.log("FAIL  the copy with readable text must be the card everyone sees");
+  }
+}
+
+const total = 23;
 console.log(`dedupe: ${total - failures}/${total} correct`);
 if (failures > 0) process.exit(1);

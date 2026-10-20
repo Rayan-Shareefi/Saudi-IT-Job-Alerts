@@ -328,7 +328,7 @@ export async function runSource(
       message.includes("free quota reached") ||
       // LinkedIn asking us to slow down is the rule working, not breakage
       // (named, not imported: linkedin.ts must not load for every run).
-      (err instanceof Error && err.name === "LinkedInRefused");
+      (err instanceof Error && (err.name === "LinkedInRefused" || err.name === "NotDue"));
     return {
       ...base,
       ok: skipped,
@@ -474,6 +474,9 @@ export async function runSource(
 
   opts.onJobs?.(kept, source);
 
+  // An adapter that stopped part-way (LinkedIn's "slow down") says so here;
+  // what it read is saved like any other batch.
+  const note = (raw as RawJob[] & { note?: string }).note;
   const result: IngestResult = {
     sourceId: source.id,
     ok: true,
@@ -481,6 +484,7 @@ export async function runSource(
     kept: kept.length,
     inserted,
     durationMs: Date.now() - started,
+    ...(note ? { error: note } : {}),
   };
   return { ...result, jobs: kept };
 }
@@ -551,6 +555,7 @@ export async function runIngest(
 
   // Browser sources are serialised separately by the caller; everything else is
   // network-bound and safe to fan out.
+  const batchStarted = Date.now();
   await mapLimit(sources, opts.concurrency ?? 6, async (source) => {
     if (opts.deadlineAt && Date.now() >= opts.deadlineAt) {
       // Not run, so not reported as run: no health row, no deactivation. The
@@ -563,12 +568,18 @@ export async function runIngest(
     done++;
     opts.onSourceDone?.(result, done, sources.length, source);
 
-    const status = result.ok ? (result.error ? "skip" : "ok  ") : "FAIL";
+    const status = result.ok ? (result.error ? (result.error.startsWith("partial:") ? "part" : "skip") : "ok  ") : "FAIL";
     log(
       `[${String(done).padStart(3)}/${sources.length}] ${status} ${source.label.slice(0, 34).padEnd(34)} ` +
         `fetched=${String(result.fetched).padStart(4)} kept=${String(result.kept).padStart(3)} ` +
         `new=${String(result.inserted).padStart(3)} ${result.error ? `(${result.error.slice(0, 60)})` : ""}`,
     );
+    // Time left, every 10 sources of a long run: from the pace so far.
+    if (sources.length >= 20 && done % 10 === 0 && done < sources.length) {
+      const leftMs = ((Date.now() - batchStarted) / done) * (sources.length - done);
+      const at = new Date(Date.now() + leftMs).toLocaleTimeString("en-GB", { hour: "2-digit", minute: "2-digit" });
+      log(`        about ${Math.max(1, Math.round(leftMs / 60_000))} min left - done around ${at}`);
+    }
 
     // Flag it right where it happens, so a wrong URL is visible in the run log
     // rather than only in a summary at the end.
@@ -592,7 +603,7 @@ export async function runIngest(
     totalKept: results.reduce((n, r) => n + r.kept, 0),
     totalInserted: results.reduce((n, r) => n + r.inserted, 0),
     failed: results.filter((r) => !r.ok).length,
-    skipped: results.filter((r) => r.ok && r.error).length,
+    skipped: results.filter((r) => r.ok && r.error && !r.error.startsWith("partial:")).length,
     deferred,
     durationMs: Date.now() - started,
   };

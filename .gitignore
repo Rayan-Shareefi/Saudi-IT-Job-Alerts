@@ -13,3 +13,4 @@ tsconfig.tsbuildinfo
 data/linkedin-debug/
 # the laptop worker log
 logs/
+data/ocr-cache/

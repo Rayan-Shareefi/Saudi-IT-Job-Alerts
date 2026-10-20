@@ -65,12 +65,18 @@ async function domTests(): Promise<void> {
     const older = await run(`
       <div data-urn="urn:li:activity:7200000000000000001">
         <div class="update-components-actor"><a class="update-components-actor__meta-link" href="https://www.linkedin.com/company/acme/">
+          <img width="400" height="400" src="https://media.licdn.com/dms/image/acme-logo.jpg">
           <span class="update-components-actor__title"><span aria-hidden="true">Acme Security</span></span></a></div>
         <div class="update-components-text">${body}<a href="https://forms.gle/abc123">form</a></div>
+        <img width="800" height="600" src="https://media.licdn.com/dms/image/coop-announcement.jpg">
+        <img width="40" height="40" src="https://media.licdn.com/dms/image/reaction-icon.png">
       </div>`);
     check("older layout: one post found", older.length === 1, JSON.stringify(older));
     check("older layout: company author kept", older[0]?.companyName === "Acme Security", String(older[0]?.companyName));
     check("older layout: the apply form link kept", older[0]?.links.includes("https://forms.gle/abc123") === true, JSON.stringify(older[0]?.links));
+    // For OCR: the post's picture, never the author's photo or a tiny icon.
+    const images = (older[0] as unknown as { images?: string[] })?.images ?? [];
+    check("the post's picture is picked for reading", images.length === 1 && images[0].endsWith("coop-announcement.jpg"), JSON.stringify(images));
 
     // 2. A newer markup: no data-urn, the id only in a link; a list wraps both posts.
     const newer = await run(`

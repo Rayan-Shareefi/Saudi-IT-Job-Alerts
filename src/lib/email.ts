@@ -1,4 +1,5 @@
 import type { JobRecord } from "./types";
+import { byPostTime } from "./post-time";
 
 /**
  * The digest email, every 3 days.
@@ -31,13 +32,6 @@ function esc(s: string): string {
   return s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 }
 
-function freshness(job: JobRecord): number {
-  const t = [job.postedAt, job.lastRefreshedAt]
-    .map((d) => (d ? new Date(d).getTime() : NaN))
-    .filter((n) => Number.isFinite(n) && n <= Date.now() + 3_600_000);
-  return t.length ? Math.max(...t) : new Date(job.firstSeenAt).getTime();
-}
-
 function timeSensitive(job: JobRecord): boolean {
   if (job.applyKind === "form") return true;
   if (!job.closesAt) return false;
@@ -49,7 +43,7 @@ function timeSensitive(job: JobRecord): boolean {
 export function digestOrder(jobs: JobRecord[], recommended = new Set<string>()): JobRecord[] {
   const rank = (j: JobRecord) =>
     timeSensitive(j) ? 0 : recommended.has(j.id) ? 1 : j.experienceBand === "coop" ? 2 : j.experienceBand === "internship" ? 3 : 4;
-  return [...jobs].sort((a, b) => rank(a) - rank(b) || freshness(b) - freshness(a));
+  return [...jobs].sort((a, b) => rank(a) - rank(b) || byPostTime(a, b));
 }
 
 function experienceText(j: JobRecord): string {
@@ -72,7 +66,8 @@ function jobRow(job: JobRecord, recommended: Set<string>): string {
   if (job.experienceBand === "internship") badges.push(pill("INTERNSHIP", "#fef3c7", "#92400e"));
   for (const f of job.focus.slice(0, 3)) badges.push(pill(f, "#f1f5f9", "#334155"));
 
-  const also = job.alsoOn.length ? ` &middot; also on ${esc([...new Set(job.alsoOn.map((a) => a.label))].join(", "))}` : "";
+  const elsewhere = [...new Set([...job.alsoOn.map((a) => a.label), ...(job.listedOn ?? [])])];
+  const also = elsewhere.length ? ` &middot; also on ${esc(elsewhere.join(", "))}` : "";
   const quote =
     job.experienceEvidence && job.experienceSource === "stated"
       ? `<div style="color:${MUTED};font-size:12px;font-style:italic;margin-top:3px;">&ldquo;${esc(job.experienceEvidence.slice(0, 160))}&rdquo;</div>`

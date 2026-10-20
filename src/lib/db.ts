@@ -97,6 +97,7 @@ function toRow(job: EnrichedJob): JobRow {
     // recomputed by state.ts after the upsert, so a re-fetch can never undo a
     // decision the jury or the user made.
     publisher: job.publisher?.slice(0, 120) ?? null,
+    listed_on: (job.listedOn ?? []).map((p) => p.slice(0, 60)).slice(0, 12),
     company_key: job.companyKey,
     text_quality: job.textQuality,
     text_hash: job.textHash,
@@ -137,6 +138,7 @@ export function fromRow(row: JobRow): JobRecord {
     isActive: Boolean(row.is_active),
     removedAt: (row.removed_at as string) ?? null,
     publisher: (row.publisher as string) ?? null,
+    listedOn: (row.listed_on as string[]) ?? [],
     applyUrl: (row.apply_url as string) ?? null,
     companyKey: (row.company_key as string) ?? "",
     textQuality: ((row.text_quality as string) ?? "none") as JobRecord["textQuality"],

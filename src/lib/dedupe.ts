@@ -1,3 +1,4 @@
+import { platformOf } from "./platform";
 import { companyKey, titleKey, titleSimilarity } from "./company-key";
 import { fetchAllRows, supabaseAdmin } from "./db";
 import { normalize } from "./text";
@@ -39,6 +40,8 @@ export interface DedupRow {
   text_quality: string | null;
   min_years: number | null;
   experience_source: string | null;
+  /** "internship" / "coop" when the posting states a programme, title or not. */
+  experience_band?: string | null;
   posted_at: string | null;
   first_seen_at: string;
   last_refreshed_at: string | null;
@@ -66,9 +69,26 @@ const LEVEL_WORDS = [
   "chief", "intern", "internship", "coop", "trainee", "graduate", "associate", "1", "2", "3", "4",
 ];
 
-function levelOf(key: string): string {
+/** Programme words that mean the same level. */
+const SAME_LEVEL: Record<string, string> = { internship: "intern", trainee: "intern" };
+
+/*
+ * The level of a posting: from its title, plus a programme the posting itself
+ * states. Sabbar lists COGNNA's "Security Engineer - Intern" (Workable) as
+ * "Security Engineer", with the internship only in the text, and the two
+ * were shown as separate jobs (2026-10-20).
+ */
+function levelOf(key: string, band?: string | null): string {
   const words = new Set(key.split(" "));
-  return LEVEL_WORDS.filter((w) => words.has(w)).sort().join(",");
+  const levels = new Set(LEVEL_WORDS.filter((w) => words.has(w)).map((w) => SAME_LEVEL[w] ?? w));
+  if (band === "internship" && !levels.has("intern") && !levels.has("coop")) levels.add("intern");
+  if (band === "coop" && !levels.has("coop")) levels.add("coop");
+  return [...levels].sort().join(",");
+}
+
+/** The title without its level words: "security engineer intern" -> "security engineer". */
+function bareTitle(key: string): string {
+  return key.split(" ").filter((w) => w && !LEVEL_WORDS.includes(w)).join(" ");
 }
 
 /** 3-word shingles of the first 3,000 characters, for text overlap. */
@@ -105,12 +125,13 @@ function canonicalApply(row: DedupRow): string | null {
   return null;
 }
 
-export type PairVerdict = { same: true; how: "exact" | "text" | "link" } | { same: false; why: string };
+export type PairVerdict = { same: true; how: "exact" | "text" | "link" | "level" } | { same: false; why: string };
 
 interface Prepared {
   row: DedupRow;
   key: string;
   level: string;
+  bare: string;
   text: Set<string>;
   full: boolean;
   link: string | null;
@@ -121,7 +142,8 @@ function prepare(row: DedupRow): Prepared {
   return {
     row,
     key,
-    level: levelOf(key),
+    level: levelOf(key, row.experience_band),
+    bare: bareTitle(key),
     text: shingles(row.description_text ?? ""),
     full: row.text_quality === "full" || row.text_quality === "partial",
     link: canonicalApply(row),
@@ -148,11 +170,22 @@ export function samePosting(a: Prepared, b: Prepared): PairVerdict {
   // on one Workable address (HANDOVER §6), so the titles must agree as well.
   if (a.link && b.link && a.link === b.link && sim >= 0.5) return { same: true, how: "link" };
   if (a.key === b.key && a.key.length > 0) return { same: true, how: "exact" };
+  // The same title once the level words are set aside, at the same level
+  // (checked above): one platform kept "- Intern", the other only said so in the text.
+  if (a.bare === b.bare && a.bare.split(" ").length >= 2) return { same: true, how: "level" };
   if (sim >= 0.75 && overlap !== null && overlap >= 0.4) return { same: true, how: "text" };
   return { same: false, why: `titles ${sim.toFixed(2)} alike, text overlap ${overlap === null ? "unknown" : overlap.toFixed(2)}` };
 }
 
 function better(a: DedupRow, b: DedupRow): DedupRow {
+  /*
+   * The card everyone sees must be one that can be read: its text is what the
+   * rules and the jury judge. A LinkedIn listing LinkedIn would not let us
+   * open outranked the same job's full text from JSearch, and the vacancy
+   * sat in Unclassified (2026-10-20).
+   */
+  const readable = (r: DedupRow) => r.text_quality === "full" || r.text_quality === "partial";
+  if (readable(a) !== readable(b)) return readable(a) ? a : b;
   const ra = SOURCE_RANK[a.source_kind] ?? 9;
   const rb = SOURCE_RANK[b.source_kind] ?? 9;
   if (ra !== rb) return ra < rb ? a : b;
@@ -163,10 +196,7 @@ function better(a: DedupRow, b: DedupRow): DedupRow {
 }
 
 function labelFor(row: DedupRow): string {
-  if (row.source_kind === "jsearch" && row.publisher) return row.publisher;
-  if (row.source_kind === "linkedin" || row.source_kind === "linkedin-post") return "LinkedIn";
-  if (row.source_kind === "ats" || row.source_kind === "career-page") return "Company site";
-  return row.source_label;
+  return platformOf(row.source_kind, row.source_label, row.publisher);
 }
 
 export interface Group {
@@ -285,7 +315,7 @@ export async function rebuildDuplicates(opts: { dry?: boolean; log?: (s: string)
       db
         .from("jobs")
         .select(
-          "id,source_id,source_kind,source_label,publisher,company,title,city,url,apply_url,description_text,text_quality,min_years,experience_source,posted_at,first_seen_at,last_refreshed_at,duplicate_of,also_on",
+          "id,source_id,source_kind,source_label,publisher,company,title,city,url,apply_url,description_text,text_quality,min_years,experience_source,experience_band,posted_at,first_seen_at,last_refreshed_at,duplicate_of,also_on",
         )
         .eq("is_active", true)
         .is("removed_at", null)

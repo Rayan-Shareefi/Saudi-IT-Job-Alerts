@@ -1,6 +1,6 @@
 import * as cheerio from "cheerio";
 import { reserve } from "../budget";
-import { supabaseAdmin } from "../db";
+import { fetchAllRows, supabaseAdmin } from "../db";
 import { envFlag, envInt } from "../env";
 import { htmlToText, sleep, toIso } from "../http";
 import type { RawJob, SourceDefinition } from "../types";
@@ -120,11 +120,20 @@ export function parseDetail(html: string): LinkedInDetail | null {
   };
 }
 
+/**
+ * A batch cut short, with why: ingest.ts saves the postings and reports the
+ * run as partial (the note becomes the source's status line).
+ */
+function withNote(jobs: RawJob[], note: string): RawJob[] {
+  return Object.assign(jobs, { note });
+}
+
 /* ------------------------------- fetching --------------------------------- */
 
 let lastRequest = 0;
 async function gentleGet(url: string): Promise<string> {
-  const gap = envInt("LINKEDIN_DELAY_MS", 4000) + Math.floor(Math.random() * 2500);
+  // ~10 s between requests, as a person paging through listings would.
+  const gap = envInt("LINKEDIN_DELAY_MS", 8000) + Math.floor(Math.random() * 4000);
   const wait = lastRequest + gap - Date.now();
   if (wait > 0) await sleep(wait);
   lastRequest = Date.now();
@@ -136,18 +145,47 @@ async function gentleGet(url: string): Promise<string> {
   return res.text();
 }
 
-/** Stored full texts for listings already read, so they are not fetched again. */
-async function alreadyRead(sourceId: string): Promise<Map<string, string>> {
+interface Stored {
+  /** Full or partial texts already read, so they are not fetched again. */
+  texts: Map<string, string>;
+  /** Listings found before whose posting was never opened, newest first. */
+  unread: LinkedInCard[];
+  /** Listings already matched to the same vacancy on another source: opening them adds nothing. */
+  settled: Set<string>;
+}
+
+async function stored(sourceId: string): Promise<Stored> {
+  const none: Stored = { texts: new Map(), unread: [], settled: new Set() };
   try {
-    const { data } = await supabaseAdmin()
-      .from("jobs")
-      .select("external_id,description_text,text_quality")
-      .eq("source_id", sourceId)
-      .in("text_quality", ["full", "partial"])
-      .limit(5000);
-    return new Map((data ?? []).map((r) => [String(r.external_id), String(r.description_text ?? "")]));
+    const rows = await fetchAllRows<Record<string, unknown>>(
+      (from, to) =>
+        supabaseAdmin()
+          .from("jobs")
+          .select("external_id,title,company,location_text,posted_at,description_text,text_quality,duplicate_of,is_active")
+          .eq("source_id", sourceId)
+          .range(from, to),
+      "stored LinkedIn listings",
+    );
+    const out: Stored = { texts: new Map(), unread: [], settled: new Set() };
+    for (const r of rows) {
+      const ext = String(r.external_id);
+      const quality = String(r.text_quality ?? "none");
+      if (quality === "full" || quality === "partial") out.texts.set(ext, String(r.description_text ?? ""));
+      else if (r.duplicate_of) out.settled.add(ext);
+      else if (r.is_active && ext.startsWith("li:")) {
+        out.unread.push({
+          id: ext.slice(3),
+          title: String(r.title),
+          company: String(r.company),
+          location: String(r.location_text ?? ""),
+          postedAt: (r.posted_at as string) ?? null,
+        });
+      }
+    }
+    out.unread.sort((a, b) => String(b.postedAt ?? "").localeCompare(String(a.postedAt ?? "")));
+    return out;
   } catch {
-    return new Map();
+    return none;
   }
 }
 
@@ -155,41 +193,71 @@ export const linkedin = async (source: SourceDefinition): Promise<RawJob[]> => {
   if (!envFlag("LINKEDIN_ENABLED")) {
     throw new MissingCredential("LINKEDIN_ENABLED=1 (LinkedIn is read from the laptop only)");
   }
-  const maxDetail = envInt("LINKEDIN_MAX_DETAIL", 120);
+  const maxDetail = envInt("LINKEDIN_MAX_DETAIL", 25);
   const pages = envInt("LINKEDIN_PAGES", 2);
-  const known = await alreadyRead(source.id);
+  const perRun = Math.min(SEARCHES.length, envInt("LINKEDIN_SEARCHES_PER_RUN", 4));
+  const { texts: known, unread, settled } = await stored(source.id);
+
+  /*
+   * A refusal stops the asking, never the keeping. The first version threw
+   * on the first 429 and lost everything already read: the laptop made ~150
+   * LinkedIn requests a day for four days (2026-10-17..20) and stored none.
+   * Now what was read is returned, the rest is read on a later pass, and the
+   * refusal is reported on the result so the worker waits before asking again.
+   */
+  let refusal: LinkedInRefused | null = null;
+  const ask = async (url: string): Promise<string | null> => {
+    if (refusal) return null;
+    try {
+      return await gentleGet(url);
+    } catch (err) {
+      if (err instanceof LinkedInRefused) {
+        refusal = err;
+        return null;
+      }
+      throw err;
+    }
+  };
+
+  // A few searches per pass, rotating through all of them every few passes:
+  // fewer requests at a time is what keeps LinkedIn answering.
+  const turn = Math.floor(Date.now() / 7_200_000);
+  const queries = Array.from({ length: perRun }, (_, i) => SEARCHES[(turn * perRun + i) % SEARCHES.length]);
 
   const cards = new Map<string, LinkedInCard>();
   let emptyPages = 0;
-  for (const q of SEARCHES) {
-    for (let page = 0; page < pages; page++) {
-      const url =
-        `${BASE}/seeMoreJobPostings/search?keywords=${encodeURIComponent(q)}` +
-        `&location=${encodeURIComponent(LOCATION)}&f_TPR=r2592000&start=${page * 25}`;
-      const found = parseSearch(await gentleGet(url));
-      if (found.length === 0) {
-        // Two empty pages in a row on searches that normally return results is
-        // what a soft block looks like; stop rather than keep asking.
-        if (++emptyPages >= 4) throw new LinkedInRefused("several result pages came back empty");
-        break;
-      }
-      emptyPages = 0;
-      for (const c of found) cards.set(c.id, c);
-      if (found.length < 10) break;
+  const search = async (q: string, page: number): Promise<number> => {
+    const url =
+      `${BASE}/seeMoreJobPostings/search?keywords=${encodeURIComponent(q)}` +
+      `&location=${encodeURIComponent(LOCATION)}&f_TPR=r2592000&start=${page * 25}`;
+    const html = await ask(url);
+    if (html === null) return 0;
+    const found = parseSearch(html);
+    if (found.length === 0) {
+      // Empty pages on searches that normally return results is what a soft
+      // block looks like; stop rather than keep asking.
+      if (++emptyPages >= 4) refusal = new LinkedInRefused("several result pages came back empty");
+      return 0;
     }
-  }
+    emptyPages = 0;
+    for (const c of found) cards.set(c.id, c);
+    return found.length;
+  };
 
-  const out: RawJob[] = [];
-  let fetched = 0;
-  for (const c of cards.values()) {
+  const out = new Map<string, RawJob>();
+  let opened = 0;
+  /** Open a listing's posting (within the pass's allowance) and keep it. */
+  const keep = async (c: LinkedInCard): Promise<void> => {
     const externalId = `li:${c.id}`;
+    if (out.has(externalId)) return;
     let text = known.get(externalId) ?? "";
     let applyUrl: string | null = null;
     let employmentType: string | null = null;
-    if (!text && fetched < maxDetail) {
-      fetched++;
-      const detail = parseDetail(await gentleGet(`${BASE}/jobPosting/${c.id}`));
-      if (detail?.closed) continue;
+    if (!text && !settled.has(externalId) && opened < maxDetail && !refusal) {
+      opened++;
+      const html = await ask(`${BASE}/jobPosting/${c.id}`);
+      const detail = html === null ? null : parseDetail(html);
+      if (detail?.closed) return;
       if (detail) {
         // LinkedIn's own fields are appended as labelled lines, so the
         // experience reader can see "Employment type: Internship".
@@ -199,7 +267,7 @@ export const linkedin = async (source: SourceDefinition): Promise<RawJob[]> => {
         employmentType = detail.criteria["Employment type"] ?? null;
       }
     }
-    out.push({
+    out.set(externalId, {
       sourceId: source.id,
       externalId,
       title: c.title,
@@ -212,6 +280,33 @@ export const linkedin = async (source: SourceDefinition): Promise<RawJob[]> => {
       employmentType,
       publisher: "LinkedIn",
     });
+  };
+
+  /*
+   * The order of a pass, because LinkedIn may stop it after a handful of
+   * requests: one fresh search page; then the postings found before but never
+   * opened (a listing without its text cannot be judged and waits in
+   * Unclassified); then the remaining searches; then the new listings' postings.
+   */
+  if (queries.length) await search(queries[0], 0);
+  for (const c of unread) {
+    if (refusal || opened >= maxDetail) break;
+    await keep(c);
   }
-  return out;
+  for (const [i, q] of queries.entries()) {
+    for (let page = i === 0 ? 1 : 0; page < pages && !refusal; page++) {
+      if ((await search(q, page)) < 10) break;
+    }
+  }
+  const fresh = [...cards.values()].sort((a, b) => String(b.postedAt ?? "").localeCompare(String(a.postedAt ?? "")));
+  for (const c of fresh) await keep(c);
+
+  const jobs = [...out.values()];
+  const stopped = refusal as LinkedInRefused | null;
+  if (stopped) {
+    // Nothing read at all: a plain refusal (a skip, see ingest.ts).
+    if (jobs.length === 0) throw stopped;
+    return withNote(jobs, `partial: ${stopped.message} - kept the ${jobs.length} listing(s) read before that`);
+  }
+  return jobs;
 };

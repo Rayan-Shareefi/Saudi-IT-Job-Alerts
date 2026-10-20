@@ -107,11 +107,21 @@ is missing, and shows the log live in colour. Keys in that window:
 
 | Key | Does |
 |---|---|
+| N | search now instead of waiting up to 2 hours (LinkedIn, the platforms, the jury) |
+| F | full search: everything above plus every company site (~2 hours) |
 | L | LinkedIn sign-in (secondary account) |
-| N | run a cycle now instead of waiting up to 2 hours |
+| U | download the latest version and restart into it |
 | R | restart the worker |
 | D | check everything (keys, Ollama, LinkedIn, database) |
 | Q | close the window - the worker keeps running |
+
+Every search first prints its plan with a time estimate for each step and the
+time it should be done; long steps print the time left as they go. The
+estimates learn from how long each step really takes on this laptop.
+
+Opening the launcher also downloads the latest version and restarts the worker
+into it, so updates reach the laptop even while the GitHub repository is
+private (the background task cannot sign in to GitHub by itself).
 
 Typing commands yourself: PowerShell refuses `npm` on a fresh Windows (script
 policy). Type `npm.cmd` instead, e.g. `npm.cmd run doctor`.

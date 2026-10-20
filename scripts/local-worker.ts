@@ -5,18 +5,20 @@
  *   npm run worker -- --once  # one cycle, then exit (for testing)
  *
  * Every 2 minutes: start any run someone queued with a button on the site.
- * Every cycle (2 hours by default, WORKER_CYCLE_MIN):
+ * Every cycle (2 hours by default, WORKER_CYCLE_MIN) - printed first as a
+ * plan with a time estimate per step and a "done around" time:
  *
  *   1. update itself from GitHub (git pull + npm ci when dependencies change),
  *      so a fix pushed once reaches the laptop without anyone touching it;
- *   2. LinkedIn job listings and company hiring posts (home IP, this machine
- *      holds the signed-in profile);
- *   3. the AI jury over what the rules could not settle, with the local
- *      Ollama model as an extra, unlimited juror;
- *   4. co-op watch and employer discovery;
- *   5. instant alerts for time-sensitive jobs;
- *   6. the company-board pass, if GitHub's nightly run has not succeeded in
- *      26 hours.
+ *   2. LinkedIn job listings and company hiring posts, pictures read too
+ *      (home IP, this machine holds the signed-in profile);
+ *   3. the other job platforms (Workable, Sabbar, Jooble, Careerjet) that no
+ *      machine has read in three hours;
+ *   4. every company site, when asked (launcher F) or when GitHub's pass has
+ *      not succeeded in 26 hours;
+ *   5. the AI jury over what the rules could not settle, with the local
+ *      Ollama model as an extra, unlimited juror; then instant alerts;
+ *   6. co-op watch, employer discovery, and the weekly AI model check.
  *
  * Each step is a separate child process: a crash in one step never stops the
  * worker, and every step runs the code currently on disk (a long-lived process
@@ -24,7 +26,8 @@
  *
  * The schedule survives restarts (logs/worker-state.json), LinkedIn is asked at
  * most once an hour, and the launcher (Saudi Job Alert.cmd) shows this log live
- * and can ask for a cycle now (logs/run-now).
+ * and can ask for a search now (logs/run-now), a full one (logs/run-full) or a
+ * restart into new code (logs/restart).
  */
 import "./load-env";
 import { spawnSync } from "node:child_process";
@@ -50,6 +53,10 @@ const TSX = join(process.cwd(), "node_modules", "tsx", "dist", "cli.mjs");
  */
 const STATE_FILE = join("logs", "worker-state.json");
 const RUN_NOW = join("logs", "run-now");
+/** The launcher's F key: a cycle now that also reads every company site. */
+const RUN_FULL = join("logs", "run-full");
+/** The launcher, after updating the code: restart into it (the supervisor loop starts the new copy). */
+const RESTART = join("logs", "restart");
 /** LinkedIn is asked at most this often, whatever triggers a cycle. */
 const LINKEDIN_GAP_MS = 60 * 60_000;
 
@@ -63,6 +70,8 @@ interface WorkerState {
   linkedinJobsPauseUntil?: string;
   /** The weekly AI model check (scripts/llm-upgrade.ts). */
   llmUpgradeAt?: string;
+  /** How long each step takes on this machine, in minutes (for the time estimates). */
+  stepMinutes?: Record<string, number>;
 }
 
 function readState(): WorkerState {
@@ -111,11 +120,20 @@ function linkedinTurn(key: "linkedinJobsAt" | "linkedinPostsAt", label: string):
  * keeps a limit like that in place.
  */
 async function afterLinkedinJobs(): Promise<void> {
-  const { data } = await supabaseAdmin().from("source_health").select("error").eq("source_id", "linkedin-riyadh").maybeSingle();
-  const refused = /asked us to slow down/i.test(String(data?.error ?? ""));
+  const { data } = await supabaseAdmin().from("source_health").select("error,kept").eq("source_id", "linkedin-riyadh").maybeSingle();
+  const status = String(data?.error ?? "");
+  const refused = /asked us to slow down/i.test(status);
   const state = readState();
   if (!refused) {
     if (state.linkedinRefusals) writeState({ linkedinRefusals: 0, linkedinJobsPauseUntil: undefined });
+    return;
+  }
+  // Stopped part-way, but with listings read and kept: progress, so no
+  // growing pause - just the usual rest before asking again.
+  if (status.startsWith("partial:")) {
+    const until = Date.now() + 3 * 3_600_000;
+    writeState({ linkedinRefusals: 0, linkedinJobsPauseUntil: new Date(until).toISOString() });
+    log(`LinkedIn stopped us part-way; the listings read before that are kept. Next LinkedIn jobs pass at ${clock(until)}.`);
     return;
   }
   const n = (state.linkedinRefusals ?? 0) + 1;
@@ -130,8 +148,8 @@ function log(s: string): void {
 }
 
 /** Run a script as its own process; returns its exit code. */
-function step(name: string, script: string, args: string[] = [], timeoutMin = 90): number {
-  log(`> ${name}`);
+function step(name: string, script: string, args: string[] = [], timeoutMin = 90, note = ""): number {
+  log(`> ${name}${note ? ` (${note})` : ""}`);
   const r = spawnSync(process.execPath, [TSX, script, ...args], {
     cwd: process.cwd(),
     stdio: "inherit",
@@ -144,7 +162,13 @@ function step(name: string, script: string, args: string[] = [], timeoutMin = 90
   return code;
 }
 
-/** Exit code that tells Task Scheduler "restart me" (the task restarts on failure). */
+/*
+ * Exit code for "start me again": the scheduled task runs the worker inside a
+ * loop (install-worker.ps1) that starts a fresh copy after it exits. Task
+ * Scheduler's own "restart on failure" never fires for a program that exits
+ * by itself, so the first version would have stopped for good after its
+ * first self-update.
+ */
 const RESTART_FOR_UPDATE = 75;
 
 function head(): string {
@@ -189,52 +213,139 @@ async function pickUpQueued(): Promise<void> {
   }
 }
 
-async function companyPassIfGithubMissed(): Promise<void> {
+/** True when GitHub's company-board pass has not succeeded in 26 hours. */
+async function githubMissedCompanies(): Promise<boolean> {
   const last = await latestRun("company");
   const lastGood = last && last.status === "done" ? new Date(last.finished_at ?? last.requested_at).getTime() : 0;
-  if (Date.now() - lastGood < 26 * 3_600_000) return;
-  log("no successful company-board pass in 26h - running it here");
-  step("company boards (fallback)", "scripts/ingest.ts", ["--scope", "company", "--no-metered", "--order", "stale-first", "--deadline-min", "100", "--trigger", "laptop-fallback"], 150);
+  return Date.now() - lastGood >= 26 * 3_600_000;
 }
 
-async function cycle(): Promise<void> {
+/*
+ * The job platforms besides LinkedIn. GitHub's fast pass also reads them
+ * every four hours, so the laptop reads only the ones nobody has read in the
+ * last three - it fills gaps instead of asking every site twice.
+ */
+const PLATFORMS = ["workable-riyadh", "sabbar-riyadh", "jooble-riyadh", "careerjet-riyadh"];
+
+async function stalePlatforms(): Promise<string[]> {
+  const { data } = await supabaseAdmin().from("source_health").select("source_id,last_run_at").in("source_id", PLATFORMS);
+  const last = new Map((data ?? []).map((r) => [String(r.source_id), new Date(String(r.last_run_at)).getTime()]));
+  return PLATFORMS.filter((id) => Date.now() - (last.get(id) ?? 0) >= 3 * 3_600_000);
+}
+
+interface Planned {
+  key: string;
+  name: string;
+  script: string;
+  args: string[];
+  timeoutMin: number;
+  after?: (code: number) => Promise<void>;
+}
+
+/** First guesses, in minutes; replaced by how long each step really took on this laptop. */
+const FIRST_GUESS: Record<string, number> = {
+  "linkedin-jobs": 4,
+  "linkedin-posts": 5,
+  platforms: 6,
+  companies: 100,
+  jury: 20,
+  coop: 3,
+  discovery: 15,
+  models: 10,
+};
+
+function estimate(key: string): number {
+  return readState().stepMinutes?.[key] ?? FIRST_GUESS[key] ?? 5;
+}
+
+/** Keep a running average of how long a step takes here, for the next estimate. */
+function learn(key: string, minutes: number): void {
+  const known = readState().stepMinutes ?? {};
+  const before = known[key];
+  writeState({ stepMinutes: { ...known, [key]: before === undefined ? minutes : before * 0.5 + minutes * 0.5 } });
+}
+
+async function plan(full: boolean): Promise<Planned[]> {
+  const steps: Planned[] = [];
+  if (envFlag("LINKEDIN_ENABLED") && linkedinTurn("linkedinJobsAt", "LinkedIn jobs")) {
+    steps.push({
+      key: "linkedin-jobs",
+      name: "LinkedIn jobs",
+      script: "scripts/ingest.ts",
+      args: ["--source", "linkedin-riyadh"],
+      timeoutMin: 60,
+      after: async () => {
+        writeState({ linkedinJobsAt: new Date().toISOString() });
+        await afterLinkedinJobs().catch(() => {});
+      },
+    });
+  }
+  if (envFlag("LINKEDIN_POSTS_ENABLED") && linkedinTurn("linkedinPostsAt", "LinkedIn hiring posts")) {
+    steps.push({
+      key: "linkedin-posts",
+      name: "LinkedIn hiring posts",
+      script: "scripts/ingest.ts",
+      args: ["--source", "linkedin-posts"],
+      timeoutMin: 40,
+      after: async (code) => {
+        // Without a saved session nothing is sent to LinkedIn, so it is not a turn.
+        if (existsSync(PROFILE_DIR)) writeState({ linkedinPostsAt: new Date().toISOString() });
+        if (code !== 0) {
+          await sendSystemAlert(
+            "linkedin",
+            "LinkedIn needs you",
+            "The laptop could not read LinkedIn hiring posts - usually it has not been signed in yet, the session expired, or LinkedIn asked for a verification step. On the laptop, double-click \"Saudi Job Alert\" on the desktop and press L to sign in.",
+          );
+        }
+      },
+    });
+  }
+  const platforms = await stalePlatforms().catch(() => PLATFORMS);
+  if (platforms.length) {
+    steps.push({ key: "platforms", name: `Job platforms (${platforms.map((p) => p.replace(/-riyadh$/, "")).join(", ")})`, script: "scripts/ingest.ts", args: ["--source", platforms.join(",")], timeoutMin: 45 });
+  }
+  if (full || (await githubMissedCompanies().catch(() => false))) {
+    if (!full) log("no successful company-board pass in 26h - running it here");
+    steps.push({ key: "companies", name: "Company sites (every employer board)", script: "scripts/ingest.ts", args: ["--scope", "company", "--no-metered", "--order", "stale-first", "--deadline-min", "120", "--trigger", full ? "laptop-full" : "laptop-fallback"], timeoutMin: 150 });
+  }
+  steps.push({ key: "jury", name: "AI jury", script: "scripts/judge.ts", args: ["--max", String(envInt("WORKER_JUDGE_MAX", 80)), "--deadline-min", "60"], timeoutMin: 75 });
+  steps.push({ key: "coop", name: "co-op watch", script: "scripts/coop-watch.ts", args: [], timeoutMin: 30 });
+  steps.push({ key: "discovery", name: "employer discovery", script: "scripts/discover-employers.ts", args: [], timeoutMin: 30 });
+  // Weekly: move to newer free AI models, only ones that pass every test
+  // posting (docs/ai-models.md). Recorded first, so a crash cannot repeat it.
+  if (minutesSince(readState().llmUpgradeAt) > 7 * 24 * 60) {
+    writeState({ llmUpgradeAt: new Date().toISOString() });
+    steps.push({ key: "models", name: "AI model check (weekly)", script: "scripts/llm-upgrade.ts", args: [], timeoutMin: 30 });
+  }
+  return steps;
+}
+
+async function cycle(full = false): Promise<void> {
   // Before the run is tracked: an update restarts the worker right here, and
   // the fresh copy runs this cycle (lastCycleAt is not written yet).
   selfUpdate();
   writeState({ lastCycleAt: new Date().toISOString() });
-  const tracker = await startRun("worker", "schedule", "laptop");
+  const tracker = await startRun("worker", full ? "full" : "schedule", "laptop");
   try {
-    if (envFlag("LINKEDIN_ENABLED") && linkedinTurn("linkedinJobsAt", "LinkedIn jobs")) {
-      writeState({ linkedinJobsAt: new Date().toISOString() });
-      step("LinkedIn jobs", "scripts/ingest.ts", ["--source", "linkedin-riyadh"], 60);
-      await afterLinkedinJobs().catch(() => {});
-    }
-    if (envFlag("LINKEDIN_POSTS_ENABLED") && linkedinTurn("linkedinPostsAt", "LinkedIn hiring posts")) {
-      // Without a saved session nothing is sent to LinkedIn, so it is not a turn.
-      if (existsSync(PROFILE_DIR)) writeState({ linkedinPostsAt: new Date().toISOString() });
-      const code = step("LinkedIn hiring posts", "scripts/ingest.ts", ["--source", "linkedin-posts"], 40);
-      if (code !== 0) {
-        await sendSystemAlert(
-          "linkedin",
-          "LinkedIn needs you",
-          "The laptop could not read LinkedIn hiring posts - usually it has not been signed in yet, the session expired, or LinkedIn asked for a verification step. On the laptop, double-click \"Saudi Job Alert\" on the desktop and press L to sign in.",
-        );
+    const steps = await plan(full);
+    const total = steps.reduce((sum, s) => sum + estimate(s.key), 0);
+    log(`search plan: ${steps.map((s) => `${s.name} ~${Math.max(1, Math.round(estimate(s.key)))} min`).join(" | ")}`);
+    log(`this search takes about ${Math.max(1, Math.round(total))} min - done around ${clock(Date.now() + total * 60_000)}`);
+    let left = total;
+    for (const s of steps) {
+      left -= estimate(s.key);
+      const started = Date.now();
+      const code = step(s.name, s.script, s.args, s.timeoutMin, `about ${Math.max(1, Math.round(estimate(s.key)))} min; everything done around ${clock(Date.now() + (estimate(s.key) + left) * 60_000)}`);
+      learn(s.key, (Date.now() - started) / 60_000);
+      await s.after?.(code);
+      // Instant alerts as soon as the jury has spoken, not at the very end.
+      if (s.key === "jury") {
+        const sent = await sendTimeSensitiveAlerts().catch((err) => {
+          log(`alerts failed: ${err instanceof Error ? err.message : err}`);
+          return 0;
+        });
+        if (sent) log(`alerted ${sent} time-sensitive item(s)`);
       }
-    }
-    step("AI jury", "scripts/judge.ts", ["--max", String(envInt("WORKER_JUDGE_MAX", 80)), "--deadline-min", "60"], 75);
-    step("co-op watch", "scripts/coop-watch.ts", [], 30);
-    step("employer discovery", "scripts/discover-employers.ts", [], 30);
-    const sent = await sendTimeSensitiveAlerts().catch((err) => {
-      log(`alerts failed: ${err instanceof Error ? err.message : err}`);
-      return 0;
-    });
-    if (sent) log(`alerted ${sent} time-sensitive item(s)`);
-    await companyPassIfGithubMissed();
-    // Weekly: move to newer free AI models, only ones that pass every test
-    // posting (docs/ai-models.md). Recorded first, so a crash cannot repeat it.
-    if (minutesSince(readState().llmUpgradeAt) > 7 * 24 * 60) {
-      writeState({ llmUpgradeAt: new Date().toISOString() });
-      step("AI model check (weekly)", "scripts/llm-upgrade.ts", [], 30);
     }
     if (tracker) await finishRun(tracker.id, "done");
   } catch (err) {
@@ -259,13 +370,25 @@ async function main(): Promise<void> {
   for (;;) {
     try {
       await pickUpQueued();
+      if (existsSync(RESTART)) {
+        unlinkSync(RESTART);
+        log("restart requested (new code) - starting a fresh copy");
+        process.exit(RESTART_FOR_UPDATE);
+      }
+      let full = false;
+      if (existsSync(RUN_FULL)) {
+        unlinkSync(RUN_FULL);
+        log("full search requested - every company site this time too");
+        full = true;
+        nextCycle = 0;
+      }
       if (existsSync(RUN_NOW)) {
         unlinkSync(RUN_NOW);
-        log("run-now requested");
+        log("search-now requested");
         nextCycle = 0;
       }
       if (Date.now() >= nextCycle) {
-        await cycle();
+        await cycle(full);
         nextCycle = Date.now() + CYCLE_MS;
         log(`cycle finished - next at ${clock(nextCycle)}; checking for button runs every 2 min`);
       }
@@ -274,7 +397,8 @@ async function main(): Promise<void> {
     }
     if (ONCE) return;
     // Sleep in short steps so a run-now request is noticed within seconds.
-    for (let waited = 0; waited < POLL_MS && !existsSync(RUN_NOW); waited += 5000) await sleep(5000);
+    const asked = () => existsSync(RUN_NOW) || existsSync(RUN_FULL) || existsSync(RESTART);
+    for (let waited = 0; waited < POLL_MS && !asked(); waited += 5000) await sleep(5000);
   }
 }
 

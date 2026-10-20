@@ -3,6 +3,8 @@
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { BoardJob } from "@/lib/board";
+import { platformName, platformOf } from "@/lib/platform";
+import { byPostTime, postTime } from "@/lib/post-time";
 import { forgetWriteKey, writeKeyOrPrompt } from "./useWriteKey";
 
 /* -------------------------------------------------------------------------- */
@@ -24,9 +26,7 @@ const BADGES: Array<{ id: string; label: string; tone: Tone; hint: string }> = [
   { id: "y34", label: "3-4 yrs", tone: "info", hint: "States 3-4 years" },
   { id: "new", label: "New", tone: "accent", hint: "Posted or reposted in the last 72 hours" },
   { id: "old", label: "Old", tone: "neutral", hint: "Posted 14 or more days ago" },
-  { id: "also-on", label: "Also on…", tone: "neutral", hint: "The same vacancy was found on other sites" },
-  { id: "direct", label: "Company site", tone: "accent", hint: "From the employer's own site" },
-  { id: "linkedin", label: "LinkedIn", tone: "info", hint: "LinkedIn listing or hiring post" },
+  { id: "duplicate", label: "Duplicate", tone: "neutral", hint: "Found on more than one platform - shown once, with every platform named" },
   { id: "saved", label: "Saved", tone: "accent", hint: "In your Saved tab" },
   { id: "applied", label: "Applied", tone: "success", hint: "You pressed Apply" },
   { id: "viewed", label: "Viewed", tone: "neutral", hint: "Opened in this browser" },
@@ -57,15 +57,16 @@ function Badge({ children, tone = "neutral", title }: { children: React.ReactNod
 
 const DAY = 86_400_000;
 
-/** When the vacancy was last (re)published - the age every badge and sort uses. */
+/** The age the New / Old badges use: the posting date, or when we found it if no site says. */
 function refreshedAt(j: BoardJob): { at: number; exact: boolean } {
-  const now = Date.now();
-  const candidates: number[] = [];
-  for (const d of [j.postedAt, j.lastRefreshedAt]) {
-    const t = d ? new Date(d).getTime() : NaN;
-    if (Number.isFinite(t) && t <= now + 3_600_000) candidates.push(t);
-  }
-  return candidates.length ? { at: Math.max(...candidates), exact: true } : { at: new Date(j.firstSeenAt).getTime(), exact: false };
+  const t = postTime(j);
+  return t !== null ? { at: t, exact: true } : { at: new Date(j.firstSeenAt).getTime(), exact: false };
+}
+
+/** Every platform this vacancy was found on, its own first. */
+function platformsOf(j: BoardJob): string[] {
+  const own = platformOf(j.sourceKind, j.sourceLabel, j.publisher);
+  return [...new Set([own, ...j.alsoOn.map((a) => platformName(a.label)), ...j.listedOn.map(platformName)])];
 }
 
 function daysUntil(iso: string | null): number | null {
@@ -87,9 +88,9 @@ function badgesOf(j: BoardJob, viewed: boolean): Set<string> {
   const age = (Date.now() - refreshedAt(j).at) / DAY;
   if (age <= 3) b.add("new");
   if (age >= 14) b.add("old");
-  if (j.alsoOn.length > 0) b.add("also-on");
-  if (j.sourceKind === "ats" || j.sourceKind === "career-page") b.add("direct");
-  if (j.sourceKind === "linkedin" || j.sourceKind === "linkedin-post") b.add("linkedin");
+  const platforms = platformsOf(j);
+  if (platforms.length > 1) b.add("duplicate");
+  for (const p of platforms) b.add(`platform:${p}`);
   if (j.saved) b.add("saved");
   if (j.saved?.appliedAt) b.add("applied");
   if (viewed) b.add("viewed");
@@ -363,6 +364,7 @@ function Card({
   onDecide: (d: "show" | "hide" | "clear") => void;
 }) {
   const fresh = refreshedAt(job);
+  const platforms = platformsOf(job);
   const closesIn = daysUntil(job.closesAt);
   const viewed = badges.has("viewed");
   const decisionTab = tab === "unclassified" || tab === "review" || tab === "hidden" || tab === "senior";
@@ -388,6 +390,10 @@ function Card({
         ))}
         {badges.has("applied") ? <Badge tone="success">Applied</Badge> : badges.has("saved") && <Badge tone="accent">Saved</Badge>}
         {!job.isActive && <Badge tone="danger">No longer listed</Badge>}
+        <Badge tone="info" title="Where this posting was found">{platforms[0]}</Badge>
+        {platforms.length > 1 && (
+          <Badge title="The same vacancy was found on these platforms; it is shown once">Duplicate · {platforms.join(", ")}</Badge>
+        )}
       </div>
 
       <button type="button" onClick={onOpen} className="mt-2 text-left" style={{ background: "none", border: "none", padding: 0, cursor: "pointer" }}>
@@ -404,16 +410,10 @@ function Card({
         </p>
       )}
       <p className="mt-1 text-[11.5px]" style={{ color: "var(--ink-3)" }}>
-        {fresh.exact ? "Posted" : "Found"} {relative(fresh.at)}
+        {fresh.exact ? `Posted ${relative(fresh.at)}` : `No posting date given · found ${relative(fresh.at)}`}
         {job.textQuality === "snippet" ? " · snippet only" : ""}
-        {" · "}
-        {job.publisher ? `${job.publisher} via ${job.sourceLabel}` : job.sourceLabel}
+        {job.publisher && job.sourceKind === "jsearch" ? ` · via ${job.sourceLabel}` : ""}
       </p>
-      {job.alsoOn.length > 0 && (
-        <p className="mt-1 text-[11.5px]" style={{ color: "var(--ink-3)" }}>
-          Also on {[...new Set(job.alsoOn.map((a) => a.label))].join(", ")}
-        </p>
-      )}
       {decisionTab && job.decisionNote && (
         <p className="mt-1.5 text-[11.5px]" style={{ color: "var(--warn-ink)" }}>{job.decisionNote}</p>
       )}
@@ -518,16 +518,15 @@ export function Board({ jobs: initial, tab }: { jobs: BoardJob[]; tab: string })
       if (included.length > 0 && !included.some((i) => badges.has(i))) return false;
       return true;
     });
-    const newest = (a: BoardJob, b: BoardJob) => refreshedAt(b).at - refreshedAt(a).at;
     if (included.length > 0) {
-      // The user's ranking: most of the chosen badges first, ties newest first.
+      // The user's ranking: most of the chosen badges first, ties by posting time.
       const score = (b: Set<string>) => included.filter((i) => b.has(i)).length;
-      rows = [...rows].sort((a, b) => score(b.badges) - score(a.badges) || newest(a.job, b.job));
+      rows = [...rows].sort((a, b) => score(b.badges) - score(a.badges) || byPostTime(a.job, b.job));
     } else {
       // Default: time-sensitive, then recommended, then co-op, then
-      // internship, then everything else newest first.
+      // internship, then everything else - each group newest posting first.
       const rank = (b: Set<string>) => (b.has("time-sensitive") ? 0 : b.has("recommended") ? 1 : b.has("coop") ? 2 : b.has("internship") ? 3 : 4);
-      rows = [...rows].sort((a, b) => rank(a.badges) - rank(b.badges) || newest(a.job, b.job));
+      rows = [...rows].sort((a, b) => rank(a.badges) - rank(b.badges) || byPostTime(a.job, b.job));
     }
     return rows;
   }, [withBadges, query, included.join(), excluded.join()]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -537,6 +536,15 @@ export function Board({ jobs: initial, tab }: { jobs: BoardJob[]; tab: string })
     for (const { badges } of withBadges) for (const b of badges) c[b] = (c[b] ?? 0) + 1;
     return c;
   }, [withBadges]);
+  // One chip per platform present, the busiest first.
+  const platformChips = useMemo(
+    () =>
+      Object.entries(counts)
+        .filter(([k]) => k.startsWith("platform:"))
+        .sort((a, b) => b[1] - a[1])
+        .map(([k]) => k.slice("platform:".length)),
+    [counts],
+  );
 
   const patch = (id: string, change: Partial<BoardJob>) => setJobs((prev) => prev.map((j) => (j.id === id ? { ...j, ...change } : j)));
 
@@ -624,11 +632,12 @@ export function Board({ jobs: initial, tab }: { jobs: BoardJob[]; tab: string })
         <div className="mt-2.5 flex flex-wrap gap-1.5">
           {BADGES.map((b) => chip(b.id, b.label, b.hint))}
           {FOCUS.map((f) => chip(`focus:${f}`, f))}
+          {platformChips.map((p) => chip(`platform:${p}`, p, `Found on ${p}`))}
         </div>
         <p className="mt-2 text-[11.5px]" style={{ color: "var(--ink-3)" }}>
           {included.length > 0
-            ? `Showing jobs with ${included.length === 1 ? "this badge" : "any of these badges"}, most matches first, then newest.`
-            : "Order: time-sensitive → recommended → co-op → internship → newest. Click a badge to bring it forward; click again to hide jobs that have it."}
+            ? `Showing jobs with ${included.length === 1 ? "this badge" : "any of these badges"}, most matches first, then newest posting.`
+            : "Order: time-sensitive → recommended → co-op → internship → the rest; inside each, newest posting first (jobs whose site gives no date last). Click a badge to bring it forward; click again to hide jobs that have it."}
         </p>
       </div>
 
