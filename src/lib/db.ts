@@ -969,12 +969,14 @@ export async function sourceHealth(): Promise<
   }>
 > {
   const db = supabasePublic();
-  const { data, error } = await db
-    .from("source_health")
-    .select("*")
-    .order("kept", { ascending: false });
-  if (error) throw new Error(`source health failed: ${error.message}`);
-  return (data ?? []).map((r) => ({
+  // Every row: ~850 on 2026-10-22 and growing. A plain select stops at 1000,
+  // and sorted by "kept" the rows cut off would be the failing ones - the very
+  // ones the Failing sources page and the repair checker need.
+  const data = await fetchAllRows<Record<string, unknown>>(
+    (from, to) => db.from("source_health").select("*").order("kept", { ascending: false }).order("source_id").range(from, to),
+    "source health",
+  );
+  return data.map((r) => ({
     sourceId: String(r.source_id),
     label: String(r.label),
     kind: String(r.kind),

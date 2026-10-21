@@ -186,6 +186,9 @@ export async function latestFixes(): Promise<Record<string, FixRow>> {
       const f = fromRow(r);
       const key = `${f.page}|${f.company}`;
       if (!out[key]) out[key] = f;
+      // Per source too: one company can have two failing sources, and each
+      // card must show its own fix (bug review, 2026-10-22).
+      if (f.sourceId && !out[`${key}|${f.sourceId}`]) out[`${key}|${f.sourceId}`] = f;
     }
   } catch {
     /* no table yet: the pages show no fix state */
@@ -243,13 +246,23 @@ function slugOf(name: string): string {
   return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "").slice(0, 40) || "company";
 }
 
-/** The employer sources a fix for this company replaces or switches off. */
+/**
+ * The employer sources a fix for this company replaces or switches off: the
+ * broken ones only - failing, or answering with no postings at all. A fix
+ * from Human intervene or Site report used to take every source of the
+ * company, so a working Greenhouse board would have been dropped along with
+ * the broken careers page it sat beside (bug review, 2026-10-22).
+ */
 export async function companySourceIds(company: string, sourceId?: string | null): Promise<string[]> {
   if (sourceId) return [sourceId];
   const isPlatform = (s: SourceDefinition) =>
     (AGGREGATOR_KINDS as readonly string[]).includes(s.kind) || s.kind === "linkedin" || s.kind === "linkedin-post";
   const all = [...ALL_SOURCES, ...(await dynamicSources())];
-  return [...new Set(all.filter((s) => !isPlatform(s) && (s.company === company || s.label === company)).map((s) => s.id))];
+  const ids = [...new Set(all.filter((s) => !isPlatform(s) && (s.company === company || s.label === company)).map((s) => s.id))];
+  if (ids.length === 0) return ids;
+  const { data } = await supabaseAdmin().from("source_health").select("source_id,ok,fetched").in("source_id", ids);
+  const working = new Set((data ?? []).filter((h) => h.ok && Number(h.fetched) > 0).map((h) => String(h.source_id)));
+  return ids.filter((id) => !working.has(id));
 }
 
 async function settle(fix: FixRow, change: Record<string, unknown>): Promise<void> {

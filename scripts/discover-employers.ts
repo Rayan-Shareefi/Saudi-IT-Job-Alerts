@@ -181,7 +181,11 @@ async function main(): Promise<void> {
   console.log(`${byCompany.size} employer(s) behind cyber/cloud postings are not tracked yet`);
 
   // Record or refresh every candidate.
-  const { data: existing } = await db.from("employer_candidates").select("company_key,status,checked_at");
+  // Every candidate, not the first 1000 (PostgREST's silent cap).
+  const existing = await fetchAllRows<Record<string, unknown>>(
+    (from, to) => db.from("employer_candidates").select("company_key,status,checked_at").order("company_key").range(from, to),
+    "employer candidates",
+  );
   const status = new Map((existing ?? []).map((e) => [String(e.company_key), String(e.status)]));
   const checkedAt = new Map((existing ?? []).map((e) => [String(e.company_key), e.checked_at ? new Date(String(e.checked_at)).getTime() : 0]));
   const due = (key: string) => {

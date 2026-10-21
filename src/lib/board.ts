@@ -233,8 +233,12 @@ export async function loadBoard(tab: BoardTab): Promise<BoardJob[]> {
 async function accuracyDoubts(): Promise<Map<string, string>> {
   try {
     const since = new Date(Date.now() - 30 * 86_400_000).toISOString();
-    const { data } = await supabaseRead().from("accuracy_checks").select("job_id,why,checked_at").eq("flagged", true).gte("checked_at", since).order("checked_at", { ascending: true });
-    return new Map((data ?? []).map((d) => [String(d.job_id), String(d.why ?? "the weekly check doubts it")]));
+    // Each job's latest check decides: a later reading that found it fine
+    // clears an earlier doubt.
+    const { data } = await supabaseRead().from("accuracy_checks").select("job_id,flagged,why,checked_at").gte("checked_at", since).order("checked_at", { ascending: true });
+    const latest = new Map<string, { flagged: boolean; why: string | null }>();
+    for (const d of data ?? []) latest.set(String(d.job_id), { flagged: Boolean(d.flagged), why: (d.why as string) ?? null });
+    return new Map([...latest].filter(([, v]) => v.flagged).map(([id, v]) => [id, v.why ?? "the weekly check doubts it"]));
   } catch {
     return new Map();
   }

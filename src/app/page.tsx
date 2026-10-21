@@ -20,7 +20,8 @@ import coverage from "../../data/coverage.json";
 /** Fixes waiting for the user that no card on the page shows. */
 function orphans(fixes: Record<string, FixRow>, page: FixPage, shown: Iterable<string | null | undefined>): FixRow[] {
   const on = new Set(shown);
-  return Object.values(fixes).filter((f) => f.page === page && f.status === "needs_you" && f.company !== "*" && !on.has(f.company));
+  const unique = [...new Map(Object.values(fixes).map((f) => [f.id, f])).values()];
+  return unique.filter((f) => f.page === page && f.status === "needs_you" && f.company !== "*" && !on.has(f.company));
 }
 
 export const dynamic = "force-dynamic";
@@ -126,7 +127,7 @@ function TabNote({ tab }: { tab: BoardTab }) {
     hidden: "Out of scope, too old, not in Saudi Arabia, not a job, or not proven (the models disagreed or could not tell), each with its reason. Keep brings one back.",
     saved: "Everything you saved or applied to. Nothing here is removed automatically, even after the posting closes.",
     linkedin: "LinkedIn job listings and company hiring posts.",
-    boards: "Found through JSearch (Indeed, Bayt, Glassdoor and others), Sabbar, Workable, Telegram channels, Careerjet and Jooble, and not on the employer's own site.",
+    boards: "Seen on JSearch (Indeed, Bayt, Glassdoor and others), Sabbar, Workable, Telegram channels, Careerjet or Jooble. A job that is also on the employer's own site or LinkedIn shows in those tabs too.",
   };
   const note = notes[tab];
   if (!note) return null;

@@ -59,14 +59,14 @@ export function FixBox({
     let tries = 0;
     const t = setInterval(async () => {
       if (++tries > 45) return clearInterval(t);
-      const res = await fetch(`/api/fixes?page=${page}&company=${encodeURIComponent(company)}`).catch(() => null);
+      const res = await fetch(`/api/fixes?page=${page}&company=${encodeURIComponent(company)}${sourceId ? `&source=${encodeURIComponent(sourceId)}` : ""}`).catch(() => null);
       const data = (await res?.json().catch(() => null)) as { fixes?: FixRow[] } | null;
       const latest = data?.fixes?.[0];
       if (latest && latest.id !== fix?.id) setFix(latest);
       else if (latest && latest.status !== fix?.status) setFix(latest);
     }, 20_000);
     return () => clearInterval(t);
-  }, [waiting, page, company, fix?.id, fix?.status]);
+  }, [waiting, page, company, sourceId, fix?.id, fix?.status]);
 
   const check = useCallback(async () => {
     setBusy(true);

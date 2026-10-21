@@ -3,6 +3,14 @@ import { COMPANIES } from "@/lib/sources/companies";
 import type { FixRow } from "@/lib/fix-words";
 import { FindAllFixes, FixBox } from "./SourceFixer";
 
+/** This card's own fix: by its source, or one made for the company as a whole. */
+function fixFor(fixes: Record<string, FixRow>, company: string, sourceId: string): FixRow | undefined {
+  const own = fixes[`failing|${company}|${sourceId}`];
+  if (own) return own;
+  const any = fixes[`failing|${company}`];
+  return any && !any.sourceId ? any : undefined;
+}
+
 /** Platform sources fail for reasons no URL fixes (a key, a quota, LinkedIn's limits). */
 const PLATFORM_KINDS = /^(aggregator|jsearch|jooble|careerjet|indeed|telegram|linkedin|linkedin-post)$/;
 
@@ -132,7 +140,7 @@ export function FailingSources({ rows, empty = [], fixes = {} }: { rows: HealthR
                   )}
 
                   {!PLATFORM_KINDS.test(r.kind) && (
-                    <FixBox page="failing" company={sourceById(r.sourceId)?.company ?? r.label} sourceId={r.sourceId} oldUrl={url} fix={fixes[`failing|${sourceById(r.sourceId)?.company ?? r.label}`]} />
+                    <FixBox page="failing" company={sourceById(r.sourceId)?.company ?? r.label} sourceId={r.sourceId} oldUrl={url} fix={fixFor(fixes, sourceById(r.sourceId)?.company ?? r.label, r.sourceId)} />
                   )}
 
                   {r.error && (
@@ -182,7 +190,7 @@ export function FailingSources({ rows, empty = [], fixes = {} }: { rows: HealthR
                         Open {url.replace(/^https?:\/\/(www\.)?/, "").slice(0, 46)} &rarr;
                       </a>
                     )}
-                    <FixBox page="failing" company={company} sourceId={r.sourceId} oldUrl={url} fix={fixes[`failing|${company}`]} />
+                    <FixBox page="failing" company={company} sourceId={r.sourceId} oldUrl={url} fix={fixFor(fixes, company, r.sourceId)} />
                   </article>
                 </li>
               );

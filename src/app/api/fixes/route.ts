@@ -19,8 +19,11 @@ export async function GET(req: Request) {
   const url = new URL(req.url);
   const page = url.searchParams.get("page");
   const company = url.searchParams.get("company");
+  const source = url.searchParams.get("source");
   const all = await latestFixes();
-  const rows = Object.values(all).filter((f) => (!page || f.page === page) && (!company || f.company === company));
+  // One row per fix: the map holds some under two keys (company, and company + source).
+  const unique = [...new Map(Object.values(all).map((f) => [f.id, f])).values()];
+  const rows = unique.filter((f) => (!page || f.page === page) && (!company || f.company === company) && (!source || f.sourceId === source));
   return NextResponse.json({ ok: true, fixes: rows });
 }
 
