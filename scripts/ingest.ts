@@ -25,7 +25,8 @@ import { AGGREGATOR_KINDS, isConfigured, lastRunTimes, retireOrphanedSources } f
 import { rebuildDuplicates } from "../src/lib/dedupe";
 import { recomputeStates } from "../src/lib/review";
 import type { EnrichedJob, IngestResult, SourceDefinition } from "../src/lib/types";
-import { claimRun, finishRun, heartbeat, startRun } from "../src/lib/runs";
+import { claimRun, finishRun, heartbeat, recordVersion, startRun } from "../src/lib/runs";
+import { codeVersion } from "./code-version";
 import { envFlag } from "../src/lib/env";
 import { disabledSources, withOverrides } from "../src/lib/source-fix";
 
@@ -169,6 +170,7 @@ async function main(): Promise<void> {
     runId = (await startRun(scopeName, arg("trigger") ?? "schedule", runner))?.id ?? null;
   }
   activeRunId = runId;
+  if (runId) await recordVersion(runId, codeVersion());
   const progress = { total: sources.length, done: 0, current: "", fetched: 0, kept: 0, inserted: 0, failed: 0, skipped: [] as string[] };
   const onSourceDone = (result: IngestResult, _done: number, _total: number, source: SourceDefinition) => {
     progress.done++;

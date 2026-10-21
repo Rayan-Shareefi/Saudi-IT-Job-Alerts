@@ -34,7 +34,8 @@ import { spawnSync } from "node:child_process";
 import { existsSync, mkdirSync, readFileSync, unlinkSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 import { envFlag, envInt, envStr } from "../src/lib/env";
-import { finishRun, latestRun, markStalled, queuedRuns, startRun } from "../src/lib/runs";
+import { finishRun, latestRun, markStalled, queuedRuns, recordVersion, startRun } from "../src/lib/runs";
+import { codeVersion } from "./code-version";
 import { sendSystemAlert, sendTimeSensitiveAlerts } from "../src/lib/alerts";
 import { PROFILE_DIR } from "../src/lib/adapters/linkedin-posts";
 import { supabaseAdmin } from "../src/lib/db";
@@ -429,6 +430,7 @@ async function cycle(full = false): Promise<void> {
   selfUpdate();
   writeState({ lastCycleAt: new Date().toISOString() });
   const tracker = await startRun("worker", full ? "full" : "schedule", "laptop");
+  if (tracker) await recordVersion(tracker.id, codeVersion());
   try {
     const steps = await plan(full);
     const total = steps.reduce((sum, s) => sum + estimate(s.key), 0);

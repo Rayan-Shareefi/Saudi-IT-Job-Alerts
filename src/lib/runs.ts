@@ -34,6 +34,25 @@ export interface Run {
   skipped: string[];
   error: string | null;
   github_run_id: string | null;
+  /** The code the run used: a short commit id, or "not a git copy". */
+  code_version?: string | null;
+}
+
+/** Record which code a run used, so the website can tell an old laptop from a current one. */
+export async function recordVersion(id: string, version: string): Promise<void> {
+  await supabaseAdmin().from("ingest_runs").update({ code_version: version }).eq("id", id).then(() => {}, () => {});
+}
+
+/** The newest run a machine made, with its code version. */
+export async function latestRunBy(runner: string): Promise<Run | null> {
+  const { data } = await supabaseRead()
+    .from("ingest_runs")
+    .select("*")
+    .eq("runner", runner)
+    .order("requested_at", { ascending: false })
+    .limit(1)
+    .maybeSingle();
+  return (data as Run) ?? null;
 }
 
 /** A run with no heartbeat for this long is reported as stalled. */

@@ -3,7 +3,7 @@ import { spawn } from "node:child_process";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { isAuthorised, writeSecret } from "@/lib/auth";
-import { dispatchWorkflow, latestRun, markStalled, queueRun, type RunScope } from "@/lib/runs";
+import { dispatchWorkflow, latestRun, latestRunBy, markStalled, queueRun, type RunScope } from "@/lib/runs";
 import { usage } from "@/lib/budget";
 import { supabaseRead } from "@/lib/db";
 
@@ -55,8 +55,19 @@ export async function GET() {
   try {
     // Housekeeping needs the service key; reading progress does not.
     await markStalled().catch(() => {});
-    const [company, api, jsearch, platformList] = await Promise.all([latestRun("company"), latestRun("api"), usage("jsearch"), platforms().catch(() => [])]);
-    return NextResponse.json({ ok: true, runs: { company, api }, jsearch: { used: jsearch.requests, cap: jsearch.cap.requests }, platforms: platformList });
+    const [company, api, jsearch, platformList, laptopRun] = await Promise.all([
+      latestRun("company"),
+      latestRun("api"),
+      usage("jsearch"),
+      platforms().catch(() => []),
+      latestRunBy("laptop").catch(() => null),
+    ]);
+    // Which code the laptop ran last, against what this site was built from
+    // (Vercel deploys every push to main): a copied folder ran old code for
+    // days without anyone being able to tell (2026-10-21).
+    const laptop = laptopRun ? { version: laptopRun.code_version ?? null, at: laptopRun.started_at ?? laptopRun.requested_at } : null;
+    const latest = process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? null;
+    return NextResponse.json({ ok: true, runs: { company, api }, jsearch: { used: jsearch.requests, cap: jsearch.cap.requests }, platforms: platformList, laptop, latest });
   } catch (err) {
     return NextResponse.json({ ok: false, error: err instanceof Error ? err.message : String(err) }, { status: 500 });
   }

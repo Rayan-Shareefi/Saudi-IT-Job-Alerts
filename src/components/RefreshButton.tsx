@@ -25,6 +25,26 @@ interface State {
   runs: { company: Run | null; api: Run | null };
   jsearch: { used: number; cap: number };
   platforms?: Array<{ label: string; lastRunAt: string | null; kept: number; problem: string | null }>;
+  /** The laptop's last run and its code version; `latest` is what this site was built from. */
+  laptop?: { version: string | null; at: string | null } | null;
+  latest?: string | null;
+}
+
+/**
+ * Whether the laptop runs the current code. It ran a copied folder's old
+ * code for days without a sign (2026-10-21); now it says so here.
+ */
+function LaptopLine({ laptop, latest }: { laptop: { version: string | null; at: string | null }; latest: string | null }) {
+  const quietHours = laptop.at ? (Date.now() - new Date(laptop.at).getTime()) / 3_600_000 : Infinity;
+  const v = laptop.version;
+  const warn = { color: "var(--warn-ink)" };
+  if (quietHours > 6) return <p style={warn}>Laptop: no search for {Number.isFinite(quietHours) ? `${Math.floor(quietHours)} h` : "a long time"} - is it on? Open Saudi Job Alert on it.</p>;
+  if (!v) return <p>Laptop: last search {ago(laptop.at)} (its version is shown from its next search on)</p>;
+  if (v === "not a git copy") return <p style={warn}>Laptop: its folder is not a git copy, so it runs old code and cannot update - see docs/laptop-setup.md.</p>;
+  if (latest && !latest.startsWith(v) && !v.startsWith(latest)) {
+    return <p style={warn}>Laptop: runs an older version ({v}; the latest is {latest}) - it updates by itself within two hours, or press U in its launcher.</p>;
+  }
+  return <p>Laptop: last search {ago(laptop.at)} · version {v}{latest ? " (up to date)" : ""}</p>;
 }
 
 /** "5h ago", "2d ago" - when a platform was last read. */
@@ -159,6 +179,7 @@ export function RefreshButton() {
             ))}
           </p>
         ) : null}
+        {state?.laptop && <LaptopLine laptop={state.laptop} latest={state.latest ?? null} />}
         {api && (LIVE.has(api.status) || Date.now() - new Date(api.requested_at).getTime() < 3 * 86_400_000) && <p>{describe(api)}</p>}
         {note && <p style={{ color: "var(--warn-ink)" }}>{note}</p>}
         {[company, api].map((r) =>
