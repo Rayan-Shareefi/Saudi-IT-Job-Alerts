@@ -44,9 +44,10 @@ Laptop setup: [docs/laptop-setup.md](docs/laptop-setup.md).
 | **All jobs** | Every verified vacancy. Order: time-sensitive, recommended, co-op, internship, then the rest - each group newest *posting* first, undated ones last | Apply. Pressing Apply also saves the job |
 | **Saved** | Everything you saved or applied to. Never removed automatically | Remove when done |
 | **Company sites / LinkedIn / Job boards** | All jobs, split by where the best copy came from | - |
-| **Unclassified** | Could not be proven either way: only a snippet was readable, location or kind of work not stated, or not reviewed yet | Keep or Hide when you have a minute; it teaches the reviewers |
-| **Review** | The checks disagree, with quotes on both sides | **Keep or Hide.** Your decision is final and permanent |
-| **5+ years** | Verified roles that state 5 or more years | For later |
+| **Waiting for the jury** | Full postings the AI jury has not read yet; each then moves to All jobs or Hidden | Nothing - it empties itself |
+| **Your call** | Co-op and internships in technology outside cyber / cloud | **Keep or Hide.** Your decision is final and permanent |
+| **Saudi Arabia** | Verified cyber / cloud roles in Saudi Arabia whose city is not stated | Keep moves one to All jobs if you know it is Riyadh |
+| **5+ years** | Roles that state 5+ years, or a senior title with no years stated | For later |
 | **Hidden** | Everything else, each with its reason (out of scope, too old, not Riyadh, not a job) | Keep brings one back |
 | **Site report** | Every employer site that could not be read, why, and the fix | Fix the ones you care about |
 | **Human intervene** | Employers no program can reach, with a working link | Check by hand now and then |
@@ -64,7 +65,7 @@ cloud work, and the date the full posting was read.
 
 | Platform | How it is read |
 |---|---|
-| **LinkedIn** | Public listings (no login) from the laptop, a few searches per pass; hiring posts with the secondary account, including the text in post pictures (OCR, `src/lib/ocr.ts`). Also arrives through JSearch |
+| **LinkedIn** | From the laptop, no login: public job listings (rotating keyword searches, plus each known company's own jobs by its LinkedIn id) and **company pages** - their hiring, co-op and internship posts, pictures read by OCR. The company list fills itself from every job card (`linkedin_companies`). The signed-in post search is off unless `LINKEDIN_SEARCH_POSTS=1`. Also arrives through JSearch |
 | **Indeed, Glassdoor, Bayt, Naukrigulf** | They block automated readers (security checks; Naukrigulf's data needs its app's private ids), so through **JSearch** (Google's job listings), twice a week. A JSearch result also says which other sites carry the same job |
 | **Jooble, Careerjet** | Their free APIs |
 | **Sabbar** | Its public job sitemap (robots.txt allows it), then the job pages; twice a day |
@@ -166,10 +167,23 @@ by our parser, Riyadh must be named. Instruction-like text is refused as
 evidence (prompt-injection guard). Failed claims are abstentions.
 
 **The arbiter** (`src/lib/state.ts`, pure, every branch tested in
-`test-judge.ts`): show when the rules are decisive, or lean in plus a verified
-vote, or two verified votes agree, or the senior plus one other signal. Hide as
-out of scope only when the rules say out *and* two verified votes (or the
-senior plus one) agree. Anything else is Unclassified or Review. The user's
+`test-judge.ts`). The owner's policy since 2026-10-21 is **not sure, not shown**:
+
+- The models decide when they agree (their quotes are checked by code);
+  rules that are *decisive* yield only to two models.
+- Models that disagree go to the senior reviewer; if it does not settle
+  them, the posting is rejected.
+- A full posting no model has read yet waits ("Waiting for the jury"); once
+  read it is shown or hidden. A snippet cannot be read further, so a vague one
+  is hidden at once - unless its own title says security or cloud work.
+- Physical security (guards, CCTV, loss prevention) is never cybersecurity.
+- A senior title with no years stated counts as 5+.
+- Saudi Arabia with no city: the "Saudi Arabia" tab.
+- Co-op and internships in technology that miss the rules are the owner's
+  call ("Your call" tab); physical security, sales, legal and other
+  non-technology programmes are not.
+
+Nothing is deleted: every hidden posting is restorable, and the owner's
 Keep / Hide beats everything.
 
 **To change a rule safely:** add the regression case first (the suites below

@@ -12,7 +12,7 @@ import type { AlsoOn, ExperienceBand, TrackId } from "./types";
  * which is never sent to the browser in the list), and attaches saved state.
  */
 
-export const BOARD_TABS = ["all", "saved", "company", "linkedin", "boards", "unclassified", "review", "senior", "hidden"] as const;
+export const BOARD_TABS = ["all", "saved", "company", "linkedin", "boards", "unclassified", "review", "saudi", "senior", "hidden"] as const;
 export type BoardTab = (typeof BOARD_TABS)[number];
 
 export interface BoardJob {
@@ -166,7 +166,8 @@ export async function loadBoard(tab: BoardTab): Promise<BoardJob[]> {
       if (tab === "unclassified") q = q.in("review_state", ["unclassified", "pending"]);
       if (tab === "review") q = q.eq("review_state", "needs_review");
       if (tab === "senior") q = q.eq("review_state", "hidden").eq("hidden_reason", "experience_5plus");
-      if (tab === "hidden") q = q.eq("review_state", "hidden").neq("hidden_reason", "experience_5plus");
+      if (tab === "saudi") q = q.eq("review_state", "hidden").eq("hidden_reason", "ksa_no_city");
+      if (tab === "hidden") q = q.eq("review_state", "hidden").not("hidden_reason", "in", "(experience_5plus,ksa_no_city)");
       return q.order("first_seen_at", { ascending: false }).range(from, to) as unknown as PromiseLike<{ data: Row[] | null; error: { message: string } | null }>;
     }, `board ${tab}`);
   }
@@ -198,7 +199,7 @@ export async function loadBoard(tab: BoardTab): Promise<BoardJob[]> {
 
 /** Counts for the tab bar. One light query, grouped in memory. */
 export async function tabCounts(): Promise<Record<BoardTab, number>> {
-  const counts: Record<BoardTab, number> = { all: 0, saved: 0, company: 0, linkedin: 0, boards: 0, unclassified: 0, review: 0, senior: 0, hidden: 0 };
+  const counts: Record<BoardTab, number> = { all: 0, saved: 0, company: 0, linkedin: 0, boards: 0, unclassified: 0, review: 0, saudi: 0, senior: 0, hidden: 0 };
   try {
     const rows = await fetchAllRows<{ review_state: string; hidden_reason: string | null; source_kind: string }>(
       (from, to) =>
@@ -220,6 +221,7 @@ export async function tabCounts(): Promise<Record<BoardTab, number>> {
       } else if (r.review_state === "unclassified" || r.review_state === "pending") counts.unclassified++;
       else if (r.review_state === "needs_review") counts.review++;
       else if (r.review_state === "hidden" && r.hidden_reason === "experience_5plus") counts.senior++;
+      else if (r.review_state === "hidden" && r.hidden_reason === "ksa_no_city") counts.saudi++;
       else if (r.review_state === "hidden") counts.hidden++;
     }
     counts.saved = (await savedMap()).size;

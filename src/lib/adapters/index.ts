@@ -18,6 +18,7 @@ import { linkedinPosts } from "./linkedin-posts";
 import { workableSearch } from "./workable-search";
 import { sabbar } from "./sabbar";
 import { telegram } from "./telegram";
+import { linkedinCompanies } from "./linkedin-companies";
 
 export const ADAPTERS: Record<string, Adapter> = {
   // company-hosted applicant tracking systems
@@ -48,6 +49,8 @@ export const ADAPTERS: Record<string, Adapter> = {
   linkedin,
   // company hiring posts, secondary account, laptop only
   "linkedin-posts": linkedinPosts,
+  // company pages, no login: their posts, and their ids for job searches
+  "linkedin-companies": linkedinCompanies,
   // every employer hiring in Riyadh through Workable (public search, free)
   "workable-search": workableSearch,
   // Sabbar, a Saudi job platform: its public job sitemap, then the job pages

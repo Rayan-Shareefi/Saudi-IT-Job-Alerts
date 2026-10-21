@@ -68,6 +68,7 @@ export interface LinkedInCard {
   company: string;
   location: string;
   postedAt: string | null;
+  companySlug?: string | null;
 }
 
 /** The cards on one search-results page. Exported for scripts/test-linkedin.ts. */
@@ -86,6 +87,8 @@ export function parseSearch(html: string): LinkedInCard[] {
       company: el.find(".base-search-card__subtitle").text().replace(/\s+/g, " ").trim() || "Unknown",
       location: el.find(".job-search-card__location").text().replace(/\s+/g, " ").trim(),
       postedAt: toIso(el.find("time").attr("datetime") ?? null),
+      // The company's page, so its posts and jobs can be read too (linkedin-companies.ts).
+      companySlug: (el.find(".base-search-card__subtitle a").attr("href") ?? "").match(/\/company\/([^/?#]+)/)?.[1] ?? null,
     });
   });
   return out;
@@ -124,14 +127,14 @@ export function parseDetail(html: string): LinkedInDetail | null {
  * A batch cut short, with why: ingest.ts saves the postings and reports the
  * run as partial (the note becomes the source's status line).
  */
-function withNote(jobs: RawJob[], note: string): RawJob[] {
+export function withNote(jobs: RawJob[], note: string): RawJob[] {
   return Object.assign(jobs, { note });
 }
 
 /* ------------------------------- fetching --------------------------------- */
 
 let lastRequest = 0;
-async function gentleGet(url: string): Promise<string> {
+export async function gentleGet(url: string): Promise<string> {
   // ~10 s between requests, as a person paging through listings would.
   const gap = envInt("LINKEDIN_DELAY_MS", 8000) + Math.floor(Math.random() * 4000);
   const wait = lastRequest + gap - Date.now();
@@ -298,6 +301,38 @@ export const linkedin = async (source: SourceDefinition): Promise<RawJob[]> => {
       if ((await search(q, page)) < 10) break;
     }
   }
+
+  // Two known companies' own jobs a pass, by the id their page gave
+  // (linkedin-companies.ts), across Saudi Arabia - the employers' whole
+  // LinkedIn boards, not only what the keywords happened to match.
+  try {
+    const { data: companies } = await supabaseAdmin()
+      .from("linkedin_companies")
+      .select("slug,org_id")
+      .not("org_id", "is", null)
+      .neq("status", "dead")
+      .order("last_jobs_at", { ascending: true, nullsFirst: true })
+      .limit(envInt("LINKEDIN_COMPANY_SEARCHES", 2));
+    for (const c of companies ?? []) {
+      if (refusal) break;
+      const html = await ask(`${BASE}/seeMoreJobPostings/search?f_C=${encodeURIComponent(String(c.org_id))}&location=${encodeURIComponent("Saudi Arabia")}&f_TPR=r2592000&start=0`);
+      if (html === null) break;
+      for (const card of parseSearch(html)) cards.set(card.id, card);
+      await supabaseAdmin().from("linkedin_companies").update({ last_jobs_at: new Date().toISOString() }).eq("slug", c.slug);
+    }
+  } catch {
+    /* no company list yet */
+  }
+
+  // Every company named on a card joins the list of pages to read.
+  const slugs = new Map<string, string>();
+  for (const c of cards.values()) if (c.companySlug) slugs.set(c.companySlug, c.company);
+  for (const [slug, name] of slugs) {
+    await supabaseAdmin()
+      .rpc("linkedin_company_seen", { p_slug: slug, p_name: name, p_via: "LinkedIn job card" })
+      .then(() => {}, () => {});
+  }
+
   const fresh = [...cards.values()].sort((a, b) => String(b.postedAt ?? "").localeCompare(String(a.postedAt ?? "")));
   for (const c of fresh) await keep(c);
 

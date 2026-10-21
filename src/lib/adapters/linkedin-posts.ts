@@ -42,7 +42,7 @@ const SEARCHES = [
   "hiring GRC Riyadh",
 ];
 
-const HIRING = /\b(hiring|we('| a)re looking|join (our|the) team|vacanc|open (role|position)|opportunit|apply|internship|co-?op|graduate program)\b|نبحث|توظيف|فرصه|فرصة|وظيف|تدريب تعاوني|شاغر/i;
+export const HIRING = /\b(hiring|we('| a)re looking|join (our|the) team|vacanc|open (role|position)|opportunit|apply|internship|co-?op|graduate program)\b|نبحث|توظيف|فرصه|فرصة|وظيف|تدريب تعاوني|شاغر/i;
 
 export class LinkedInChallenge extends Error {
   constructor(why: string) {

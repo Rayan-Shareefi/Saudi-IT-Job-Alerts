@@ -57,6 +57,13 @@ function Badge({ children, tone = "neutral", title }: { children: React.ReactNod
 
 const DAY = 86_400_000;
 
+/** The years a posting states, as it states them: "2-8 yrs", "3+ yrs". */
+function yearsText(j: BoardJob): string | null {
+  if (j.minYears === null || j.minYears < 1) return null;
+  if (j.maxYears !== null && j.maxYears > j.minYears) return `${j.minYears}-${j.maxYears} yrs`;
+  return `${j.minYears}+ yrs`;
+}
+
 /** The age the New / Old badges use: the posting date, or when we found it if no site says. */
 function refreshedAt(j: BoardJob): { at: number; exact: boolean } {
   const t = postTime(j);
@@ -83,8 +90,12 @@ function badgesOf(j: BoardJob, viewed: boolean): Set<string> {
   if (j.experienceBand === "coop") b.add("coop");
   if (j.experienceBand === "internship") b.add("internship");
   if (j.experienceBand === "0") b.add("entry");
-  if (j.experienceBand === "1-2") b.add("y12");
-  if (j.experienceBand === "3-5" && (j.minYears ?? 0) < 5) b.add("y34");
+  // By the range the posting states, not its band: Deloitte's "2-8 years" sat
+  // in the 1-2 band on its minimum and wore a "1-2 yrs" badge (2026-10-21).
+  const min = j.minYears;
+  const max = j.maxYears ?? j.minYears;
+  if (min !== null && max !== null && min >= 1 && min <= 2 && max <= 3) b.add("y12");
+  if (min !== null && max !== null && min >= 3 && min <= 4 && max <= 5) b.add("y34");
   const age = (Date.now() - refreshedAt(j).at) / DAY;
   if (age <= 3) b.add("new");
   if (age >= 14) b.add("old");
@@ -367,7 +378,7 @@ function Card({
   const platforms = platformsOf(job);
   const closesIn = daysUntil(job.closesAt);
   const viewed = badges.has("viewed");
-  const decisionTab = tab === "unclassified" || tab === "review" || tab === "hidden" || tab === "senior";
+  const decisionTab = tab === "unclassified" || tab === "review" || tab === "hidden" || tab === "senior" || tab === "saudi";
 
   return (
     <article className="surface flex flex-col p-4" style={{ borderRadius: "var(--radius-lg)", boxShadow: "var(--shadow-sm)", opacity: viewed ? 0.72 : 1 }}>
@@ -381,8 +392,7 @@ function Card({
         {badges.has("coop") && <Badge tone="warn">Co-op</Badge>}
         {badges.has("internship") && <Badge tone="warn">Internship</Badge>}
         {badges.has("entry") && <Badge tone="info">No experience</Badge>}
-        {badges.has("y12") && <Badge tone="info">1-2 yrs</Badge>}
-        {badges.has("y34") && <Badge tone="info">3-4 yrs</Badge>}
+        {yearsText(job) && <Badge tone="info" title="As the posting states it">{yearsText(job)}</Badge>}
         {badges.has("new") && <Badge tone="accent">New</Badge>}
         {badges.has("old") && <Badge>Old</Badge>}
         {job.focus.map((f) => (

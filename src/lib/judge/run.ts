@@ -205,7 +205,7 @@ export async function judgeOne(
   }
 
   // The senior reviewer, only where the arbiter still has no answer.
-  const verdict = arbitrateScope(rules, votes);
+  const verdict = arbitrateScope(rules, votes, row.text_quality === "full" || row.text_quality === "partial");
   const needsSenior = (verdict.kind === "review" || verdict.kind === "unclear") && !votes.some((v) => v.role === "senior");
   const hasTwoReadings = usable().length >= 2 || (usable().length >= 1 && verdict.kind === "review");
   if (needsSenior && hasTwoReadings) {

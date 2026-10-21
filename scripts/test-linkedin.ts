@@ -10,6 +10,7 @@
 import { readFileSync } from "node:fs";
 import { parseDetail, parseSearch } from "../src/lib/adapters/linkedin";
 import { EXTRACT, STRUCTURE, postTitle } from "../src/lib/adapters/linkedin-posts";
+import { parseCompanyPage } from "../src/lib/adapters/linkedin-companies";
 
 let total = 0;
 let failures = 0;
@@ -44,6 +45,41 @@ check(
 );
 check("a post that names no role gets no title", postTitle("Great day at the conference! #cybersecurity #Riyadh") === null);
 check("Arabic role line", postTitle("نعلن عن فرصة تدريب تعاوني\nمطلوب متدرب في الأمن السيبراني") !== null);
+
+// The company behind each card, so its page joins the list to read (2026-10-21).
+check("a card names its company's page", search.some((c) => c.companySlug === "deloitte"), JSON.stringify(search.slice(0, 2).map((c) => c.companySlug)));
+
+/*
+ * A public company page (no login), trimmed from linkedin.com/company/elm
+ * (2026-10-21): posts as schema.org records, the post card with its picture,
+ * and the company's id. Texts are made up.
+ */
+{
+  const PAGE = `<html><head>
+<script type="application/ld+json">{"@context":"http://schema.org","@graph":[
+ {"@type":"SocialMediaPosting","author":{"@type":"Organization","name":"Elm Company"},"datePublished":"2026-10-20T09:00:00.000Z","text":"We are hiring! Elm opens its co-op training program for students in cybersecurity and computer science in Riyadh. Apply now.","url":"https://www.linkedin.com/posts/elm_hiring-activity-7518576421343076352-AbCd"},
+ {"@type":"SocialMediaPosting","author":{"@type":"Organization","name":"Elm Company"},"datePublished":"2026-10-18T09:00:00.000Z","text":"Visit our booth at the exhibition.","url":"https://www.linkedin.com/posts/elm_expo-activity-7518000000000000001-EfGh"},
+ {"@type":"Organization","name":"Elm Company","url":"https://sa.linkedin.com/company/elm","sameAs":"https://www.elm.sa/"}]}</script>
+</head><body>
+<article class="main-feed-activity-card" data-activity-urn="urn:li:activity:7518576421343076352">
+  <img data-delayed-url="https://media.licdn.com/dms/image/v2/X/company-logo_100_100/elm_logo">
+  <p>We are hiring!</p>
+  <img data-delayed-url="https://media.licdn.com/dms/image/v2/Y/feedshare-shrink_800/coop.jpg">
+</article>
+<a href="https://www.linkedin.com/jobs/elm-company-jobs-worldwide?f_C=42185&amp;trk=x">Jobs</a>
+<code>urn:li:organization:42185</code>
+</body></html>`;
+  const page = parseCompanyPage(PAGE);
+  check("company page: its name", page.name === "Elm Company", String(page.name));
+  check("company page: its id, for its job listings", page.orgId === "42185", String(page.orgId));
+  check("company page: its own website", page.website === "https://www.elm.sa/", String(page.website));
+  check("company page: both posts read", page.posts.length === 2, JSON.stringify(page.posts.map((p) => p.id)));
+  check("company page: post id from its link", page.posts[0]?.id === "7518576421343076352", String(page.posts[0]?.id));
+  check("company page: the post's time", page.posts[0]?.at === "2026-10-20T09:00:00.000Z", String(page.posts[0]?.at));
+  check("company page: the post's picture, not the logo", JSON.stringify(page.posts[0]?.images) === JSON.stringify(["https://media.licdn.com/dms/image/v2/Y/feedshare-shrink_800/coop.jpg"]), JSON.stringify(page.posts[0]?.images));
+  check("company page: a post without a picture has none", page.posts[1]?.images.length === 0, JSON.stringify(page.posts[1]?.images));
+  check("company page: nothing on a page without records", parseCompanyPage("<html><body>Sign in</body></html>").posts.length === 0);
+}
 
 /*
  * The hiring-posts extractor in a real browser, on three layouts. The first

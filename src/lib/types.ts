@@ -183,7 +183,9 @@ export type HiddenReason =
   | "too_old"
   | "stale"
   | "closed"
-  | "human";
+  | "human"
+  /** In Saudi Arabia, the city not stated: the "Saudi Arabia" tab. */
+  | "ksa_no_city";
 
 /** A row as stored and as served to the client. */
 export interface JobRecord extends EnrichedJob {

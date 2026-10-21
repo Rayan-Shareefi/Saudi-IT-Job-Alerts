@@ -46,8 +46,8 @@ async function Results({ searchParams }: { searchParams: SearchParams }) {
       <div className="mb-4 grid grid-cols-2 gap-2 sm:grid-cols-4 sm:gap-3">
         <Stat value={counts.all} label="Verified jobs" accent />
         <Stat value={counts.saved} label="Saved" />
-        <Stat value={counts.unclassified} label="Unclassified" />
-        <Stat value={counts.review} label="Need your review" />
+        <Stat value={counts.unclassified} label="Waiting for the jury" />
+        <Stat value={counts.review} label="Your call" />
       </div>
 
       <RefreshButton />
@@ -92,14 +92,15 @@ async function SiteReportBoundary() {
 function TabNote({ tab }: { tab: BoardTab }) {
   const notes: Partial<Record<BoardTab, string>> = {
     unclassified:
-      "Could not be proven either way: only a snippet could be read, the location or the kind of work is not stated, or the free AI readers have not reached it yet. Your Keep or Hide teaches the board.",
+      "Full postings the AI jury has not read yet. The laptop reads them every two hours; each one then moves to All jobs or Hidden. Nothing uncertain stays here.",
     review:
-      "The rules and the AI readers disagree here, with quotes on both sides. Your Keep or Hide is final and becomes a permanent example for the reviewers.",
-    senior: "Verified cyber / cloud roles that state 5 or more years. Kept out of All jobs; they will be here when you want them.",
-    hidden: "Out of scope, too old, not in Riyadh, or not a job posting, each with its reason. Keep brings one back.",
+      "Co-op and internship openings outside cyber / cloud. You asked to judge these yourself: Keep moves one to All jobs, Hide removes it. Physical security is never here.",
+    saudi: "Verified cyber / cloud roles in Saudi Arabia whose posting does not say the city. Not in All jobs, which is Riyadh only.",
+    senior: "Roles that state 5 or more years, or have a senior title (Senior, Lead, Principal, Manager, Head, Director...) with no years stated. Kept out of All jobs.",
+    hidden: "Out of scope, too old, not in Saudi Arabia, not a job, or not proven (the models disagreed or could not tell), each with its reason. Keep brings one back.",
     saved: "Everything you saved or applied to. Nothing here is removed automatically, even after the posting closes.",
     linkedin: "LinkedIn job listings and company hiring posts.",
-    boards: "Found through JSearch (Indeed, Bayt, Glassdoor and others), Careerjet and Jooble, and not on the employer's own site.",
+    boards: "Found through JSearch (Indeed, Bayt, Glassdoor and others), Sabbar, Workable, Telegram channels, Careerjet and Jooble, and not on the employer's own site.",
   };
   const note = notes[tab];
   if (!note) return null;

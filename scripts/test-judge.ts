@@ -13,7 +13,7 @@ import { jsonObjectIn, parseAnswer, verifyAnswer } from "../src/lib/judge/verify
 import { perMinuteWait } from "../src/lib/judge/providers";
 import type { Answer, Vote } from "../src/lib/judge/types";
 import { judgeScope, type ScopeResult } from "../src/lib/scope";
-import { arbitrateScope, decideState, type StateInput } from "../src/lib/state";
+import { arbitrateScope, decideState, techProgramme, type StateInput } from "../src/lib/state";
 
 let total = 0;
 let failures = 0;
@@ -100,22 +100,30 @@ const seniorAdd = vote("in", { role: "senior", decision: "add" });
 const seniorDont = vote("out", { role: "senior", decision: "dont_add" });
 const kind = (r: ScopeResult, votes: Vote[]) => arbitrateScope(r, votes).kind;
 
+// The policy since 2026-10-21 (state.ts arbitrateScope): the models decide when
+// they agree; decisive rules yield only to two of them; disagreement goes to
+// the senior reviewer or is rejected; not sure is not shown.
+const snippetKind = (r: ScopeResult, votes: Vote[]) => arbitrateScope(r, votes, false).kind;
 check("decisive in, no votes -> in", kind(rules("in", "decisive"), []), "in");
-check("decisive in vs two outs -> review, never silently hidden", kind(rules("in", "decisive"), [vote("out"), vote("out")]), "review");
+check("decisive in vs one out -> in (decisive rules yield only to two models)", kind(rules("in", "decisive"), [vote("out")]), "in");
+check("decisive in vs two outs -> out (trust the models)", kind(rules("in", "decisive"), [vote("out"), vote("out")]), "out");
 check("decisive out, no votes -> out", kind(rules("out", "decisive"), []), "out");
-check("decisive out vs two ins -> review", kind(rules("out", "decisive"), [vote("in"), vote("in")]), "review");
-check("leaning in, no votes -> unclear (waits for a model)", kind(rules("in", "leaning"), []), "unclear");
+check("decisive out vs one in -> out", kind(rules("out", "decisive"), [vote("in")]), "out");
+check("decisive out vs two ins -> in (trust the models)", kind(rules("out", "decisive"), [vote("in"), vote("in")]), "in");
+check("leaning in, no votes, full text -> waits for the jury", kind(rules("in", "leaning"), []), "unclear");
+check("leaning in, no votes, snippet -> in on its security title", snippetKind(rules("in", "leaning"), []), "in");
 check("leaning in + one verified in -> in", kind(rules("in", "leaning"), [vote("in")]), "in");
+check("leaning in + one out -> out ('rules lean in, models say out': trust the models)", kind(rules("in", "leaning"), [vote("out")]), "out");
 check("leaning in + senior add -> in", kind(rules("in", "leaning"), [seniorAdd]), "in");
-check("leaning in, models split -> review", kind(rules("in", "leaning"), [vote("in"), vote("out")]), "review");
-check("unclear + one in -> still unclear", kind(rules("unclear", "leaning"), [vote("in")]), "unclear");
-check("unclear + two ins -> in", kind(rules("unclear", "leaning"), [vote("in"), vote("in")]), "in");
-check("unclear + split -> review", kind(rules("unclear", "leaning"), [vote("in"), vote("out")]), "review");
-check("unclear + two outs, no senior -> unclear (models alone never hide)", kind(rules("unclear", "leaning"), [vote("out"), vote("out")]), "unclear");
-check("unclear + two outs + senior -> out", kind(rules("unclear", "leaning"), [vote("out"), vote("out"), seniorDont]), "out");
-check("leaning out + two outs -> out", kind(rules("out", "leaning"), [vote("out"), vote("out")]), "out");
-check("leaning out + one out -> unclear", kind(rules("out", "leaning"), [vote("out")]), "unclear");
-check("abstentions count for nothing", kind(rules("unclear", "leaning"), [vote(null), vote(null)]), "unclear");
+check("models split -> a dispute for the senior reviewer", kind(rules("in", "leaning"), [vote("in"), vote("out")]), "review");
+check("models split + senior: don't add -> out", kind(rules("in", "leaning"), [vote("in"), vote("out"), seniorDont]), "out");
+check("unclear + one in -> in", kind(rules("unclear", "leaning"), [vote("in")]), "in");
+check("unclear + two outs -> out", kind(rules("unclear", "leaning"), [vote("out"), vote("out")]), "out");
+check("unclear, no votes, snippet -> out (not enough to tell)", snippetKind(rules("unclear", "leaning"), []), "out");
+check("leaning out, no votes, full text -> waits for the jury", kind(rules("out", "leaning"), []), "unclear");
+check("leaning out, no votes, snippet -> out", snippetKind(rules("out", "leaning"), []), "out");
+check("two abstentions -> out (the models could not establish it)", kind(rules("unclear", "leaning"), [vote(null), vote(null)]), "out");
+check("one abstention -> still waiting for a second reading", kind(rules("unclear", "leaning"), [vote(null)]), "unclear");
 
 /* -------------------------------------------------------------------------- */
 /* the whole decision                                                          */
@@ -157,7 +165,7 @@ check("not a job -> hidden", st(input({ plausibility: { ok: false, reason: "cook
 check("two models say not a job, plus no role word -> hidden", st(input({ votes: [vote("out", { isJob: false }), vote("out", { isJob: false })], weakNotJob: true })), "hidden:not_a_job");
 check("two models say not a job, but it names a role -> not hidden as not-a-job", st(input({ votes: [vote(null, { isJob: false }), vote(null, { isJob: false })] })), "show");
 check("Jeddah -> hidden", st(input({ city: "ksa-other" })), "hidden:not_riyadh");
-check("location not stated -> unclassified", st(input({ city: "unknown" })), "unclassified");
+check("location not stated -> the Saudi Arabia tab", st(input({ city: "unknown" })), "hidden:ksa_no_city");
 check("location confirmed by a quoted Riyadh -> show", st(input({ city: "unknown", votes: [vote("in", { riyadh: true, locationEvidence: "Riyadh, KSA" })] })), "show");
 check("posted 40 days ago -> too old", st(input({ postedAt: daysAgo(40), firstSeenAt: daysAgo(40) })), "hidden:too_old");
 check("40 days old but the deadline is ahead -> show", st(input({ postedAt: daysAgo(40), firstSeenAt: daysAgo(40), closesAt: daysAgo(-10) })), "show");
@@ -167,10 +175,39 @@ check("closing date passed -> closed", st(input({ closesAt: daysAgo(1) })), "hid
 check("5+ stated and required -> 5+ tab", st(input({ experience: detectExperience("SOC Analyst", "Requirements: 5+ years of experience in a SOC.") })), "hidden:experience_5plus");
 check("5+ only preferred -> show", st(input({ experience: detectExperience("SOC Analyst", "1+ years of experience. 5 years preferred.") })), "show");
 check("co-op that states 5+ -> review", st(input({ title: "SOC Co-op", experience: { ...detectExperience("SOC Analyst", "5+ years of experience."), source: "stated" }, votes: [vote("in", { programme: "coop", programmeEvidence: "co-op" })] })), "needs_review");
-check("senior title, no years -> unclassified", st(input({ title: "Senior SOC Analyst", experience: detectExperience("Senior SOC Analyst", "Monitor SIEM alerts.") })), "unclassified");
+check("senior title, no years -> 5+ tab (user, 2026-10-21)", st(input({ title: "Senior SOC Analyst", experience: detectExperience("Senior SOC Analyst", "Monitor SIEM alerts.") })), "hidden:experience_5plus");
 check("years the rules missed, found by a model -> used", st(input({ experience: detectExperience("SOC Analyst", "Monitor alerts."), votes: [vote("in", { minYears: 6, yearsEvidence: "six years in a SOC" })] })), "hidden:experience_5plus");
 check("out of scope by rules and models -> hidden", st(input({ title: "Software Engineer", scope: rules("out", "leaning"), votes: [vote("out"), vote("out")] })), "hidden:out_of_scope");
-check("models disagree -> review tab", st(input({ scope: rules("unclear", "leaning"), votes: [vote("in"), vote("out")] })), "needs_review");
+check("models disagree, no senior -> rejected", st(input({ scope: rules("unclear", "leaning"), votes: [vote("in"), vote("out")] })), "hidden:out_of_scope");
+
+// The user's cases from the board, 2026-10-21.
+{
+  const snippet = (title: string, text: string) => input({ title, textQuality: "snippet", scope: judgeScope(title, null, text, "snippet"), experience: detectExperience(title, text) });
+  check("DIKTUCOM 'Systems Engineering Expert', snippet, kind of work unclear -> hidden", st(snippet("Systems Engineering Expert, project in a Saudi Arabian Tech Company, Riyadh", "Systems engineering for a tech project.")), "hidden:out_of_scope");
+  check("DIKTUCOM 'CCTV Manufacturing Expert' -> hidden (physical security)", st(snippet("CCTV Manufacturing Expert, project in a Saudi Arabian Tech Company, Riyadh", "CCTV manufacturing.")), "hidden:out_of_scope");
+  check("Ninja 'Network & Infrastructure Engineer', snippet, no security duties -> hidden", st(snippet("Network & Infrastructure Engineer", "Maintain the network and servers.")), "hidden:out_of_scope");
+  check("Ritz-Carlton 'Loss Prevention Officer (Security Officer)' -> hidden", st(snippet("Loss Prevention Officer (Security Officer)", "Patrol and CCTV.")), "hidden:out_of_scope");
+  check("Bristol-Myers 'Compliance & Ethics Lead', GRC with no cyber content -> hidden", st(snippet("Associate Director, Compliance & Ethics Lead LR MEA", "Compliance programme.")), "hidden:out_of_scope");
+  check("Saudi Fransi 'Senior Cyber Security Analyst', snippet -> kept on its title, then 5+ for 'Senior'", st(snippet("Senior Cyber Security Analyst", "Cyber security analyst role in Riyadh.")), "hidden:experience_5plus");
+  check("a cyber title with only a snippet -> shown", st(snippet("Cyber Security Analyst", "Cyber security analyst role in Riyadh.")), "show");
+  const amazon = "(Physical) Security Specialist Intern - 2027 Internship";
+  const amazonText = "Support physical security operations at our sites: access badges, guard tours and incident reports. This internship is for students.";
+  check("Amazon physical security intern -> hidden, never 'your call'", st(input({ title: amazon, scope: judgeScope(amazon, null, amazonText, "full"), experience: detectExperience(amazon, amazonText), votes: [vote("out"), vote("out")] })), "hidden:out_of_scope");
+  const trainee = "IT Trainee: Grow in Tech Support & Cloud Basics";
+  const traineeText = "Join our trainee programme: support users, learn cloud basics, help the service desk. Trainee programme for fresh graduates.";
+  check("an IT trainee outside cyber/cloud -> your call (Review)", st(input({ title: trainee, scope: judgeScope(trainee, null, traineeText, "full"), experience: detectExperience(trainee, traineeText), votes: [vote("out"), vote("out")] })), "needs_review");
+  // "Your call" is for technology programmes (first dry run, 2026-10-21).
+  check("your call: Elm's Arabic co-op announcement", techProgramme("شركة علم تعلن بدء التسجيل في برنامج التدريب التعاوني 2027", "the title and text do not establish the kind of work"), true);
+  check("your call: a co-op listing IT among other fields", techProgramme("Co-op Trainee (IT, Marketing, Product Management, Sales)", "commercial role, not technical work"), true);
+  check("your call: an IT trainee", techProgramme("IT Trainee: Grow in Tech Support & Cloud Basics", "IT / customer support"), true);
+  check("not your call: Sales Intern", techProgramme("Sales Intern", "commercial role, not technical work"), false);
+  check("not your call: Tamheer Legal GRC and Board Affairs", techProgramme("Tamheer Legal GRC and Board Affairs", "GRC-shaped title with no cyber content"), false);
+  check("not your call: Trade Compliance internship", techProgramme("Internship - Trade Compliance - Riyadh", "GRC-shaped title with no cyber content"), false);
+  check("not your call: Infrastructure & Real Estate internship", techProgramme("Internship l Infrastructure & Real Estate l Real Estate Development", "construction / civil engineering"), false);
+  check("not your call: physical security, even with 'security' in it", techProgramme("(Physical) Security Specialist Intern", "physical security, not cybersecurity"), false);
+  check("Deloitte 'Consultant - Manager' stating 2-8 years -> not 5+ (the number wins)", st(input({ title: "Consultant - Manager | Cyber Operate | Third-Party Risk Assessor | KSA", experience: detectExperience("Consultant - Manager", "Years of experience: 2- 8 years") })), "show");
+  check("a full posting the rules cannot place, no reading yet -> waits for the jury", st(input({ title: "Integration Engineer", scope: judgeScope("Integration Engineer", null, "Integrate systems for our clients across the Kingdom and support delivery.", "full") })), "unclassified");
+}
 
 // Reading model replies (2026-10-17: Gemma replies came back "unparseable" and
 // Groq's JSON mode refused gpt-oss answers; the reader must find the answer

@@ -10,14 +10,15 @@ import type { Vote } from "./judge/types";
  * that checks the models rather than another model to trust.
  *
  *   show          proven: a real Riyadh posting, cyber/cloud, fresh, < 5 years
- *   unclassified  not proven either way - visible in its own tab
- *   needs_review  the evidence conflicts - the Review tab, for the user
- *   hidden        with a reason; every one reversible
+ *   unclassified  a full posting waiting for the AI jury's first reading
+ *   needs_review  the user's call: co-op and internships outside cyber/cloud
+ *   hidden        with a reason; every one reversible - including the
+ *                 "5+ years" and "Saudi Arabia" (city not stated) tabs
  *
- * Deletion is never decided on one signal (HANDOVER §6). "Hide as out of
- * scope" needs the rules AND the models; the models alone, or the rules alone
- * on anything but a decisive two-signal verdict, can only send a posting to
- * Unclassified or Review.
+ * Nothing is ever deleted. Since 2026-10-21 the user's policy is "not sure,
+ * not shown": the models decide when they agree, disagreement is rejected
+ * unless the senior reviewer settles it, and a posting that cannot be
+ * confirmed is hidden rather than left waiting (arbitrateScope).
  *
  * Every branch has a case in scripts/test-judge.ts.
  */
@@ -94,6 +95,24 @@ export function canonicalFocus(label: string): string | null {
   return null;
 }
 
+/*
+ * The co-op and internships the user judges are technology ones. "Any co-op
+ * or intern" (2026-10-21) brought Sales Intern, Tamheer Legal GRC and Board
+ * Affairs, Trade Compliance and Real Estate internships with it on the first
+ * dry run - not what a cybersecurity student is asking for.
+ */
+const NOT_TECH_FAMILY = /^(physical security|commercial role|a profession outside IT|construction|marketing|business risk|facilities)/;
+const TECH_TITLE_WORD = /\b(it|ict|information technology|information systems|computer\w*|software|cyber\w*|security|cloud|data|network\w*|devops|digital|tech\w*|programming|ai)\b|تقني|حاسب|سيبران|بيانات|شبكات|برمج/i;
+const NON_TECH_TITLE = /\b(sales|marketing|legal|finance|financial|accounting|hr|human resources|real estate|procurement|supply chain|trade|commercial|business development|retail|hospitality|customer service|logistics|admin\w*)\b|مبيعات|تسويق|قانون|محاسب|موارد بشرية|مشتريات/i;
+
+/** A co-op or internship in technology - the kind the user wants to judge. Exported for tests. */
+export function techProgramme(title: string, scopeReason: string): boolean {
+  if (/^physical security/.test(scopeReason)) return false;
+  if (TECH_TITLE_WORD.test(title)) return true;
+  if (NOT_TECH_FAMILY.test(scopeReason)) return false;
+  return !NON_TECH_TITLE.test(title);
+}
+
 function count(votes: Vote[], pred: (v: Vote) => boolean): number {
   return votes.filter(pred).length;
 }
@@ -108,7 +127,27 @@ type ScopeCall =
   | { kind: "unclear"; why: string }
   | { kind: "review"; why: string };
 
-export function arbitrateScope(rules: ScopeResult, votes: Vote[]): ScopeCall {
+/**
+ * In or out of scope - cybersecurity or cloud work?
+ *
+ * The user's policy (2026-10-21), replacing "two signals before hiding":
+ *
+ *   - The models decide when they agree. Their answers carry quotes our code
+ *     checked, and the rules were written without much time to think them
+ *     through ("rules lean in, models say out" was physical security every
+ *     time). Rules that are *decisive* yield only to two models.
+ *   - Models that disagree are settled by the senior reviewer, or the
+ *     posting is rejected.
+ *   - Not sure is not shown: a posting that cannot be confirmed is hidden
+ *     (restorable from Hidden), not left in Unclassified. Only a full posting
+ *     still waiting for its first reading waits; a snippet cannot be read
+ *     further, so a vague one is hidden at once - unless its own title says
+ *     security or cloud work, which keeps it.
+ *
+ * `kind: "review"` means a dispute no senior has settled yet: judge/run.ts
+ * calls the senior reviewer on it, and decideState rejects it if none does.
+ */
+export function arbitrateScope(rules: ScopeResult, votes: Vote[], readable = true): ScopeCall {
   const jurors = votes.filter((v) => v.role === "juror");
   const senior = votes.find((v) => v.role === "senior" && v.decision !== null);
   const inV = count(jurors, (v) => v.scope === "in");
@@ -116,39 +155,36 @@ export function arbitrateScope(rules: ScopeResult, votes: Vote[]): ScopeCall {
   const seniorIn = senior?.decision === "add" && senior.scope === "in";
   const seniorOut = senior?.decision === "dont_add" && senior.scope !== "in";
   const area = (): ScopeArea | null => rules.scope ?? jurors.find((v) => v.area)?.area ?? senior?.area ?? null;
+  const decisiveIn = rules.verdict === "in" && rules.confidence === "decisive";
+  const decisiveOut = rules.verdict === "out" && rules.confidence === "decisive";
 
-  const R = `${rules.verdict}/${rules.confidence}`;
+  // The senior reviewer settles what it was asked to settle.
+  if (seniorIn) return { kind: "in", by: "senior", area: area(), why: "the senior reviewer: add, with quoted duties" };
+  if (seniorOut) return { kind: "out", by: "senior", why: "the senior reviewer: out of scope" };
 
-  if (R === "in/decisive") {
-    if (outV >= 2 && inV === 0 && !seniorIn) return { kind: "review", why: "rules say in (title and duties), two models say out" };
-    return { kind: "in", by: "rules", area: area(), why: rules.reason };
+  // The models agree.
+  if (inV >= 1 && outV === 0) {
+    if (decisiveOut && inV < 2) return { kind: "out", by: "rules", why: `${rules.reason} (one model disagreed)` };
+    return { kind: "in", by: "jury", area: area(), why: `${inV} model(s) confirm security or cloud duties, quoted` };
   }
-
-  if (R === "out/decisive") {
-    if (inV >= 2 || seniorIn) return { kind: "review", why: "rules say out, models say in" };
-    return { kind: "out", by: "rules", why: rules.reason };
+  if (outV >= 1 && inV === 0) {
+    if (decisiveIn && outV < 2) return { kind: "in", by: "rules", area: area(), why: `${rules.reason} (one model disagreed)` };
+    return { kind: "out", by: "jury", why: rules.verdict === "in" ? "the models say it is not security or cloud work (the rules leaned in)" : "the models say it is not security or cloud work" };
   }
+  // They disagree: the senior reviewer's call, else rejected (decideState).
+  if (inV >= 1 && outV >= 1) return { kind: "review", why: "the models disagree" };
 
-  if (R === "in/leaning") {
-    if (inV >= 1 && outV === 0) return { kind: "in", by: "jury", area: area(), why: `${rules.reason}; confirmed by ${inV} model(s)` };
-    if (seniorIn && inV >= 0 && outV <= 1) return { kind: "in", by: "senior", area: area(), why: `${rules.reason}; senior reviewer: add` };
-    if (outV >= 1 && inV >= 1) return { kind: "review", why: "models disagree" };
-    if (outV >= 2 || seniorOut) return { kind: "review", why: "rules lean in, models say out" };
-    return { kind: "unclear", why: `${rules.reason}; waiting for a model to confirm` };
+  // No usable reading.
+  if (decisiveIn) return { kind: "in", by: "rules", area: area(), why: rules.reason };
+  if (decisiveOut) return { kind: "out", by: "rules", why: rules.reason };
+  if (jurors.length >= 2) return { kind: "out", by: "jury", why: "the models could not establish security or cloud work" };
+  if (!readable) {
+    // A snippet will not get clearer. Its title saying security or cloud work
+    // is the evidence there is; anything vaguer is not shown.
+    if (rules.verdict === "in") return { kind: "in", by: "rules", area: area(), why: `${rules.reason} - from the title; only a snippet is readable` };
+    return { kind: "out", by: "rules", why: `${rules.reason} - only a snippet is readable, not enough to tell` };
   }
-
-  if (R === "out/leaning") {
-    if (outV >= 2 || (outV >= 1 && seniorOut)) return { kind: "out", by: "jury", why: `${rules.reason}; confirmed by the models` };
-    if (inV >= 2 || seniorIn) return { kind: "review", why: "rules lean out, models say in" };
-    return { kind: "unclear", why: `${rules.reason}; not confirmed yet` };
-  }
-
-  // Rules unclear: the models decide, and only when they agree.
-  if (inV >= 2 && outV === 0) return { kind: "in", by: "jury", area: area(), why: "two models agree, with quoted duties" };
-  if (seniorIn && inV >= 1 && outV === 0) return { kind: "in", by: "senior", area: area(), why: "senior reviewer and a model agree" };
-  if (seniorOut && outV >= 2) return { kind: "out", by: "senior", why: "senior reviewer and two models agree it is out of scope" };
-  if (inV >= 1 && outV >= 1) return { kind: "review", why: "models disagree" };
-  return { kind: "unclear", why: rules.reason };
+  return { kind: "unclear", why: `${rules.reason} - waiting for the AI jury` };
 }
 
 /* -------------------------------------------------------------------------- */
@@ -218,18 +254,28 @@ export function decideState(i: StateInput): StateDecision {
   }
 
   // 5. Scope.
-  const call = i.humanOverride === "show" ? ({ kind: "in", by: "rules", area: i.scope.scope, why: "kept by you" } as ScopeCall) : arbitrateScope(i.scope, i.votes);
+  const readable = i.textQuality === "full" || i.textQuality === "partial";
+  const call = i.humanOverride === "show" ? ({ kind: "in", by: "rules", area: i.scope.scope, why: "kept by you" } as ScopeCall) : arbitrateScope(i.scope, i.votes, readable);
   const evidence = [...i.scope.evidence, ...jurors.flatMap((v) => v.evidence), ...(senior?.evidence ?? [])];
   // Models name the focus in their own words ("cloud", "soc analysis");
   // only the fixed vocabulary becomes a badge.
   const focus = [...new Set([...i.scope.focus, ...jurors.flatMap((v) => v.focus.map(canonicalFocus).filter((f): f is string => f !== null))])].slice(0, 4);
   base.juryLocation = juryLocation;
+  const exp = i.experience;
+  const programme = exp.source === "programme" || jurors.some((v) => v.programme);
 
-  if (call.kind === "out") return hidden("out_of_scope", call.by, call.why);
-  if (call.kind === "review") {
-    return { ...base, state: "needs_review", hiddenReason: null, decidedBy: "jury", note: call.why, scope: i.scope.scope, focus, scopeEvidence: [...new Set(evidence)].slice(0, 3) };
-  }
-  if (call.kind === "unclear") {
+  if (call.kind !== "in") {
+    /*
+     * Co-op and internships outside the rules are the user's call (2026-10-21:
+     * "add them and I will be the judge") - except physical security, which
+     * is never cybersecurity, whatever the programme.
+     */
+    if (programme && techProgramme(i.title, i.scope.reason)) {
+      return { ...base, state: "needs_review", hiddenReason: null, decidedBy: "rules", note: `a co-op or internship outside cyber/cloud (${call.why}) - your call`, scope: i.scope.scope, focus, scopeEvidence: [...new Set(evidence)].slice(0, 3) };
+    }
+    if (call.kind === "out") return hidden("out_of_scope", call.by, call.why);
+    // A dispute nobody settled: rejected, restorable from Hidden.
+    if (call.kind === "review") return hidden("out_of_scope", "jury", `${call.why}, and no senior reviewer settled it`);
     return { ...base, state: "unclassified", hiddenReason: null, decidedBy: "rules", note: `scope: ${call.why}`, scope: i.scope.scope, focus, scopeEvidence: [...new Set(evidence)].slice(0, 3) };
   }
 
@@ -240,9 +286,7 @@ export function decideState(i: StateInput): StateDecision {
     scopeEvidence: [...new Set(evidence)].slice(0, 3),
   };
 
-  // 6. Experience: hidden at 5+ only on a stated, required, quoted number.
-  const exp = i.experience;
-  const programme = exp.source === "programme" || jurors.some((v) => v.programme);
+  // 6. Experience: 5+ on a stated, required, quoted number - or a senior title.
   let statedMin = exp.source === "stated" && !exp.preferredOnly ? exp.minYears : null;
   let juryYears: StateDecision["juryYears"] = null;
   if (exp.source === "none") {
@@ -261,12 +305,16 @@ export function decideState(i: StateInput): StateDecision {
     return { ...inDecision, juryYears, state: "hidden", hiddenReason: "experience_5plus", decidedBy: juryYears ? "jury" : "rules", note: `requires ${statedMin}+ years (quoted)` };
   }
 
-  // 7. Not proven enough for "All".
-  if (city === "unknown" && i.humanOverride !== "show") {
-    return { ...inDecision, juryYears, state: "unclassified", hiddenReason: null, decidedBy: "rules", note: "location not stated in the posting" };
-  }
+  // A senior title with no number is 5+ (user, 2026-10-21: "if there is a
+  // senior title that means it's 5+ years"). A stated number always wins.
   if (statedMin === null && !programme && exp.band !== "0" && exp.seniorityHint === "senior" && i.humanOverride !== "show") {
-    return { ...inDecision, juryYears, state: "unclassified", hiddenReason: null, decidedBy: "rules", note: "senior title; years of experience not stated" };
+    return { ...inDecision, juryYears, state: "hidden", hiddenReason: "experience_5plus", decidedBy: "rules", note: "senior title, no years stated - counted as 5+" };
+  }
+
+  // 7. Saudi Arabia, city not stated: its own tab (user, 2026-10-21), not
+  //    "All" (Riyadh only) and not Unclassified.
+  if (city === "unknown" && i.humanOverride !== "show") {
+    return { ...inDecision, juryYears, state: "hidden", hiddenReason: "ksa_no_city", decidedBy: "rules", note: "in Saudi Arabia; the city is not stated" };
   }
 
   return { ...inDecision, juryYears, state: "show", hiddenReason: null, decidedBy: i.humanOverride === "show" ? "human" : call.by, note: call.why };

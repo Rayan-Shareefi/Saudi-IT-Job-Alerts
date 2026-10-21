@@ -24,12 +24,22 @@ interface Run {
 interface State {
   runs: { company: Run | null; api: Run | null };
   jsearch: { used: number; cap: number };
+  platforms?: Array<{ label: string; lastRunAt: string | null; kept: number; problem: string | null }>;
+}
+
+/** "5h ago", "2d ago" - when a platform was last read. */
+function ago(iso: string | null): string {
+  if (!iso) return "not yet";
+  const h = Math.floor((Date.now() - new Date(iso).getTime()) / 3_600_000);
+  if (h < 1) return "just now";
+  if (h < 48) return `${h}h ago`;
+  return `${Math.floor(h / 24)}d ago`;
 }
 
 const LIVE = new Set(["queued", "running"]);
 
 function describe(run: Run): string {
-  const what = run.scope === "api" ? "Search APIs" : "Employer boards";
+  const what = run.scope === "api" ? "Search by API (button)" : "Employer boards";
   if (run.status === "queued") return `${what}: queued, waiting for a machine to start it…`;
   if (run.status === "running") {
     return `${what}: ${run.done} of ${run.total || "?"} sources${run.current ? ` · ${run.current}` : ""} · ${run.inserted} new so far${run.runner ? ` (on ${run.runner})` : ""}`;
@@ -134,14 +144,26 @@ export function RefreshButton() {
       </div>
       <div className="mt-2 space-y-0.5 text-[12px]" style={{ color: "var(--ink-3)" }} role="status">
         {company && <p>{describe(company)}</p>}
-        {api && <p>{describe(api)}</p>}
+        {state?.platforms?.length ? (
+          <p>
+            Platforms, last read:{" "}
+            {state.platforms.map((p, i) => (
+              <span key={p.label} style={{ color: p.problem ? "var(--warn-ink)" : undefined }} title={p.problem ?? `${p.kept} relevant on the last read`}>
+                {i > 0 ? " · " : ""}
+                {p.label} {ago(p.lastRunAt)}
+              </span>
+            ))}
+          </p>
+        ) : null}
+        {api && (LIVE.has(api.status) || Date.now() - new Date(api.requested_at).getTime() < 3 * 86_400_000) && <p>{describe(api)}</p>}
         {note && <p style={{ color: "var(--warn-ink)" }}>{note}</p>}
         {[company, api].map((r) =>
-          r && r.status === "done" && r.skipped?.length ? (
+          // LinkedIn is the laptop's by design; its "skipped" on GitHub is not news.
+          r && r.status === "done" && r.skipped?.filter((s) => !/laptop/i.test(s)).length ? (
             <details key={r.id}>
-              <summary style={{ cursor: "pointer" }}>Why {r.skipped.length} source(s) were skipped</summary>
+              <summary style={{ cursor: "pointer" }}>Why {r.skipped.filter((s) => !/laptop/i.test(s)).length} source(s) were skipped</summary>
               <ul className="mt-1 list-disc pl-5">
-                {r.skipped.map((s) => (
+                {r.skipped.filter((s) => !/laptop/i.test(s)).map((s) => (
                   <li key={s}>{s}</li>
                 ))}
               </ul>

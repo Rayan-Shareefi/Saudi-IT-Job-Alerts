@@ -70,6 +70,17 @@ export const AGGREGATOR_SOURCES: SourceDefinition[] = [
     enabled: true,
   },
   {
+    // Company pages without signing in: their hiring, co-op and internship
+    // posts. Laptop only (LINKEDIN_ENABLED=1), a few companies a pass.
+    id: "linkedin-companies",
+    label: "LinkedIn company pages",
+    kind: "linkedin-post",
+    adapter: "linkedin-companies",
+    handle: "companies",
+    region: "ksa",
+    enabled: true,
+  },
+  {
     id: "careerjet-riyadh",
     label: "Careerjet",
     kind: "careerjet",

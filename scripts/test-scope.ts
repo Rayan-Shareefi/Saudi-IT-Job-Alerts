@@ -114,6 +114,15 @@ const CASES: Array<[string, string, string, TextQuality, Want]> = [
   ["software engineering intern", "Software Engineering Intern", "Build features in React and Node.js.", "full", { verdict: "out" }],
   ["data engineering manager", "Data Engineering Manager II", "Lead the data platform team building pipelines on AWS.", "full", { verdict: "out" }],
   ["customer support intern", "Customer Support Intern (TechOps)", "Answer customer tickets and escalate issues.", "full", { verdict: "out" }],
+
+  /* ---- physical security is not cybersecurity (user, 2026-10-21) ---------- */
+  ["Amazon physical security intern", "(Physical) Security Specialist Intern - 2027 Internship", "Support physical security operations at our sites: access badges, guard tours, incident reports.", "full", { verdict: "out", confidence: "decisive" }],
+  ["Sabbar physical security specialist", "(Physical) Security Specialist", "Physical security programme for data centre buildings.", "full", { verdict: "out", confidence: "decisive" }],
+  ["Ritz-Carlton loss prevention", "Loss Prevention Officer (Security Officer)", "Patrol the hotel and monitor CCTV.", "snippet", { verdict: "out", confidence: "decisive" }],
+  ["DIKTUCOM CCTV manufacturing", "CCTV Manufacturing Expert, project in a Saudi Arabian Tech Company, Riyadh", "Manufacturing of CCTV cameras.", "snippet", { verdict: "out", confidence: "decisive" }],
+  ["Arabic security guard", "حارس أمن", "حراسة المنشأة", "full", { verdict: "out", confidence: "decisive" }],
+  ["must stay in: a cyber title beside a physical one", "Physical & Cyber Security Lead", SOC_DUTIES, "full", { verdict: "in" }],
+  ["must stay in: security officer of information", "Information Security Officer", SOC_DUTIES, "full", { verdict: "in", confidence: "decisive" }],
 ];
 
 let failures = 0;

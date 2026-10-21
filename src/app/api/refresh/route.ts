@@ -5,6 +5,7 @@ import { join } from "node:path";
 import { isAuthorised, writeSecret } from "@/lib/auth";
 import { dispatchWorkflow, latestRun, markStalled, queueRun, type RunScope } from "@/lib/runs";
 import { usage } from "@/lib/budget";
+import { supabaseRead } from "@/lib/db";
 
 export const dynamic = "force-dynamic";
 export const maxDuration = 30;
@@ -24,12 +25,38 @@ export const maxDuration = 30;
  * so the progress survives reloads and works from any device.
  */
 
+/** The platforms, by when each was last read - by whichever machine read it. */
+const PLATFORMS: Array<[string, string]> = [
+  ["linkedin-riyadh", "LinkedIn jobs"],
+  ["linkedin-companies", "LinkedIn company pages"],
+  ["telegram-channels", "Telegram"],
+  ["sabbar-riyadh", "Sabbar"],
+  ["workable-riyadh", "Workable"],
+  ["jsearch-riyadh", "JSearch (Indeed, Bayt, Glassdoor…)"],
+  ["jooble-riyadh", "Jooble"],
+  ["careerjet-riyadh", "Careerjet"],
+];
+
+async function platforms(): Promise<Array<{ label: string; lastRunAt: string | null; kept: number; problem: string | null }>> {
+  const { data } = await supabaseRead()
+    .from("source_health")
+    .select("source_id,last_run_at,kept,ok,error")
+    .in("source_id", PLATFORMS.map(([id]) => id));
+  const byId = new Map((data ?? []).map((r) => [String(r.source_id), r]));
+  return PLATFORMS.map(([id, label]) => {
+    const r = byId.get(id);
+    // A skip or a partial run is the rules working, not a problem to show.
+    const problem = r && !r.ok ? String(r.error ?? "failed").slice(0, 120) : null;
+    return { label, lastRunAt: (r?.last_run_at as string) ?? null, kept: Number(r?.kept ?? 0), problem };
+  });
+}
+
 export async function GET() {
   try {
     // Housekeeping needs the service key; reading progress does not.
     await markStalled().catch(() => {});
-    const [company, api, jsearch] = await Promise.all([latestRun("company"), latestRun("api"), usage("jsearch")]);
-    return NextResponse.json({ ok: true, runs: { company, api }, jsearch: { used: jsearch.requests, cap: jsearch.cap.requests } });
+    const [company, api, jsearch, platformList] = await Promise.all([latestRun("company"), latestRun("api"), usage("jsearch"), platforms().catch(() => [])]);
+    return NextResponse.json({ ok: true, runs: { company, api }, jsearch: { used: jsearch.requests, cap: jsearch.cap.requests }, platforms: platformList });
   } catch (err) {
     return NextResponse.json({ ok: false, error: err instanceof Error ? err.message : String(err) }, { status: 500 });
   }

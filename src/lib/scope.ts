@@ -139,6 +139,13 @@ const GRC_TITLE =
   /\b(grc|governance|risk|compliance|assurance|controls|policy|regulatory|business continuity|bcm)\b|الحوكمه|المخاطر|الالتزام/;
 
 /** Families the user excluded outright, even when the employer is a security or cloud company. */
+/** Guarding, CCTV, loss prevention: security of buildings and goods, not of systems. */
+const PHYSICAL_SECURITY =
+  /physical\W{0,3}security|\b(cctv|loss prevention|asset protection|security (guard|officer|supervisor|patrol)|guard(s|ing)?|patrol\w*|surveillance|close protection|executive protection|fire (alarm|safety))\b|حراس|حارس|كاميرات المراقبه|امن وسلامه|الامن والسلامه/;
+/** Words that make a title cyber work even beside a physical one ("Physical & Cyber Security Lead"). */
+const CYBER_WORD =
+  /\b(cyber\w*|information security|infosec|it security|network security|cloud security|soc analyst|security operations cent(er|re)|siem|appsec|application security|penetration|pentest\w*|vulnerabilit\w*|incident response|grc)\b|سيبران|امن المعلومات/;
+
 const EXCLUDED_FAMILY: Array<[RegExp, string]> = [
   [/\b(it audit\w*|itgc|internal audit\w*|it auditor|sox)\b/, "IT / internal audit"],
   // \w* on purpose: "Data Engineering Manager" and "Software Engineering
@@ -305,6 +312,18 @@ export function judgeScope(
   // Non-IT professions, unless the title itself carries a real IT term.
   if (OTHER_PROFESSION.test(t) && !STRONG_IT_OVERRIDE.test(t) && !secTitle && !cloudTitle) {
     return result("out", canDecide ? "decisive" : "leaning", null, "a profession outside IT", ctx);
+  }
+
+  /*
+   * Physical security is not cybersecurity, though its titles say "security".
+   * Amazon's "(Physical) Security Specialist Intern", the Ritz-Carlton's
+   * "Loss Prevention Officer (Security Officer)" and DIKTUCOM's "CCTV
+   * Manufacturing Expert" all leaned in on the word, and the models were
+   * right to say out (user, 2026-10-21). Checked before the security title,
+   * which they would otherwise pass as.
+   */
+  if (PHYSICAL_SECURITY.test(t) && !CYBER_WORD.test(t)) {
+    return result("out", "decisive", null, "physical security, not cybersecurity", ctx);
   }
 
   // Families the user excluded. A security title wins ("Data Security

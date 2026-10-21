@@ -26,6 +26,10 @@ import { rebuildDuplicates } from "../src/lib/dedupe";
 import { recomputeStates } from "../src/lib/review";
 import type { EnrichedJob, IngestResult, SourceDefinition } from "../src/lib/types";
 import { claimRun, finishRun, heartbeat, startRun } from "../src/lib/runs";
+import { envFlag } from "../src/lib/env";
+
+/** Sources only the laptop reads, and the setting that turns each on there. */
+const LAPTOP_ONLY: Record<string, string> = { linkedin: "LINKEDIN_ENABLED", "linkedin-companies": "LINKEDIN_ENABLED", "linkedin-posts": "LINKEDIN_POSTS_ENABLED" };
 
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);
@@ -79,6 +83,13 @@ async function main(): Promise<void> {
       ...dynamic.filter((d) => !known.has(d.id) && (!skipBrowser || !d.needsBrowser)),
     ];
     if (kind) sources = sources.filter((s) => s.kind === kind);
+    /*
+     * LinkedIn is read from the laptop only. Elsewhere its sources are left
+     * out rather than run as "skipped": the skip overwrote the laptop's real
+     * status, and the website said LinkedIn was skipped while the laptop was
+     * reading it (2026-10-21).
+     */
+    sources = sources.filter((s) => !LAPTOP_ONLY[s.adapter] || envFlag(LAPTOP_ONLY[s.adapter]));
     // Every metered aggregator, not just two of them. Leaving jooble and
     // careerjet in meant --no-api still spent quota on the runs that exist
     // precisely to avoid spending it.

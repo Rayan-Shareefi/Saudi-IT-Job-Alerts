@@ -18,10 +18,10 @@ Read it before changing any rule, adapter or the checker.
    in a frequent schedule (`jsearch.yml` runs twice a week, ~87 of the 150 cap). Test with
    `npm run test:jsearch` - the local mock, zero real requests.
 4. **Do not bypass bot protection.** Blocked sites go to the Site report and
-   are covered through LinkedIn / JSearch. LinkedIn: public listings (no
-   login) and hiring posts via the user's *secondary* account on the laptop -
-   an explicit user decision (2026-10-13), slow and read-only, stopping at
-   the first 429 / login wall / challenge. Never solve a CAPTCHA or
+   are covered through LinkedIn / JSearch. LinkedIn, from the laptop: public
+   listings and public company pages (no login); the signed-in post search
+   with the *secondary* account only if 'LINKEDIN_SEARCH_POSTS=1'. Slow and
+   read-only, stopping at the first 429 / login wall / challenge. Never solve a CAPTCHA or
    verification step in code.
 5. **Riyadh only. Cybersecurity and cloud only**, judged from the duties:
    DevOps/SRE only with cloud duties, network roles only with security duties;
@@ -33,11 +33,16 @@ Read it before changing any rule, adapter or the checker.
 
 - **Rules never delete.** Every decision is a recomputable `review_state`
   (`src/lib/state.ts`); `removed_at` is the user's trash button only.
-- **Two signals before hiding** (HANDOVER §"The checker"). Unproven ->
-  Unclassified; conflicting evidence -> Review. The user's Keep/Hide is final.
-- **Models never create postings and never decide alone.** Every model claim
-  needs a quote that `judge/verify.ts` finds in the posting and that supports
-  the claim; years are re-read from the quote by our own parser.
+- **Not sure, not shown** (the owner's policy, 2026-10-21; HANDOVER §"The
+  checker"). The models decide when they agree; decisive rules yield to two;
+  disagreement -> senior reviewer, else rejected; unconfirmable -> hidden
+  (restorable). Physical security is never cyber; a senior title with no
+  years is 5+; Saudi with no city -> "Saudi Arabia" tab; technology co-op /
+  intern outside the rules -> "Your call". The user's Keep/Hide is final.
+- **Models never create postings, and a claim without a checked quote counts
+  for nothing.** Every model claim needs a quote that `judge/verify.ts` finds
+  in the posting and that supports the claim; years are re-read from the
+  quote by our own parser.
 - When you change a rule, **add a regression case** naming the real posting,
   run `npm run test`, then `npm run reclassify -- --dry` and read the moves.
 

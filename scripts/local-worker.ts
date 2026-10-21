@@ -64,6 +64,7 @@ interface WorkerState {
   lastCycleAt?: string;
   linkedinJobsAt?: string;
   linkedinPostsAt?: string;
+  linkedinCompaniesAt?: string;
   /** LinkedIn job listings asked us to slow down this many times in a row. */
   linkedinRefusals?: number;
   /** No LinkedIn job listings before this time (after a refusal). */
@@ -97,9 +98,10 @@ function minutesSince(iso: string | undefined): number {
 }
 
 /** True if LinkedIn may be asked now; otherwise logs why not. */
-function linkedinTurn(key: "linkedinJobsAt" | "linkedinPostsAt", label: string): boolean {
+function linkedinTurn(key: "linkedinJobsAt" | "linkedinPostsAt" | "linkedinCompaniesAt", label: string): boolean {
   const state = readState();
-  const pause = key === "linkedinJobsAt" && state.linkedinJobsPauseUntil ? new Date(state.linkedinJobsPauseUntil).getTime() : 0;
+  // A refusal pauses every request to LinkedIn without a login: job listings and company pages share the limit.
+  const pause = key !== "linkedinPostsAt" && state.linkedinJobsPauseUntil ? new Date(state.linkedinJobsPauseUntil).getTime() : 0;
   if (pause > Date.now()) {
     log(`${label}: LinkedIn asked us to slow down - pausing until ${clock(pause)}`);
     return false;
@@ -119,8 +121,8 @@ function linkedinTurn(key: "linkedinJobsAt" | "linkedinPostsAt", label: string):
  * while the PC on the same day was answered: asking every two hours only
  * keeps a limit like that in place.
  */
-async function afterLinkedinJobs(): Promise<void> {
-  const { data } = await supabaseAdmin().from("source_health").select("error,kept").eq("source_id", "linkedin-riyadh").maybeSingle();
+async function afterLinkedinJobs(sourceId = "linkedin-riyadh"): Promise<void> {
+  const { data } = await supabaseAdmin().from("source_health").select("error,kept").eq("source_id", sourceId).maybeSingle();
   const status = String(data?.error ?? "");
   const refused = /asked us to slow down/i.test(status);
   const state = readState();
@@ -239,6 +241,8 @@ interface Planned {
   script: string;
   args: string[];
   timeoutMin: number;
+  /** Checked again just before the step runs: false skips it. */
+  when?: () => boolean;
   after?: (code: number) => Promise<void>;
 }
 
@@ -246,6 +250,7 @@ interface Planned {
 const FIRST_GUESS: Record<string, number> = {
   "linkedin-jobs": 4,
   "linkedin-posts": 5,
+  "linkedin-companies": 4,
   platforms: 6,
   companies: 100,
   jury: 20,
@@ -280,7 +285,29 @@ async function plan(full: boolean): Promise<Planned[]> {
       },
     });
   }
-  if (envFlag("LINKEDIN_POSTS_ENABLED") && linkedinTurn("linkedinPostsAt", "LinkedIn hiring posts")) {
+  /*
+   * Company pages, without signing in: their hiring, co-op and internship
+   * posts. Replaced the signed-in post search as the way to read posts
+   * (2026-10-21): that search mixed in adverts and AI-written posts, and its
+   * page showed the reader nothing at all.
+   */
+  if (envFlag("LINKEDIN_ENABLED") && linkedinTurn("linkedinCompaniesAt", "LinkedIn company pages")) {
+    steps.push({
+      key: "linkedin-companies",
+      name: "LinkedIn company pages",
+      // If the job listings were refused moments ago, this waits too.
+      when: () => !(readState().linkedinJobsPauseUntil && Date.parse(readState().linkedinJobsPauseUntil as string) > Date.now()),
+      script: "scripts/ingest.ts",
+      args: ["--source", "linkedin-companies"],
+      timeoutMin: 40,
+      after: async () => {
+        writeState({ linkedinCompaniesAt: new Date().toISOString() });
+        await afterLinkedinJobs("linkedin-companies").catch(() => {});
+      },
+    });
+  }
+  // The old signed-in post search, only if asked for (LINKEDIN_SEARCH_POSTS=1).
+  if (envFlag("LINKEDIN_POSTS_ENABLED") && envFlag("LINKEDIN_SEARCH_POSTS") && linkedinTurn("linkedinPostsAt", "LinkedIn hiring posts")) {
     steps.push({
       key: "linkedin-posts",
       name: "LinkedIn hiring posts",
@@ -334,6 +361,10 @@ async function cycle(full = false): Promise<void> {
     let left = total;
     for (const s of steps) {
       left -= estimate(s.key);
+      if (s.when && !s.when()) {
+        log(`${s.name}: skipped - LinkedIn asked us to slow down a moment ago`);
+        continue;
+      }
       const started = Date.now();
       const code = step(s.name, s.script, s.args, s.timeoutMin, `about ${Math.max(1, Math.round(estimate(s.key)))} min; everything done around ${clock(Date.now() + (estimate(s.key) + left) * 60_000)}`);
       learn(s.key, (Date.now() - started) / 60_000);
