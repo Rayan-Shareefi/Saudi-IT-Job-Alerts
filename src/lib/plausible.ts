@@ -452,6 +452,10 @@ export function judgePosting(
   const t = (title ?? "").replace(/\s+/g, " ").trim();
 
   if (t.length === 0) return { ok: false, reason: "empty title" };
+  // A posting's own address must be a web link: the board opens it, and a
+  // "javascript:" address would run on the board's site (security review,
+  // 2026-10-22). Relative paths never reach here - adapters resolve them.
+  if (url && !/^https?:\/\//i.test(url.trim())) return { ok: false, reason: "not a web link" };
   if (t.length < 3) return { ok: false, reason: "title too short" };
   if (t.length > 180) return { ok: false, reason: "title too long to be a role" };
 

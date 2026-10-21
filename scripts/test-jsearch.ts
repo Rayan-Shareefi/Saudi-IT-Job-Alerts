@@ -18,6 +18,10 @@ import { JSEARCH_SWEEPS, PROVIDER_BASE, jsearch, jsearchHeadersFor } from "../sr
 const SWEEPS = JSEARCH_SWEEPS.length;
 import type { SourceDefinition } from "../src/lib/types";
 
+// The mock listens on 127.0.0.1, which the fetch helpers refuse by default
+// (net-guard.ts); this suite may reach it.
+process.env.ALLOW_LOCAL_FETCH = "1";
+
 const SOURCE: SourceDefinition = {
   id: "jsearch-riyadh",
   label: "JSearch",

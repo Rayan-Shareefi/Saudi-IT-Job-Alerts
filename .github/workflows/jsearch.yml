@@ -15,6 +15,10 @@ concurrency:
   group: jsearch
   cancel-in-progress: false
 
+# Least privilege: this workflow only reads the code (the repo is public).
+permissions:
+  contents: read
+
 jobs:
   jsearch:
     runs-on: ubuntu-latest

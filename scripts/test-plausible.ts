@@ -149,6 +149,9 @@ const MUST_REJECT: Array<[string, string]> = [
  * URL is. [title, description, url, why].
  */
 const MUST_REJECT_CTX: Array<[string, string, string, string]> = [
+  // Security review, 2026-10-22: the board opens a posting's address.
+  ["SOC Analyst", "Monitor SIEM alerts.", "javascript:alert(document.cookie)", "a script link would run on the board's site"],
+  ["Cloud Engineer", "AWS and Terraform.", "data:text/html,<script>x</script>", "a data: link is not a web page"],
   ["Ahmed Al-Harbi", "", "https://example.com/about/leadership/ahmed-al-harbi", "leadership profile collected as a posting"],
   ["Sara Abdullah", "Sara joined the company in 2019 and serves as Head of Digital Transformation.", "https://example.com/careers/sara-abdullah", "a biography, not a vacancy"],
   ["Khalid Bin Saeed", "", "https://example.com/our-team/khalid", "team page profile"],

@@ -15,6 +15,7 @@ import type { RawJob, SourceDefinition } from "../types";
 import { isPlausiblePosting } from "../plausible";
 import { isTechnologyRole } from "../relevance";
 import { storedTexts } from "../db";
+import { obviouslyPrivate } from "../net-guard";
 import type { Adapter } from "./ats";
 import {
   REPEATED_BLOCK_SCRIPT,
@@ -518,6 +519,17 @@ export const browser: Adapter = async (source) => {
       userAgent:
         "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
       locale: "en-US",
+    });
+    // A page - or a redirect, or a script on it - must not reach into the
+    // laptop's home network (net-guard.ts, security review 2026-10-22).
+    await context.route("**/*", (route) => {
+      let host = "";
+      try {
+        host = new URL(route.request().url()).hostname;
+      } catch {
+        /* data: and blob: URLs have no host */
+      }
+      return host && obviouslyPrivate(host) ? route.abort("blockedbyclient") : route.continue();
     });
     const page = await context.newPage();
 

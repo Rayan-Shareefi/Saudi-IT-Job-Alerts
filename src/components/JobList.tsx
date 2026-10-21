@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { scoreJob, type MatchResult } from "@/lib/resume";
 import { useResumeProfile } from "./ResumeMatch";
+import { safeLink } from "@/lib/safe-link";
 import { useWriteKey } from "./useWriteKey";
 import {
   CITY_LABELS,
@@ -720,7 +721,7 @@ function JobModal({
 
         <div className="border-t p-4">
           <a
-            href={job.url}
+            href={safeLink(job.url) ?? undefined}
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex w-full items-center justify-center gap-1.5 px-4 py-3 text-[13.5px] font-semibold no-underline"

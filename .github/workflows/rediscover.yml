@@ -7,6 +7,10 @@ on:
     - cron: "0 3 1 * *"
   workflow_dispatch:
 
+# Commits the refreshed registry, so it may write to the repository - nothing else.
+permissions:
+  contents: write
+
 jobs:
   discover:
     runs-on: ubuntu-latest

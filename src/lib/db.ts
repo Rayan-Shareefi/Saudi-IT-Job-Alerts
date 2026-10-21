@@ -534,8 +534,10 @@ export async function queryJobs(
   // matching row to group it - capping at 200 made the header claim "615 roles
   // across 22 companies" when there were 54, because grouping only ever saw the
   // first page.
-  const limit = Math.min(q.limit ?? 50, 1000);
-  const offset = q.offset ?? 0;
+  // Whole numbers in range: "?limit=abc" or a negative offset made the query fail.
+  const whole = (v: number | undefined, fallback: number) => (Number.isFinite(v) && (v as number) >= 0 ? Math.trunc(v as number) : fallback);
+  const limit = Math.min(Math.max(whole(q.limit, 50), 1), 1000);
+  const offset = Math.min(whole(q.offset, 0), 100_000);
 
   let query = db
     .from("jobs")
@@ -589,7 +591,10 @@ export async function queryJobs(
     query = query.not("source_kind", "in", `(${AGGREGATOR_KINDS.join(",")})`);
   }
   if (q.search) {
-    const term = `%${q.search.replace(/[%_]/g, "")}%`;
+    // Only letters, digits and spaces reach the filter: PostgREST's or() is
+    // comma- and bracket-delimited, so "x,review_state.eq.hidden" from the
+    // public feed's ?q= added filters of its own (security review, 2026-10-22).
+    const term = `%${q.search.replace(/[^\p{L}\p{N} .+#-]/gu, " ").replace(/[.]/g, " ").trim().slice(0, 80)}%`;
     query = query.or(`title.ilike.${term},company.ilike.${term}`);
   }
   if (q.sinceDays) {

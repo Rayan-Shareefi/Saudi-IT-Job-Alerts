@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { cronAuthorised } from "@/lib/auth";
 import { runIngest } from "@/lib/ingest";
 import { enabledSources } from "@/lib/sources/registry";
 
@@ -14,11 +15,7 @@ export const maxDuration = 300;
  */
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const secret = process.env.CRON_SECRET;
-  const provided =
-    url.searchParams.get("secret") ?? request.headers.get("authorization")?.replace("Bearer ", "");
-
-  if (!secret || provided !== secret) {
+  if (!cronAuthorised(request)) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 

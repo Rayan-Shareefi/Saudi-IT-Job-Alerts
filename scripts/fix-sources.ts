@@ -56,6 +56,7 @@ import {
   type FoundBoard,
 } from "../src/lib/source-fix";
 import { checkCareersUrl } from "../src/lib/url-check";
+import { isPublicUrl, PrivateAddressRefused } from "../src/lib/net-guard";
 import { matchSignatures, probeSlugs } from "./discover-ats";
 
 const arg = (name: string) => {
@@ -91,10 +92,22 @@ async function look(url: string, timeoutMs = 15000): Promise<Look> {
   const ctrl = new AbortController();
   const timer = setTimeout(() => ctrl.abort(), timeoutMs);
   try {
-    const res = await fetch(url, { headers: { "user-agent": UA, "accept-language": "en-US,en;q=0.9,ar;q=0.8", accept: "text/html,application/xhtml+xml,*/*" }, redirect: "follow", signal: ctrl.signal });
-    const headers: Record<string, string> = {};
-    res.headers.forEach((v, k) => (headers[k.toLowerCase()] = v));
-    return { status: res.status, finalUrl: res.url || url, headers, html: (await res.text()).slice(0, 600_000) };
+    // Redirects followed by hand, each hop checked to be on the public
+    // internet: the laptop sits inside a home network (net-guard.ts).
+    let at = url;
+    for (let hop = 0; hop <= 5; hop++) {
+      if (!(await isPublicUrl(at))) return { status: 0, finalUrl: at, headers: {}, html: "", error: new PrivateAddressRefused(at).message };
+      const res = await fetch(at, { headers: { "user-agent": UA, "accept-language": "en-US,en;q=0.9,ar;q=0.8", accept: "text/html,application/xhtml+xml,*/*" }, redirect: "manual", signal: ctrl.signal });
+      const next = res.status >= 300 && res.status < 400 ? res.headers.get("location") : null;
+      if (next) {
+        at = new URL(next, at).toString();
+        continue;
+      }
+      const headers: Record<string, string> = {};
+      res.headers.forEach((v, k) => (headers[k.toLowerCase()] = v));
+      return { status: res.status, finalUrl: at, headers, html: (await res.text()).slice(0, 600_000) };
+    }
+    return { status: 0, finalUrl: at, headers: {}, html: "", error: "too many redirects" };
   } catch (err) {
     return { status: 0, finalUrl: url, headers: {}, html: "", error: err instanceof Error ? (err.name === "AbortError" ? "timed out" : (err.cause as Error)?.message ?? err.message) : String(err) };
   } finally {

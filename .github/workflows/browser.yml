@@ -26,6 +26,10 @@ env:
   GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
   GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
 
+# Least privilege: this workflow only reads the code (the repo is public).
+permissions:
+  contents: read
+
 jobs:
   shard:
     runs-on: ubuntu-latest

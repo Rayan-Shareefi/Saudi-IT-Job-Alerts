@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import { useCallback, useEffect, useMemo, useState } from "react";
 import type { BoardJob } from "@/lib/board";
+import { safeLink } from "@/lib/safe-link";
 import { platformName, platformOf } from "@/lib/platform";
 import { byPostTime, postTime } from "@/lib/post-time";
 import { forgetWriteKey, writeKeyOrPrompt } from "./useWriteKey";
@@ -317,7 +318,7 @@ function DetailView({ job, onClose, onApply }: { job: BoardJob; onClose: () => v
               {job.alsoOn.map((a, i) => (
                 <span key={`${a.url}-${i}`}>
                   {i > 0 && " · "}
-                  <a href={a.url} target="_blank" rel="noopener noreferrer">{a.label}</a>
+                  <a href={safeLink(a.url) ?? undefined} target="_blank" rel="noopener noreferrer">{a.label}</a>
                 </span>
               ))}
             </p>
@@ -579,7 +580,9 @@ export function Board({ jobs: initial, tab }: { jobs: BoardJob[]; tab: string })
 
   const apply = async (job: BoardJob) => {
     // Open first, synchronously, so the browser does not treat it as a popup.
-    window.open(job.applyUrl ?? job.url, "_blank", "noopener,noreferrer");
+    const link = safeLink(job.applyUrl) ?? safeLink(job.url);
+    if (!link) return setMessage("This posting has no web link to open.");
+    window.open(link, "_blank", "noopener,noreferrer");
     markViewed(job.id);
     setBusy(job.id);
     const r = await post("/api/saved", { jobId: job.id, action: "applied" }, "saving jobs you apply to");

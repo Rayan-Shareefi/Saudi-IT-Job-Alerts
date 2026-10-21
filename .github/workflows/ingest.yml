@@ -26,6 +26,10 @@ concurrency:
   group: ingest-${{ inputs.scope || 'scheduled' }}
   cancel-in-progress: false
 
+# Least privilege: this workflow only reads the code (the repo is public).
+permissions:
+  contents: read
+
 jobs:
   ingest:
     runs-on: ubuntu-latest
@@ -65,10 +69,18 @@ jobs:
         run: npx playwright install --with-deps chromium
 
       # JSearch is never part of this workflow: it bills per request (see jsearch.yml).
+      # The inputs arrive as environment variables and are checked before use:
+      # pasted straight into the script, a crafted run id could have run
+      # commands with every secret above in reach (2026-10-22).
       - name: Run ingest
+        env:
+          RUN_ID: ${{ inputs.run_id }}
+          SCOPE: ${{ inputs.scope }}
         run: |
-          if [ -n "${{ inputs.run_id }}" ]; then
-            npx tsx scripts/ingest.ts --run-id "${{ inputs.run_id }}" --scope "${{ inputs.scope }}" --no-metered --order stale-first --deadline-min 45
+          if [ -n "$RUN_ID" ]; then
+            [[ "$RUN_ID" =~ ^[0-9a-f-]{36}$ ]] || { echo "bad run id"; exit 1; }
+            [[ "$SCOPE" == "company" || "$SCOPE" == "api" ]] || { echo "bad scope"; exit 1; }
+            npx tsx scripts/ingest.ts --run-id "$RUN_ID" --scope "$SCOPE" --no-metered --order stale-first --deadline-min 45
           else
             npx tsx scripts/ingest.ts --skip-browser --no-metered --deadline-min 30
           fi

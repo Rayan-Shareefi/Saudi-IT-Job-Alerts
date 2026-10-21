@@ -5,6 +5,7 @@ import { detectExperience } from "./experience";
 import { companyKey, shortHash } from "./company-key";
 import { textQualityOf } from "./scope";
 import { applyKindOf, formLinkIn } from "./apply-link";
+import { safeLink } from "./safe-link";
 
 export { normalize };
 import type {
@@ -701,7 +702,7 @@ export function enrich(raw: RawJob, source: SourceDefinition): EnrichedJob {
     companyKey: companyKey(company),
     textQuality: textQualityOf(body, source.kind),
     textHash: shortHash(normalize(body)),
-    applyKind: applyKindOf(raw.applyUrl ?? raw.url, source.kind, body),
-    applyUrl: raw.applyUrl ?? formLinkIn(body) ?? null,
+    applyKind: applyKindOf(safeLink(raw.applyUrl) ?? raw.url, source.kind, body),
+    applyUrl: safeLink(raw.applyUrl) ?? formLinkIn(body) ?? null,
   };
 }

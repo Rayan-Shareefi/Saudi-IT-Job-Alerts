@@ -46,6 +46,10 @@ export async function POST(req: Request) {
   const newUrl = body.newUrl?.trim() || null;
   if (newUrl && !/^https?:\/\//i.test(newUrl)) return NextResponse.json({ ok: false, error: "paste a full URL starting with https://" }, { status: 400 });
   if (!body.all && !body.company?.trim()) return NextResponse.json({ ok: false, error: "company is required" }, { status: 400 });
+  // Bounded: the laptop works through whatever is queued here.
+  if ((newUrl?.length ?? 0) > 1000 || (body.oldUrl?.length ?? 0) > 1000 || (body.company?.length ?? 0) > 200 || (body.sourceId?.length ?? 0) > 120) {
+    return NextResponse.json({ ok: false, error: "too long" }, { status: 400 });
+  }
 
   try {
     const fix = await queueFix({

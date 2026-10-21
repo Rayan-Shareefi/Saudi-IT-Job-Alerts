@@ -1,4 +1,5 @@
 /** Shared fetch helpers: polite defaults, retries, timeouts, HTML -> text. */
+import { obviouslyPrivate, PrivateAddressRefused } from "./net-guard";
 
 const UA =
   "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
@@ -27,6 +28,15 @@ export interface FetchOptions {
  */
 export async function request(url: string, opts: FetchOptions = {}): Promise<Response> {
   const { method = "GET", headers = {}, body, timeoutMs = 20_000, retries = 2 } = opts;
+  // Boards found on scraped pages become sources: never an address inside
+  // the laptop's home network (net-guard.ts). Literal addresses and local
+  // names only here - no DNS lookup on every request.
+  // ALLOW_LOCAL_FETCH: the offline test suites' local mock servers only.
+  try {
+    if (!process.env.ALLOW_LOCAL_FETCH && obviouslyPrivate(new URL(url).hostname)) throw new PrivateAddressRefused(url);
+  } catch (err) {
+    if (err instanceof PrivateAddressRefused) throw err;
+  }
 
   let lastError: unknown;
   for (let attempt = 0; attempt <= retries; attempt++) {

@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { cronAuthorised } from "@/lib/auth";
 import { sendDigest } from "@/lib/digest";
 import { envStr } from "@/lib/env";
 
@@ -8,11 +9,7 @@ export const maxDuration = 60;
 /** Sends the digest. Same implementation as scripts/digest.ts, callable over HTTP. */
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const secret = envStr("CRON_SECRET");
-  const provided =
-    url.searchParams.get("secret") ?? request.headers.get("authorization")?.replace("Bearer ", "");
-
-  if (!secret || provided !== secret) {
+  if (!cronAuthorised(request)) {
     return NextResponse.json({ error: "unauthorized" }, { status: 401 });
   }
 
