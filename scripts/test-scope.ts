@@ -63,6 +63,7 @@ const CASES: Array<[string, string, string, TextQuality, Want]> = [
   ["DevOps without cloud", "DevOps Engineer", DEVOPS_NO_CLOUD, "full", { verdict: "out", confidence: "decisive" }],
   ["DevOps snippet is out too", "Senior DevOps Engineer", "Kubernetes and CI/CD.", "snippet", { verdict: "out", confidence: "decisive" }],
   ["Azure DevOps is a pipeline tool, not cloud work", "Azure DevOps Engineer", DEVOPS_NO_CLOUD, "full", { verdict: "out", confidence: "decisive" }],
+  ["Yallo Retail 'Kubernetes & Storage DevOps Engineer': Kubernetes is not a cloud name (2026-10-22)", "Kubernetes & Storage DevOps Engineer", CLOUD_DUTIES, "full", { verdict: "out", confidence: "decisive" }],
   ["must stay in: DevSecOps is security", "DevSecOps Engineer", "Integrate SAST and DAST into CI/CD pipelines and run container scanning.", "full", { verdict: "in" }],
   ["must stay in: a cloud title with DevOps in it", "Cloud DevOps Engineer (AWS)", CLOUD_DUTIES, "full", { verdict: "in", scope: "cloud" }],
   ["must stay in: cloud security with platform in it", "Cloud Security Platform Engineer", `${CLOUD_DUTIES} Implement CSPM and security controls.`, "full", { verdict: "in" }],
@@ -134,6 +135,16 @@ const CASES: Array<[string, string, string, TextQuality, Want]> = [
 ];
 
 let failures = 0;
+
+// The department is not the title (Devoteam, 2026-10-22).
+{
+  const got = judgeScope("DevOps Engineer", "Cloud", CLOUD_DUTIES, "full");
+  if (got.verdict !== "out" || !got.absolute) {
+    failures++;
+    console.log(`FAIL  Devoteam 'DevOps Engineer' in a 'Cloud' department -> out\n      got ${got.verdict} (${got.reason})`);
+  }
+}
+
 for (const [name, title, body, quality, want] of CASES) {
   const got = judgeScope(title, null, body, quality);
   const problems: string[] = [];

@@ -40,6 +40,7 @@ import { sendSystemAlert, sendTimeSensitiveAlerts } from "../src/lib/alerts";
 import { PROFILE_DIR } from "../src/lib/adapters/linkedin-posts";
 import { supabaseAdmin } from "../src/lib/db";
 import { sleep } from "../src/lib/http";
+import { queueFix } from "../src/lib/source-fix";
 
 const ONCE = process.argv.includes("--once");
 const CYCLE_MS = envInt("WORKER_CYCLE_MIN", 120) * 60_000;
@@ -74,6 +75,10 @@ interface WorkerState {
   llmUpgradeAt?: string;
   /** The last source-repair pass (scripts/fix-sources.ts). */
   fixRunAt?: string;
+  /** The weekly "Find fixes for all" on every repair page. */
+  autoFixAt?: string;
+  /** The weekly accuracy check (scripts/accuracy-check.ts). */
+  accuracyAt?: string;
   /** How long each step takes on this machine, in minutes (for the time estimates). */
   stepMinutes?: Record<string, number>;
 }
@@ -327,6 +332,7 @@ const FIRST_GUESS: Record<string, number> = {
   "linkedin-jobs": 4,
   "linkedin-posts": 5,
   "linkedin-companies": 4,
+  accuracy: 12,
   platforms: 6,
   companies: 100,
   jury: 20,
@@ -420,6 +426,25 @@ async function plan(full: boolean): Promise<Planned[]> {
   if (minutesSince(readState().llmUpgradeAt) > 7 * 24 * 60) {
     writeState({ llmUpgradeAt: new Date().toISOString() });
     steps.push({ key: "models", name: "AI model check (weekly)", script: "scripts/llm-upgrade.ts", args: [], timeoutMin: 30 });
+  }
+  /*
+   * Weekly: "Find fixes for all" on the four repair pages, without the button
+   * (owner, 2026-10-22). Cards being handled or already decided are skipped
+   * (fix-sources.ts settledCompanies); the checks run 25 at a time between
+   * searches (pickUpQueued).
+   */
+  if (minutesSince(readState().autoFixAt) > 7 * 24 * 60) {
+    writeState({ autoFixAt: new Date().toISOString() });
+    for (const page of ["failing", "sites", "human", "urls"] as const) {
+      await queueFix({ company: "*", page, requestedBy: "auto" }).catch((err) => log(`weekly fixes for ${page}: ${err instanceof Error ? err.message : err}`));
+    }
+    log("weekly: asked the repair checker to look at every card on Failing sources, Site report, Human intervene and Check URLs");
+  }
+  // Weekly: re-check a sample of the jobs on the board with the strongest
+  // free model, and email anything that looks wrong (accuracy-check.ts).
+  if (minutesSince(readState().accuracyAt) > 7 * 24 * 60) {
+    writeState({ accuracyAt: new Date().toISOString() });
+    steps.push({ key: "accuracy", name: "accuracy check (weekly)", script: "scripts/accuracy-check.ts", args: ["--sample", "20"], timeoutMin: 40 });
   }
   return steps;
 }

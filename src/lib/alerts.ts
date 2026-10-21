@@ -54,6 +54,26 @@ export async function sendSystemAlert(key: string, subject: string, body: string
   return ok;
 }
 
+/**
+ * The weekly accuracy check's findings (scripts/accuracy-check.ts): jobs on
+ * the board that a fresh reading says may not belong there. One email a
+ * week at most, from the system-alert allowance.
+ */
+export async function sendAccuracyReport(checked: number, flagged: Array<{ title: string; company: string; url: string; why: string }>): Promise<boolean> {
+  if (flagged.length === 0) return false;
+  if (!(await reserve("resend-system"))) return false;
+  const board = envStr("APP_URL");
+  const intro = `The weekly check re-read ${checked} jobs on the board with the strongest free AI model. ${flagged.length} may not belong there - each has a "Double-check" badge on the board. Keep or Hide decides it for good; nothing was hidden by itself.`;
+  const html =
+    `<div style="font-family:sans-serif;font-size:14px"><p>${esc(intro)}</p><ul>` +
+    flagged.map((f) => `<li style="margin-bottom:8px"><a href="${esc(f.url)}">${esc(f.title)}</a> - ${esc(f.company)}<br><span style="color:#555">${esc(f.why)}</span></li>`).join("") +
+    `</ul>${board ? `<p><a href="${esc(board)}">Open the board</a></p>` : ""}</div>`;
+  const text = `${intro}\n\n${flagged.map((f) => `- ${f.title} (${f.company}): ${f.why}\n  ${f.url}`).join("\n")}`;
+  const ok = await send(`Saudi Job Alert: ${flagged.length} job(s) to double-check`, html, text);
+  if (ok) await supabaseAdmin().from("audit_log").insert({ actor: "system", action: "accuracy-report", detail: { checked, flagged: flagged.length } });
+  return ok;
+}
+
 interface AlertRow {
   id: string;
   title: string;

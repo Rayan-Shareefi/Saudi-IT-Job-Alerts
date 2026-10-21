@@ -55,6 +55,8 @@ export interface BoardJob {
   recommended: boolean;
   /** A big-name or technical employer (recommended-company.ts). */
   recommendedCompany: boolean;
+  /** The weekly accuracy check's doubt about this job, if any (accuracy-check.ts). */
+  doubleCheck: string | null;
   matchScore: number | null;
   matchNote: string | null;
   saved: { savedAt: string; appliedAt: string | null } | null;
@@ -131,6 +133,7 @@ function toBoardJob(r: Row): BoardJob {
     isActive: Boolean(r.is_active),
     recommended: false,
     recommendedCompany: isRecommendedCompany(String(r.company)),
+    doubleCheck: null,
     matchScore: null,
     matchNote: null,
     saved: null,
@@ -199,8 +202,11 @@ export async function loadBoard(tab: BoardTab): Promise<BoardJob[]> {
   }
 
   const profile = tab === "hidden" ? null : await loadProfile();
+  const doubts = await accuracyDoubts();
   return rows.map((r) => {
     const job = toBoardJob(r);
+    // The owner's Keep or Hide settles a doubt for good.
+    if (!job.humanOverride) job.doubleCheck = doubts.get(job.id) ?? null;
     job.saved = saved.get(job.id) ?? null;
     if (profile) {
       const m = scoreJob(
@@ -221,6 +227,17 @@ export async function loadBoard(tab: BoardTab): Promise<BoardJob[]> {
     }
     return job;
   });
+}
+
+/** Jobs the weekly accuracy check doubted in the last 30 days, with why. */
+async function accuracyDoubts(): Promise<Map<string, string>> {
+  try {
+    const since = new Date(Date.now() - 30 * 86_400_000).toISOString();
+    const { data } = await supabaseRead().from("accuracy_checks").select("job_id,why,checked_at").eq("flagged", true).gte("checked_at", since).order("checked_at", { ascending: true });
+    return new Map((data ?? []).map((d) => [String(d.job_id), String(d.why ?? "the weekly check doubts it")]));
+  } catch {
+    return new Map();
+  }
 }
 
 /** Counts for the tab bar. One light query, grouped in memory. */

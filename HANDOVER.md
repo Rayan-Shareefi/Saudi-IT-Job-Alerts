@@ -92,7 +92,7 @@ cloud work, and the date the full posting was read.
 | Platform | How it is read |
 |---|---|
 | **LinkedIn** | From the laptop, no login: public job listings (rotating keyword searches, plus each known company's own jobs by its LinkedIn id) and **company pages** - their hiring, co-op and internship posts, pictures read by OCR. The company list fills itself from every job card (`linkedin_companies`). The signed-in post search is off unless `LINKEDIN_SEARCH_POSTS=1`. Also arrives through JSearch |
-| **Indeed, Glassdoor, Bayt, Naukrigulf** | They block automated readers (security checks; Naukrigulf's data needs its app's private ids), so through **JSearch** (Google's job listings), twice a week. A JSearch result also says which other sites carry the same job |
+| **Indeed, Glassdoor, Bayt, Naukrigulf** | They block automated readers (security checks; Naukrigulf's data needs its app's private ids), so through **JSearch** (Google's job listings), twice a week: ten searches, the five broadest two pages deep, ~130 of the 150 free requests a month. A JSearch result also says which other sites carry the same job |
 | **Jooble, Careerjet** | Their free APIs |
 | **Sabbar** | Its public job sitemap (robots.txt allows it), then the job pages; twice a day |
 | **Workable** | Its free public job search, every employer hiring in Riyadh through Workable |
@@ -105,12 +105,18 @@ its own board added (`discover-employers`).
 
 ## Your routine
 
-- **Every few days:** open **Review** and decide the few cards there. That is
+- **Every few days:** open **Your call** and decide the few cards there, and
+  answer any **Waiting for your decision** cards on the repair pages. That is
   the last check on everything automatic, and each decision makes the next
   ones better.
 - **The email** every 3 days lists new verified jobs. A separate instant email
   arrives for time-sensitive ones (application forms, deadlines within a week)
   and co-op watch hits.
+- **Weekly, by itself:** the laptop re-reads 20 random jobs on the board with
+  the strongest free model (`scripts/accuracy-check.ts`). Any it doubts get a
+  **Double-check** badge (with a Keep button) and one email lists them; Keep
+  or Hide settles each for good - nothing is hidden by the check itself. The
+  same day it runs **Find fixes for all** on the four repair pages.
 
 ## When something goes wrong
 
@@ -237,6 +243,7 @@ then `npm run reclassify -- --dry` and read the "moves" before applying.
 | `src/lib/resume.ts` | CV match ("Recommended") | `test:matching` | 7 |
 | `src/lib/source-fix.ts`, `scripts/fix-sources.ts` | Source repairs: robots.txt, bot protection, learned choices, overrides | `test:fixes` | 33 |
 | `src/lib/recommended-company.ts` | "Recommended Company" badge | `test:badges` | 18 |
+| `scripts/accuracy-check.ts` | Weekly re-read of shown jobs ("Double-check" badge, one email) | - | live |
 
 Other key files: `src/lib/review.ts` (recompute states), `src/lib/board.ts`
 (what each tab holds), `src/lib/runs.ts` (run tracking for the buttons),

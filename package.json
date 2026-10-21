@@ -66,6 +66,7 @@
     "test:fixes": "tsx scripts/test-fixes.ts",
     "test:badges": "tsx scripts/test-badges.ts",
     "sources:fix": "tsx scripts/fix-sources.ts",
+    "accuracy:check": "tsx scripts/accuracy-check.ts",
     "linkedin:login": "tsx scripts/linkedin-login.ts",
     "coop:watch": "tsx scripts/coop-watch.ts",
     "employers:discover": "tsx scripts/discover-employers.ts",

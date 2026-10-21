@@ -130,6 +130,9 @@ const CLOUD_TITLE =
   /\b(cloud|aws|azure|gcp|google cloud|oracle cloud|\boci\b|finops|openshift|kubernetes)\b|سحابي|الحوسبه السحابيه/;
 const NOT_CLOUD_WORK = /\b(cloud kitchen|cloud sales|marketing cloud|commerce cloud|sales cloud|service cloud|azure devops)\b/;
 
+/** A cloud provider or the word cloud itself: what keeps "Cloud DevOps" in. */
+const CLOUD_NAME = /\b(cloud|aws|azure|gcp|google cloud|oracle cloud|oci)\b|سحابي|الحوسبه السحابيه/;
+
 /** DevOps, SRE and platform roles: out by the owner's choice. */
 const DEVOPS_ONLY = /\b(devops|dev ops|sre|site reliability|platform engineer\w*|platform operations)\b/;
 
@@ -337,7 +340,12 @@ export function judgeScope(
   // "only cybersecurity, cloud and cloud security"), whatever the duties - a
   // title that is itself cloud or security work ("Cloud DevOps Engineer",
   // "DevSecOps") stays in.
-  if (!secTitle && !cloudTitle && DEVOPS_ONLY.test(t)) {
+  // Only a cloud *name* rescues a DevOps title: "Kubernetes & Storage DevOps
+  // Engineer" (Yallo Retail) passed on "Kubernetes" and was shown (2026-10-22).
+  // The title alone, not the department: Devoteam's "DevOps Engineer" in a
+  // department called "Cloud" was shown (2026-10-22).
+  const ownTitle = normalize(title);
+  if (!SECURITY_TITLE.test(ownTitle) && !CLOUD_NAME.test(ownTitle.replace(/azure devops/g, "")) && DEVOPS_ONLY.test(ownTitle)) {
     return result("out", "decisive", null, "DevOps / SRE / platform role - out by the owner's choice (cybersecurity and cloud only)", ctx, true);
   }
 

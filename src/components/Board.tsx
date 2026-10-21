@@ -17,6 +17,7 @@ import { forgetWriteKey, writeKeyOrPrompt } from "./useWriteKey";
  * many of the chosen badges a job has (ties: newest first).
  */
 const BADGES: Array<{ id: string; label: string; tone: Tone; hint: string }> = [
+  { id: "double-check", label: "Double-check", tone: "warn", hint: "The weekly accuracy check doubts this one - Keep or Hide settles it" },
   { id: "time-sensitive", label: "Time-sensitive", tone: "danger", hint: "Applies through a form (Google Forms etc.) or closes within 7 days" },
   { id: "recommended", label: "Recommended", tone: "success", hint: "Matches your CV" },
   { id: "top-company", label: "Recommended Company", tone: "accent", hint: "A big name, or a company whose main work is technical (SITE, Elm, stc, Aramco, SDAIA, NCA, Microsoft...)" },
@@ -88,6 +89,7 @@ function badgesOf(j: BoardJob, viewed: boolean): Set<string> {
   const closesIn = daysUntil(j.closesAt);
   if (j.applyKind === "form" || (closesIn !== null && closesIn >= 0 && closesIn <= 7)) b.add("time-sensitive");
   if (j.recommended) b.add("recommended");
+  if (j.doubleCheck) b.add("double-check");
   if (j.recommendedCompany) b.add("top-company");
   if (j.experienceBand === "coop") b.add("coop");
   if (j.experienceBand === "internship") b.add("internship");
@@ -385,6 +387,7 @@ function Card({
   return (
     <article className="surface flex flex-col p-4" style={{ borderRadius: "var(--radius-lg)", boxShadow: "var(--shadow-sm)", opacity: viewed ? 0.72 : 1 }}>
       <div className="flex flex-wrap items-center gap-1.5">
+        {badges.has("double-check") && <Badge tone="warn" title={job.doubleCheck ?? undefined}>Double-check</Badge>}
         {badges.has("time-sensitive") && (
           <Badge tone="danger" title={job.applyKind === "form" ? "Applies through a form - these intakes often close without notice" : "Closes soon"}>
             {job.applyKind === "form" ? "Form · time-sensitive" : `Closes in ${closesIn}d`}
@@ -430,6 +433,11 @@ function Card({
       {decisionTab && job.decisionNote && (
         <p className="mt-1.5 text-[11.5px]" style={{ color: "var(--warn-ink)" }}>{job.decisionNote}</p>
       )}
+      {job.doubleCheck && (
+        <p className="mt-1.5 text-[11.5px]" style={{ color: "var(--warn-ink)" }}>
+          Double-check: the weekly re-read says it {job.doubleCheck}. Keep or Hide settles it.
+        </p>
+      )}
 
       <div className="mt-3 flex flex-wrap items-center gap-2 pt-1">
         <button type="button" onClick={onApply} disabled={busy} className="px-3 py-1.5 text-[12.5px] font-semibold" style={{ background: "var(--accent)", color: "var(--accent-on)", border: "none", borderRadius: "var(--radius-sm)", cursor: "pointer" }}>
@@ -466,9 +474,17 @@ function Card({
           </>
         ) : (
           tab !== "saved" && (
-            <button type="button" disabled={busy} onClick={() => onDecide("hide")} className="ml-auto px-2 py-1.5 text-[12px]" style={{ background: "none", color: "var(--ink-3)", border: "none", cursor: "pointer" }} title="Not a fit - hide it (restorable from the Hidden tab)">
-              Hide
-            </button>
+            <>
+              {/* A doubted job: Keep says the weekly check was wrong, for good. */}
+              {job.doubleCheck && (
+                <button type="button" disabled={busy} onClick={() => onDecide("show")} className="ml-auto px-3 py-1.5 text-[12.5px] font-semibold" style={{ background: "var(--success-soft)", color: "var(--success-ink)", border: "none", borderRadius: "var(--radius-sm)", cursor: "pointer" }} title="It belongs here - the check was wrong">
+                  Keep
+                </button>
+              )}
+              <button type="button" disabled={busy} onClick={() => onDecide("hide")} className={`${job.doubleCheck ? "" : "ml-auto "}px-2 py-1.5 text-[12px]`} style={{ background: "none", color: "var(--ink-3)", border: "none", cursor: "pointer" }} title="Not a fit - hide it (restorable from the Hidden tab)">
+                Hide
+              </button>
+            </>
           )
         )}
       </div>

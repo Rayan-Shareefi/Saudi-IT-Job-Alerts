@@ -297,22 +297,24 @@ const JSEARCH_PAGES = (() => {
  * Short phrases, more of them. Overlap between sweeps costs nothing - results
  * are deduplicated by job_id - so breadth is the only thing being bought.
  */
-export const JSEARCH_SWEEPS: Array<{ query: string; internOnly?: boolean; arabic?: boolean }> = [
+export const JSEARCH_SWEEPS: Array<{ query: string; internOnly?: boolean; arabic?: boolean; pages?: number }> = [
   /*
-   * Security + cloud only since 2026-10-13. Ten sweeps at one page is ten
-   * requests a run; twice a week keeps a month near ~87 of the 150 budget.
+   * Security + cloud only since 2026-10-13. The five broadest sweeps read two
+   * pages, the rest one: fifteen requests a run, twice a week, ~130 a month
+   * of the 150 budget (raised from ten on 2026-10-22, when October had used 8;
+   * a second page of a broad query is all new results).
    *
    * English sweeps ask for English results: left to the Saudi default,
    * "cybersecurity in Riyadh" returned 3 postings from small Arabic boards
    * with no dates; with language=en, 10 - mostly LinkedIn, with exact dates
    * (2026-10-20). One Arabic sweep keeps the Arabic-only postings.
    */
-  { query: "cybersecurity in Riyadh" },
-  { query: "SOC analyst in Riyadh" },
-  { query: "information security GRC in Riyadh" },
+  { query: "cybersecurity in Riyadh", pages: 2 },
+  { query: "SOC analyst in Riyadh", pages: 2 },
+  { query: "information security GRC in Riyadh", pages: 2 },
   { query: "penetration tester in Riyadh" },
-  { query: "cloud engineer in Riyadh" },
-  { query: "cloud security in Riyadh" },
+  { query: "cloud engineer in Riyadh", pages: 2 },
+  { query: "cloud security in Riyadh", pages: 2 },
   { query: "information security analyst in Riyadh" },
   { query: "cybersecurity internship in Riyadh", internOnly: true },
   { query: "cybersecurity graduate program Saudi Arabia" },
@@ -437,9 +439,11 @@ export const jsearch: Adapter = async (source) => {
   const baseFor = (k: JsearchKey) => override || PROVIDER_BASE[k.provider];
 
   for (const sweep of JSEARCH_SWEEPS) {
+    // A sweep's own page count wins; JSEARCH_PAGES is the default for the rest.
+    const pages = Math.min(20, sweep.pages ?? JSEARCH_PAGES);
     const query =
       `/search-v2?query=${encodeURIComponent(sweep.query)}` +
-      `&num_pages=${JSEARCH_PAGES}&country=sa&date_posted=week` +
+      `&num_pages=${pages}&country=sa&date_posted=week` +
       (sweep.arabic ? "" : "&language=en") +
       (sweep.internOnly ? "&employment_types=INTERN" : "");
 
@@ -449,7 +453,9 @@ export const jsearch: Adapter = async (source) => {
     // This app's own monthly cap, shared by every machine (budget.ts), so the
     // plan's limit is never the thing that stops a run. Not counted against
     // the local mock (JSEARCH_BASE_URL), which costs nothing.
-    if (!override && !(await reserve("jsearch"))) {
+    // One request per page: JSearch bills each page, so a two-page sweep
+    // reserves two - counting one per sweep would let the budget undercount.
+    if (!override && !(await reserve("jsearch", { requests: pages }))) {
       if (out.length > 0) break;
       throw new QuotaExceeded("JSearch (this app's monthly budget, BUDGET_JSEARCH_MONTH)");
     }
