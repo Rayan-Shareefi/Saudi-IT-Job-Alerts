@@ -1,4 +1,6 @@
 import { fetchAllRows, supabaseAdmin, supabaseRead } from "./db";
+import { platformName, platformOf } from "./platform";
+import { isRecommendedCompany } from "./recommended-company";
 import { scoreJob, type ResumeProfile } from "./resume";
 import type { AlsoOn, ExperienceBand, TrackId } from "./types";
 
@@ -51,6 +53,8 @@ export interface BoardJob {
   humanOverride: string | null;
   isActive: boolean;
   recommended: boolean;
+  /** A big-name or technical employer (recommended-company.ts). */
+  recommendedCompany: boolean;
   matchScore: number | null;
   matchNote: string | null;
   saved: { savedAt: string; appliedAt: string | null } | null;
@@ -59,6 +63,28 @@ export interface BoardJob {
 const COMPANY_KINDS = ["ats", "career-page"];
 const LINKEDIN_KINDS = ["linkedin", "linkedin-post"];
 const BOARD_KINDS = ["jsearch", "jooble", "careerjet", "indeed", "aggregator", "telegram"];
+const PLATFORM_TABS = new Set<BoardTab>(["company", "linkedin", "boards"]);
+
+/**
+ * Whether a card belongs on a platform tab. A card is one vacancy; it belongs
+ * wherever the vacancy was seen, not only where its primary copy came from.
+ * The LinkedIn tab showed 13 (user, 2026-10-21) because a job read in full on
+ * a company site, with LinkedIn as its "also on" copy, or a JSearch result
+ * Google found on LinkedIn, counted only as "company" or "job board".
+ */
+function onPlatformTab(tab: BoardTab, r: Row): boolean {
+  const kind = String(r.source_kind);
+  const others = ((r.also_on as AlsoOn[]) ?? []).map((a) => ({ kind: a.kind, name: platformName(a.label) }));
+  const listed = ((r.listed_on as string[]) ?? []).map(platformName);
+  const primary = platformOf(kind, String(r.source_label ?? ""), (r.publisher as string) ?? null);
+  if (tab === "company") return COMPANY_KINDS.includes(kind) || others.some((o) => COMPANY_KINDS.includes(o.kind));
+  if (tab === "linkedin") {
+    const isLinkedIn = (name: string) => name.startsWith("LinkedIn");
+    return LINKEDIN_KINDS.includes(kind) || isLinkedIn(primary) || others.some((o) => LINKEDIN_KINDS.includes(o.kind) || isLinkedIn(o.name)) || listed.some(isLinkedIn);
+  }
+  if (tab === "boards") return BOARD_KINDS.includes(kind) || others.some((o) => BOARD_KINDS.includes(o.kind));
+  return true;
+}
 
 const LIST_COLUMNS =
   "id,title,company,url,apply_url,apply_kind,source_kind,source_label,publisher,location_text,city," +
@@ -104,6 +130,7 @@ function toBoardJob(r: Row): BoardJob {
     humanOverride: (r.human_override as string) ?? null,
     isActive: Boolean(r.is_active),
     recommended: false,
+    recommendedCompany: isRecommendedCompany(String(r.company)),
     matchScore: null,
     matchNote: null,
     saved: null,
@@ -157,10 +184,8 @@ export async function loadBoard(tab: BoardTab): Promise<BoardJob[]> {
         .eq("is_active", true)
         .is("removed_at", null)
         .is("duplicate_of", null);
-      if (tab === "all" || tab === "company" || tab === "linkedin" || tab === "boards") q = q.eq("review_state", "show");
-      if (tab === "company") q = q.in("source_kind", COMPANY_KINDS);
-      if (tab === "linkedin") q = q.in("source_kind", LINKEDIN_KINDS);
-      if (tab === "boards") q = q.in("source_kind", BOARD_KINDS);
+      // Platform tabs are filtered below, by membership (onPlatformTab).
+      if (tab === "all" || PLATFORM_TABS.has(tab)) q = q.eq("review_state", "show");
       // "pending" only exists between a run's write and its recompute; if a run
       // stops in between, those postings must still be visible somewhere.
       if (tab === "unclassified") q = q.in("review_state", ["unclassified", "pending"]);
@@ -170,6 +195,7 @@ export async function loadBoard(tab: BoardTab): Promise<BoardJob[]> {
       if (tab === "hidden") q = q.eq("review_state", "hidden").not("hidden_reason", "in", "(experience_5plus,ksa_no_city)");
       return q.order("first_seen_at", { ascending: false }).range(from, to) as unknown as PromiseLike<{ data: Row[] | null; error: { message: string } | null }>;
     }, `board ${tab}`);
+    if (PLATFORM_TABS.has(tab)) rows = rows.filter((r) => onPlatformTab(tab, r));
   }
 
   const profile = tab === "hidden" ? null : await loadProfile();
@@ -201,11 +227,11 @@ export async function loadBoard(tab: BoardTab): Promise<BoardJob[]> {
 export async function tabCounts(): Promise<Record<BoardTab, number>> {
   const counts: Record<BoardTab, number> = { all: 0, saved: 0, company: 0, linkedin: 0, boards: 0, unclassified: 0, review: 0, saudi: 0, senior: 0, hidden: 0 };
   try {
-    const rows = await fetchAllRows<{ review_state: string; hidden_reason: string | null; source_kind: string }>(
+    const rows = await fetchAllRows<Row & { review_state: string; hidden_reason: string | null }>(
       (from, to) =>
         supabaseRead()
           .from("jobs")
-          .select("review_state,hidden_reason,source_kind")
+          .select("review_state,hidden_reason,source_kind,source_label,publisher,also_on,listed_on")
           .eq("is_active", true)
           .is("removed_at", null)
           .is("duplicate_of", null)
@@ -215,9 +241,7 @@ export async function tabCounts(): Promise<Record<BoardTab, number>> {
     for (const r of rows) {
       if (r.review_state === "show") {
         counts.all++;
-        if (COMPANY_KINDS.includes(r.source_kind)) counts.company++;
-        if (LINKEDIN_KINDS.includes(r.source_kind)) counts.linkedin++;
-        if (BOARD_KINDS.includes(r.source_kind)) counts.boards++;
+        for (const tab of PLATFORM_TABS) if (onPlatformTab(tab, r)) counts[tab]++;
       } else if (r.review_state === "unclassified" || r.review_state === "pending") counts.unclassified++;
       else if (r.review_state === "needs_review") counts.review++;
       else if (r.review_state === "hidden" && r.hidden_reason === "experience_5plus") counts.senior++;

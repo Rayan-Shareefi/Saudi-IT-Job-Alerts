@@ -271,6 +271,8 @@ export interface SourceDefinition {
   note?: string;
   /** Marks sources that need a real browser (Playwright) rather than fetch. */
   needsBrowser?: boolean;
+  /** A board a fix found (source-fix.ts) stands in for these source ids. */
+  replaces?: string[];
 }
 
 export interface IngestResult {

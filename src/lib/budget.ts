@@ -50,7 +50,7 @@ function caps(): Record<Provider, Cap> {
     "sabbar-sitemap": { period: "day", requests: 2, tokens: 0 },
     sabbar: { period: "day", requests: envInt("BUDGET_SABBAR_DAY", 200), tokens: 0 },
     // Telegram: ~8 channel pages a pass plus the articles they link to.
-    telegram: { period: "day", requests: envInt("BUDGET_TELEGRAM_DAY", 300), tokens: 0 },
+    telegram: { period: "day", requests: envInt("BUDGET_TELEGRAM_DAY", 500), tokens: 0 },
     // Instant alerts: Resend free is 100/day; alerts are capped at 20 so the
     // digest and system mails always fit (see HANDOVER, email maths).
     "resend-alert": { period: "day", requests: envInt("BUDGET_ALERT_EMAILS_DAY", 20), tokens: 0 },

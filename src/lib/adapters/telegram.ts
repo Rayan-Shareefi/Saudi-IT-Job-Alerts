@@ -52,6 +52,9 @@ const HEADERS = {
 const TECH =
   /سيبران|أمن المعلومات|امن المعلومات|تقنية المعلومات|التخصصات التقنية|تقني|الحاسب|حاسب آلي|علوم الحاسب|نظم المعلومات|الشبكات|سحاب|cyber|security|cloud|devops|\bIT\b|information technology|computer science|software|network/i;
 
+/** A post announcing openings or a programme, whose fields the article lists. */
+const ANNOUNCEMENT = /تعلن|يعلن|وظائف|وظيفة|فرص|فرصة|شاغر|تدريب|برنامج|تمهير|توظيف|hiring|vacanc|jobs|opening|internship|program/i;
+
 /** Saudi cities an announcement may list, Arabic and English. "المدينة" alone means "the city", so only the full name counts. */
 const CITIES: Array<[RegExp, string]> = [
   [/الرياض|riyadh/i, "Riyadh"],
@@ -221,7 +224,9 @@ function channels(): Channel[] {
 }
 
 export const telegram = async (source: SourceDefinition): Promise<RawJob[]> => {
-  const pages = envInt("TELEGRAM_PAGES", 2);
+  // 20 posts a page. Four pages keep up with daily channels between passes;
+  // a full search (launcher F) reads 15, the last two weeks or so.
+  const pages = envInt("TELEGRAM_PAGES", 4);
   const ocrBudget = envInt("TELEGRAM_OCR_MAX", 12);
 
   // Posts already stored: reported again while under 30 days old (a post
@@ -296,10 +301,15 @@ export const telegram = async (source: SourceDefinition): Promise<RawJob[]> => {
               /* the post's own text stands */
             }
           }
-          if (!TECH.test(text)) continue;
-
-          // The full article, where the channel's site allows reading it.
+          /*
+           * The full article, where the channel's site allows reading it -
+           * read before deciding, for an announcement. "Company X announces
+           * jobs in several fields" names the fields only in the article, so
+           * filtering on the post alone dropped most of them: 11 posts kept
+           * from four daily channels in a week (2026-10-21).
+           */
           const link = ch.articles ? p.links.find((u) => ch.articles?.test(u)) : undefined;
+          if (!TECH.test(text) && !(link && ANNOUNCEMENT.test(text))) continue;
           let article: Article | null = null;
           if (link && (await reserve("telegram"))) {
             try {
@@ -309,6 +319,7 @@ export const telegram = async (source: SourceDefinition): Promise<RawJob[]> => {
             }
             await sleep(1200 + Math.floor(Math.random() * 800));
           }
+          if (!TECH.test(`${text}\n${article?.title ?? ""}\n${article?.text ?? ""}`)) continue;
 
           const body = [text, article?.text ? `[From the article ${link}]\n${article.text}` : ""].filter(Boolean).join("\n\n");
           const title = article?.title || headline(text);

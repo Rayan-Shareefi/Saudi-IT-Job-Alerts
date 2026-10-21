@@ -38,7 +38,7 @@ const HEADERS = {
 };
 
 /** Roles worth opening, read from the URL's role part (English or Arabic). */
-const ROLE = /cyber|secur|\bsoc\b|siem|grc|penetration|pentest|vulnerab|threat|incident|forensic|\biam\b|identity|cloud|devops|devsecops|\bsre\b|site-reliability|\baws\b|azure|\bgcp\b|kubernetes|سيبران|أمن-المعلومات|امن-المعلومات|سحاب/;
+const ROLE = /cyber|secur|\bsoc\b|siem|grc|penetration|pentest|vulnerab|threat|incident|forensic|\biam\b|identity|cloud|devsecops|\baws\b|azure|\bgcp\b|kubernetes|سيبران|أمن-المعلومات|امن-المعلومات|سحاب/;
 const STUDENT = /intern|trainee|co-?op|graduate|تدريب|متدرب|خريج/;
 /* In Saudi listings "security officer" is mostly guarding; information
    security officers keep their qualifier, so only the bare forms are dropped. */

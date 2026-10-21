@@ -27,9 +27,16 @@ import { recomputeStates } from "../src/lib/review";
 import type { EnrichedJob, IngestResult, SourceDefinition } from "../src/lib/types";
 import { claimRun, finishRun, heartbeat, startRun } from "../src/lib/runs";
 import { envFlag } from "../src/lib/env";
+import { disabledSources, withOverrides } from "../src/lib/source-fix";
 
-/** Sources only the laptop reads, and the setting that turns each on there. */
-const LAPTOP_ONLY: Record<string, string> = { linkedin: "LINKEDIN_ENABLED", "linkedin-companies": "LINKEDIN_ENABLED", "linkedin-posts": "LINKEDIN_POSTS_ENABLED" };
+/** Sources only the laptop reads, and the settings that must all be on there. */
+const LAPTOP_ONLY: Record<string, string[]> = {
+  linkedin: ["LINKEDIN_ENABLED"],
+  "linkedin-companies": ["LINKEDIN_ENABLED"],
+  // The signed-in post search is off unless asked for (local-worker.ts).
+  "linkedin-posts": ["LINKEDIN_POSTS_ENABLED", "LINKEDIN_SEARCH_POSTS"],
+};
+const laptopMay = (adapter: string) => (LAPTOP_ONLY[adapter] ?? []).every((flag) => envFlag(flag));
 
 function arg(name: string): string | undefined {
   const i = process.argv.indexOf(`--${name}`);
@@ -75,13 +82,12 @@ async function main(): Promise<void> {
       sources.push(s);
     }
   } else {
-    // Plus employers the worker discovered and added by itself.
+    // Plus employers the worker discovered and added by itself, and the
+    // repairs from the fix pages: switched-off sources go, and a board a fix
+    // found stands in for the ones it replaces (source-fix.ts).
     const dynamic = configured ? await dynamicSources() : [];
-    const known = new Set(ALL_SOURCES.map((s) => s.id));
-    sources = [
-      ...enabledSources({ includeBrowser: !skipBrowser }),
-      ...dynamic.filter((d) => !known.has(d.id) && (!skipBrowser || !d.needsBrowser)),
-    ];
+    const disabled = configured ? await disabledSources() : new Set<string>();
+    sources = withOverrides(enabledSources({ includeBrowser: !skipBrowser }), dynamic.filter((d) => !skipBrowser || !d.needsBrowser), disabled);
     if (kind) sources = sources.filter((s) => s.kind === kind);
     /*
      * LinkedIn is read from the laptop only. Elsewhere its sources are left
@@ -89,7 +95,7 @@ async function main(): Promise<void> {
      * status, and the website said LinkedIn was skipped while the laptop was
      * reading it (2026-10-21).
      */
-    sources = sources.filter((s) => !LAPTOP_ONLY[s.adapter] || envFlag(LAPTOP_ONLY[s.adapter]));
+    sources = sources.filter((s) => laptopMay(s.adapter));
     // Every metered aggregator, not just two of them. Leaving jooble and
     // careerjet in meant --no-api still spent quota on the runs that exist
     // precisely to avoid spending it.
@@ -100,7 +106,10 @@ async function main(): Promise<void> {
     }
     // What the two buttons mean: employer boards, or the search APIs.
     const scope = arg("scope");
-    const isApi = (k: string) => (AGGREGATOR_KINDS as readonly string[]).includes(k) || k === "linkedin";
+    // LinkedIn (listings, company pages, posts) and the job platforms are not
+    // employer boards: the company pass (launcher F) read the company pages
+    // twice when "linkedin-post" counted as a company source.
+    const isApi = (k: string) => (AGGREGATOR_KINDS as readonly string[]).includes(k) || k === "linkedin" || k === "linkedin-post";
     if (scope === "company") sources = sources.filter((s) => !isApi(s.kind));
     if (scope === "api") sources = sources.filter((s) => isApi(s.kind));
     // JSearch only when asked for by name: it is the one that costs quota.

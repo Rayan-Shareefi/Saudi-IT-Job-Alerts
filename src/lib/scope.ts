@@ -9,7 +9,9 @@ import { COMMERCIAL_ROLE, OTHER_PROFESSION, STRONG_IT_OVERRIDE, TECHNICAL_ANYWAY
  *
  *  - judge the whole posting, not the title: SOC and GRC roles often never say
  *    "cybersecurity", and a title can name no role at all;
- *  - DevOps / SRE / Platform roles count only when the duties are cloud work;
+ *  - DevOps / SRE / Platform roles are out (the owner, 2026-10-21: cybersecurity,
+ *    cloud and cloud security only); infrastructure roles count only when
+ *    the duties are cloud work;
  *  - network roles count only when the duties are security work;
  *  - out: plain IT audit, data / AI roles that merely use cloud, IT support,
  *    software development, and selling security (a Major Account Manager at a
@@ -35,6 +37,8 @@ export type TextQuality = "full" | "partial" | "snippet" | "none";
 export interface ScopeResult {
   verdict: ScopeVerdict;
   confidence: ScopeConfidence;
+  /** An owner's exclusion (physical security, DevOps): no model can overrule it. */
+  absolute?: boolean;
   scope: ScopeArea | null;
   focus: Focus[];
   /** Verbatim sentences from the posting that carry the decisive terms. */
@@ -124,9 +128,12 @@ const SECURITY_TITLE =
 /** Cloud work in the title. Not "solutions architect": that is any vendor's presales. */
 const CLOUD_TITLE =
   /\b(cloud|aws|azure|gcp|google cloud|oracle cloud|\boci\b|finops|openshift|kubernetes)\b|سحابي|الحوسبه السحابيه/;
-const NOT_CLOUD_WORK = /\b(cloud kitchen|cloud sales|marketing cloud|commerce cloud|sales cloud|service cloud)\b/;
+const NOT_CLOUD_WORK = /\b(cloud kitchen|cloud sales|marketing cloud|commerce cloud|sales cloud|service cloud|azure devops)\b/;
 
-/** In scope only if the duties are cloud work. */
+/** DevOps, SRE and platform roles: out by the owner's choice. */
+const DEVOPS_ONLY = /\b(devops|dev ops|sre|site reliability|platform engineer\w*|platform operations)\b/;
+
+/** Infrastructure roles: in scope only if the duties are cloud work. */
 const DEVOPS_TITLE =
   /\b(devops|dev ops|sre|site reliability|platform engineer\w*|platform operations|cloudops|infrastructure engineer|infrastructure specialist|system(s)? administrator|system(s)? engineer|sysadmin|linux|windows (server|administrator)|virtuali[sz]ation|vmware|middleware|data ?cent(er|re))\b|البنيه التحتيه/;
 
@@ -247,7 +254,6 @@ const FOCUS_RULES: Array<[Focus, RegExp]> = [
   ["OT Security", /\b(ot security|ics|scada|iec 62443|operational technology)\b/],
   ["Network Security", /\b(firewall\w*|ids|ips|waf|nac|vpn|zero trust|palo alto|fortinet|fortigate|check ?point|network security|segmentation)\b/],
   ["Cloud Security", /\b(cloud security|cspm|cnapp|ccsp|az-500|security hub|defender for cloud)\b/],
-  ["DevOps", /\b(devops|sre|site reliability|platform engineer\w*|ci\/cd|gitops|argocd|terraform|kubernetes)\b/],
   ["Cloud", /\b(aws|azure|gcp|google cloud|oci|oracle cloud|landing zone|cloud migration|cloud architect\w*|cloud engineer\w*|iaas|paas)\b|سحابي|الحوسبه السحابيه/],
 ];
 
@@ -272,6 +278,7 @@ function result(
   scope: ScopeArea | null,
   reason: string,
   ctx: { title: string; duty: string; sentences: string[]; sec: string[]; cloud: string[] },
+  absolute = false,
 ): ScopeResult {
   const terms = scope === "cloud" ? ctx.cloud : scope === "security" ? ctx.sec : [...ctx.sec, ...ctx.cloud];
   return {
@@ -281,6 +288,7 @@ function result(
     focus: verdict === "in" ? focusOf(ctx.title, ctx.duty, scope) : [],
     evidence: verdict === "out" ? [] : evidenceSentences(ctx.sentences, terms),
     reason,
+    ...(absolute ? { absolute: true } : {}),
     securityTerms: ctx.sec,
     cloudTerms: ctx.cloud,
   };
@@ -323,7 +331,14 @@ export function judgeScope(
    * which they would otherwise pass as.
    */
   if (PHYSICAL_SECURITY.test(t) && !CYBER_WORD.test(t)) {
-    return result("out", "decisive", null, "physical security, not cybersecurity", ctx);
+    return result("out", "decisive", null, "physical security, not cybersecurity", ctx, true);
+  }
+  // DevOps, SRE and platform work: out by the owner's choice (2026-10-21,
+  // "only cybersecurity, cloud and cloud security"), whatever the duties - a
+  // title that is itself cloud or security work ("Cloud DevOps Engineer",
+  // "DevSecOps") stays in.
+  if (!secTitle && !cloudTitle && DEVOPS_ONLY.test(t)) {
+    return result("out", "decisive", null, "DevOps / SRE / platform role - out by the owner's choice (cybersecurity and cloud only)", ctx, true);
   }
 
   // Families the user excluded. A security title wins ("Data Security
@@ -355,8 +370,8 @@ export function judgeScope(
   }
 
   if (DEVOPS_TITLE.test(t)) {
-    if (strong(cloud.length)) return result("in", "decisive", "cloud", "DevOps / platform role with cloud duties", ctx);
-    if (cloud.length === 1 || !canDecide) return result("unclear", "leaning", "cloud", "DevOps / infrastructure role; cloud duties not established", ctx);
+    if (strong(cloud.length)) return result("in", "decisive", "cloud", "infrastructure role with cloud duties", ctx);
+    if (cloud.length === 1 || !canDecide) return result("unclear", "leaning", "cloud", "infrastructure role; cloud duties not established", ctx);
     if (strong(sec.length) && sec.length >= 3) return result("unclear", "leaning", "security", "infrastructure role with security duties", ctx);
     return result("out", "leaning", null, "infrastructure role without cloud duties", ctx);
   }

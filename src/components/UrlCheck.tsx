@@ -2,20 +2,10 @@
 
 import { useCallback, useMemo, useState } from "react";
 import type { StoredUrlFinding, UrlDecision, UrlRole } from "@/lib/db";
+import type { FixRow } from "@/lib/fix-words";
+import { FindAllFixes, FixBox } from "./SourceFixer";
 import { writeKeyOrPrompt } from "./useWriteKey";
 
-
-interface CheckResult {
-  ok: boolean;
-  checked?: number;
-  moved?: number;
-  extraFound?: number;
-  stale?: number;
-  unreachable?: number;
-  changed?: number;
-  error?: string;
-  retryInSeconds?: number;
-}
 
 const STATUS_LABEL: Record<string, { title: string; blurb: string; tone: string }> = {
   moved: {
@@ -164,11 +154,13 @@ function Finding({
   decisions,
   busy,
   onDecide,
+  fix,
 }: {
   f: StoredUrlFinding;
   decisions: Map<string, "accepted" | "rejected">;
   busy: boolean;
   onDecide: (c: Candidate, d: "accepted" | "rejected" | "clear") => void;
+  fix?: FixRow;
 }) {
   const candidates: Candidate[] = [
     ...(f.suggestedUrl ? [{ company: f.company, url: f.suggestedUrl, role: "primary" as const }] : []),
@@ -218,6 +210,7 @@ function Finding({
             Nothing to add — this one needs a look by hand.
           </p>
         )}
+        <FixBox page="urls" company={f.company} oldUrl={f.currentUrl} fix={fix} />
       </article>
     </li>
   );
@@ -243,15 +236,15 @@ export function UrlCheck({
   decisions: initialDecisions,
   progress,
   total,
+  fixes = {},
 }: {
   findings: StoredUrlFinding[];
   decisions: UrlDecision[];
   progress: { checked: number; open: number };
   total: number;
+  fixes?: Record<string, FixRow>;
 }) {
-  const [busy, setBusy] = useState(false);
   const [deciding, setDeciding] = useState(false);
-  const [result, setResult] = useState<CheckResult | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [manualUrl, setManualUrl] = useState("");
   const [manualCompany, setManualCompany] = useState("");
@@ -260,23 +253,6 @@ export function UrlCheck({
   const [decisions, setDecisions] = useState<Map<string, "accepted" | "rejected">>(
     () => new Map(initialDecisions.map((d) => [`${d.company}|${d.url}`, d.decision])),
   );
-
-  const run = useCallback(async () => {
-    setBusy(true);
-    setResult(null);
-    try {
-      const res = await fetch("/api/urls/check", {
-        method: "POST",
-        headers: { "content-type": "application/json" },
-        body: JSON.stringify({ batch: 25 }),
-      });
-      setResult((await res.json()) as CheckResult);
-    } catch (err) {
-      setResult({ ok: false, error: err instanceof Error ? err.message : "Check failed." });
-    } finally {
-      setBusy(false);
-    }
-  }, []);
 
   const editingKey = useCallback((): string | null => writeKeyOrPrompt("editing URLs"), []);
 
@@ -294,12 +270,10 @@ export function UrlCheck({
           company: manualCompany.trim() || undefined,
         }),
       });
-      const data = (await res.json()) as {
-        ok: boolean; added?: boolean; company?: string; extraFound?: number; error?: string;
-      };
-      if (data.ok && data.added) {
+      const data = (await res.json()) as { ok: boolean; queued?: boolean; company?: string; error?: string };
+      if (data.ok && data.queued) {
         setAddResult(
-          `Added for ${data.company}${data.extraFound ? `, plus ${data.extraFound} board(s) it links to` : ""}. Reload to see it.`,
+          `Queued for ${data.company}: the laptop opens it within a few minutes and adds it only if real postings come off it. Its result shows on the card.`,
         );
         setManualUrl("");
         setManualCompany("");
@@ -380,27 +354,12 @@ export function UrlCheck({
           {progress.open > 0 && <span> &middot; {progress.open} with something to look at</span>}
           {accepted > 0 && <span> &middot; {accepted} URL{accepted === 1 ? "" : "s"} added</span>}
           <span className="mt-0.5 block text-[11.5px]" style={{ color: "var(--ink-3)" }}>
-            Nothing is added or removed on its own — you decide per URL.
+            A URL that is checked and works is used by itself; the unclear ones go to the AI jury, then to you with the reason.
           </span>
         </div>
-
-        <button
-          type="button"
-          onClick={run}
-          disabled={busy}
-          className="inline-flex items-center gap-2 px-4 text-[13px] font-semibold"
-          style={{
-            background: "var(--accent)",
-            color: "var(--accent-on)",
-            border: "none",
-            borderRadius: "var(--radius)",
-            height: "var(--control-h)",
-            cursor: busy ? "wait" : "pointer",
-          }}
-        >
-          {busy ? "Checking 25 employers…" : "Check the next 25 URLs"}
-        </button>
       </div>
+
+      <FindAllFixes page="urls" count={25} last={fixes["urls|*"]} />
 
       {/*
         Adding one by hand.
@@ -491,28 +450,14 @@ export function UrlCheck({
             borderRadius: "var(--radius-sm)",
           }}
         >
-          {accepted} URL{accepted === 1 ? "" : "s"} added. They take effect on the next{" "}
-          <code>npm run sources:discover</code>, which resolves each one into a source the
-          collector polls — the job list is untouched until then.
+          {accepted} URL{accepted === 1 ? "" : "s"} added. Each one is checked on the laptop and read
+          from the next run on - no code change needed.
         </p>
       )}
 
-      {(result || error) && (
-        <p
-          className="mb-4 px-4 py-2.5 text-[12.5px]"
-          style={{
-            background: error || !result?.ok ? "var(--danger-soft)" : "var(--accent-soft)",
-            color: error || !result?.ok ? "var(--danger-ink)" : "var(--accent-ink)",
-            borderRadius: "var(--radius-sm)",
-          }}
-        >
-          {error
-            ? error
-            : result?.ok
-              ? `Checked ${result.checked}. ${result.changed} worth a look — ${result.moved} moved, ${result.extraFound} with extra boards, ${result.stale} no longer listing, ${result.unreachable} unreachable. Reload to see them.`
-              : result?.retryInSeconds
-                ? `Just ran — try again in ${result.retryInSeconds}s.`
-                : (result?.error ?? "The check failed.")}
+      {error && (
+        <p className="mb-4 px-4 py-2.5 text-[12.5px]" style={{ background: "var(--danger-soft)", color: "var(--danger-ink)", borderRadius: "var(--radius-sm)" }}>
+          {error}
         </p>
       )}
 
@@ -523,7 +468,7 @@ export function UrlCheck({
           </p>
           <p className="mx-auto mt-2 max-w-md text-[13px]" style={{ color: "var(--ink-2)" }}>
             {progress.checked === 0
-              ? "No URLs have been checked yet. Press the button above to start."
+              ? "No URLs have been checked yet. Press Find fixes for all to start."
               : "Every employer checked so far still points at a working job list."}
           </p>
         </div>
@@ -546,6 +491,7 @@ export function UrlCheck({
                     decisions={decisions}
                     busy={deciding}
                     onDecide={onDecide}
+                    fix={fixes[`urls|${f.company}`]}
                   />
                 ))}
               </ul>

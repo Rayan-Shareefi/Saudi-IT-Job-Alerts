@@ -53,11 +53,9 @@ export const QUERY_TERMS = [
   "AWS",
   "Azure",
   "Google Cloud",
-  "DevOps engineer",
   "DevSecOps",
-  "site reliability engineer",
-  "platform engineer",
-  "Kubernetes",
+  "cloud security engineer",
+  "cloud infrastructure",
   "الحوسبة السحابية",
 ] as const;
 
@@ -315,7 +313,7 @@ export const JSEARCH_SWEEPS: Array<{ query: string; internOnly?: boolean; arabic
   { query: "penetration tester in Riyadh" },
   { query: "cloud engineer in Riyadh" },
   { query: "cloud security in Riyadh" },
-  { query: "devops engineer in Riyadh" },
+  { query: "information security analyst in Riyadh" },
   { query: "cybersecurity internship in Riyadh", internOnly: true },
   { query: "cybersecurity graduate program Saudi Arabia" },
   { query: "أمن سيبراني الرياض", arabic: true },

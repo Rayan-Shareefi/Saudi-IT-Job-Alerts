@@ -19,6 +19,7 @@ import { forgetWriteKey, writeKeyOrPrompt } from "./useWriteKey";
 const BADGES: Array<{ id: string; label: string; tone: Tone; hint: string }> = [
   { id: "time-sensitive", label: "Time-sensitive", tone: "danger", hint: "Applies through a form (Google Forms etc.) or closes within 7 days" },
   { id: "recommended", label: "Recommended", tone: "success", hint: "Matches your CV" },
+  { id: "top-company", label: "Recommended Company", tone: "accent", hint: "A big name, or a company whose main work is technical (SITE, Elm, stc, Aramco, SDAIA, NCA, Microsoft...)" },
   { id: "coop", label: "Co-op", tone: "warn", hint: "Cooperative training (تدريب تعاوني)" },
   { id: "internship", label: "Internship", tone: "warn", hint: "Internship or trainee programme" },
   { id: "entry", label: "No experience", tone: "info", hint: "Entry level / fresh graduates, quoted from the posting" },
@@ -31,7 +32,7 @@ const BADGES: Array<{ id: string; label: string; tone: Tone; hint: string }> = [
   { id: "applied", label: "Applied", tone: "success", hint: "You pressed Apply" },
   { id: "viewed", label: "Viewed", tone: "neutral", hint: "Opened in this browser" },
 ];
-const FOCUS = ["SOC", "DFIR", "Threat Intel", "GRC", "IAM", "AppSec", "Pentest", "OT Security", "Network Security", "Cloud Security", "Cloud", "DevOps"];
+const FOCUS = ["SOC", "DFIR", "Threat Intel", "GRC", "IAM", "AppSec", "Pentest", "OT Security", "Network Security", "Cloud Security", "Cloud"];
 
 type Tone = "neutral" | "accent" | "info" | "warn" | "success" | "danger";
 const TONES: Record<Tone, { background: string; color: string }> = {
@@ -87,6 +88,7 @@ function badgesOf(j: BoardJob, viewed: boolean): Set<string> {
   const closesIn = daysUntil(j.closesAt);
   if (j.applyKind === "form" || (closesIn !== null && closesIn >= 0 && closesIn <= 7)) b.add("time-sensitive");
   if (j.recommended) b.add("recommended");
+  if (j.recommendedCompany) b.add("top-company");
   if (j.experienceBand === "coop") b.add("coop");
   if (j.experienceBand === "internship") b.add("internship");
   if (j.experienceBand === "0") b.add("entry");
@@ -389,6 +391,7 @@ function Card({
           </Badge>
         )}
         {badges.has("recommended") && <Badge tone="success" title={job.matchNote ?? undefined}>Recommended</Badge>}
+        {badges.has("top-company") && <Badge tone="accent" title="A big name, or a company whose main work is technical">Recommended Company</Badge>}
         {badges.has("coop") && <Badge tone="warn">Co-op</Badge>}
         {badges.has("internship") && <Badge tone="warn">Internship</Badge>}
         {badges.has("entry") && <Badge tone="info">No experience</Badge>}

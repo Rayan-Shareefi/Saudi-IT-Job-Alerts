@@ -1,24 +1,20 @@
 import { NextResponse } from "next/server";
 import { isAuthorised, writeSecret } from "@/lib/auth";
-import { saveUrlDecision, saveUrlFindings } from "@/lib/db";
-import { checkCareersUrl } from "@/lib/url-check";
 import { COMPANIES } from "@/lib/sources/companies";
+import { queueFix } from "@/lib/source-fix";
 
 export const dynamic = "force-dynamic";
-export const maxDuration = 120;
 
 /**
  * Add a careers URL you found yourself.
  *
  * The checker only proposes what it stumbles across; plenty of boards are
- * simply not linked from anywhere it looks. This takes a URL, opens it, and
- * fills in the rest - whether it actually lists vacancies, which employer it
- * belongs to, and any secondary boards it links to - so the only thing to type
- * is the address.
+ * simply not linked from anywhere it looks. This takes a URL, works out the
+ * employer, and queues it for the laptop, which opens it and adds it only if
+ * real postings come off it (scripts/fix-sources.ts).
  *
- * The URL is opened before it is stored. Accepting one unverified would put a
- * page into the collector that might list nothing at all, which is the failure
- * this whole tab exists to prevent.
+ * It used to open the page right here, in a browser - which a Vercel function
+ * does not have ("browserType.launch: Executable doesn't exist", 2026-10-21).
  */
 interface Body {
   url?: string;
@@ -110,81 +106,12 @@ export async function POST(req: Request) {
     );
   }
 
-  const seed = COMPANIES.find((c) => c.name === company);
-  if (!seed) {
-    return NextResponse.json(
-      { ok: false, error: `"${company}" is not an employer on file.` },
-      { status: 422 },
-    );
-  }
-
   try {
-    const { chromium } = await import("playwright");
-    const browser = await chromium.launch({ headless: true });
-    let finding;
-    try {
-      // Check the URL AS IF it were this employer's careers page, which tells
-      // us whether it lists vacancies and what else it links to.
-      finding = await checkCareersUrl({ ...seed, careersUrl: url }, browser);
-    } finally {
-      await browser.close().catch(() => {});
-    }
-
-    const listsJobs = finding.status === "unchanged" || finding.status === "extra-found";
-    const movedTo = finding.status === "moved" ? finding.suggestedUrl : undefined;
-
-    if (!listsJobs && !movedTo) {
-      // Recorded so it shows in the tab with its reason, but not accepted:
-      // adding a page that lists nothing is the mistake this tab prevents.
-      await saveUrlFindings([
-        {
-          company,
-          currentUrl: url,
-          extraUrls: finding.extraUrls,
-          status: finding.status,
-          note: `added by hand: ${finding.note ?? "does not look like a vacancy list"}`,
-        },
-      ]);
-      return NextResponse.json({
-        ok: false,
-        added: false,
-        company,
-        status: finding.status,
-        error:
-          finding.status === "unreachable"
-            ? "That page did not respond."
-            : "That page opened but nothing on it reads as a job listing, so it was not added. It is listed in the tab so you can look.",
-      });
-    }
-
-    // A redirect to a real board means the destination is the useful URL.
-    const finalUrl = movedTo ?? url;
     const role = body.role === "primary" ? "primary" : "alternate";
-
-    await saveUrlFindings([
-      {
-        company,
-        currentUrl: seed.careersUrl,
-        suggestedUrl: finalUrl,
-        extraUrls: finding.extraUrls,
-        status: "moved",
-        note: `added by hand${movedTo ? " (redirected to the live board)" : ""}`,
-      },
-    ]);
-    await saveUrlDecision(company, finalUrl, role, "accepted");
-
-    return NextResponse.json({
-      ok: true,
-      added: true,
-      company,
-      url: finalUrl,
-      role,
-      extraFound: finding.extraUrls.length,
-    });
+    const seed = COMPANIES.find((c) => c.name === company);
+    const fix = await queueFix({ company, page: "urls", oldUrl: seed?.careersUrl ?? null, newUrl: url, requestedBy: "user", detail: { role } });
+    return NextResponse.json({ ok: true, queued: true, company, fix });
   } catch (err) {
-    return NextResponse.json(
-      { ok: false, error: err instanceof Error ? err.message : String(err) },
-      { status: 500 },
-    );
+    return NextResponse.json({ ok: false, error: err instanceof Error ? err.message : String(err) }, { status: 500 });
   }
 }

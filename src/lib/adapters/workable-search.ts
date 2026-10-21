@@ -19,7 +19,7 @@ import type { Adapter } from "./ats";
  * Riyadh are written in English).
  */
 
-const QUERIES = ["cybersecurity", "security", "SOC", "cloud", "DevOps", "intern", "internship", "graduate", "co-op"];
+const QUERIES = ["cybersecurity", "security", "SOC", "cloud", "cloud security", "intern", "internship", "graduate", "co-op"];
 const LOCATION = "Riyadh";
 const BASE = "https://jobs.workable.com/api/v1/jobs";
 const HEADERS = {

@@ -85,7 +85,6 @@ const FOCUS_NAMES: Array<[RegExp, string]> = [
   [/\bot\b|ics|scada|operational technology/i, "OT Security"],
   [/network security|firewall/i, "Network Security"],
   [/cloud security/i, "Cloud Security"],
-  [/devops|sre|site reliability|platform/i, "DevOps"],
   [/^cloud|aws|azure|gcp/i, "Cloud"],
 ];
 
@@ -157,6 +156,9 @@ export function arbitrateScope(rules: ScopeResult, votes: Vote[], readable = tru
   const area = (): ScopeArea | null => rules.scope ?? jurors.find((v) => v.area)?.area ?? senior?.area ?? null;
   const decisiveIn = rules.verdict === "in" && rules.confidence === "decisive";
   const decisiveOut = rules.verdict === "out" && rules.confidence === "decisive";
+
+  // The owner's own exclusions (physical security, DevOps) are final.
+  if (rules.absolute) return { kind: "out", by: "rules", why: rules.reason };
 
   // The senior reviewer settles what it was asked to settle.
   if (seniorIn) return { kind: "in", by: "senior", area: area(), why: "the senior reviewer: add, with quoted duties" };
@@ -298,11 +300,18 @@ export function decideState(i: StateInput): StateDecision {
       juryYears = { min: found.minYears, evidence: found.yearsEvidence };
     }
   }
-  if (statedMin !== null && statedMin >= 5 && i.humanOverride !== "show") {
+  /*
+   * A range that reaches 5 counts as 5+ (the owner, 2026-10-21): with "4-8
+   * years" or "2-5 years", a candidate with five years is the one chosen.
+   */
+  const statedMax = exp.source === "stated" && !exp.preferredOnly ? exp.maxYears : null;
+  const reaches5 = statedMin !== null && statedMin < 5 && statedMax !== null && statedMax >= 5;
+  if (((statedMin !== null && statedMin >= 5) || reaches5) && i.humanOverride !== "show") {
     if (programme) {
       return { ...inDecision, juryYears, state: "needs_review", hiddenReason: null, decidedBy: "rules", note: "a co-op or internship that also states 5+ years" };
     }
-    return { ...inDecision, juryYears, state: "hidden", hiddenReason: "experience_5plus", decidedBy: juryYears ? "jury" : "rules", note: `requires ${statedMin}+ years (quoted)` };
+    const note = reaches5 ? `asks for ${statedMin}-${statedMax} years (quoted) - the range reaches 5` : `requires ${statedMin}+ years (quoted)`;
+    return { ...inDecision, juryYears, state: "hidden", hiddenReason: "experience_5plus", decidedBy: juryYears ? "jury" : "rules", note };
   }
 
   // A senior title with no number is 5+ (user, 2026-10-21: "if there is a

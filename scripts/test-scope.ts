@@ -4,7 +4,7 @@
  *   npm run test:scope
  *
  * The rules (user, 2026-10-13): security and cloud only, judged from the whole
- * posting. DevOps/SRE/Platform only with cloud duties; network roles only with
+ * posting. DevOps/SRE/Platform out (owner, 2026-10-21); network roles only with
  * security duties. Out: IT audit, data/AI roles that merely use cloud, IT
  * support, software development, and selling security. Unclear -> Unclassified.
  *
@@ -54,13 +54,21 @@ const CASES: Array<[string, string, string, TextQuality, Want]> = [
   /* ---- cloud ----------------------------------------------------------------- */
   ["cloud engineer", "Cloud Engineer", CLOUD_DUTIES, "full", { verdict: "in", confidence: "decisive", scope: "cloud", focus: "Cloud" }],
   ["Arabic cloud title", "مهندس حوسبة سحابية", "المهام: إدارة خدمات AWS و Azure وبناء البنية باستخدام Terraform و Kubernetes.", "full", { verdict: "in", confidence: "decisive", scope: "cloud" }],
-  ["DevOps with cloud duties", "DevOps Engineer", CLOUD_DUTIES, "full", { verdict: "in", confidence: "decisive", scope: "cloud" }],
-  ["SRE with cloud duties", "Site Reliability Engineer", CLOUD_DUTIES, "full", { verdict: "in", confidence: "decisive", scope: "cloud" }],
-  ["platform engineer with cloud duties", "Platform Engineer", CLOUD_DUTIES, "full", { verdict: "in", confidence: "decisive" }],
   ["generic title, cloud duties", "Engineer", CLOUD_DUTIES, "full", { verdict: "in", confidence: "leaning", scope: "cloud" }],
 
+  /* ---- DevOps / SRE / platform: out by the owner's choice (2026-10-21) ------- */
+  ["DevOps with cloud duties is still out", "DevOps Engineer", CLOUD_DUTIES, "full", { verdict: "out", confidence: "decisive" }],
+  ["SRE with cloud duties is still out", "Site Reliability Engineer", CLOUD_DUTIES, "full", { verdict: "out", confidence: "decisive" }],
+  ["platform engineer is out", "Platform Engineer", CLOUD_DUTIES, "full", { verdict: "out", confidence: "decisive" }],
+  ["DevOps without cloud", "DevOps Engineer", DEVOPS_NO_CLOUD, "full", { verdict: "out", confidence: "decisive" }],
+  ["DevOps snippet is out too", "Senior DevOps Engineer", "Kubernetes and CI/CD.", "snippet", { verdict: "out", confidence: "decisive" }],
+  ["Azure DevOps is a pipeline tool, not cloud work", "Azure DevOps Engineer", DEVOPS_NO_CLOUD, "full", { verdict: "out", confidence: "decisive" }],
+  ["must stay in: DevSecOps is security", "DevSecOps Engineer", "Integrate SAST and DAST into CI/CD pipelines and run container scanning.", "full", { verdict: "in" }],
+  ["must stay in: a cloud title with DevOps in it", "Cloud DevOps Engineer (AWS)", CLOUD_DUTIES, "full", { verdict: "in", scope: "cloud" }],
+  ["must stay in: cloud security with platform in it", "Cloud Security Platform Engineer", `${CLOUD_DUTIES} Implement CSPM and security controls.`, "full", { verdict: "in" }],
+
   /* ---- conditional families ------------------------------------------------- */
-  ["DevOps without cloud -> not in", "DevOps Engineer", DEVOPS_NO_CLOUD, "full", { verdict: "out", confidence: "leaning" }],
+  ["infrastructure engineer with cloud duties", "Infrastructure Engineer", CLOUD_DUTIES, "full", { verdict: "in", confidence: "decisive", scope: "cloud" }],
   ["system administrator without cloud", "System Administrator", DEVOPS_NO_CLOUD, "full", { verdict: "out", confidence: "leaning" }],
   ["network engineer with security duties", "Network Engineer", NETWORK_SEC_DUTIES, "full", { verdict: "in", confidence: "decisive", scope: "security", focus: "Network Security" }],
   ["network engineer, routing only", "Network Engineer", NETWORK_PLAIN, "full", { verdict: "out", confidence: "leaning" }],

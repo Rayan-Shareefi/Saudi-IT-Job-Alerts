@@ -1,6 +1,7 @@
 import { NextResponse } from "next/server";
 import { isAuthorised, writeSecret } from "@/lib/auth";
 import { clearUrlDecision, saveUrlDecision, type UrlRole } from "@/lib/db";
+import { queueFix } from "@/lib/source-fix";
 
 export const dynamic = "force-dynamic";
 
@@ -57,6 +58,11 @@ export async function POST(req: Request) {
     }
     const decision = body.decision === "accepted" ? "accepted" : "rejected";
     await saveUrlDecision(company, url, role, decision);
+    // An accepted URL is checked on the laptop and, if it works, read from the
+    // next run on - it used to wait for someone to run sources:discover.
+    if (decision === "accepted") {
+      await queueFix({ company, page: "urls", newUrl: url, requestedBy: "user", detail: { role } });
+    }
     return NextResponse.json({ ok: true, decision, role });
   } catch (err) {
     return NextResponse.json(

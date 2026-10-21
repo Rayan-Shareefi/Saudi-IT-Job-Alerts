@@ -20,7 +20,7 @@ IN SCOPE (judge by the duties, not just the title - many qualify without saying 
   security engineering or architecture, OT/ICS security, network security.
 - Cloud: cloud engineer / architect / administrator (AWS, Azure, GCP, OCI),
   cloud security, FinOps.
-- DevOps / SRE / Platform roles ONLY when the duties are cloud work.
+- DevOps / SRE / Platform roles are OUT (the owner's choice), unless the title itself is a cloud or security role.
 - Network roles ONLY when the duties are security work (firewalls, IDS/IPS, VPN, NAC, zero trust).
 
 OUT OF SCOPE (say "neither"):

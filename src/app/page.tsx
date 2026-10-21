@@ -12,6 +12,8 @@ import { SetupNotice } from "@/components/SetupNotice";
 import { isConfigured, openUrlFindings, urlDecisions, sourceHealth, sourceReports, urlCheckProgress } from "@/lib/db";
 import { BOARD_TABS, loadBoard, tabCounts, type BoardTab } from "@/lib/board";
 import { COMPANIES } from "@/lib/sources/companies";
+import { disabledSources, latestFixes, readNothing, withOverrides } from "@/lib/source-fix";
+import { dynamicSources, enabledSources } from "@/lib/sources/registry";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -61,7 +63,7 @@ async function Results({ searchParams }: { searchParams: SearchParams }) {
       ) : tab === "failing" ? (
         <FailingSourcesBoundary />
       ) : tab === "human" ? (
-        <HumanIntervene />
+        <HumanInterveneBoundary />
       ) : tab === "sites" ? (
         <SiteReportBoundary />
       ) : tab === "urls" ? (
@@ -84,8 +86,12 @@ async function BoardBoundary({ tab }: { tab: BoardTab }) {
 }
 
 async function SiteReportBoundary() {
-  const rows = await sourceReports().catch(() => []);
-  return <SiteReport rows={rows} />;
+  const [rows, fixes] = await Promise.all([sourceReports().catch(() => []), latestFixes()]);
+  return <SiteReport rows={rows} fixes={fixes} />;
+}
+
+async function HumanInterveneBoundary() {
+  return <HumanIntervene fixes={await latestFixes()} />;
 }
 
 /** One line under the tabs saying what this tab is, in plain words. */
@@ -112,20 +118,37 @@ function TabNote({ tab }: { tab: BoardTab }) {
 }
 
 async function UrlCheckBoundary() {
-  const [findings, decisions, progress] = await Promise.all([
+  const [findings, decisions, progress, fixes] = await Promise.all([
     openUrlFindings().catch(() => []),
     urlDecisions().catch(() => []),
     urlCheckProgress().catch(() => ({ checked: 0, open: 0 })),
+    latestFixes(),
   ]);
-  return <UrlCheck findings={findings} decisions={decisions} progress={progress} total={COMPANIES.length} />;
+  return <UrlCheck findings={findings} decisions={decisions} progress={progress} total={COMPANIES.length} fixes={fixes} />;
 }
 
 async function FailingSourcesBoundary() {
+  const [fixes, disabled, dynamic] = await Promise.all([latestFixes(), disabledSources(), dynamicSources()]);
+  // A source a fix replaced or switched off is no longer run, so its last
+  // status stays "failing" for good: shown for three days with the fix, then gone.
+  const gone = new Set([...disabled, ...dynamic.flatMap((d) => d.replaces ?? [])]);
+  const recentFix = new Set(
+    Object.values(fixes)
+      .filter((f) => f.page === "failing" && f.sourceId && Date.now() - new Date(f.checkedAt ?? f.createdAt).getTime() < 3 * 86_400_000)
+      .map((f) => f.sourceId as string),
+  );
   try {
     const health = await sourceHealth();
-    return <FailingSources rows={health.filter((h) => !h.ok)} />;
+    const live = new Set(withOverrides(enabledSources({ includeBrowser: true }), dynamic, disabled).map((s) => s.id));
+    return (
+      <FailingSources
+        rows={health.filter((h) => !h.ok && (!gone.has(h.sourceId) || recentFix.has(h.sourceId)))}
+        empty={health.filter((h) => readNothing(h, live) || (recentFix.has(h.sourceId) && h.ok && h.fetched === 0))}
+        fixes={fixes}
+      />
+    );
   } catch {
-    return <FailingSources rows={[]} />;
+    return <FailingSources rows={[]} fixes={fixes} />;
   }
 }
 

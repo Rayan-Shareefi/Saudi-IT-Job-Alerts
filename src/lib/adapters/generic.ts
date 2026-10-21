@@ -475,6 +475,26 @@ const REVEAL_BUTTON =
  * assumed the seeded page held the jobs, and on most of these employers it
  * simply does not.
  */
+/**
+ * The page's HTML once it stops moving. `page.content()` throws "Unable to
+ * retrieve content because the page is navigating" on boards that redirect or
+ * re-route after loading - MongoDB's, Parsons', GIB's (2026-10-21, failing on
+ * every run). Wait for the next load and ask again; give up quietly after
+ * three tries, so the other strategies still run.
+ */
+async function settledContent(page: import("playwright").Page): Promise<string> {
+  for (let attempt = 0; attempt < 3; attempt++) {
+    try {
+      return await page.content();
+    } catch (err) {
+      if (!/navigating|changing the content/i.test(String(err))) throw err;
+      await page.waitForLoadState("domcontentloaded", { timeout: 10_000 }).catch(() => {});
+      await page.waitForTimeout(1500);
+    }
+  }
+  return "";
+}
+
 export const browser: Adapter = async (source) => {
   const { chromium } = await import("playwright");
   const b = await chromium.launch({ headless: true });
@@ -527,7 +547,7 @@ export const browser: Adapter = async (source) => {
       );
       if (fromJson.length >= 3) return fromJson;
 
-      const html = await page.content();
+      const html = await settledContent(page);
       const fromLd = parseJsonLd(html, source, page.url()).filter((j) =>
         isPlausiblePosting(j.title, j.descriptionText, j.url),
       );

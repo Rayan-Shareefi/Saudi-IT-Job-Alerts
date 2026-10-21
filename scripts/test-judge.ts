@@ -80,6 +80,24 @@ check(
   verifyAnswer(answer({ location: "riyadh", location_quote: "LOCATION FIELD: Riyadh, Saudi Arabia" }), { title: "SOC Analyst", text: "Monitor SIEM alerts.", location: "Riyadh, Saudi Arabia" }, meta).riyadh,
   true,
 );
+// "Cybersecurity Service Engineer", location "Saudi Arabia": two models said
+// "elsewhere in Saudi" quoting only the country, and it was hidden as not
+// Riyadh (2026-10-21). The country alone says the city is unknown.
+check(
+  "'Saudi Arabia' alone is not evidence of another city",
+  verifyAnswer(answer({ location: "saudi_other", location_quote: "Saudi Arabia" }), { title: "Cybersecurity Service Engineer", text: "Monitor SIEM alerts.", location: "Saudi Arabia" }, meta).riyadh,
+  null,
+);
+check(
+  "a named city is evidence",
+  verifyAnswer(answer({ location: "saudi_other", location_quote: "Jeddah, Saudi Arabia" }), { title: "SOC Analyst", text: "Monitor SIEM alerts.", location: "Jeddah, Saudi Arabia" }, meta).riyadh,
+  false,
+);
+check(
+  "a foreign city is evidence",
+  verifyAnswer(answer({ location: "outside_saudi", location_quote: "Dubai, United Arab Emirates" }), { title: "SOC Analyst", text: "Monitor SIEM alerts.", location: "Dubai, United Arab Emirates" }, meta).riyadh,
+  false,
+);
 check("co-op claim on a normal posting fails", v({ programme: "coop", programme_quote: "Monitor SIEM alerts and investigate security incidents." }).programme, null);
 
 /* -------------------------------------------------------------------------- */
@@ -205,7 +223,13 @@ check("models disagree, no senior -> rejected", st(input({ scope: rules("unclear
   check("not your call: Trade Compliance internship", techProgramme("Internship - Trade Compliance - Riyadh", "GRC-shaped title with no cyber content"), false);
   check("not your call: Infrastructure & Real Estate internship", techProgramme("Internship l Infrastructure & Real Estate l Real Estate Development", "construction / civil engineering"), false);
   check("not your call: physical security, even with 'security' in it", techProgramme("(Physical) Security Specialist Intern", "physical security, not cybersecurity"), false);
-  check("Deloitte 'Consultant - Manager' stating 2-8 years -> not 5+ (the number wins)", st(input({ title: "Consultant - Manager | Cyber Operate | Third-Party Risk Assessor | KSA", experience: detectExperience("Consultant - Manager", "Years of experience: 2- 8 years") })), "show");
+  // A range that reaches 5 goes to 5+ (user, 2026-10-21: "if I applied and
+  // another person with 5 years applied they will choose the 5 years").
+  check("Deloitte 'Consultant - Manager' stating 2-8 years -> 5+ (the range reaches 5)", st(input({ title: "Consultant - Manager | Cyber Operate | Third-Party Risk Assessor | KSA", experience: detectExperience("Consultant - Manager", "Years of experience: 2- 8 years") })), "hidden:experience_5plus");
+  check("2-5 years -> 5+", st(input({ experience: detectExperience("SOC Analyst", "Requirements: 2-5 years of experience in a SOC.") })), "hidden:experience_5plus");
+  check("4 to 8 years -> 5+", st(input({ experience: detectExperience("SOC Analyst", "Requirements: 4 to 8 years of experience in security operations.") })), "hidden:experience_5plus");
+  check("must stay: 1-3 years -> show", st(input({ experience: detectExperience("SOC Analyst", "Requirements: 1-3 years of experience in a SOC.") })), "show");
+  check("must stay: 2-4 years -> show", st(input({ experience: detectExperience("SOC Analyst", "Requirements: 2-4 years of experience in a SOC.") })), "show");
   check("a full posting the rules cannot place, no reading yet -> waits for the jury", st(input({ title: "Integration Engineer", scope: judgeScope("Integration Engineer", null, "Integrate systems for our clients across the Kingdom and support delivery.", "full") })), "unclassified");
 }
 

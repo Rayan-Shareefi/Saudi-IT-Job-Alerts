@@ -308,6 +308,7 @@ export async function dynamicSources(): Promise<SourceDefinition[]> {
       region: (r.region as SourceDefinition["region"]) ?? "ksa",
       needsBrowser: Boolean(r.needs_browser),
       enabled: true,
+      replaces: (r.replaces as string[] | null) ?? [],
     }));
   } catch {
     return [];

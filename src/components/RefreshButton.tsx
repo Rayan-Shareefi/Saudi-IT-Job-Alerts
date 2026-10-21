@@ -47,7 +47,11 @@ function describe(run: Run): string {
   if (run.status === "stalled") return `${what}: stopped responding${run.error ? ` - ${run.error}` : ""}. Press the button to try again.`;
   if (run.status === "failed") return `${what}: failed - ${run.error ?? "unknown error"}`;
   const when = run.finished_at ? new Date(run.finished_at).toLocaleString("en-GB", { timeZone: "Asia/Riyadh", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit" }) : "";
-  return `${what}: last run ${when} · ${run.total} sources · ${run.kept} relevant · ${run.inserted} new${run.failed ? ` · ${run.failed} failing` : ""}`;
+  // GitHub's every-few-hours pass leaves out the boards that need a browser;
+  // the nightly pass and the laptop's full search (F) read every board. "168
+  // sources" read as if the rest had been lost (user, 2026-10-21).
+  const part = run.scope === "company" && run.total > 0 && run.total < 300 ? " (quick pass without the browser boards; the nightly pass reads all of them)" : "";
+  return `${what}: last run ${when} · ${run.total} sources${part} · ${run.kept} relevant · ${run.inserted} new${run.failed ? ` · ${run.failed} failing` : ""}`;
 }
 
 /**

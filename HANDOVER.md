@@ -14,12 +14,17 @@ measured and the command that re-measures them.
 A personal job board for co-op, internships and entry-level work in
 **cybersecurity and cloud** in Riyadh.
 
-- Riyadh only. Cybersecurity and cloud only, judged from the whole posting,
-  not the title (SOC and GRC roles often never say "cybersecurity").
-- DevOps / SRE / Platform roles count only when the duties are cloud work;
-  network roles only when the duties are security work. Software development,
-  data / AI, IT support, plain IT audit and *selling* security are out.
-- Roles that ask for 5+ years go to their own tab, never "All jobs".
+- Riyadh only. Cybersecurity, cloud and cloud security only, judged from the
+  whole posting, not the title (SOC and GRC roles often never say
+  "cybersecurity").
+- DevOps / SRE / Platform roles are out (the owner's choice, 2026-10-21),
+  unless the title itself is cloud or security work ("Cloud DevOps Engineer",
+  "DevSecOps"). Network roles count only when the duties are security work.
+  Software development, data / AI, IT support, plain IT audit and *selling*
+  security are out.
+- Roles that ask for 5+ years go to their own tab, never "All jobs" - and so
+  do ranges that reach 5 ("2-5 years", "4-8 years": a candidate with five is
+  the one chosen) and senior titles with no years stated.
 - Nothing older than 30 days, unless its stated deadline is still ahead.
 - One card per vacancy. Every card names the platform it was found on, and a
   **Duplicate** badge names every platform the same vacancy appeared on.
@@ -43,14 +48,35 @@ Laptop setup: [docs/laptop-setup.md](docs/laptop-setup.md).
 |---|---|---|
 | **All jobs** | Every verified vacancy. Order: time-sensitive, recommended, co-op, internship, then the rest - each group newest *posting* first, undated ones last | Apply. Pressing Apply also saves the job |
 | **Saved** | Everything you saved or applied to. Never removed automatically | Remove when done |
-| **Company sites / LinkedIn / Job boards** | All jobs, split by where the best copy came from | - |
+| **Company sites / LinkedIn / Job boards** | All jobs, by every platform the vacancy was seen on (a job on a company site and on LinkedIn is in both tabs) | - |
 | **Waiting for the jury** | Full postings the AI jury has not read yet; each then moves to All jobs or Hidden | Nothing - it empties itself |
 | **Your call** | Co-op and internships in technology outside cyber / cloud | **Keep or Hide.** Your decision is final and permanent |
 | **Saudi Arabia** | Verified cyber / cloud roles in Saudi Arabia whose city is not stated | Keep moves one to All jobs if you know it is Riyadh |
 | **5+ years** | Roles that state 5+ years, or a senior title with no years stated | For later |
 | **Hidden** | Everything else, each with its reason (out of scope, too old, not Riyadh, not a job) | Keep brings one back |
-| **Site report** | Every employer site that could not be read, why, and the fix | Fix the ones you care about |
-| **Human intervene** | Employers no program can reach, with a working link | Check by hand now and then |
+| **Site report** | Every employer site that could not be read, why, and the fix | Paste a working URL on a card, or press **Find fixes for all** |
+| **Human intervene** | Employers no program can reach, with a working link | Same: paste a URL, or **Find fixes for all** |
+| **Check URLs** | Careers URLs that moved, extra boards, pages that stopped listing | **Find fixes for all** checks the next 25; what works is used by itself |
+| **Failing sources** | Sources that failed on the last run, and main boards that opened but read nothing | Paste a URL, or **Find fixes for all** |
+
+**Repairing a source** (the four pages above). Paste a working careers URL -
+or a LinkedIn company page - on a card, or press **Find fixes for all**. The
+laptop checks every URL within a few minutes: robots.txt, bot protection, the
+job system the page runs on, and a real read that must return real postings
+from that employer. A URL that works replaces the broken source by itself; a
+site that cannot be read is read through its LinkedIn page when one is known;
+a page that opens but shows nothing goes to the AI jury ("is this their
+careers page?"). Anything still unsettled waits on the card with the reason
+and the choices: **Use its LinkedIn page, Try another URL, Keep as it is, Stop
+reading it** (or **Use this URL anyway**). Your last three choices for the same
+kind of problem are repeated by themselves, saying so; **Undo** reverses any
+fix. Nothing needs a code change.
+
+**Badges** include **Recommended Company**: the big names and the companies
+whose main work is technical (SITE, Elm, stc, Tahakom, Aramco, SDAIA, NCA, the
+banks, Microsoft, the security vendors...). The list is every priority-1
+employer in `src/lib/sources/companies.ts` plus the priority-2 security,
+technology and telecom companies; give an employer that priority to add it.
 
 **The badge filter** (above the cards): click a badge to bring jobs with it
 forward, click again to hide jobs with it, a third time to clear it. With
@@ -70,8 +96,8 @@ cloud work, and the date the full posting was read.
 | **Jooble, Careerjet** | Their free APIs |
 | **Sabbar** | Its public job sitemap (robots.txt allows it), then the job pages; twice a day |
 | **Workable** | Its free public job search, every employer hiring in Riyadh through Workable |
-| **Telegram** | Saudi job channels @ewdifh, @cd4cd, @jobzaty, @fu1sa through their public channel pages (no login). Only posts about technology or training are kept; the linked article is read where the site allows it (jobzaty.com, wdeftksa.com), the post's picture (OCR) otherwise. Change the list with `TELEGRAM_CHANNELS=handle,handle` |
-| **Company sites** | ~530 employer boards and career pages, plus the ones the worker discovers |
+| **Telegram** | Saudi job channels @ewdifh, @cd4cd, @jobzaty, @fu1sa through their public channel pages (no login), 4 pages (80 posts) each per pass, 15 on a full search. An announcement's linked article is read *before* deciding (jobzaty.com and wdeftksa.com list the fields there), the post's picture (OCR) otherwise; only technology and training posts are kept. These four only link to each other - no further large channel was found (2026-10-21). Change the list with `TELEGRAM_CHANNELS=handle,handle` |
+| **Company sites** | ~560 employer boards and career pages (525 employers), plus the ones the worker discovers and the repairs. GitHub's quick pass every few hours reads the ~170 that need no browser; the nightly pass (6 shards) and the laptop's **F** read all of them |
 
 Every posting from every platform goes through the same rules, jury and
 evidence check. A company found on a platform but not tracked is looked up and
@@ -177,7 +203,12 @@ evidence (prompt-injection guard). Failed claims are abstentions.
   read it is shown or hidden. A snippet cannot be read further, so a vague one
   is hidden at once - unless its own title says security or cloud work.
 - Physical security (guards, CCTV, loss prevention) is never cybersecurity.
-- A senior title with no years stated counts as 5+.
+- A senior title with no years stated counts as 5+; so does a stated range
+  that reaches 5 ("2-5", "4-8").
+- DevOps / SRE / Platform titles are out, an owner's exclusion no model can
+  overrule (`absolute` in scope.ts), like physical security.
+- "Saudi Arabia" alone is not evidence of another city: a model's location
+  quote must name a place (`namesAPlace`, verify.ts).
 - Saudi Arabia with no city: the "Saudi Arabia" tab.
 - Co-op and internships in technology that miss the rules are the owner's
   call ("Your call" tab); physical security, sales, legal and other
@@ -198,12 +229,14 @@ then `npm run reclassify -- --dry` and read the "moves" before applying.
 | `src/lib/relevance.ts` | Is it IT at all? (ingest gate) | `test:relevance` | 76 |
 | `src/lib/classify.ts` | City, tracks, closing date | `test:location` | 19 |
 | `src/lib/experience.ts` | Years required, with the sentence | `test:experience` | 61 |
-| `src/lib/scope.ts` | Cybersecurity / cloud? | `test:scope` | 60 |
-| `src/lib/judge/*`, `src/lib/state.ts` | Jury, evidence check, arbiter | `test:judge` | 54 |
+| `src/lib/scope.ts` | Cybersecurity / cloud? | `test:scope` | 73 |
+| `src/lib/judge/*`, `src/lib/state.ts` | Jury, evidence check, arbiter | `test:judge` | 98 |
 | `src/lib/dedupe.ts` | One card per vacancy | `test:dedupe` | 19 |
-| `src/lib/adapters/linkedin*.ts` | LinkedIn listings and posts | `test:linkedin` | 14 |
+| `src/lib/adapters/linkedin*.ts` | LinkedIn listings and posts | `test:linkedin` | 37 |
 | `src/lib/digest.ts` | Email sender handling | `test:digest` | 13 |
 | `src/lib/resume.ts` | CV match ("Recommended") | `test:matching` | 7 |
+| `src/lib/source-fix.ts`, `scripts/fix-sources.ts` | Source repairs: robots.txt, bot protection, learned choices, overrides | `test:fixes` | 33 |
+| `src/lib/recommended-company.ts` | "Recommended Company" badge | `test:badges` | 18 |
 
 Other key files: `src/lib/review.ts` (recompute states), `src/lib/board.ts`
 (what each tab holds), `src/lib/runs.ts` (run tracking for the buttons),
@@ -272,7 +305,7 @@ npm run fix:bytes         # repair regex escapes mangled by shell edits
 16. **JSearch answers in Arabic for Saudi searches**: 3 results with only
     relative dates ("قبل ١٥ يومًا"); with `language=en`, 10 with exact dates.
     Dates are read in every form (`relative-date.ts`).
-19. **Programme titles were rejected as institution names.** "Summer Internship
+17. **Programme titles were rejected as institution names.** "Summer Internship
     Program", "COOP Training Program", "Tamheer Program" matched the institution
     rule ("... Program") on every source until 2026-10-21. A programme word now
     lets a title through (`PROGRAMME`, plausible.ts), and announcements read
@@ -280,8 +313,29 @@ npm run fix:bytes         # repair regex escapes mangled by shell edits
 18. **"Cannot read properties of undefined (reading 'length')" in webpack's
     WasmHash** during `npm run build` is a stale `.next` cache (left by a dev
     server): delete `.next` and build again.
-17. **The worker cannot 'git pull' a private repo** (no desktop to sign in).
-    The launcher updates it from your session; a public repo removes the issue.
+19. **The worker cannot 'git pull' a private repo** (no desktop to sign in).
+    The launcher updates it from your session; the repo is public since
+    2026-10-21, so the worker updates itself. A pull blocked by line-ending
+    changes is set aside (git stash) and retried; real local edits are
+    reported, and the launcher's U offers to set them aside.
+20. **"ok" is not "working".** 360 of 845 sources answered without error and
+    read no postings at all (2026-10-21) - JavaScript-drawn lists, moved
+    boards - and never showed as failing. The Failing sources page now lists
+    main boards that read nothing; the repair checker handles them.
+21. **A SuccessFactors signature matched a script asset.** "messagebundle...
+    rmk-jobs-search" contains "jobs", so Wipro's and Fujitsu's sources were a
+    properties file and failed on every run for months. The signature now
+    refuses asset paths (discover-ats.ts).
+22. **LinkedIn's guest search pages hold 10 cards**, and the reader stepped by
+    25: every page after the first skipped 15 listings. Paging now steps by
+    what a page holds (`PAGE_SIZE`).
+23. **A fix must meet a higher bar than a posting.** Tahakom's careers page
+    "read" as postings titled "Experienced Professionals" and "Fresh
+    Graduates" - entry tiles. The repair checker counts only titles that name
+    a role and are not tiles, and a lone posting must link to a posting.
+24. **`page.content()` throws while a page is still navigating** (boards that
+    redirect after loading: MongoDB, Parsons, GIB). The browser reader waits
+    for the page to settle and asks again (`settledContent`).
 
 ## State on 2026-10-15
 
@@ -308,6 +362,8 @@ Re-measure: `npm run reclassify -- --dry`, `npm run verify`.
    run). A board is added only when it shows real postings in Saudi Arabia;
    companies without one are looked at again after 30 days. Check
    `employer_candidates` for the ones it could not resolve.
-4. **Private repo minutes**: while the repo is private the nightly scan is one
-   30-minute shard. Making it public switches to six parallel shards
-   automatically.
+4. **The repo is public** (2026-10-21): the nightly scan runs six parallel
+   shards, and the laptop updates itself from GitHub.
+5. **Boards that read nothing**: about 110 main boards (2026-10-21). Press
+   **Find fixes for all** on Failing sources; the laptop works through them 25
+   at a time, at most every 45 minutes, between its searches.

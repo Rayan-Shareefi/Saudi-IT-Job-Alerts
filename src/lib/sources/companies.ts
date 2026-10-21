@@ -705,6 +705,22 @@ export const COMPANIES: CompanySeed[] = [
   { name: "Red Hat Saudi", careersUrl: "https://www.redhat.com/en/jobs", sector: "global-tech", priority: 2 },
   { name: "Canonical", careersUrl: "https://canonical.com/careers/all", sector: "global-tech", priority: 3, altUrls: ["https://canonical.com/careers/early-careers", "https://canonical.com/careers/6103331", "https://canonical.com/careers/7048263"] },
   { name: "SUSE", careersUrl: "https://www.suse.com/careers/", sector: "global-tech", priority: 3 },
+  // Riyadh cyber / cloud employers missing from the list (2026-10-21), each
+  // URL checked to answer. Their boards are found by the repair checker
+  // (scripts/fix-sources.ts) and the monthly sources:discover.
+  { name: "Check Point", careersUrl: "https://www.checkpoint.com/careers/", sector: "security-vendor", priority: 2 },
+  { name: "Inspira Enterprise", careersUrl: "https://inspiraenterprise.com/careers", sector: "security-vendor", priority: 2 },
+  { name: "Recorded Future", careersUrl: "https://www.recordedfuture.com/work-with-us", sector: "security-vendor", priority: 3 },
+  { name: "Spire Solutions", careersUrl: "https://www.spiresolutions.com/careers/", sector: "security-vendor", priority: 3 },
+  { name: "Seclore", careersUrl: "https://www.seclore.com/careers/", sector: "security-vendor", priority: 3 },
+  { name: "Saudi Cloud Computing Company (SCCC)", careersUrl: "https://sccc.sa/en", sector: "telecom-tech", priority: 2 },
+  { name: "EzdiTek", careersUrl: "https://ezditek.com/", sector: "telecom-tech", priority: 2 },
+  { name: "TAQNIA", careersUrl: "https://www.taqnia.com/", sector: "telecom-tech", priority: 2 },
+  { name: "NTT DATA", careersUrl: "https://careers.nttdata.com/global/en", sector: "global-tech", priority: 2 },
+  { name: "Gulf Business Machines (GBM)", careersUrl: "https://www.gbmme.com/", sector: "telecom-tech", priority: 2 },
+  { name: "Saudi Federation for Cybersecurity and Programming (SAFCSP)", careersUrl: "https://safcsp.org.sa/", sector: "government", priority: 2 },
+  { name: "RTX (Raytheon)", careersUrl: "https://careers.rtx.com/global/en", sector: "energy-industrial", priority: 2 },
+  { name: "Protiviti", careersUrl: "https://www.protiviti.com/sa-en/careers", sector: "consulting", priority: 2 },
 ];
 
 /** Company count by sector, used by the sources page in the UI. */

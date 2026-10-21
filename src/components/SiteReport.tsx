@@ -1,4 +1,6 @@
 import type { SourceReport } from "@/lib/db";
+import type { FixRow } from "@/lib/fix-words";
+import { FindAllFixes, FixBox } from "./SourceFixer";
 
 /**
  * Every employer site that could not be read, why, and what fixes it.
@@ -49,7 +51,7 @@ const GROUPS: Array<{ verdict: string; title: string; blurb: string }> = [
   },
 ];
 
-export function SiteReport({ rows }: { rows: SourceReport[] }) {
+export function SiteReport({ rows, fixes = {} }: { rows: SourceReport[]; fixes?: Record<string, FixRow> }) {
   if (rows.length === 0) {
     return (
       <p className="surface px-6 py-12 text-center text-[13px]" style={{ borderRadius: "var(--radius-lg)", color: "var(--ink-2)" }}>
@@ -64,6 +66,7 @@ export function SiteReport({ rows }: { rows: SourceReport[] }) {
       <p className="text-[13px]" style={{ color: "var(--ink-2)" }}>
         <strong style={{ color: "var(--ink)" }}>{rows.length}</strong> employer sites could not be read completely. Each one says why and what fixes it.
       </p>
+      <FindAllFixes page="sites" count={rows.filter((r) => r.verdict !== "email-only").length} last={fixes["sites|*"]} />
       {GROUPS.map((g) => {
         const list = rows.filter((r) => r.verdict === g.verdict);
         if (list.length === 0) return null;
@@ -90,6 +93,7 @@ export function SiteReport({ rows }: { rows: SourceReport[] }) {
                       <a key={e} href={`mailto:${e}`}>{e}</a>
                     ))}
                   </div>
+                  {r.verdict !== "email-only" && <FixBox page="sites" company={r.company} oldUrl={r.careers_url} fix={fixes[`sites|${r.company}`]} />}
                 </li>
               ))}
             </ul>

@@ -227,11 +227,36 @@ export const oraclecloud: Adapter = async (source) => {
  * matches the two anchor shapes SF has shipped rather than one rigid selector.
  */
 export const successfactors: Adapter = async (source) => {
-  const html = await getText(source.handle);
   const base = new URL(source.handle).origin;
   const out: RawJob[] = [];
   const seen = new Set<string>();
 
+  /*
+   * Every results page, not just the first. These career sites show 25 jobs
+   * a page and take the rest with `startrow` (the user, 2026-10-21: "the
+   * first page only shows 10 jobs, the second page shows another 10"). Stops
+   * at the first page that adds nothing new, or after 12 pages.
+   */
+  for (let pageNo = 0; pageNo < 12; pageNo++) {
+    const before = out.length;
+    const url = pageNo === 0 ? source.handle : withStartRow(source.handle, out.length);
+    const html = await getText(url).catch((err) => {
+      if (pageNo === 0) throw err;
+      return "";
+    });
+    readSuccessFactorsPage(html, base, source, seen, out);
+    if (out.length === before) break;
+  }
+  return out;
+};
+
+function withStartRow(handle: string, startrow: number): string {
+  const u = new URL(handle);
+  u.searchParams.set("startrow", String(startrow));
+  return u.toString();
+}
+
+function readSuccessFactorsPage(html: string, base: string, source: SourceDefinition, seen: Set<string>, out: RawJob[]): void {
   const anchorRe =
     /<a[^>]+href="([^"]*\/job\/[^"]*?)"[^>]*>([\s\S]{0,300}?)<\/a>/gi;
   let m: RegExpExecArray | null;
@@ -254,8 +279,7 @@ export const successfactors: Adapter = async (source) => {
       postedAt: null,
     });
   }
-  return out;
-};
+}
 
 /* ------------------------------------ Taleo ------------------------------ */
 

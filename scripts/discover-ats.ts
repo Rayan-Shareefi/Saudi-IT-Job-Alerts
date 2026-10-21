@@ -90,7 +90,10 @@ const SIGNATURES: Signature[] = [
   {
     adapter: "successfactors",
     pattern: /(https?:\/\/[a-z0-9.-]*(?:successfactors|sapsf)\.[a-z]+\/[^"'\s]*(?:career|jobs)[^"'\s]*)/i,
-    build: (m) => ({ handle: m[1].replace(/&amp;/g, "&") }),
+    // Not the page's script assets: Wipro's and Fujitsu's sources were a
+    // "messagebundle.properties" file whose path names "rmk-jobs-search", and
+    // failed on every run for months (fixed 2026-10-21).
+    build: (m) => (/messagebundle|\/verp\/|\.properties|\.js\b/i.test(m[1]) ? null : { handle: m[1].replace(/&amp;/g, "&") }),
   },
 ];
 

@@ -71,6 +71,8 @@ interface WorkerState {
   linkedinJobsPauseUntil?: string;
   /** The weekly AI model check (scripts/llm-upgrade.ts). */
   llmUpgradeAt?: string;
+  /** The last source-repair pass (scripts/fix-sources.ts). */
+  fixRunAt?: string;
   /** How long each step takes on this machine, in minutes (for the time estimates). */
   stepMinutes?: Record<string, number>;
 }
@@ -150,14 +152,14 @@ function log(s: string): void {
 }
 
 /** Run a script as its own process; returns its exit code. */
-function step(name: string, script: string, args: string[] = [], timeoutMin = 90, note = ""): number {
+function step(name: string, script: string, args: string[] = [], timeoutMin = 90, note = "", extraEnv: Record<string, string> = {}): number {
   log(`> ${name}${note ? ` (${note})` : ""}`);
   const r = spawnSync(process.execPath, [TSX, script, ...args], {
     cwd: process.cwd(),
     stdio: "inherit",
     timeout: timeoutMin * 60_000,
     windowsHide: true,
-    env: { ...process.env, WORKER_NAME: "laptop" },
+    env: { ...process.env, WORKER_NAME: "laptop", ...extraEnv },
   });
   const code = r.status ?? (r.error ? 1 : 0);
   log(`< ${name} exited ${code}${r.error ? ` (${r.error.message})` : ""}`);
@@ -177,6 +179,25 @@ function head(): string {
   return spawnSync("git", ["rev-parse", "HEAD"], { encoding: "utf8", windowsHide: true }).stdout?.trim() ?? "";
 }
 
+/** "abc1234 from 2026-10-21 14:05 - what changed", for the log. */
+function version(): string {
+  const r = spawnSync("git", ["log", "-1", "--format=%h from %cd - %s", "--date=format:%Y-%m-%d %H:%M"], { encoding: "utf8", windowsHide: true });
+  return r.stdout?.trim().slice(0, 110) || "unknown (not a git copy)";
+}
+
+/*
+ * Files changed on the laptop block every later `git pull`, and the worker
+ * then runs old code for good. When the only changes are line endings (an
+ * editor or a .gitattributes change can cause that), set them aside in git
+ * stash - recoverable, nothing lost - and pull again. Real edits are left
+ * alone and reported; the launcher's U key offers to set them aside.
+ */
+function onlyLineEndingsChanged(): boolean {
+  const any = spawnSync("git", ["diff", "--quiet"], { windowsHide: true }).status === 1;
+  const real = spawnSync("git", ["diff", "--quiet", "--ignore-cr-at-eol"], { windowsHide: true }).status === 1;
+  return any && !real;
+}
+
 /*
  * The scheduled task has no desktop, so a credential prompt (a private repo,
  * an expired sign-in) would wait forever for a click nobody can make. Fail
@@ -188,9 +209,20 @@ function selfUpdate(): void {
   if (!existsSync(".git")) return;
   const before = head();
   const lockBefore = existsSync("package-lock.json") ? readFileSync("package-lock.json", "utf8") : "";
-  const pull = spawnSync("git", ["pull", "--ff-only"], { stdio: "inherit", windowsHide: true, env: GIT_NO_PROMPT, timeout: 5 * 60_000 });
+  const pullOnce = () => spawnSync("git", ["pull", "--ff-only"], { stdio: "inherit", windowsHide: true, env: GIT_NO_PROMPT, timeout: 5 * 60_000 });
+  let pull = pullOnce();
+  if (pull.status !== 0 && onlyLineEndingsChanged()) {
+    log("update blocked by line-ending changes only - setting them aside (git stash) and updating");
+    spawnSync("git", ["stash", "push", "-m", `line endings set aside by the worker ${new Date().toISOString().slice(0, 16)}`], { stdio: "inherit", windowsHide: true });
+    pull = pullOnce();
+  }
   if (pull.status !== 0) {
-    log("git pull failed (local changes?) - carrying on with the code on disk");
+    const changed = spawnSync("git", ["status", "--porcelain", "--untracked-files=no"], { encoding: "utf8", windowsHide: true }).stdout?.trim();
+    log(
+      changed
+        ? `NOT updated: files changed on this laptop block the update (${changed.split(/\r?\n/).slice(0, 4).join("; ")}) - press U in the launcher to set them aside. Running: ${version()}`
+        : `NOT updated: git pull failed (no internet?) - running: ${version()}`,
+    );
     return;
   }
   const lockAfter = existsSync("package-lock.json") ? readFileSync("package-lock.json", "utf8") : "";
@@ -201,7 +233,7 @@ function selfUpdate(): void {
   // The steps are child processes and already run the new code; the loop
   // itself does not, so it hands over to a fresh copy of itself.
   if (head() !== before && !ONCE) {
-    log("updated to new code - restarting the worker");
+    log(`updated to ${version()} - restarting the worker into it`);
     process.exit(RESTART_FOR_UPDATE);
   }
 }
@@ -212,6 +244,19 @@ async function pickUpQueued(): Promise<void> {
   for (const run of await queuedRuns()) {
     if (run.scope !== "company" && run.scope !== "api") continue;
     step(`queued ${run.scope} run`, "scripts/ingest.ts", ["--run-id", run.id, "--scope", run.scope, ...(run.trigger?.includes("jsearch") ? ["--with-jsearch"] : [])], 180);
+  }
+  /*
+   * URLs pasted on the fix pages, and their "Find fixes" buttons. A URL the
+   * user pasted is checked at once; the many automatic checks one "Find
+   * fixes" press creates go 25 at a time, at most every 45 minutes, so the
+   * searches themselves still run on time.
+   */
+  const db = supabaseAdmin();
+  const { count: mine } = await db.from("source_fixes").select("id", { count: "exact", head: true }).eq("status", "queued").eq("requested_by", "user");
+  const { count: auto } = await db.from("source_fixes").select("id", { count: "exact", head: true }).eq("status", "queued").eq("requested_by", "auto");
+  if (mine || (auto && minutesSince(readState().fixRunAt) >= 45)) {
+    writeState({ fixRunAt: new Date().toISOString() });
+    step("source repair", "scripts/fix-sources.ts", ["--max", "25", "--deadline-min", "40"], 50, `${mine ?? 0} from you, ${auto ?? 0} automatic waiting`);
   }
 }
 
@@ -244,6 +289,8 @@ interface Planned {
   /** Checked again just before the step runs: false skips it. */
   when?: () => boolean;
   after?: (code: number) => Promise<void>;
+  /** Settings for this step only (a full search reads further back). */
+  env?: Record<string, string>;
 }
 
 /** First guesses, in minutes; replaced by how long each step really took on this laptop. */
@@ -327,9 +374,10 @@ async function plan(full: boolean): Promise<Planned[]> {
       },
     });
   }
-  const platforms = await stalePlatforms().catch(() => PLATFORMS);
+  // A full search (F) reads every platform; otherwise only those due.
+  const platforms = full ? PLATFORMS : await stalePlatforms().catch(() => PLATFORMS);
   if (platforms.length) {
-    steps.push({ key: "platforms", name: `Job platforms (${platforms.map((p) => p.replace(/-(riyadh|channels)$/, "")).join(", ")})`, script: "scripts/ingest.ts", args: ["--source", platforms.join(",")], timeoutMin: 45 });
+    steps.push({ key: "platforms", name: `Job platforms (${platforms.map((p) => p.replace(/-(riyadh|channels)$/, "")).join(", ")})`, script: "scripts/ingest.ts", args: ["--source", platforms.join(",")], timeoutMin: 45, env: full ? { TELEGRAM_PAGES: "15" } : {} });
   }
   if (full || (await githubMissedCompanies().catch(() => false))) {
     if (!full) log("no successful company-board pass in 26h - running it here");
@@ -366,7 +414,7 @@ async function cycle(full = false): Promise<void> {
         continue;
       }
       const started = Date.now();
-      const code = step(s.name, s.script, s.args, s.timeoutMin, `about ${Math.max(1, Math.round(estimate(s.key)))} min; everything done around ${clock(Date.now() + (estimate(s.key) + left) * 60_000)}`);
+      const code = step(s.name, s.script, s.args, s.timeoutMin, `about ${Math.max(1, Math.round(estimate(s.key)))} min; everything done around ${clock(Date.now() + (estimate(s.key) + left) * 60_000)}`, s.env);
       learn(s.key, (Date.now() - started) / 60_000);
       await s.after?.(code);
       // Instant alerts as soon as the jury has spoken, not at the very end.
@@ -386,7 +434,7 @@ async function cycle(full = false): Promise<void> {
 }
 
 async function main(): Promise<void> {
-  log(`worker starting (cycle every ${CYCLE_MS / 60_000} min)`);
+  log(`worker starting (cycle every ${CYCLE_MS / 60_000} min) - version ${version()}`);
   // Without these every database call fails, and a failure cannot be written
   // to the database - so say it here, where the log is the only witness.
   const missing = ["NEXT_PUBLIC_SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"].filter((k) => !envStr(k));

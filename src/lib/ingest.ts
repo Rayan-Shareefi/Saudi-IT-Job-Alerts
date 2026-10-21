@@ -568,7 +568,9 @@ export async function runIngest(
     done++;
     opts.onSourceDone?.(result, done, sources.length, source);
 
-    const status = result.ok ? (result.error ? (result.error.startsWith("partial:") ? "part" : "skip") : "ok  ") : "FAIL";
+    // "none": the site answered and has nothing in scope today. Most company
+    // boards are like that most days; it is not a fault, so it says so.
+    const status = result.ok ? (result.error ? (result.error.startsWith("partial:") ? "part" : "skip") : result.kept > 0 ? "ok  " : "none") : "FAIL";
     log(
       `[${String(done).padStart(3)}/${sources.length}] ${status} ${source.label.slice(0, 34).padEnd(34)} ` +
         `fetched=${String(result.fetched).padStart(4)} kept=${String(result.kept).padStart(3)} ` +

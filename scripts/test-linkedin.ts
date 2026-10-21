@@ -8,7 +8,7 @@
  * fixtures, the selectors in src/lib/adapters/linkedin.ts need updating.
  */
 import { readFileSync } from "node:fs";
-import { parseDetail, parseSearch } from "../src/lib/adapters/linkedin";
+import { byUsefulness, parseDetail, parseSearch } from "../src/lib/adapters/linkedin";
 import { EXTRACT, STRUCTURE, postTitle } from "../src/lib/adapters/linkedin-posts";
 import { parseCompanyPage } from "../src/lib/adapters/linkedin-companies";
 
@@ -29,6 +29,21 @@ check("every card has a title", search.every((c) => c.title.length > 3));
 check("every card has a company", search.every((c) => c.company.length > 0 && c.company !== "Unknown"));
 check("cards carry a Riyadh location", search.some((c) => /riyadh/i.test(c.location)));
 check("cards carry a posting date", search.every((c) => c.postedAt !== null));
+check("a results page is 10 cards - the paging step (it was 25, skipping 15 a page)", search.length === 10, `(${search.length})`);
+check("cards name their company page", search.some((c) => !!c.companySlug), JSON.stringify(search.map((c) => c.companySlug)));
+
+// A pass opens at most 25 postings: programmes and juniors first, seniors last.
+{
+  const card = (title: string, postedAt: string) => ({ id: title, title, company: "X", location: "Riyadh", postedAt });
+  const order = byUsefulness([
+    card("Senior SOC Analyst", "2026-10-21"),
+    card("SOC Analyst", "2026-10-19"),
+    card("Cybersecurity Co-op Trainee", "2026-10-01"),
+    card("Cloud Engineer", "2026-10-20"),
+    card("Lead Cloud Architect", "2026-10-21"),
+  ]).map((c) => c.title);
+  check("opening order: programme, then newest non-senior, then senior", order.join(" | ") === "Cybersecurity Co-op Trainee | Cloud Engineer | SOC Analyst | Senior SOC Analyst | Lead Cloud Architect", order.join(" | "));
+}
 
 const detail = parseDetail(readFileSync("scripts/fixtures/linkedin-job.html", "utf8"));
 check("detail page parses", detail !== null);

@@ -23,11 +23,13 @@ Read it before changing any rule, adapter or the checker.
    with the *secondary* account only if 'LINKEDIN_SEARCH_POSTS=1'. Slow and
    read-only, stopping at the first 429 / login wall / challenge. Never solve a CAPTCHA or
    verification step in code.
-5. **Riyadh only. Cybersecurity and cloud only**, judged from the duties:
-   DevOps/SRE only with cloud duties, network roles only with security duties;
-   software dev, data/AI, IT support, plain IT audit and selling security are
-   out. 5+ years -> its own tab. Older than 30 days -> hidden unless the
-   stated deadline is ahead.
+5. **Riyadh only. Cybersecurity, cloud and cloud security only**, judged from
+   the duties: DevOps/SRE/Platform are out (owner, 2026-10-21) unless the title
+   itself is cloud or security ("Cloud DevOps", "DevSecOps"); network roles
+   only with security duties; software dev, data/AI, IT support, plain IT
+   audit and selling security are out. 5+ years, a range that reaches 5
+   ("2-5", "4-8") or a senior title -> its own tab. Older than 30 days ->
+   hidden unless the stated deadline is ahead.
 
 ## Deciding where a posting goes
 

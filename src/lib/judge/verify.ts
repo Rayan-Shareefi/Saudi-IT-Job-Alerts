@@ -1,3 +1,4 @@
+import { detectCity } from "../classify";
 import { detectExperience } from "../experience";
 import { cloudTermsIn, securityTermsIn, type ScopeArea } from "../scope";
 import { normalize } from "../text";
@@ -52,6 +53,19 @@ export function quoteFound(quote: string | null | undefined, posting: string, mi
 }
 
 const RIYADH = /riyadh|riyad|الرياض/i;
+
+/**
+ * Whether a location quote names somewhere, not just the country. "Saudi
+ * Arabia" alone says the city is unknown, so it cannot prove "not Riyadh":
+ * the models quoted it for "Cybersecurity Service Engineer" and two such
+ * answers hid it as outside Riyadh (2026-10-21); it belongs on the Saudi
+ * Arabia tab.
+ */
+function namesAPlace(quote: string): boolean {
+  const city = detectCity(quote, "");
+  return city !== "ksa-other" && city !== "remote-ksa";
+}
+
 const PROGRAMME = {
   coop: /co-?op|cooperative|تعاوني/i,
   internship: /intern|trainee|apprentic|تدريب|متدرب|تمهير/i,
@@ -141,7 +155,7 @@ export function verifyAnswer(
     if (answer.location === "riyadh" && RIYADH.test(answer.location_quote)) {
       riyadh = true;
       locationEvidence = answer.location_quote.trim();
-    } else if ((answer.location === "saudi_other" || answer.location === "outside_saudi") && !RIYADH.test(answer.location_quote)) {
+    } else if ((answer.location === "saudi_other" || answer.location === "outside_saudi") && !RIYADH.test(answer.location_quote) && namesAPlace(answer.location_quote)) {
       riyadh = false;
       locationEvidence = answer.location_quote.trim();
     }

@@ -1,4 +1,6 @@
 import coverage from "../../data/coverage.json";
+import type { FixRow } from "@/lib/fix-words";
+import { FindAllFixes, FixBox } from "./SourceFixer";
 
 interface CoverageRow {
   company: string;
@@ -44,7 +46,7 @@ const GROUPS: Array<{ verdict: string; title: string; blurb: string; tone: "warn
   },
 ];
 
-function Row({ row }: { row: CoverageRow }) {
+function Row({ row, fix }: { row: CoverageRow; fix?: FixRow }) {
   return (
     <li>
       <article className="surface p-4" style={{ borderRadius: "var(--radius-lg)" }}>
@@ -111,6 +113,8 @@ function Row({ row }: { row: CoverageRow }) {
         >
           Open {row.careersUrl.replace(/^https?:\/\/(www\.)?/, "").slice(0, 46)} &rarr;
         </a>
+
+        {row.verdict !== "email-only" && <FixBox page="human" company={row.company} oldUrl={row.careersUrl} fix={fix} />}
       </article>
     </li>
   );
@@ -123,7 +127,7 @@ function Row({ row }: { row: CoverageRow }) {
  * the same as "this employer is not hiring" — several of these are among the
  * largest tech employers in Riyadh. The link is the deliverable.
  */
-export function HumanIntervene() {
+export function HumanIntervene({ fixes = {} }: { fixes?: Record<string, FixRow> }) {
   const rows = (coverage as { rows: CoverageRow[] }).rows ?? [];
   const needing = rows.filter((r) => r.needsHuman);
 
@@ -137,8 +141,11 @@ export function HumanIntervene() {
         <strong>{needing.length} employers need you to look yourself.</strong> Every one has been
         tried repeatedly and cannot be read automatically. They are grouped by the reason, with a
         working link each — several are major Riyadh tech employers, so they are worth a manual
-        check rather than being written off as not hiring.
+        check rather than being written off as not hiring. Paste a working URL on any card, or let
+        the laptop look for one.
       </div>
+
+      {needing.length > 0 && <FindAllFixes page="human" count={needing.filter((r) => r.verdict !== "email-only").length} last={fixes["human|*"]} />}
 
       {needing.length === 0 ? (
         <div className="surface px-6 py-12 text-center" style={{ borderRadius: "var(--radius-lg)" }}>
@@ -165,7 +172,7 @@ export function HumanIntervene() {
               </p>
               <ul className="mt-3 grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
                 {list.map((r) => (
-                  <Row key={r.company} row={r} />
+                  <Row key={r.company} row={r} fix={fixes[`human|${r.company}`]} />
                 ))}
               </ul>
             </div>
