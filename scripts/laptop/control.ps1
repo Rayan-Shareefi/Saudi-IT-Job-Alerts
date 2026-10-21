@@ -119,6 +119,23 @@ function Update-Code([switch]$Ask) {
   }
   $out = (& git -C $repo pull --ff-only 2>&1 | Out-String)
   if ($LASTEXITCODE -ne 0) {
+    # GitHub's history was rewritten when the repo went public: a copy cloned
+    # before then can never fast-forward. Keep it on a branch and move over.
+    & git -C $repo merge-base --is-ancestor HEAD origin/main 2>$null; $behind = ($LASTEXITCODE -eq 0)
+    & git -C $repo merge-base --is-ancestor origin/main HEAD 2>$null; $ahead = ($LASTEXITCODE -eq 0)
+    if (-not $behind -and -not $ahead) {
+      Say "This copy's history differs from GitHub's (the history was rewritten when the repo went public), so it cannot update by pulling." Yellow
+      $go = (-not $Ask) -or ((Read-Host "Keep this copy on a backup branch and move to GitHub's version? (Y = yes, Enter = no)") -match "^[yY]")
+      if ($go) {
+        $keep = "laptop-before-" + (Get-Date -Format "yyyy-MM-dd-HHmm")
+        & git -C $repo branch $keep | Out-Null
+        & git -C $repo stash push -m "set aside before moving to GitHub's history ($keep)" | Out-Null
+        $out = (& git -C $repo reset --hard origin/main 2>&1 | Out-String)
+        if ($LASTEXITCODE -eq 0) { Say "Moved to GitHub's version; the old copy is on branch $keep." Green }
+      }
+    }
+  }
+  if ($LASTEXITCODE -ne 0) {
     # Usually files changed on this laptop (often only line endings) block it.
     $changed = @(& git -C $repo status --porcelain --untracked-files=no 2>$null)
     if ($changed.Count -gt 0) {

@@ -52,7 +52,7 @@ Read it before changing any rule, adapter or the checker.
 
 ```bash
 npm run verify          # live end-to-end checks - run after any change
-npm run test            # all suites (494 cases)
+npm run test            # all suites (722 cases)
 npm run reclassify      # recompute states from stored rows; no fetching, no model calls
 npm run dedupe          # rebuild duplicate groups
 npm run judge           # the AI jury (free models), --max N

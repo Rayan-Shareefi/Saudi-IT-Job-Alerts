@@ -12,8 +12,16 @@ import { SetupNotice } from "@/components/SetupNotice";
 import { isConfigured, openUrlFindings, urlDecisions, sourceHealth, sourceReports, urlCheckProgress } from "@/lib/db";
 import { BOARD_TABS, loadBoard, tabCounts, type BoardTab } from "@/lib/board";
 import { COMPANIES } from "@/lib/sources/companies";
-import { disabledSources, latestFixes, readNothing, withOverrides } from "@/lib/source-fix";
-import { dynamicSources, enabledSources } from "@/lib/sources/registry";
+import { disabledSources, latestFixes, readNothing, withOverrides, type FixPage, type FixRow } from "@/lib/source-fix";
+import { dynamicSources, enabledSources, sourceById } from "@/lib/sources/registry";
+import { WaitingFixes } from "@/components/SourceFixer";
+import coverage from "../../data/coverage.json";
+
+/** Fixes waiting for the user that no card on the page shows. */
+function orphans(fixes: Record<string, FixRow>, page: FixPage, shown: Iterable<string | null | undefined>): FixRow[] {
+  const on = new Set(shown);
+  return Object.values(fixes).filter((f) => f.page === page && f.status === "needs_you" && f.company !== "*" && !on.has(f.company));
+}
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -87,11 +95,23 @@ async function BoardBoundary({ tab }: { tab: BoardTab }) {
 
 async function SiteReportBoundary() {
   const [rows, fixes] = await Promise.all([sourceReports().catch(() => []), latestFixes()]);
-  return <SiteReport rows={rows} fixes={fixes} />;
+  return (
+    <>
+      <WaitingFixes page="sites" fixes={orphans(fixes, "sites", rows.filter((r) => r.verdict !== "email-only").map((r) => r.company))} />
+      <SiteReport rows={rows} fixes={fixes} />
+    </>
+  );
 }
 
 async function HumanInterveneBoundary() {
-  return <HumanIntervene fixes={await latestFixes()} />;
+  const fixes = await latestFixes();
+  const shown = (coverage as { rows: Array<{ company: string; needsHuman: boolean; verdict: string }> }).rows.filter((r) => r.needsHuman && r.verdict !== "email-only").map((r) => r.company);
+  return (
+    <>
+      <WaitingFixes page="human" fixes={orphans(fixes, "human", shown)} />
+      <HumanIntervene fixes={fixes} />
+    </>
+  );
 }
 
 /** One line under the tabs saying what this tab is, in plain words. */
@@ -124,7 +144,12 @@ async function UrlCheckBoundary() {
     urlCheckProgress().catch(() => ({ checked: 0, open: 0 })),
     latestFixes(),
   ]);
-  return <UrlCheck findings={findings} decisions={decisions} progress={progress} total={COMPANIES.length} fixes={fixes} />;
+  return (
+    <>
+      <WaitingFixes page="urls" fixes={orphans(fixes, "urls", findings.map((f) => f.company))} />
+      <UrlCheck findings={findings} decisions={decisions} progress={progress} total={COMPANIES.length} fixes={fixes} />
+    </>
+  );
 }
 
 async function FailingSourcesBoundary() {
@@ -140,12 +165,14 @@ async function FailingSourcesBoundary() {
   try {
     const health = await sourceHealth();
     const live = new Set(withOverrides(enabledSources({ includeBrowser: true }), dynamic, disabled).map((s) => s.id));
+    const rows = health.filter((h) => !h.ok && (!gone.has(h.sourceId) || recentFix.has(h.sourceId)));
+    const empty = health.filter((h) => readNothing(h, live) || (recentFix.has(h.sourceId) && h.ok && h.fetched === 0));
+    const shown = [...rows, ...empty].map((h) => sourceById(h.sourceId)?.company ?? h.label);
     return (
-      <FailingSources
-        rows={health.filter((h) => !h.ok && (!gone.has(h.sourceId) || recentFix.has(h.sourceId)))}
-        empty={health.filter((h) => readNothing(h, live) || (recentFix.has(h.sourceId) && h.ok && h.fetched === 0))}
-        fixes={fixes}
-      />
+      <>
+        <WaitingFixes page="failing" fixes={orphans(fixes, "failing", shown)} />
+        <FailingSources rows={rows} empty={empty} fixes={fixes} />
+      </>
     );
   } catch {
     return <FailingSources rows={[]} fixes={fixes} />;

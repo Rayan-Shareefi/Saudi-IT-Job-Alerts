@@ -192,6 +192,15 @@ function version(): string {
  * stash - recoverable, nothing lost - and pull again. Real edits are left
  * alone and reported; the launcher's U key offers to set them aside.
  */
+/** This copy and GitHub's share no line of history to fast-forward along. */
+function historyRewritten(): boolean {
+  const fetched = spawnSync("git", ["fetch", "origin"], { windowsHide: true, env: GIT_NO_PROMPT, timeout: 5 * 60_000 }).status === 0;
+  if (!fetched) return false;
+  const behind = spawnSync("git", ["merge-base", "--is-ancestor", "HEAD", "origin/main"], { windowsHide: true }).status === 0;
+  const ahead = spawnSync("git", ["merge-base", "--is-ancestor", "origin/main", "HEAD"], { windowsHide: true }).status === 0;
+  return !behind && !ahead;
+}
+
 function onlyLineEndingsChanged(): boolean {
   const any = spawnSync("git", ["diff", "--quiet"], { windowsHide: true }).status === 1;
   const real = spawnSync("git", ["diff", "--quiet", "--ignore-cr-at-eol"], { windowsHide: true }).status === 1;
@@ -215,6 +224,20 @@ function selfUpdate(): void {
     log("update blocked by line-ending changes only - setting them aside (git stash) and updating");
     spawnSync("git", ["stash", "push", "-m", `line endings set aside by the worker ${new Date().toISOString().slice(0, 16)}`], { stdio: "inherit", windowsHide: true });
     pull = pullOnce();
+  }
+  /*
+   * GitHub's history was rewritten when the repo went public (2026-10-21), so
+   * a copy cloned before then can never fast-forward: the laptop kept running
+   * old code for a day and overwrote the board with the old checker policy.
+   * The old copy is kept on a branch and any local edits in git stash -
+   * nothing is lost - and the laptop moves to GitHub's version.
+   */
+  if (pull.status !== 0 && historyRewritten()) {
+    const keep = `laptop-before-${new Date().toISOString().slice(0, 10)}-${Date.now().toString(36)}`;
+    log(`GitHub's history was rewritten, so this copy cannot update by pulling - keeping it on branch ${keep} and moving to GitHub's version`);
+    spawnSync("git", ["branch", keep], { stdio: "inherit", windowsHide: true });
+    spawnSync("git", ["stash", "push", "-m", `set aside before moving to GitHub's history (${keep})`], { stdio: "inherit", windowsHide: true });
+    pull = spawnSync("git", ["reset", "--hard", "origin/main"], { stdio: "inherit", windowsHide: true });
   }
   if (pull.status !== 0) {
     const changed = spawnSync("git", ["status", "--porcelain", "--untracked-files=no"], { encoding: "utf8", windowsHide: true }).stdout?.trim();

@@ -153,6 +153,41 @@ export function FixBox({
   );
 }
 
+/**
+ * Fixes that wait for the user but have no card of their own on the page -
+ * an employer just added to the list has no failing source to show it on.
+ */
+export function WaitingFixes({ page, fixes }: { page: FixPage; fixes: FixRow[] }) {
+  if (fixes.length === 0) return null;
+  return (
+    <section className="mb-6">
+      <h2 className="text-[15px] font-bold" style={{ color: "var(--ink)" }}>
+        Waiting for your decision <span className="nums text-[12px] font-semibold" style={{ color: "var(--ink-3)" }}>{fixes.length}</span>
+      </h2>
+      <p className="mb-2 mt-1 max-w-3xl text-[12.5px] leading-relaxed" style={{ color: "var(--ink-2)" }}>
+        The laptop checked these and could not settle them, even with the AI jury. Each says why; choose, or paste a better URL.
+      </p>
+      <ul className="grid list-none gap-3 p-0 sm:grid-cols-2 lg:grid-cols-3">
+        {fixes.map((f) => (
+          <li key={f.id}>
+            <article className="surface p-4" style={{ borderRadius: "var(--radius-lg)" }}>
+              <h3 className="text-[14px] font-semibold leading-snug" style={{ color: "var(--ink)" }}>
+                {f.company}
+              </h3>
+              {f.oldUrl && (
+                <a href={f.oldUrl} target="_blank" rel="noopener noreferrer" className="mt-1 block truncate text-[12px] font-semibold underline-offset-2 hover:underline" style={{ color: "var(--accent)" }} title={f.oldUrl}>
+                  Open {f.oldUrl.replace(/^https?:\/\/(www\.)?/, "").slice(0, 46)} &rarr;
+                </a>
+              )}
+              <FixBox page={page} company={f.company} sourceId={f.sourceId} oldUrl={f.oldUrl} fix={f} />
+            </article>
+          </li>
+        ))}
+      </ul>
+    </section>
+  );
+}
+
 /** "Find fixes" for every card on a page, with what the last such run did. */
 export function FindAllFixes({ page, count, last }: { page: FixPage; count: number; last?: FixRow | null }) {
   const [busy, setBusy] = useState(false);

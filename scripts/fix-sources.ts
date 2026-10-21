@@ -67,6 +67,7 @@ const NO_BROWSER = process.argv.includes("--no-browser");
 const DEADLINE = Date.now() + Number(arg("deadline-min") ?? 40) * 60_000;
 const UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
 const SAUDI = /saudi|riyadh|\bksa\b|jeddah|dammam|khobar|dhahran|الرياض|السعودية|المملكة/i;
+const GULF = /\b(uae|united arab emirates|dubai|abu dhabi|qatar|doha|bahrain|manama|kuwait|oman|muscat|egypt|cairo|jordan|amman|middle east|mena|gcc)\b/i;
 const STOPWORDS = new Set(["company", "group", "holding", "holdings", "saudi", "arabia", "arabian", "technologies", "technology", "solutions", "services", "systems", "international", "limited", "the", "and", "for"]);
 
 function log(s: string): void {
@@ -142,6 +143,8 @@ const ENTRY_TILE =
 interface Read {
   postings: number;
   saudi: number;
+  /** In Saudi Arabia or elsewhere in the Gulf / Middle East. */
+  region: number;
   sample: string[];
   companies: string[];
   error?: string;
@@ -150,7 +153,7 @@ interface Read {
 /** Read a board with its own reader, as the collector would. */
 async function readBoard(company: string, board: FoundBoard): Promise<Read> {
   const adapter = ADAPTERS[board.adapter];
-  if (!adapter) return { postings: 0, saudi: 0, sample: [], companies: [], error: `no reader for ${board.adapter}` };
+  if (!adapter) return { postings: 0, saudi: 0, region: 0, sample: [], companies: [], error: `no reader for ${board.adapter}` };
   const seed = seedFor(company);
   const source = {
     id: `fix-check-${board.adapter}`,
@@ -178,9 +181,10 @@ async function readBoard(company: string, board: FoundBoard): Promise<Read> {
     // or a /job/ path), not back to a section of the careers page.
     if (real.length === 1 && !/\/jobs?\/|\/vacanc|\/position|\/requisition|\d{4,}/i.test(real[0].url.replace(/^https?:\/\/[^/]+/, ""))) real = [];
     const saudi = real.filter((j) => SAUDI.test(`${j.locationText ?? ""} ${j.title}`));
-    return { postings: real.length, saudi: saudi.length, sample: [...saudi, ...real].slice(0, 3).map((j) => j.title.slice(0, 70)), companies: real.map((j) => j.company) };
+    const region = real.filter((j) => SAUDI.test(`${j.locationText ?? ""} ${j.title}`) || GULF.test(j.locationText ?? "")).length;
+    return { postings: real.length, saudi: saudi.length, region, sample: [...saudi, ...real].slice(0, 3).map((j) => j.title.slice(0, 70)), companies: real.map((j) => j.company) };
   } catch (err) {
-    return { postings: 0, saudi: 0, sample: [], companies: [], error: err instanceof Error ? err.message.slice(0, 160) : String(err) };
+    return { postings: 0, saudi: 0, region: 0, sample: [], companies: [], error: err instanceof Error ? err.message.slice(0, 160) : String(err) };
   }
 }
 
@@ -375,9 +379,18 @@ async function processFix(fix: FixRow, history: Array<{ verdict: string | null; 
     if (probed.length) {
       const board: FoundBoard = { adapter: probed[0].adapter, handle: probed[0].handle, url: `${probed[0].adapter}:${probed[0].handle}`, needsBrowser: false };
       const read = await readBoard(fix.company, board);
-      const o: Outcome = read.postings > 0
-        ? { url: board.url, verdict: "works", why: `${read.postings} real postings on its ${board.adapter} board "${board.handle}"${read.saudi ? ` (${read.saudi} in Saudi Arabia)` : ""}`, board, read }
-        : { url: board.url, verdict: "no-postings", why: `its ${board.adapter} board "${board.handle}" has no postings`, board, read };
+      /*
+       * A board found by guessing from the name is that company's only if it
+       * hires in the region: "spire" on Greenhouse is Spire Global (Glasgow,
+       * Boulder), not Spire Solutions; "protiviti" on Recruitee is Protiviti
+       * Germany (2026-10-21). Anything else waits for the user.
+       */
+      const o: Outcome =
+        read.postings === 0
+          ? { url: board.url, verdict: "no-postings", why: `its ${board.adapter} board "${board.handle}" has no postings`, board, read }
+          : read.region === 0
+            ? { url: board.url, verdict: "other-company", why: `a ${board.adapter} board named "${board.handle}" has ${read.postings} postings, none in Saudi Arabia or the Gulf - it may be another company with the same name`, board, read }
+            : { url: board.url, verdict: "works", why: `${read.postings} real postings on its ${board.adapter} board "${board.handle}" (${read.saudi ? `${read.saudi} in Saudi Arabia` : `${read.region} in the Gulf`})`, board, read };
       seen.push(o);
       if (o.verdict === "works") {
         await applyBoard(fix, board, "works", o.why, { postings: read.postings, saudi: read.saudi, sample: read.sample, tried: seen.map((s) => ({ url: s.url, verdict: s.verdict, why: s.why })) });
@@ -401,7 +414,8 @@ async function processFix(fix: FixRow, history: Array<{ verdict: string | null; 
   }
   const other = seen.find((s) => s.verdict === "other-company");
   if (other) {
-    await needsYou(fix, "other-company", `${other.url}: ${other.why}. It may be another company's board.`, { board: other.board, postings: other.read?.postings, sample: other.read?.sample, tried });
+    const why = /another company/.test(other.why) ? other.why : `${other.why}. It may be another company's board`;
+    await needsYou(fix, "other-company", `${other.url}: ${why}.`, { board: other.board, postings: other.read?.postings, sample: other.read?.sample, tried });
     return "NEEDS YOU  postings of another company";
   }
 

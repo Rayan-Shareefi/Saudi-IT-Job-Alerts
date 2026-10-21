@@ -248,7 +248,7 @@ Other key files: `src/lib/review.ts` (recompute states), `src/lib/board.ts`
 
 ```bash
 npm run verify            # live end-to-end checks
-npm run test              # every suite above (494 cases)
+npm run test              # every suite above (722 cases)
 npm run reclassify        # recompute states (no fetching, no model calls); --dry to preview
 npm run dedupe            # rebuild duplicate groups; --dry to preview
 npm run judge             # run the AI jury; --max N, --deadline-min N
@@ -317,7 +317,12 @@ npm run fix:bytes         # repair regex escapes mangled by shell edits
     The launcher updates it from your session; the repo is public since
     2026-10-21, so the worker updates itself. A pull blocked by line-ending
     changes is set aside (git stash) and retried; real local edits are
-    reported, and the launcher's U offers to set them aside.
+    reported, and the launcher's U offers to set them aside. **Going public
+    rewrote the history**, so the laptop's older copy could never
+    fast-forward: it ran pre-2026-10-21 code for a day and rewrote the board
+    with the old checker policy every two hours. The worker (and U) now spot
+    a rewritten history, keep the old copy on a `laptop-before-...` branch,
+    and move to GitHub's version.
 20. **"ok" is not "working".** 360 of 845 sources answered without error and
     read no postings at all (2026-10-21) - JavaScript-drawn lists, moved
     boards - and never showed as failing. The Failing sources page now lists
