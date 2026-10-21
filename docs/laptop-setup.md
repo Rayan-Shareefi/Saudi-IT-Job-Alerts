@@ -30,6 +30,29 @@ npm ci
 npx playwright install chromium
 ```
 
+Clone it - do not copy the folder over from another computer. A copied folder
+has no `.git`, so the worker can never update it and keeps running the code it
+was copied with.
+
+### The laptop folder is not a git copy
+
+The launcher says so in red, and the worker's log says "NOT a git copy". Fix
+it in place, once - your `.env.local`, LinkedIn sign-in, logs, the background
+task and the desktop shortcut all stay as they are. In PowerShell, inside the
+project folder, one line at a time:
+
+```
+git init
+git remote add origin https://github.com/Rayan-Shareefi/Saudi-IT-Job-Alerts.git
+git fetch origin
+git checkout -f -B main origin/main
+npm.cmd ci
+```
+
+`checkout -f` replaces the old code files with GitHub's; files git ignores
+(`.env.local`, `.linkedin-profile`, `logs`) are not touched. Then open the
+launcher and press **R**; it should say "Up to date".
+
 ## 3. The settings file
 
 Copy `.env.local` from your PC into the laptop's `Saudi Job Alert` folder

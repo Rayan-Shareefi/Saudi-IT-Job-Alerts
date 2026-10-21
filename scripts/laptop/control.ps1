@@ -105,7 +105,12 @@ function Remote-Head() {
 
 # Downloads the latest version and says plainly what this laptop now runs.
 function Update-Code([switch]$Ask) {
-  if (-not (Test-Path (Join-Path $repo ".git"))) { Say "This folder is not a git copy, so it cannot update itself." Yellow; return $false }
+  if (-not (Test-Path (Join-Path $repo ".git"))) {
+    Say "This folder is NOT a git copy, so it can never update itself - it keeps running the code it was copied with." Red
+    Say "One-time fix (docs/laptop-setup.md, 'The laptop folder is not a git copy'): in this folder run" Red
+    Say "  git init ; git remote add origin https://github.com/Rayan-Shareefi/Saudi-IT-Job-Alerts.git ; git fetch origin ; git checkout -f -B main origin/main ; npm.cmd ci" Yellow
+    return $false
+  }
   Say "Checking GitHub for a newer version..." White
   $before = (& git -C $repo rev-parse HEAD 2>$null)
   $remote = Remote-Head

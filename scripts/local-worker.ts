@@ -215,7 +215,12 @@ function onlyLineEndingsChanged(): boolean {
 const GIT_NO_PROMPT = { ...process.env, GIT_TERMINAL_PROMPT: "0", GCM_INTERACTIVE: "never" };
 
 function selfUpdate(): void {
-  if (!existsSync(".git")) return;
+  // A folder copied rather than cloned has no .git and can never update: the
+  // laptop ran its first copy's code for days without a word (2026-10-21).
+  if (!existsSync(".git")) {
+    log(`NOT a git copy: this folder cannot update itself and runs old code. One-time fix: see "The laptop folder is not a git copy" in docs/laptop-setup.md. Running: ${process.cwd()}`);
+    return;
+  }
   const before = head();
   const lockBefore = existsSync("package-lock.json") ? readFileSync("package-lock.json", "utf8") : "";
   const pullOnce = () => spawnSync("git", ["pull", "--ff-only"], { stdio: "inherit", windowsHide: true, env: GIT_NO_PROMPT, timeout: 5 * 60_000 });
