@@ -158,6 +158,36 @@ function log(s: string): void {
 }
 
 /** Run a script as its own process; returns its exit code. */
+/*
+ * The heartbeat: what the worker is doing, every poll and before each step,
+ * so the website can tell "online, busy" from "offline since 03:06" - a
+ * sleeping laptop and a long step looked the same before (2026-10-22). A step
+ * blocks this process, so the beat says how long it may take (busy_until).
+ */
+async function beat(state: string, busyMin = 0, nextCycleAt: number | null = null): Promise<void> {
+  const now = Date.now();
+  try {
+    await supabaseAdmin()
+      .from("worker_status")
+      .upsert({
+        id: "laptop",
+        seen_at: new Date(now).toISOString(),
+        version: codeVersion(),
+        state: state.slice(0, 200),
+        busy_until: busyMin > 0 ? new Date(now + busyMin * 60_000).toISOString() : null,
+        ...(nextCycleAt ? { next_cycle_at: new Date(nextCycleAt).toISOString() } : {}),
+      });
+  } catch {
+    /* the heartbeat is a courtesy; never stop the worker over it */
+  }
+}
+
+/** A step, announced first: the beat must be written before the step blocks the process. */
+async function runStep(name: string, script: string, args: string[] = [], timeoutMin = 90, note = "", extraEnv: Record<string, string> = {}): Promise<number> {
+  await beat(`running: ${name}`, timeoutMin);
+  return step(name, script, args, timeoutMin, note, extraEnv);
+}
+
 function step(name: string, script: string, args: string[] = [], timeoutMin = 90, note = "", extraEnv: Record<string, string> = {}): number {
   log(`> ${name}${note ? ` (${note})` : ""}`);
   const r = spawnSync(process.execPath, [TSX, script, ...args], {
@@ -277,7 +307,7 @@ async function pickUpQueued(): Promise<void> {
   await markStalled();
   for (const run of await queuedRuns()) {
     if (run.scope !== "company" && run.scope !== "api") continue;
-    step(`queued ${run.scope} run`, "scripts/ingest.ts", ["--run-id", run.id, "--scope", run.scope, ...(run.trigger?.includes("jsearch") ? ["--with-jsearch"] : [])], 180);
+    await runStep(`queued ${run.scope} run`, "scripts/ingest.ts", ["--run-id", run.id, "--scope", run.scope, ...(run.trigger?.includes("jsearch") ? ["--with-jsearch"] : [])], 180);
   }
   /*
    * URLs pasted on the fix pages, and their "Find fixes" buttons. A URL the
@@ -290,7 +320,7 @@ async function pickUpQueued(): Promise<void> {
   const { count: auto } = await db.from("source_fixes").select("id", { count: "exact", head: true }).eq("status", "queued").eq("requested_by", "auto");
   if (mine || (auto && minutesSince(readState().fixRunAt) >= 45)) {
     writeState({ fixRunAt: new Date().toISOString() });
-    step("source repair", "scripts/fix-sources.ts", ["--max", "25", "--deadline-min", "40"], 50, `${mine ?? 0} from you, ${auto ?? 0} automatic waiting`);
+    await runStep("source repair", "scripts/fix-sources.ts", ["--max", "25", "--deadline-min", "40"], 50, `${mine ?? 0} from you, ${auto ?? 0} automatic waiting`);
   }
 }
 
@@ -469,7 +499,7 @@ async function cycle(full = false): Promise<void> {
         continue;
       }
       const started = Date.now();
-      const code = step(s.name, s.script, s.args, s.timeoutMin, `about ${Math.max(1, Math.round(estimate(s.key)))} min; everything done around ${clock(Date.now() + (estimate(s.key) + left) * 60_000)}`, s.env);
+      const code = await runStep(s.name, s.script, s.args, s.timeoutMin, `about ${Math.max(1, Math.round(estimate(s.key)))} min; everything done around ${clock(Date.now() + (estimate(s.key) + left) * 60_000)}`, s.env);
       learn(s.key, (Date.now() - started) / 60_000);
       await s.after?.(code);
       // Instant alerts as soon as the jury has spoken, not at the very end.
@@ -490,6 +520,7 @@ async function cycle(full = false): Promise<void> {
 
 async function main(): Promise<void> {
   log(`worker starting (cycle every ${CYCLE_MS / 60_000} min) - version ${version()}`);
+  await beat("starting");
   // Without these every database call fails, and a failure cannot be written
   // to the database - so say it here, where the log is the only witness.
   const missing = ["NEXT_PUBLIC_SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"].filter((k) => !envStr(k));
@@ -530,6 +561,7 @@ async function main(): Promise<void> {
       log(`loop error: ${err instanceof Error ? err.message : err}`);
     }
     if (ONCE) return;
+    await beat(`idle - next search around ${clock(nextCycle)}`, 0, nextCycle);
     // Sleep in short steps so a run-now request is noticed within seconds.
     const asked = () => existsSync(RUN_NOW) || existsSync(RUN_FULL) || existsSync(RESTART);
     for (let waited = 0; waited < POLL_MS && !asked(); waited += 5000) await sleep(5000);

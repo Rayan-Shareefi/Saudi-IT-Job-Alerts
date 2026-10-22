@@ -680,7 +680,7 @@ export const COMPANIES: CompanySeed[] = [
   { name: "Cognizant", careersUrl: "https://careers.cognizant.com/global-en/", sector: "consulting", priority: 3, altUrls: ["https://careers.cognizant.com/global-en/pathways-to-cognizant/students-and-new-grads/", "https://careers.cognizant.com/global-en/talent-community/", "https://careers.cognizant.com/global-en/blog/life-at-cognizant/where-opportunities-truly-feel-equal-maria-s-life-at-cognizant/"] },
   { name: "LTIMindtree", careersUrl: "https://www.ltm.com/careers", sector: "consulting", priority: 3 },
   { name: "Zensar", careersUrl: "https://fa-etvl-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs", sector: "consulting", priority: 3, altUrls: ["https://fa-etvl-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/requisitions/", "https://fa-etvl-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs?lastSelectedFacet=LOCATIONS&selectedLocationsFacet=300000000435067"] },
-  { name: "NTT DATA", careersUrl: "https://careers.nttdata.com/", sector: "consulting", priority: 3 },
+  { name: "NTT DATA", careersUrl: "https://careers.nttdata.com/", sector: "global-tech", priority: 2 },
   { name: "Fujitsu", careersUrl: "https://www.jobs.global.fujitsu.com/search?searchResultView=LIST", sector: "global-tech", priority: 3, altUrls: ["https://global.fujitsu/en-global/careers#opportunities"] },
   { name: "Hitachi Vantara", careersUrl: "https://www.hitachivantara.com/en-us/company/careers", sector: "global-tech", priority: 3 },
   { name: "Ericsson Saudi", careersUrl: "https://jobs.ericsson.com/careers?start=0&pid=563121776072318&sort_by=hot", sector: "global-tech", priority: 2, altUrls: ["https://jobs.ericsson.com/careers/join?domain=ericsson.com"] },
@@ -716,10 +716,8 @@ export const COMPANIES: CompanySeed[] = [
   { name: "Saudi Cloud Computing Company (SCCC)", careersUrl: "https://sccc.sa/en", sector: "telecom-tech", priority: 2 },
   { name: "EzdiTek", careersUrl: "https://ezditek.com/", sector: "telecom-tech", priority: 2 },
   { name: "TAQNIA", careersUrl: "https://www.taqnia.com/", sector: "telecom-tech", priority: 2 },
-  { name: "NTT DATA", careersUrl: "https://careers.nttdata.com/global/en", sector: "global-tech", priority: 2 },
   { name: "Gulf Business Machines (GBM)", careersUrl: "https://www.gbmme.com/", sector: "telecom-tech", priority: 2 },
   { name: "Saudi Federation for Cybersecurity and Programming (SAFCSP)", careersUrl: "https://safcsp.org.sa/", sector: "government", priority: 2 },
-  { name: "RTX (Raytheon)", careersUrl: "https://careers.rtx.com/global/en", sector: "energy-industrial", priority: 2 },
   { name: "Protiviti", careersUrl: "https://www.protiviti.com/sa-en/careers", sector: "consulting", priority: 2 },
 ];
 

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-04T12:28:58.937Z",
+  "generatedAt": "2026-10-22T10:25:36.255Z",
   "rows": [
     {
       "company": "NEOM",
@@ -20,13 +20,13 @@
       "sector": "giga-project",
       "priority": 1,
       "careersUrl": "https://careers.theredsea.sa/go/Job-Opportunities/7716923/",
-      "jobsFound": 17,
-      "postingsSeen": 88,
+      "jobsFound": 6,
+      "postingsSeen": 108,
       "adapters": [
         "browser"
       ],
       "verdict": "working",
-      "reason": "17 Riyadh-relevant postings on the last run",
+      "reason": "6 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -34,13 +34,13 @@
       "sector": "giga-project",
       "priority": 1,
       "careersUrl": "https://apply.workable.com/qiddiya-investment-company-1/",
-      "jobsFound": 92,
-      "postingsSeen": 279,
+      "jobsFound": 59,
+      "postingsSeen": 242,
       "adapters": [
         "workable"
       ],
       "verdict": "working",
-      "reason": "92 Riyadh-relevant postings on the last run",
+      "reason": "59 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -63,13 +63,13 @@
       "priority": 1,
       "careersUrl": "https://www.roshn.sa/careers",
       "jobsFound": 0,
-      "postingsSeen": 1,
+      "postingsSeen": 0,
       "adapters": [
         "oraclecloud"
       ],
-      "verdict": "reachable-no-riyadh",
-      "reason": "1 postings read, none in Riyadh",
-      "needsHuman": false
+      "verdict": "no-postings-read",
+      "reason": "the source ran without error but no postings could be read - either the employer has nothing open, or their listing is in a shape the extractor cannot see",
+      "needsHuman": true
     },
     {
       "company": "Public Investment Fund (PIF)",
@@ -77,7 +77,7 @@
       "priority": 1,
       "careersUrl": "https://www.pif.gov.sa/en/careers/",
       "jobsFound": 1,
-      "postingsSeen": 8,
+      "postingsSeen": 9,
       "adapters": [
         "oraclecloud",
         "browser"
@@ -92,12 +92,12 @@
       "priority": 2,
       "careersUrl": "https://newmurabba.com/careers",
       "jobsFound": 0,
-      "postingsSeen": 4,
+      "postingsSeen": 3,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "4 postings read, none in Riyadh",
+      "reason": "3 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -204,14 +204,14 @@
       "sector": "giga-project",
       "priority": 2,
       "careersUrl": "https://lucidmotors.com/careers",
-      "jobsFound": 12,
-      "postingsSeen": 636,
+      "jobsFound": 13,
+      "postingsSeen": 859,
       "adapters": [
         "greenhouse",
         "browser"
       ],
       "verdict": "working",
-      "reason": "12 Riyadh-relevant postings on the last run",
+      "reason": "13 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -259,7 +259,7 @@
       "careersUrl": "https://jobs.sabic.com/search/?searchby=location&createNewAlert=false&q=&locationsearch=&geolocation=&optionsFacetsDD_title=&optionsFacetsDD_dept=&optionsFacetsDD_department=",
       "careersEmail": "recruitment@sabic.com",
       "jobsFound": 0,
-      "postingsSeen": 10,
+      "postingsSeen": 0,
       "adapters": [
         "browser"
       ],
@@ -273,12 +273,12 @@
       "priority": 1,
       "careersUrl": "https://careers.maaden.com/gb/en",
       "jobsFound": 0,
-      "postingsSeen": 21,
+      "postingsSeen": 10,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "21 postings read, none in Riyadh",
+      "reason": "10 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -315,12 +315,12 @@
       "priority": 3,
       "careersUrl": "https://careers.petrorabigh.com/",
       "jobsFound": 0,
-      "postingsSeen": 10,
+      "postingsSeen": 16,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "10 postings read, none in Riyadh",
+      "reason": "16 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -444,12 +444,12 @@
       "priority": 1,
       "careersUrl": "https://careers.stc.com.sa/",
       "jobsFound": 0,
-      "postingsSeen": 94,
+      "postingsSeen": 19,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "94 postings read, none in Riyadh",
+      "reason": "19 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -471,13 +471,14 @@
       "sector": "security-vendor",
       "priority": 1,
       "careersUrl": "https://www.linkedin.com/company/sirarbystc/jobs/",
-      "jobsFound": 1,
+      "jobsFound": 0,
       "postingsSeen": 6,
       "adapters": [
         "browser"
       ],
-      "verdict": "working",
-      "reason": "1 Riyadh-relevant postings on the last run",
+      "verdict": "wrong-url",
+      "reason": "\"See Jobs\" leads to the real list",
+      "suggestedUrl": "https://www.linkedin.com/company/sirarbystc/jobs/",
       "needsHuman": false
     },
     {
@@ -500,26 +501,26 @@
       "priority": 1,
       "careersUrl": "https://careers.mobily.com.sa/en/sites/opportunities",
       "jobsFound": 0,
-      "postingsSeen": 0,
+      "postingsSeen": 2,
       "adapters": [
         "browser"
       ],
-      "verdict": "no-postings-read",
-      "reason": "the source ran without error but no postings could be read - either the employer has nothing open, or their listing is in a shape the extractor cannot see",
-      "needsHuman": true
+      "verdict": "reachable-no-riyadh",
+      "reason": "2 postings read, none in Riyadh",
+      "needsHuman": false
     },
     {
       "company": "Zain KSA",
       "sector": "telecom-tech",
       "priority": 1,
       "careersUrl": "https://sa.zain.com/about/careers/",
-      "jobsFound": 0,
-      "postingsSeen": 0,
+      "jobsFound": 1,
+      "postingsSeen": 3,
       "adapters": [
         "browser"
       ],
-      "verdict": "no-openings",
-      "reason": "page loads and lists nothing - probably genuinely empty",
+      "verdict": "working",
+      "reason": "1 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -689,13 +690,13 @@
       "sector": "telecom-tech",
       "priority": 2,
       "careersUrl": "https://www.unifonic.com/en/careers",
-      "jobsFound": 4,
-      "postingsSeen": 28,
+      "jobsFound": 2,
+      "postingsSeen": 32,
       "adapters": [
         "recruitee"
       ],
       "verdict": "working",
-      "reason": "4 Riyadh-relevant postings on the last run",
+      "reason": "2 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -730,12 +731,12 @@
       "priority": 1,
       "careersUrl": "https://careers.alrajhibank.com.sa/ar/",
       "jobsFound": 0,
-      "postingsSeen": 6,
+      "postingsSeen": 10,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "6 postings read, none in Riyadh",
+      "reason": "10 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -743,13 +744,13 @@
       "sector": "banking-fintech",
       "priority": 1,
       "careersUrl": "https://careers.riyadbank.com/en/",
-      "jobsFound": 0,
-      "postingsSeen": 8,
+      "jobsFound": 1,
+      "postingsSeen": 4,
       "adapters": [
         "browser"
       ],
-      "verdict": "reachable-no-riyadh",
-      "reason": "8 postings read, none in Riyadh",
+      "verdict": "working",
+      "reason": "1 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -757,13 +758,13 @@
       "sector": "banking-fintech",
       "priority": 1,
       "careersUrl": "https://www.sab.com/en/about-us/careers/",
-      "jobsFound": 3,
-      "postingsSeen": 7,
+      "jobsFound": 2,
+      "postingsSeen": 2,
       "adapters": [
         "browser"
       ],
       "verdict": "working",
-      "reason": "3 Riyadh-relevant postings on the last run",
+      "reason": "2 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -842,12 +843,12 @@
       "priority": 2,
       "careersUrl": "https://careers.gib.com/en/job-search-results/",
       "jobsFound": 0,
-      "postingsSeen": 6,
+      "postingsSeen": 2,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "6 postings read, none in Riyadh",
+      "reason": "2 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -912,13 +913,13 @@
       "sector": "banking-fintech",
       "priority": 1,
       "careersUrl": "https://tamara.co/en-sa/careers",
-      "jobsFound": 3,
-      "postingsSeen": 33,
+      "jobsFound": 4,
+      "postingsSeen": 45,
       "adapters": [
         "greenhouse"
       ],
       "verdict": "working",
-      "reason": "3 Riyadh-relevant postings on the last run",
+      "reason": "4 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -940,13 +941,13 @@
       "sector": "banking-fintech",
       "priority": 2,
       "careersUrl": "https://jobs.ashbyhq.com/LeanTech/70aa6290-8d58-4749-9861-59675b1c8cb5",
-      "jobsFound": 0,
-      "postingsSeen": 4,
+      "jobsFound": 4,
+      "postingsSeen": 9,
       "adapters": [
         "ashby"
       ],
-      "verdict": "reachable-no-riyadh",
-      "reason": "4 postings read, none in Riyadh",
+      "verdict": "working",
+      "reason": "4 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -968,14 +969,14 @@
       "sector": "banking-fintech",
       "priority": 2,
       "careersUrl": "https://job-boards.greenhouse.io/hala",
-      "jobsFound": 6,
-      "postingsSeen": 13,
+      "jobsFound": 0,
+      "postingsSeen": 0,
       "adapters": [
         "greenhouse"
       ],
-      "verdict": "working",
-      "reason": "6 Riyadh-relevant postings on the last run",
-      "needsHuman": false
+      "verdict": "no-postings-read",
+      "reason": "the source ran without error but no postings could be read - either the employer has nothing open, or their listing is in a shape the extractor cannot see",
+      "needsHuman": true
     },
     {
       "company": "Geidea",
@@ -1009,27 +1010,27 @@
       "priority": 3,
       "careersUrl": "https://ai.paytabs.com/en/career/",
       "jobsFound": 0,
-      "postingsSeen": 0,
+      "postingsSeen": 1,
       "adapters": [
         "browser"
       ],
-      "verdict": "no-postings-read",
-      "reason": "the source ran without error but no postings could be read - either the employer has nothing open, or their listing is in a shape the extractor cannot see",
-      "needsHuman": true
+      "verdict": "reachable-no-riyadh",
+      "reason": "1 postings read, none in Riyadh",
+      "needsHuman": false
     },
     {
       "company": "Foodics",
       "sector": "banking-fintech",
       "priority": 2,
       "careersUrl": "https://www.foodics.com/careers/",
-      "jobsFound": 18,
-      "postingsSeen": 62,
+      "jobsFound": 24,
+      "postingsSeen": 80,
       "adapters": [
         "workable",
         "browser"
       ],
       "verdict": "working",
-      "reason": "18 Riyadh-relevant postings on the last run",
+      "reason": "24 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -1051,13 +1052,13 @@
       "sector": "retail-consumer",
       "priority": 2,
       "careersUrl": "https://deliveryhero-1481174-gb-engb.sr-attrax.com/hungerstation-arabic",
-      "jobsFound": 3,
+      "jobsFound": 0,
       "postingsSeen": 12,
       "adapters": [
         "browser"
       ],
-      "verdict": "working",
-      "reason": "3 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "12 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -1106,14 +1107,14 @@
       "sector": "retail-consumer",
       "priority": 3,
       "careersUrl": "https://mrsool.co/careers",
-      "jobsFound": 0,
-      "postingsSeen": 7,
+      "jobsFound": 1,
+      "postingsSeen": 14,
       "adapters": [
         "workable"
       ],
-      "verdict": "blocked",
-      "reason": "host alive, no careers page located",
-      "needsHuman": true
+      "verdict": "working",
+      "reason": "1 Riyadh-relevant postings on the last run",
+      "needsHuman": false
     },
     {
       "company": "Sary",
@@ -1132,14 +1133,14 @@
       "sector": "retail-consumer",
       "priority": 2,
       "careersUrl": "https://www.almarai.com/en/careers/",
-      "jobsFound": 44,
+      "jobsFound": 0,
       "postingsSeen": 48,
       "adapters": [
         "successfactors",
         "browser"
       ],
-      "verdict": "working",
-      "reason": "44 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "48 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -1174,7 +1175,7 @@
       "priority": 3,
       "careersUrl": "https://www.alshaya.com/en/careers/",
       "jobsFound": 0,
-      "postingsSeen": 20,
+      "postingsSeen": 19,
       "adapters": [
         "browser"
       ],
@@ -1227,13 +1228,13 @@
       "sector": "government",
       "priority": 1,
       "careersUrl": "https://nca.gov.sa/en/careers/",
-      "jobsFound": 0,
-      "postingsSeen": 0,
+      "jobsFound": 1,
+      "postingsSeen": 9,
       "adapters": [
         "browser"
       ],
-      "verdict": "no-openings",
-      "reason": "page loads and lists nothing - probably genuinely empty",
+      "verdict": "working",
+      "reason": "1 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -1255,27 +1256,27 @@
       "sector": "government",
       "priority": 2,
       "careersUrl": "https://careers.mcit.gov.sa/",
-      "jobsFound": 2,
-      "postingsSeen": 2,
+      "jobsFound": 0,
+      "postingsSeen": 0,
       "adapters": [
         "browser"
       ],
-      "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
-      "needsHuman": false
+      "verdict": "no-postings-read",
+      "reason": "the source ran without error but no postings could be read - either the employer has nothing open, or their listing is in a shape the extractor cannot see",
+      "needsHuman": true
     },
     {
       "company": "ZATCA",
       "sector": "government",
       "priority": 2,
       "careersUrl": "https://careers.zatca.gov.sa/?locale=ar_SA",
-      "jobsFound": 8,
-      "postingsSeen": 10,
+      "jobsFound": 7,
+      "postingsSeen": 8,
       "adapters": [
         "browser"
       ],
       "verdict": "working",
-      "reason": "8 Riyadh-relevant postings on the last run",
+      "reason": "7 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -1457,13 +1458,13 @@
       "sector": "education-research",
       "priority": 3,
       "careersUrl": "https://psu.edu.sa/en/career",
-      "jobsFound": 1,
+      "jobsFound": 0,
       "postingsSeen": 19,
       "adapters": [
         "browser"
       ],
-      "verdict": "working",
-      "reason": "1 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "19 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -1472,13 +1473,13 @@
       "priority": 2,
       "careersUrl": "https://careers.bupa.com.sa/en/job-search-results/",
       "jobsFound": 0,
-      "postingsSeen": 15,
+      "postingsSeen": 16,
       "adapters": [
         "workable",
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "15 postings read, none in Riyadh",
+      "reason": "16 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -1538,14 +1539,14 @@
       "sector": "consulting",
       "priority": 1,
       "careersUrl": "https://www.accenture.com/sa-en/careers",
-      "jobsFound": 16,
+      "jobsFound": 15,
       "postingsSeen": 37,
       "adapters": [
         "workday",
         "browser"
       ],
       "verdict": "working",
-      "reason": "16 Riyadh-relevant postings on the last run",
+      "reason": "15 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -1553,13 +1554,13 @@
       "sector": "consulting",
       "priority": 1,
       "careersUrl": "https://middleeastjobs.deloitte.com/",
-      "jobsFound": 12,
-      "postingsSeen": 106,
+      "jobsFound": 17,
+      "postingsSeen": 123,
       "adapters": [
         "browser"
       ],
       "verdict": "working",
-      "reason": "12 Riyadh-relevant postings on the last run",
+      "reason": "17 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -1568,12 +1569,12 @@
       "priority": 1,
       "careersUrl": "https://www.pwc.com/m1/en/careers.html",
       "jobsFound": 0,
-      "postingsSeen": 34,
+      "postingsSeen": 39,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "34 postings read, none in Riyadh",
+      "reason": "39 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -1582,12 +1583,12 @@
       "priority": 1,
       "careersUrl": "https://www.ey.com/en_sa/careers",
       "jobsFound": 0,
-      "postingsSeen": 10,
+      "postingsSeen": 6,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "10 postings read, none in Riyadh",
+      "reason": "6 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -1595,13 +1596,13 @@
       "sector": "consulting",
       "priority": 1,
       "careersUrl": "https://kpmg.com/sa/en/careers.html",
-      "jobsFound": 0,
-      "postingsSeen": 4,
+      "jobsFound": 3,
+      "postingsSeen": 34,
       "adapters": [
         "browser"
       ],
-      "verdict": "reachable-no-riyadh",
-      "reason": "4 postings read, none in Riyadh",
+      "verdict": "working",
+      "reason": "3 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -1623,13 +1624,13 @@
       "sector": "consulting",
       "priority": 2,
       "careersUrl": "https://careers.bcg.com/global/en/search-results",
-      "jobsFound": 8,
-      "postingsSeen": 178,
+      "jobsFound": 1,
+      "postingsSeen": 99,
       "adapters": [
         "browser"
       ],
       "verdict": "working",
-      "reason": "8 Riyadh-relevant postings on the last run",
+      "reason": "1 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -1637,13 +1638,13 @@
       "sector": "consulting",
       "priority": 2,
       "careersUrl": "https://careers.bain.com/",
-      "jobsFound": 2,
-      "postingsSeen": 198,
+      "jobsFound": 0,
+      "postingsSeen": 60,
       "adapters": [
         "browser"
       ],
-      "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "60 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -1652,7 +1653,7 @@
       "priority": 3,
       "careersUrl": "https://careers.marsh.com/global/en/oliver-wyman-search",
       "jobsFound": 1,
-      "postingsSeen": 8,
+      "postingsSeen": 5,
       "adapters": [
         "workday"
       ],
@@ -1666,7 +1667,7 @@
       "priority": 3,
       "careersUrl": "https://www.kearney.com/careers",
       "jobsFound": 0,
-      "postingsSeen": 48,
+      "postingsSeen": 50,
       "adapters": [
         "browser"
       ],
@@ -1680,12 +1681,12 @@
       "priority": 2,
       "careersUrl": "https://www.capgemini.com/careers/?page=1&size=11",
       "jobsFound": 0,
-      "postingsSeen": 27,
+      "postingsSeen": 20,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "27 postings read, none in Riyadh",
+      "reason": "20 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -1694,7 +1695,7 @@
       "priority": 2,
       "careersUrl": "https://careers.wipro.com/search/?searchResultView=LIST",
       "jobsFound": 0,
-      "postingsSeen": 48,
+      "postingsSeen": 369,
       "adapters": [
         "successfactors",
         "browser"
@@ -1738,13 +1739,13 @@
       "priority": 3,
       "careersUrl": "https://careers.techmahindra.com/",
       "jobsFound": 0,
-      "postingsSeen": 11,
+      "postingsSeen": 6,
       "adapters": [
         "bamboohr",
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "11 postings read, none in Riyadh",
+      "reason": "6 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -1765,12 +1766,12 @@
       "priority": 3,
       "careersUrl": "https://atos.net/en/join-us",
       "jobsFound": 0,
-      "postingsSeen": 13,
+      "postingsSeen": 354,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "13 postings read, none in Riyadh",
+      "reason": "354 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -1778,14 +1779,14 @@
       "sector": "consulting",
       "priority": 3,
       "careersUrl": "https://careers.dxc.com/",
-      "jobsFound": 9,
-      "postingsSeen": 742,
+      "jobsFound": 7,
+      "postingsSeen": 756,
       "adapters": [
         "workday",
         "browser"
       ],
       "verdict": "working",
-      "reason": "9 Riyadh-relevant postings on the last run",
+      "reason": "7 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -1818,13 +1819,13 @@
       "priority": 1,
       "careersUrl": "https://apply.careers.microsoft.com/careers?start=0&pid=1970393556972152&sort_by=timestamp",
       "jobsFound": 0,
-      "postingsSeen": 4,
+      "postingsSeen": 3,
       "adapters": [
         "jsonld",
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "4 postings read, none in Riyadh",
+      "reason": "3 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -1847,13 +1848,13 @@
       "priority": 1,
       "careersUrl": "https://www.google.com/about/careers/applications/",
       "jobsFound": 0,
-      "postingsSeen": 8,
+      "postingsSeen": 1,
       "adapters": [
         "recruitee",
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "8 postings read, none in Riyadh",
+      "reason": "1 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -1877,7 +1878,7 @@
       "careersUrl": "https://jobs.sap.com/",
       "careersEmail": "careers@sap.com",
       "jobsFound": 0,
-      "postingsSeen": 32,
+      "postingsSeen": 20,
       "adapters": [
         "successfactors",
         "browser"
@@ -1891,13 +1892,13 @@
       "sector": "global-tech",
       "priority": 1,
       "careersUrl": "https://www.ibm.com/careers/search",
-      "jobsFound": 6,
-      "postingsSeen": 15,
+      "jobsFound": 0,
+      "postingsSeen": 32,
       "adapters": [
         "browser"
       ],
-      "verdict": "working",
-      "reason": "6 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "32 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -1906,12 +1907,12 @@
       "priority": 1,
       "careersUrl": "https://careers.cisco.com/global/en",
       "jobsFound": 0,
-      "postingsSeen": 17,
+      "postingsSeen": 10,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "17 postings read, none in Riyadh",
+      "reason": "10 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -1920,7 +1921,7 @@
       "priority": 2,
       "careersUrl": "https://enterpriseplatform.dell.com/hcmUI/CandidateExperience/en/sites/careers/jobs?mode=location",
       "jobsFound": 0,
-      "postingsSeen": 49,
+      "postingsSeen": 46,
       "adapters": [
         "browser"
       ],
@@ -1934,14 +1935,14 @@
       "sector": "global-tech",
       "priority": 2,
       "careersUrl": "https://careers.hpe.com/us/en/search-results",
-      "jobsFound": 2,
-      "postingsSeen": 42,
+      "jobsFound": 3,
+      "postingsSeen": 38,
       "adapters": [
         "workday",
         "browser"
       ],
       "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
+      "reason": "3 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -1994,7 +1995,7 @@
       "priority": 2,
       "careersUrl": "https://jobs.siemens.com/en_US/externaljobs/Home",
       "jobsFound": 0,
-      "postingsSeen": 87,
+      "postingsSeen": 95,
       "adapters": [
         "browser"
       ],
@@ -2023,13 +2024,13 @@
       "priority": 2,
       "careersUrl": "https://careers.honeywell.com/en/sites/Honeywell",
       "jobsFound": 0,
-      "postingsSeen": 3,
+      "postingsSeen": 0,
       "adapters": [
         "browser"
       ],
-      "verdict": "reachable-no-riyadh",
-      "reason": "3 postings read, none in Riyadh",
-      "needsHuman": false
+      "verdict": "no-postings-read",
+      "reason": "the source ran without error but no postings could be read - either the employer has nothing open, or their listing is in a shape the extractor cannot see",
+      "needsHuman": true
     },
     {
       "company": "ABB",
@@ -2037,12 +2038,12 @@
       "priority": 3,
       "careersUrl": "https://careers.abb/global/en",
       "jobsFound": 0,
-      "postingsSeen": 5,
+      "postingsSeen": 8,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "5 postings read, none in Riyadh",
+      "reason": "8 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2063,15 +2064,15 @@
       "sector": "global-tech",
       "priority": 2,
       "careersUrl": "https://careers.servicenow.com/",
-      "jobsFound": 3,
-      "postingsSeen": 730,
+      "jobsFound": 0,
+      "postingsSeen": 737,
       "adapters": [
         "smartrecruiters",
         "browser"
       ],
-      "verdict": "working",
-      "reason": "3 Riyadh-relevant postings on the last run",
-      "needsHuman": false
+      "verdict": "blocked",
+      "reason": "careers site rejects automated access (Cloudflare/Akamai)",
+      "needsHuman": true
     },
     {
       "company": "Salesforce",
@@ -2093,7 +2094,7 @@
       "priority": 3,
       "careersUrl": "https://broadcom.wd1.myworkdayjobs.com/External_Career",
       "jobsFound": 0,
-      "postingsSeen": 375,
+      "postingsSeen": 371,
       "adapters": [
         "workday"
       ],
@@ -2108,12 +2109,12 @@
       "priority": 2,
       "careersUrl": "https://www.redhat.com/en/jobs",
       "jobsFound": 0,
-      "postingsSeen": 3,
+      "postingsSeen": 2,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "3 postings read, none in Riyadh",
+      "reason": "2 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2136,7 +2137,7 @@
       "careersUrl": "https://careers.netapp.com/",
       "careersEmail": "careers@netapp.com",
       "jobsFound": 0,
-      "postingsSeen": 19,
+      "postingsSeen": 23,
       "adapters": [
         "successfactors",
         "browser"
@@ -2151,7 +2152,7 @@
       "priority": 3,
       "careersUrl": "https://www.everpuredata.com/company/careers/opportunities.html",
       "jobsFound": 0,
-      "postingsSeen": 632,
+      "postingsSeen": 692,
       "adapters": [
         "greenhouse",
         "browser"
@@ -2166,14 +2167,14 @@
       "sector": "global-tech",
       "priority": 3,
       "careersUrl": "https://careers.snowflake.com/us/en",
-      "jobsFound": 1,
-      "postingsSeen": 387,
+      "jobsFound": 0,
+      "postingsSeen": 449,
       "adapters": [
         "ashby",
         "browser"
       ],
-      "verdict": "working",
-      "reason": "1 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "449 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2181,14 +2182,14 @@
       "sector": "global-tech",
       "priority": 3,
       "careersUrl": "https://www.databricks.com/company/careers/open-positions",
-      "jobsFound": 1,
-      "postingsSeen": 874,
+      "jobsFound": 0,
+      "postingsSeen": 906,
       "adapters": [
         "greenhouse",
         "browser"
       ],
-      "verdict": "working",
-      "reason": "1 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "906 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2197,13 +2198,13 @@
       "priority": 3,
       "careersUrl": "https://www.mongodb.com/company/careers",
       "jobsFound": 0,
-      "postingsSeen": 414,
+      "postingsSeen": 395,
       "adapters": [
         "greenhouse",
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "414 postings read, none in Riyadh",
+      "reason": "395 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2211,13 +2212,13 @@
       "sector": "global-tech",
       "priority": 3,
       "careersUrl": "https://www.elastic.co/careers",
-      "jobsFound": 4,
-      "postingsSeen": 362,
+      "jobsFound": 2,
+      "postingsSeen": 379,
       "adapters": [
         "greenhouse"
       ],
       "verdict": "working",
-      "reason": "4 Riyadh-relevant postings on the last run",
+      "reason": "2 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -2225,14 +2226,14 @@
       "sector": "global-tech",
       "priority": 3,
       "careersUrl": "https://about.gitlab.com/jobs/all-jobs/",
-      "jobsFound": 3,
-      "postingsSeen": 236,
+      "jobsFound": 0,
+      "postingsSeen": 686,
       "adapters": [
         "greenhouse",
         "browser"
       ],
-      "verdict": "working",
-      "reason": "3 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "686 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2241,12 +2242,12 @@
       "priority": 3,
       "careersUrl": "https://www.atlassian.com/company/careers/all-jobs",
       "jobsFound": 0,
-      "postingsSeen": 20,
+      "postingsSeen": 15,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "20 postings read, none in Riyadh",
+      "reason": "15 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2254,13 +2255,13 @@
       "sector": "global-tech",
       "priority": 3,
       "careersUrl": "https://www.ibm.com/careers/search?q=hashicorp",
-      "jobsFound": 4,
-      "postingsSeen": 10,
+      "jobsFound": 0,
+      "postingsSeen": 6,
       "adapters": [
         "browser"
       ],
-      "verdict": "working",
-      "reason": "4 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "6 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2269,7 +2270,7 @@
       "priority": 3,
       "careersUrl": "https://www.confluent.io/careers/",
       "jobsFound": 0,
-      "postingsSeen": 23,
+      "postingsSeen": 0,
       "adapters": [
         "ashby"
       ],
@@ -2283,12 +2284,12 @@
       "priority": 3,
       "careersUrl": "https://cloudera.wd5.myworkdayjobs.com/External_Career",
       "jobsFound": 0,
-      "postingsSeen": 72,
+      "postingsSeen": 60,
       "adapters": [
         "workday"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "72 postings read, none in Riyadh",
+      "reason": "60 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2308,14 +2309,14 @@
       "sector": "security-vendor",
       "priority": 1,
       "careersUrl": "https://jobs.paloaltonetworks.com/en",
-      "jobsFound": 5,
-      "postingsSeen": 48,
+      "jobsFound": 1,
+      "postingsSeen": 46,
       "adapters": [
         "workday",
         "browser"
       ],
       "verdict": "working",
-      "reason": "5 Riyadh-relevant postings on the last run",
+      "reason": "1 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -2323,14 +2324,14 @@
       "sector": "security-vendor",
       "priority": 1,
       "careersUrl": "https://www.fortinet.com/corporate/careers",
-      "jobsFound": 2,
+      "jobsFound": 3,
       "postingsSeen": 400,
       "adapters": [
         "oraclecloud",
         "browser"
       ],
       "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
+      "reason": "3 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -2339,28 +2340,28 @@
       "priority": 1,
       "careersUrl": "https://www.crowdstrike.com/en-us/careers/",
       "careersEmail": "recruiting@crowdstrike.com",
-      "jobsFound": 3,
-      "postingsSeen": 11,
+      "jobsFound": 0,
+      "postingsSeen": 12,
       "adapters": [
         "workday",
         "browser"
       ],
-      "verdict": "working",
-      "reason": "3 Riyadh-relevant postings on the last run",
-      "needsHuman": false
+      "verdict": "email-only",
+      "reason": "applications go to recruiting@crowdstrike.com",
+      "needsHuman": true
     },
     {
       "company": "Splunk",
       "sector": "security-vendor",
       "priority": 2,
       "careersUrl": "https://careers.cisco.com/global/en/splunk/india",
-      "jobsFound": 9,
-      "postingsSeen": 10,
+      "jobsFound": 3,
+      "postingsSeen": 7,
       "adapters": [
         "workday"
       ],
       "verdict": "working",
-      "reason": "9 Riyadh-relevant postings on the last run",
+      "reason": "3 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -2369,12 +2370,12 @@
       "priority": 2,
       "careersUrl": "https://careers.checkpoint.com/index.php?m=cpcareers&a=search",
       "jobsFound": 0,
-      "postingsSeen": 107,
+      "postingsSeen": 0,
       "adapters": [
         "browser"
       ],
-      "verdict": "reachable-no-riyadh",
-      "reason": "107 postings read, none in Riyadh",
+      "verdict": "no-openings",
+      "reason": "page loads and lists nothing - probably genuinely empty",
       "needsHuman": false
     },
     {
@@ -2382,14 +2383,14 @@
       "sector": "security-vendor",
       "priority": 2,
       "careersUrl": "https://www.trendmicro.com/en_us/about/careers.html",
-      "jobsFound": 3,
-      "postingsSeen": 23,
+      "jobsFound": 2,
+      "postingsSeen": 20,
       "adapters": [
         "workday",
         "browser"
       ],
       "verdict": "working",
-      "reason": "3 Riyadh-relevant postings on the last run",
+      "reason": "2 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -2412,7 +2413,7 @@
       "priority": 2,
       "careersUrl": "https://careers.rapid7.com/jobs/search",
       "jobsFound": 0,
-      "postingsSeen": 34,
+      "postingsSeen": 82,
       "adapters": [
         "browser"
       ],
@@ -2439,12 +2440,12 @@
       "priority": 2,
       "careersUrl": "https://www.zscaler.com/careers",
       "jobsFound": 0,
-      "postingsSeen": 375,
+      "postingsSeen": 360,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "375 postings read, none in Riyadh",
+      "reason": "360 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2453,12 +2454,12 @@
       "priority": 3,
       "careersUrl": "https://www.netskope.com/company/careers",
       "jobsFound": 0,
-      "postingsSeen": 141,
+      "postingsSeen": 128,
       "adapters": [
         "greenhouse"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "141 postings read, none in Riyadh",
+      "reason": "128 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2467,12 +2468,12 @@
       "priority": 2,
       "careersUrl": "https://www.cloudflare.com/careers/jobs/",
       "jobsFound": 0,
-      "postingsSeen": 329,
+      "postingsSeen": 444,
       "adapters": [
         "greenhouse"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "329 postings read, none in Riyadh",
+      "reason": "444 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2480,14 +2481,14 @@
       "sector": "security-vendor",
       "priority": 3,
       "careersUrl": "https://www.f5.com/company/careers",
-      "jobsFound": 2,
-      "postingsSeen": 12,
+      "jobsFound": 3,
+      "postingsSeen": 16,
       "adapters": [
         "workday",
         "browser"
       ],
       "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
+      "reason": "3 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -2508,13 +2509,13 @@
       "priority": 3,
       "careersUrl": "https://www.proofpoint.com/us/company/careers",
       "jobsFound": 0,
-      "postingsSeen": 19,
+      "postingsSeen": 24,
       "adapters": [
         "workday",
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "19 postings read, none in Riyadh",
+      "reason": "24 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2522,13 +2523,13 @@
       "sector": "security-vendor",
       "priority": 3,
       "careersUrl": "https://www.sophos.com/en-us/company/careers",
-      "jobsFound": 1,
-      "postingsSeen": 114,
+      "jobsFound": 0,
+      "postingsSeen": 87,
       "adapters": [
         "lever"
       ],
-      "verdict": "working",
-      "reason": "1 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "87 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2536,13 +2537,13 @@
       "sector": "security-vendor",
       "priority": 3,
       "careersUrl": "https://careers.kaspersky.com/",
-      "jobsFound": 2,
-      "postingsSeen": 20,
+      "jobsFound": 0,
+      "postingsSeen": 13,
       "adapters": [
         "browser"
       ],
-      "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "13 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2575,12 +2576,12 @@
       "priority": 3,
       "careersUrl": "https://darktrace.wd3.myworkdayjobs.com/DarktaceExternal",
       "jobsFound": 0,
-      "postingsSeen": 86,
+      "postingsSeen": 66,
       "adapters": [
         "workday"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "86 postings read, none in Riyadh",
+      "reason": "66 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2588,13 +2589,13 @@
       "sector": "security-vendor",
       "priority": 3,
       "careersUrl": "https://www.sophos.com/en-us/company/careers",
-      "jobsFound": 1,
-      "postingsSeen": 114,
+      "jobsFound": 0,
+      "postingsSeen": 87,
       "adapters": [
         "lever"
       ],
-      "verdict": "working",
-      "reason": "1 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "87 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2603,12 +2604,12 @@
       "priority": 2,
       "careersUrl": "https://www.helpag.com/careers/",
       "jobsFound": 0,
-      "postingsSeen": 8,
+      "postingsSeen": 10,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "8 postings read, none in Riyadh",
+      "reason": "10 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2655,13 +2656,13 @@
       "priority": 2,
       "careersUrl": "https://careers.thalesgroup.com/global/en",
       "jobsFound": 0,
-      "postingsSeen": 171,
+      "postingsSeen": 7,
       "adapters": [
         "smartrecruiters",
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "171 postings read, none in Riyadh",
+      "reason": "7 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2669,14 +2670,14 @@
       "sector": "energy-industrial",
       "priority": 3,
       "careersUrl": "https://www.airbus.com/en/careers",
-      "jobsFound": 2,
-      "postingsSeen": 79,
+      "jobsFound": 4,
+      "postingsSeen": 70,
       "adapters": [
         "workday",
         "browser"
       ],
       "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
+      "reason": "4 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -2684,14 +2685,14 @@
       "sector": "energy-industrial",
       "priority": 3,
       "careersUrl": "https://jobs.boeing.com/",
-      "jobsFound": 0,
-      "postingsSeen": 33,
+      "jobsFound": 1,
+      "postingsSeen": 27,
       "adapters": [
         "workday",
         "browser"
       ],
-      "verdict": "reachable-no-riyadh",
-      "reason": "33 postings read, none in Riyadh",
+      "verdict": "working",
+      "reason": "1 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -2713,7 +2714,7 @@
       "careersUrl": "https://careers.rtx.com/global/en",
       "careersEmail": "rtxrecruiting@rtx.com",
       "jobsFound": 0,
-      "postingsSeen": 16,
+      "postingsSeen": 10,
       "adapters": [
         "workday"
       ],
@@ -2727,12 +2728,12 @@
       "priority": 3,
       "careersUrl": "https://www.northropgrumman.com/careers",
       "jobsFound": 0,
-      "postingsSeen": 36,
+      "postingsSeen": 28,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "36 postings read, none in Riyadh",
+      "reason": "28 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -2755,12 +2756,12 @@
       "priority": 3,
       "careersUrl": "https://jobs.baesystems.com/global/en",
       "jobsFound": 0,
-      "postingsSeen": 46,
+      "postingsSeen": 120,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "46 postings read, none in Riyadh",
+      "reason": "120 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -3012,7 +3013,7 @@
       "priority": 3,
       "careersUrl": "https://forus.com.sa/careers",
       "jobsFound": 0,
-      "postingsSeen": 48,
+      "postingsSeen": 55,
       "adapters": [
         "ashby"
       ],
@@ -3225,13 +3226,13 @@
       "sector": "telecom-tech",
       "priority": 1,
       "careersUrl": "https://careers.ejada.com/",
-      "jobsFound": 3,
-      "postingsSeen": 9,
+      "jobsFound": 0,
+      "postingsSeen": 0,
       "adapters": [
         "browser"
       ],
-      "verdict": "working",
-      "reason": "3 Riyadh-relevant postings on the last run",
+      "verdict": "no-openings",
+      "reason": "page loads and lists nothing - probably genuinely empty",
       "needsHuman": false
     },
     {
@@ -3348,7 +3349,7 @@
       "priority": 3,
       "careersUrl": "https://lucidya.com/careers",
       "jobsFound": 12,
-      "postingsSeen": 41,
+      "postingsSeen": 44,
       "adapters": [
         "workable"
       ],
@@ -3361,13 +3362,13 @@
       "sector": "telecom-tech",
       "priority": 2,
       "careersUrl": "https://intelmatix.ai/company-careers.html",
-      "jobsFound": 2,
-      "postingsSeen": 3,
+      "jobsFound": 0,
+      "postingsSeen": 2,
       "adapters": [
         "bamboohr"
       ],
-      "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "2 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -3376,7 +3377,7 @@
       "priority": 2,
       "careersUrl": "https://www.mozn.ai/careers",
       "jobsFound": 9,
-      "postingsSeen": 14,
+      "postingsSeen": 19,
       "adapters": [
         "workable"
       ],
@@ -3503,14 +3504,14 @@
       "sector": "retail-consumer",
       "priority": 3,
       "careersUrl": "https://mdlbeast.com/about/careers",
-      "jobsFound": 5,
-      "postingsSeen": 7,
+      "jobsFound": 0,
+      "postingsSeen": 2,
       "adapters": [
         "recruitee",
         "browser"
       ],
-      "verdict": "working",
-      "reason": "5 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "2 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -3532,13 +3533,13 @@
       "sector": "retail-consumer",
       "priority": 3,
       "careersUrl": "https://webook.com/en/careers",
-      "jobsFound": 14,
-      "postingsSeen": 87,
+      "jobsFound": 11,
+      "postingsSeen": 70,
       "adapters": [
         "workable"
       ],
       "verdict": "working",
-      "reason": "14 Riyadh-relevant postings on the last run",
+      "reason": "11 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -3547,7 +3548,7 @@
       "priority": 3,
       "careersUrl": "https://iaazkf.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/",
       "jobsFound": 1,
-      "postingsSeen": 8,
+      "postingsSeen": 9,
       "adapters": [
         "oraclecloud"
       ],
@@ -3627,7 +3628,7 @@
       "priority": 3,
       "careersUrl": "https://mt.gov.sa/en/careers",
       "jobsFound": 0,
-      "postingsSeen": 7,
+      "postingsSeen": 5,
       "adapters": [
         "browser"
       ],
@@ -4084,14 +4085,14 @@
       "sector": "retail-consumer",
       "priority": 3,
       "careersUrl": "https://centers.cenomi.com/sa-en/careers/",
-      "jobsFound": 2,
-      "postingsSeen": 19,
+      "jobsFound": 0,
+      "postingsSeen": 11,
       "adapters": [
         "oraclecloud",
         "browser"
       ],
-      "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "11 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -4230,7 +4231,7 @@
       "priority": 2,
       "careersUrl": "https://jobs.careem.com/",
       "jobsFound": 0,
-      "postingsSeen": 19,
+      "postingsSeen": 12,
       "adapters": [
         "greenhouse"
       ],
@@ -4244,13 +4245,13 @@
       "sector": "global-tech",
       "priority": 3,
       "careersUrl": "https://careers.deliveryhero.com/",
-      "jobsFound": 4,
+      "jobsFound": 3,
       "postingsSeen": 600,
       "adapters": [
         "smartrecruiters"
       ],
       "verdict": "working",
-      "reason": "4 Riyadh-relevant postings on the last run",
+      "reason": "3 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -4258,14 +4259,14 @@
       "sector": "global-tech",
       "priority": 3,
       "careersUrl": "https://visa.wd5.myworkdayjobs.com/Visa",
-      "jobsFound": 2,
-      "postingsSeen": 9,
+      "jobsFound": 1,
+      "postingsSeen": 15,
       "adapters": [
         "workday",
         "browser"
       ],
       "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
+      "reason": "1 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -4273,14 +4274,14 @@
       "sector": "global-tech",
       "priority": 3,
       "careersUrl": "https://careers.mastercard.com/us/en",
-      "jobsFound": 2,
-      "postingsSeen": 16,
+      "jobsFound": 5,
+      "postingsSeen": 26,
       "adapters": [
         "workday",
         "browser"
       ],
       "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
+      "reason": "5 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -4289,7 +4290,7 @@
       "priority": 3,
       "careersUrl": "https://careers.pypl.com/home/default.aspx",
       "jobsFound": 0,
-      "postingsSeen": 2,
+      "postingsSeen": 9,
       "adapters": [
         "browser"
       ],
@@ -4302,14 +4303,14 @@
       "sector": "global-tech",
       "priority": 3,
       "careersUrl": "https://careers.adobe.com/us/en",
-      "jobsFound": 1,
-      "postingsSeen": 23,
+      "jobsFound": 0,
+      "postingsSeen": 67,
       "adapters": [
         "workday",
         "browser"
       ],
-      "verdict": "working",
-      "reason": "1 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "67 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -4359,24 +4360,9 @@
       "sector": "global-tech",
       "priority": 3,
       "careersUrl": "https://jobs.lenovo.com/en_US/careers",
-      "jobsFound": 1,
-      "postingsSeen": 196,
-      "adapters": [
-        "browser"
-      ],
-      "verdict": "working",
-      "reason": "1 Riyadh-relevant postings on the last run",
-      "needsHuman": false
-    },
-    {
-      "company": "Juniper Networks",
-      "sector": "global-tech",
-      "priority": 3,
-      "careersUrl": "https://careers.hpe.com/juniper",
       "jobsFound": 2,
-      "postingsSeen": 42,
+      "postingsSeen": 188,
       "adapters": [
-        "workday",
         "browser"
       ],
       "verdict": "working",
@@ -4384,17 +4370,32 @@
       "needsHuman": false
     },
     {
+      "company": "Juniper Networks",
+      "sector": "global-tech",
+      "priority": 3,
+      "careersUrl": "https://careers.hpe.com/juniper",
+      "jobsFound": 3,
+      "postingsSeen": 35,
+      "adapters": [
+        "workday",
+        "browser"
+      ],
+      "verdict": "working",
+      "reason": "3 Riyadh-relevant postings on the last run",
+      "needsHuman": false
+    },
+    {
       "company": "Veeam",
       "sector": "global-tech",
       "priority": 3,
       "careersUrl": "https://careers.veeam.com/",
-      "jobsFound": 0,
-      "postingsSeen": 48,
+      "jobsFound": 6,
+      "postingsSeen": 84,
       "adapters": [
         "browser"
       ],
-      "verdict": "reachable-no-riyadh",
-      "reason": "48 postings read, none in Riyadh",
+      "verdict": "working",
+      "reason": "6 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -4403,15 +4404,15 @@
       "priority": 3,
       "careersUrl": "https://www.commvault.com/careers",
       "careersEmail": "recruitingteam@commvault.com",
-      "jobsFound": 1,
-      "postingsSeen": 82,
+      "jobsFound": 0,
+      "postingsSeen": 66,
       "adapters": [
         "greenhouse",
         "browser"
       ],
-      "verdict": "working",
-      "reason": "1 Riyadh-relevant postings on the last run",
-      "needsHuman": false
+      "verdict": "email-only",
+      "reason": "applications go to recruitingteam@commvault.com",
+      "needsHuman": true
     },
     {
       "company": "OpenText",
@@ -4420,7 +4421,7 @@
       "careersUrl": "https://careers.opentext.com/us/en",
       "careersEmail": "hr@opentext.com",
       "jobsFound": 0,
-      "postingsSeen": 25,
+      "postingsSeen": 12,
       "adapters": [
         "successfactors",
         "browser"
@@ -4472,14 +4473,14 @@
       "sector": "security-vendor",
       "priority": 3,
       "careersUrl": "https://jobs.paloaltonetworks.com/en/",
-      "jobsFound": 5,
-      "postingsSeen": 48,
+      "jobsFound": 1,
+      "postingsSeen": 46,
       "adapters": [
         "workday",
         "browser"
       ],
       "verdict": "working",
-      "reason": "5 Riyadh-relevant postings on the last run",
+      "reason": "1 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -4488,13 +4489,13 @@
       "priority": 3,
       "careersUrl": "https://www.okta.com/company/careers/",
       "jobsFound": 0,
-      "postingsSeen": 317,
+      "postingsSeen": 400,
       "adapters": [
         "greenhouse",
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "317 postings read, none in Riyadh",
+      "reason": "400 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -4503,13 +4504,13 @@
       "priority": 3,
       "careersUrl": "https://www.sailpoint.com/company/careers/",
       "jobsFound": 0,
-      "postingsSeen": 67,
+      "postingsSeen": 139,
       "adapters": [
         "workday",
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "67 postings read, none in Riyadh",
+      "reason": "139 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -4518,12 +4519,12 @@
       "priority": 3,
       "careersUrl": "https://jobs.ashbyhq.com/delinea",
       "jobsFound": 0,
-      "postingsSeen": 93,
+      "postingsSeen": 69,
       "adapters": [
         "ashby"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "93 postings read, none in Riyadh",
+      "reason": "69 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -4531,14 +4532,14 @@
       "sector": "security-vendor",
       "priority": 3,
       "careersUrl": "https://www.group-ib.com/careers/",
-      "jobsFound": 10,
-      "postingsSeen": 131,
+      "jobsFound": 20,
+      "postingsSeen": 68,
       "adapters": [
         "greenhouse",
         "browser"
       ],
       "verdict": "working",
-      "reason": "10 Riyadh-relevant postings on the last run",
+      "reason": "20 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -4547,13 +4548,13 @@
       "priority": 3,
       "careersUrl": "https://www.infoblox.com/company/careers/",
       "jobsFound": 0,
-      "postingsSeen": 90,
+      "postingsSeen": 95,
       "adapters": [
         "oraclecloud",
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "90 postings read, none in Riyadh",
+      "reason": "95 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -4561,13 +4562,13 @@
       "sector": "energy-industrial",
       "priority": 2,
       "careersUrl": "https://careers.slb.com/",
-      "jobsFound": 0,
-      "postingsSeen": 15,
+      "jobsFound": 2,
+      "postingsSeen": 32,
       "adapters": [
         "browser"
       ],
-      "verdict": "reachable-no-riyadh",
-      "reason": "15 postings read, none in Riyadh",
+      "verdict": "working",
+      "reason": "2 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -4576,13 +4577,13 @@
       "priority": 2,
       "careersUrl": "https://jobs.halliburton.com/",
       "jobsFound": 0,
-      "postingsSeen": 7,
+      "postingsSeen": 6,
       "adapters": [
         "successfactors",
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "7 postings read, none in Riyadh",
+      "reason": "6 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -4591,12 +4592,12 @@
       "priority": 2,
       "careersUrl": "https://careers.bakerhughes.com/global/en",
       "jobsFound": 0,
-      "postingsSeen": 10,
+      "postingsSeen": 6,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "10 postings read, none in Riyadh",
+      "reason": "6 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -4604,13 +4605,13 @@
       "sector": "energy-industrial",
       "priority": 3,
       "careersUrl": "https://careers.weatherford.com/#en/sites/CX_1",
-      "jobsFound": 2,
-      "postingsSeen": 270,
+      "jobsFound": 1,
+      "postingsSeen": 319,
       "adapters": [
         "oraclecloud"
       ],
       "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
+      "reason": "1 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -4634,7 +4635,7 @@
       "priority": 1,
       "careersUrl": "https://fa-exrn-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_3001",
       "jobsFound": 0,
-      "postingsSeen": 2,
+      "postingsSeen": 1,
       "adapters": [
         "oraclecloud"
       ],
@@ -4647,13 +4648,13 @@
       "sector": "energy-industrial",
       "priority": 2,
       "careersUrl": "https://jobs.siemens-energy.com/en_US/jobs",
-      "jobsFound": 11,
-      "postingsSeen": 342,
+      "jobsFound": 2,
+      "postingsSeen": 271,
       "adapters": [
         "browser"
       ],
       "verdict": "working",
-      "reason": "11 Riyadh-relevant postings on the last run",
+      "reason": "2 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -4716,13 +4717,13 @@
       "priority": 3,
       "careersUrl": "https://jobs.johnsoncontrols.com/job-search",
       "jobsFound": 0,
-      "postingsSeen": 464,
+      "postingsSeen": 452,
       "adapters": [
         "workday",
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "464 postings read, none in Riyadh",
+      "reason": "452 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -4730,14 +4731,14 @@
       "sector": "aviation-transport",
       "priority": 3,
       "careersUrl": "https://jobsearch.alstom.com/",
-      "jobsFound": 2,
-      "postingsSeen": 9,
+      "jobsFound": 0,
+      "postingsSeen": 8,
       "adapters": [
         "successfactors",
         "browser"
       ],
-      "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "8 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -4746,7 +4747,7 @@
       "priority": 2,
       "careersUrl": "https://www.sbm.com.sa/career-opportunities",
       "jobsFound": 69,
-      "postingsSeen": 119,
+      "postingsSeen": 149,
       "adapters": [
         "browser"
       ],
@@ -4798,12 +4799,12 @@
       "priority": 3,
       "careersUrl": "https://www.savola.com/about-us/careers",
       "jobsFound": 0,
-      "postingsSeen": 76,
+      "postingsSeen": 68,
       "adapters": [
         "oraclecloud"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "76 postings read, none in Riyadh",
+      "reason": "68 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -4873,12 +4874,12 @@
       "priority": 3,
       "careersUrl": "https://careers.maaden.com/gb/en",
       "jobsFound": 0,
-      "postingsSeen": 8,
+      "postingsSeen": 5,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "8 postings read, none in Riyadh",
+      "reason": "5 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -5070,7 +5071,7 @@
       "priority": 3,
       "careersUrl": "https://careers.woodgroup.com/",
       "jobsFound": 0,
-      "postingsSeen": 429,
+      "postingsSeen": 426,
       "adapters": [
         "oraclecloud",
         "browser"
@@ -5084,13 +5085,13 @@
       "sector": "energy-industrial",
       "priority": 3,
       "careersUrl": "https://www.worley.com/en/careers",
-      "jobsFound": 6,
-      "postingsSeen": 36,
+      "jobsFound": 0,
+      "postingsSeen": 31,
       "adapters": [
         "browser"
       ],
-      "verdict": "working",
-      "reason": "6 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "31 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -5098,28 +5099,27 @@
       "sector": "energy-industrial",
       "priority": 3,
       "careersUrl": "https://careers.jacobs.com/en_US/careers",
-      "jobsFound": 0,
-      "postingsSeen": 0,
+      "jobsFound": 1,
+      "postingsSeen": 209,
       "adapters": [
         "browser"
       ],
-      "verdict": "unreachable",
-      "reason": "the seeded domain does not resolve; www.jacobs.com carries this company's name and may be the right one",
-      "suggestedUrl": "https://www.jacobs.com/",
-      "needsHuman": true
+      "verdict": "working",
+      "reason": "1 Riyadh-relevant postings on the last run",
+      "needsHuman": false
     },
     {
       "company": "AECOM",
       "sector": "energy-industrial",
       "priority": 3,
       "careersUrl": "https://aecom.com/careers/",
-      "jobsFound": 4,
-      "postingsSeen": 7,
+      "jobsFound": 0,
+      "postingsSeen": 3,
       "adapters": [
         "browser"
       ],
-      "verdict": "working",
-      "reason": "4 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "3 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -5127,13 +5127,13 @@
       "sector": "energy-industrial",
       "priority": 3,
       "careersUrl": "https://jobs.parsons.com/",
-      "jobsFound": 3,
-      "postingsSeen": 40,
+      "jobsFound": 2,
+      "postingsSeen": 74,
       "adapters": [
         "browser"
       ],
       "verdict": "working",
-      "reason": "3 Riyadh-relevant postings on the last run",
+      "reason": "2 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -5141,14 +5141,14 @@
       "sector": "energy-industrial",
       "priority": 3,
       "careersUrl": "https://www.hillintl.com/careers/",
-      "jobsFound": 3,
-      "postingsSeen": 280,
+      "jobsFound": 8,
+      "postingsSeen": 289,
       "adapters": [
         "oraclecloud",
         "browser"
       ],
       "verdict": "working",
-      "reason": "3 Riyadh-relevant postings on the last run",
+      "reason": "8 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -5341,14 +5341,14 @@
       "sector": "giga-project",
       "priority": 2,
       "careersUrl": "https://www.dgda.gov.sa/en/careers",
-      "jobsFound": 3,
-      "postingsSeen": 56,
+      "jobsFound": 0,
+      "postingsSeen": 17,
       "adapters": [
         "browser"
       ],
-      "verdict": "working",
-      "reason": "3 Riyadh-relevant postings on the last run",
-      "needsHuman": false
+      "verdict": "blocked",
+      "reason": "careers site rejects automated access (Cloudflare/Akamai)",
+      "needsHuman": true
     },
     {
       "company": "King Abdullah Financial District",
@@ -5369,13 +5369,13 @@
       "sector": "giga-project",
       "priority": 3,
       "careersUrl": "https://fa-eute-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1",
-      "jobsFound": 1,
-      "postingsSeen": 17,
+      "jobsFound": 0,
+      "postingsSeen": 3,
       "adapters": [
         "oraclecloud"
       ],
-      "verdict": "working",
-      "reason": "1 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "3 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -5538,13 +5538,13 @@
       "sector": "banking-fintech",
       "priority": 2,
       "careersUrl": "https://www.sab.com/en/about-us/careers/",
-      "jobsFound": 3,
-      "postingsSeen": 7,
+      "jobsFound": 2,
+      "postingsSeen": 2,
       "adapters": [
         "browser"
       ],
       "verdict": "working",
-      "reason": "3 Riyadh-relevant postings on the last run",
+      "reason": "2 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -5953,7 +5953,7 @@
       "priority": 3,
       "careersUrl": "https://alfa-tech.sa/careers",
       "jobsFound": 0,
-      "postingsSeen": 1,
+      "postingsSeen": 0,
       "adapters": [
         "recruitee"
       ],
@@ -5994,12 +5994,12 @@
       "priority": 3,
       "careersUrl": "https://www.nasdaq.com/about/careers",
       "jobsFound": 0,
-      "postingsSeen": 178,
+      "postingsSeen": 169,
       "adapters": [
         "workday"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "178 postings read, none in Riyadh",
+      "reason": "169 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -6007,14 +6007,14 @@
       "sector": "telecom-tech",
       "priority": 2,
       "careersUrl": "https://sa.zain.com/about/careers/",
-      "jobsFound": 0,
-      "postingsSeen": 0,
+      "jobsFound": 1,
+      "postingsSeen": 3,
       "adapters": [
         "browser"
       ],
-      "verdict": "no-postings-read",
-      "reason": "the source ran without error but no postings could be read - either the employer has nothing open, or their listing is in a shape the extractor cannot see",
-      "needsHuman": true
+      "verdict": "working",
+      "reason": "1 Riyadh-relevant postings on the last run",
+      "needsHuman": false
     },
     {
       "company": "Integrated Digital Systems",
@@ -6163,13 +6163,13 @@
       "sector": "energy-industrial",
       "priority": 3,
       "careersUrl": "https://jobs.parsons.com/",
-      "jobsFound": 3,
-      "postingsSeen": 40,
+      "jobsFound": 2,
+      "postingsSeen": 74,
       "adapters": [
         "browser"
       ],
       "verdict": "working",
-      "reason": "3 Riyadh-relevant postings on the last run",
+      "reason": "2 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -6415,14 +6415,14 @@
       "sector": "consulting",
       "priority": 1,
       "careersUrl": "https://www.accenture.com/sa-en/careers",
-      "jobsFound": 20,
-      "postingsSeen": 37,
+      "jobsFound": 16,
+      "postingsSeen": 34,
       "adapters": [
         "workday",
         "browser"
       ],
       "verdict": "working",
-      "reason": "20 Riyadh-relevant postings on the last run",
+      "reason": "16 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -6430,13 +6430,13 @@
       "sector": "global-tech",
       "priority": 2,
       "careersUrl": "https://www.ibm.com/careers/search",
-      "jobsFound": 12,
-      "postingsSeen": 15,
+      "jobsFound": 1,
+      "postingsSeen": 33,
       "adapters": [
         "browser"
       ],
       "verdict": "working",
-      "reason": "12 Riyadh-relevant postings on the last run",
+      "reason": "1 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -6445,13 +6445,13 @@
       "priority": 1,
       "careersUrl": "https://apply.careers.microsoft.com/careers?start=0&pid=1970393556961344&sort_by=timestamp",
       "jobsFound": 0,
-      "postingsSeen": 4,
+      "postingsSeen": 3,
       "adapters": [
         "jsonld",
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "4 postings read, none in Riyadh",
+      "reason": "3 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -6459,14 +6459,14 @@
       "sector": "global-tech",
       "priority": 2,
       "careersUrl": "https://www.google.com/about/careers/applications/",
-      "jobsFound": 2,
-      "postingsSeen": 11,
+      "jobsFound": 0,
+      "postingsSeen": 0,
       "adapters": [
         "browser"
       ],
-      "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
-      "needsHuman": false
+      "verdict": "no-postings-read",
+      "reason": "the source ran without error but no postings could be read - either the employer has nothing open, or their listing is in a shape the extractor cannot see",
+      "needsHuman": true
     },
     {
       "company": "Oracle Saudi Arabia",
@@ -6488,15 +6488,15 @@
       "priority": 2,
       "careersUrl": "https://jobs.sap.com/viewalljobs/",
       "careersEmail": "careers@sap.com",
-      "jobsFound": 6,
-      "postingsSeen": 16,
+      "jobsFound": 0,
+      "postingsSeen": 12,
       "adapters": [
         "successfactors",
         "browser"
       ],
-      "verdict": "working",
-      "reason": "6 Riyadh-relevant postings on the last run",
-      "needsHuman": false
+      "verdict": "email-only",
+      "reason": "applications go to careers@sap.com",
+      "needsHuman": true
     },
     {
       "company": "Cognizant",
@@ -6530,19 +6530,19 @@
       "priority": 3,
       "careersUrl": "https://fa-etvl-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/jobs",
       "jobsFound": 0,
-      "postingsSeen": 274,
+      "postingsSeen": 206,
       "adapters": [
         "oraclecloud",
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "274 postings read, none in Riyadh",
+      "reason": "206 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
       "company": "NTT DATA",
-      "sector": "consulting",
-      "priority": 3,
+      "sector": "global-tech",
+      "priority": 2,
       "careersUrl": "https://careers.nttdata.com/",
       "jobsFound": 0,
       "postingsSeen": 0,
@@ -6557,7 +6557,7 @@
       "priority": 3,
       "careersUrl": "https://www.jobs.global.fujitsu.com/search?searchResultView=LIST",
       "jobsFound": 0,
-      "postingsSeen": 141,
+      "postingsSeen": 0,
       "adapters": [
         "successfactors",
         "browser"
@@ -6625,12 +6625,12 @@
       "priority": 3,
       "careersUrl": "https://motorolasolutions.wd5.myworkdayjobs.com/Careers",
       "jobsFound": 0,
-      "postingsSeen": 19,
+      "postingsSeen": 17,
       "adapters": [
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "19 postings read, none in Riyadh",
+      "reason": "17 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -6638,13 +6638,13 @@
       "sector": "global-tech",
       "priority": 3,
       "careersUrl": "https://www.genesys.com/company/careers",
-      "jobsFound": 2,
-      "postingsSeen": 2,
+      "jobsFound": 0,
+      "postingsSeen": 195,
       "adapters": [
         "workday"
       ],
-      "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "195 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -6697,13 +6697,13 @@
       "priority": 3,
       "careersUrl": "https://www.palantir.com/careers/",
       "jobsFound": 0,
-      "postingsSeen": 315,
+      "postingsSeen": 310,
       "adapters": [
         "lever",
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "315 postings read, none in Riyadh",
+      "reason": "310 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -6712,12 +6712,12 @@
       "priority": 3,
       "careersUrl": "https://www.cloudflare.com/careers/jobs/",
       "jobsFound": 0,
-      "postingsSeen": 329,
+      "postingsSeen": 444,
       "adapters": [
         "greenhouse"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "329 postings read, none in Riyadh",
+      "reason": "444 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -6741,14 +6741,14 @@
       "sector": "global-tech",
       "priority": 3,
       "careersUrl": "https://careers.datadoghq.com/",
-      "jobsFound": 2,
-      "postingsSeen": 462,
+      "jobsFound": 0,
+      "postingsSeen": 460,
       "adapters": [
         "greenhouse",
         "browser"
       ],
-      "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
+      "verdict": "reachable-no-riyadh",
+      "reason": "460 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -6781,14 +6781,14 @@
       "sector": "global-tech",
       "priority": 3,
       "careersUrl": "https://www.cohesity.com/careers/",
-      "jobsFound": 27,
-      "postingsSeen": 2095,
+      "jobsFound": 0,
+      "postingsSeen": 0,
       "adapters": [
         "browser"
       ],
-      "verdict": "working",
-      "reason": "27 Riyadh-relevant postings on the last run",
-      "needsHuman": false
+      "verdict": "no-postings-read",
+      "reason": "the source ran without error but no postings could be read - either the employer has nothing open, or their listing is in a shape the extractor cannot see",
+      "needsHuman": true
     },
     {
       "company": "Rubrik",
@@ -6796,12 +6796,12 @@
       "priority": 3,
       "careersUrl": "https://www.rubrik.com/company/careers",
       "jobsFound": 0,
-      "postingsSeen": 134,
+      "postingsSeen": 146,
       "adapters": [
         "greenhouse"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "134 postings read, none in Riyadh",
+      "reason": "146 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -6809,14 +6809,14 @@
       "sector": "security-vendor",
       "priority": 2,
       "careersUrl": "https://www.fortinet.com/corporate/careers",
-      "jobsFound": 2,
+      "jobsFound": 3,
       "postingsSeen": 400,
       "adapters": [
         "oraclecloud",
         "browser"
       ],
       "verdict": "working",
-      "reason": "2 Riyadh-relevant postings on the last run",
+      "reason": "3 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -6840,12 +6840,12 @@
       "priority": 3,
       "careersUrl": "https://cloudera.wd5.myworkdayjobs.com/External_Career",
       "jobsFound": 0,
-      "postingsSeen": 72,
+      "postingsSeen": 60,
       "adapters": [
         "workday"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "72 postings read, none in Riyadh",
+      "reason": "60 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -6853,13 +6853,13 @@
       "sector": "global-tech",
       "priority": 2,
       "careersUrl": "https://www.redhat.com/en/jobs",
-      "jobsFound": 0,
-      "postingsSeen": 3,
+      "jobsFound": 1,
+      "postingsSeen": 2,
       "adapters": [
         "browser"
       ],
-      "verdict": "reachable-no-riyadh",
-      "reason": "3 postings read, none in Riyadh",
+      "verdict": "working",
+      "reason": "1 Riyadh-relevant postings on the last run",
       "needsHuman": false
     },
     {
@@ -6868,13 +6868,13 @@
       "priority": 3,
       "careersUrl": "https://canonical.com/careers/all",
       "jobsFound": 0,
-      "postingsSeen": 346,
+      "postingsSeen": 354,
       "adapters": [
         "greenhouse",
         "browser"
       ],
       "verdict": "reachable-no-riyadh",
-      "reason": "346 postings read, none in Riyadh",
+      "reason": "354 postings read, none in Riyadh",
       "needsHuman": false
     },
     {
@@ -6889,6 +6889,138 @@
       ],
       "verdict": "reachable-no-riyadh",
       "reason": "1 postings read, none in Riyadh",
+      "needsHuman": false
+    },
+    {
+      "company": "Check Point",
+      "sector": "security-vendor",
+      "priority": 2,
+      "careersUrl": "https://www.checkpoint.com/careers/",
+      "jobsFound": 0,
+      "postingsSeen": 0,
+      "adapters": [],
+      "verdict": "not-yet-run",
+      "reason": "no source has run for this employer yet",
+      "needsHuman": false
+    },
+    {
+      "company": "Inspira Enterprise",
+      "sector": "security-vendor",
+      "priority": 2,
+      "careersUrl": "https://inspiraenterprise.com/careers",
+      "jobsFound": 0,
+      "postingsSeen": 0,
+      "adapters": [],
+      "verdict": "not-yet-run",
+      "reason": "no source has run for this employer yet",
+      "needsHuman": false
+    },
+    {
+      "company": "Recorded Future",
+      "sector": "security-vendor",
+      "priority": 3,
+      "careersUrl": "https://www.recordedfuture.com/work-with-us",
+      "jobsFound": 0,
+      "postingsSeen": 0,
+      "adapters": [],
+      "verdict": "not-yet-run",
+      "reason": "no source has run for this employer yet",
+      "needsHuman": false
+    },
+    {
+      "company": "Spire Solutions",
+      "sector": "security-vendor",
+      "priority": 3,
+      "careersUrl": "https://www.spiresolutions.com/careers/",
+      "jobsFound": 0,
+      "postingsSeen": 0,
+      "adapters": [],
+      "verdict": "not-yet-run",
+      "reason": "no source has run for this employer yet",
+      "needsHuman": false
+    },
+    {
+      "company": "Seclore",
+      "sector": "security-vendor",
+      "priority": 3,
+      "careersUrl": "https://www.seclore.com/careers/",
+      "jobsFound": 0,
+      "postingsSeen": 0,
+      "adapters": [],
+      "verdict": "not-yet-run",
+      "reason": "no source has run for this employer yet",
+      "needsHuman": false
+    },
+    {
+      "company": "Saudi Cloud Computing Company (SCCC)",
+      "sector": "telecom-tech",
+      "priority": 2,
+      "careersUrl": "https://sccc.sa/en",
+      "jobsFound": 0,
+      "postingsSeen": 0,
+      "adapters": [],
+      "verdict": "not-yet-run",
+      "reason": "no source has run for this employer yet",
+      "needsHuman": false
+    },
+    {
+      "company": "EzdiTek",
+      "sector": "telecom-tech",
+      "priority": 2,
+      "careersUrl": "https://ezditek.com/",
+      "jobsFound": 0,
+      "postingsSeen": 0,
+      "adapters": [],
+      "verdict": "not-yet-run",
+      "reason": "no source has run for this employer yet",
+      "needsHuman": false
+    },
+    {
+      "company": "TAQNIA",
+      "sector": "telecom-tech",
+      "priority": 2,
+      "careersUrl": "https://www.taqnia.com/",
+      "jobsFound": 0,
+      "postingsSeen": 0,
+      "adapters": [],
+      "verdict": "not-yet-run",
+      "reason": "no source has run for this employer yet",
+      "needsHuman": false
+    },
+    {
+      "company": "Gulf Business Machines (GBM)",
+      "sector": "telecom-tech",
+      "priority": 2,
+      "careersUrl": "https://www.gbmme.com/",
+      "jobsFound": 0,
+      "postingsSeen": 0,
+      "adapters": [],
+      "verdict": "not-yet-run",
+      "reason": "no source has run for this employer yet",
+      "needsHuman": false
+    },
+    {
+      "company": "Saudi Federation for Cybersecurity and Programming (SAFCSP)",
+      "sector": "government",
+      "priority": 2,
+      "careersUrl": "https://safcsp.org.sa/",
+      "jobsFound": 0,
+      "postingsSeen": 0,
+      "adapters": [],
+      "verdict": "not-yet-run",
+      "reason": "no source has run for this employer yet",
+      "needsHuman": false
+    },
+    {
+      "company": "Protiviti",
+      "sector": "consulting",
+      "priority": 2,
+      "careersUrl": "https://www.protiviti.com/sa-en/careers",
+      "jobsFound": 0,
+      "postingsSeen": 0,
+      "adapters": [],
+      "verdict": "not-yet-run",
+      "reason": "no source has run for this employer yet",
       "needsHuman": false
     }
   ]

@@ -4,6 +4,7 @@
  *   npm run test:badges
  */
 import { isRecommendedCompany } from "../src/lib/recommended-company";
+import { COMPANIES } from "../src/lib/sources/companies";
 
 const CASES: Array<[string, boolean, string]> = [
   ["SITE", true, "the user's own example"],
@@ -27,6 +28,18 @@ const CASES: Array<[string, boolean, string]> = [
 ];
 
 let failures = 0;
+
+// Every employer once: two entries named "RTX (Raytheon)" and "NTT DATA"
+// broke the nightly Site report and emptied it (2026-10-22).
+{
+  const seen = new Map<string, number>();
+  for (const c of COMPANIES) seen.set(c.name, (seen.get(c.name) ?? 0) + 1);
+  const twice = [...seen].filter(([, n]) => n > 1).map(([name]) => name);
+  if (twice.length) {
+    failures++;
+    console.log(`FAIL  companies.ts lists these more than once: ${twice.join(", ")}`);
+  }
+}
 for (const [name, want, why] of CASES) {
   const got = isRecommendedCompany(name);
   if (got !== want) {

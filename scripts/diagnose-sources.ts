@@ -89,12 +89,24 @@ async function main(): Promise<void> {
   ];
 
   const db = supabaseAdmin();
-  // Replace the whole report: a site that is now readable must drop off it.
-  const { error: delError } = await db.from("source_reports").delete().neq("company", "");
-  if (delError) throw new Error(`clear failed: ${delError.message}`);
-  for (let i = 0; i < rows.length; i += 200) {
-    const { error } = await db.from("source_reports").upsert(rows.slice(i, i + 200), { onConflict: "company" });
+  /*
+   * Write the new report first, then drop the companies no longer on it (a
+   * site that is now readable must drop off). It used to clear the table
+   * first: when the write then failed - two employers listed twice made one
+   * batch touch the same row twice - the Site report stayed empty
+   * (2026-10-22). One row per company, whatever the inputs.
+   */
+  const unique = [...new Map(rows.map((r) => [r.company, r])).values()];
+  for (let i = 0; i < unique.length; i += 200) {
+    const { error } = await db.from("source_reports").upsert(unique.slice(i, i + 200), { onConflict: "company" });
     if (error) throw new Error(`write failed: ${error.message}`);
+  }
+  const keep = new Set(unique.map((r) => r.company));
+  const { data: stored } = await db.from("source_reports").select("company");
+  const stale = (stored ?? []).map((r) => String(r.company)).filter((c) => !keep.has(c));
+  for (let i = 0; i < stale.length; i += 100) {
+    const { error } = await db.from("source_reports").delete().in("company", stale.slice(i, i + 100));
+    if (error) throw new Error(`clearing old rows failed: ${error.message}`);
   }
 
   const by: Record<string, number> = {};

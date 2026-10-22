@@ -65,7 +65,18 @@ export async function GET() {
     // Which code the laptop ran last, against what this site was built from
     // (Vercel deploys every push to main): a copied folder ran old code for
     // days without anyone being able to tell (2026-10-21).
-    const laptop = laptopRun ? { version: laptopRun.code_version ?? null, at: laptopRun.started_at ?? laptopRun.requested_at } : null;
+    // The heartbeat (worker_status) says whether it is on at all, and what it is doing.
+    const { data: hb } = await supabaseRead().from("worker_status").select("seen_at,version,state,busy_until").eq("id", "laptop").maybeSingle();
+    const laptop =
+      laptopRun || hb
+        ? {
+            version: hb?.version ?? laptopRun?.code_version ?? null,
+            at: laptopRun ? (laptopRun.started_at ?? laptopRun.requested_at) : null,
+            seenAt: (hb?.seen_at as string) ?? null,
+            busyUntil: (hb?.busy_until as string) ?? null,
+            state: (hb?.state as string) ?? null,
+          }
+        : null;
     const latest = process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? null;
     return NextResponse.json({ ok: true, runs: { company, api }, jsearch: { used: jsearch.requests, cap: jsearch.cap.requests }, platforms: platformList, laptop, latest });
   } catch (err) {

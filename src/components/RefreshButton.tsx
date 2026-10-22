@@ -26,7 +26,7 @@ interface State {
   jsearch: { used: number; cap: number };
   platforms?: Array<{ label: string; lastRunAt: string | null; kept: number; problem: string | null }>;
   /** The laptop's last run and its code version; `latest` is what this site was built from. */
-  laptop?: { version: string | null; at: string | null } | null;
+  laptop?: { version: string | null; at: string | null; seenAt?: string | null; busyUntil?: string | null; state?: string | null } | null;
   latest?: string | null;
 }
 
@@ -34,17 +34,34 @@ interface State {
  * Whether the laptop runs the current code. It ran a copied folder's old
  * code for days without a sign (2026-10-21); now it says so here.
  */
-function LaptopLine({ laptop, latest }: { laptop: { version: string | null; at: string | null }; latest: string | null }) {
-  const quietHours = laptop.at ? (Date.now() - new Date(laptop.at).getTime()) / 3_600_000 : Infinity;
+function LaptopLine({ laptop, latest }: { laptop: NonNullable<State["laptop"]>; latest: string | null }) {
   const v = laptop.version;
   const warn = { color: "var(--warn-ink)" };
-  if (quietHours > 6) return <p style={warn}>Laptop: no search for {Number.isFinite(quietHours) ? `${Math.floor(quietHours)} h` : "a long time"} - is it on? Open Saudi Job Alert on it.</p>;
-  if (!v) return <p>Laptop: last search {ago(laptop.at)} (its version is shown from its next search on)</p>;
-  if (v === "not a git copy") return <p style={warn}>Laptop: its folder is not a git copy, so it runs old code and cannot update - see docs/laptop-setup.md.</p>;
-  if (latest && !latest.startsWith(v) && !v.startsWith(latest)) {
-    return <p style={warn}>Laptop: runs an older version ({v}; the latest is {latest}) - it updates by itself within two hours, or press U in its launcher.</p>;
+  const riyadh = (iso: string) => new Date(iso).toLocaleString("en-GB", { timeZone: "Asia/Riyadh", weekday: "short", hour: "2-digit", minute: "2-digit" });
+  // The heartbeat: every 2 minutes, or a promise of how long a step may take.
+  if (laptop.seenAt) {
+    const seen = new Date(laptop.seenAt).getTime();
+    const busy = laptop.busyUntil ? new Date(laptop.busyUntil).getTime() : 0;
+    const online = Date.now() - seen < 10 * 60_000 || Date.now() < busy + 5 * 60_000;
+    if (!online) {
+      return <p style={warn}>Laptop: offline since {riyadh(laptop.seenAt)} - asleep, switched off, or without internet. It carries on by itself once it is awake.</p>;
+    }
+  } else {
+    const quietHours = laptop.at ? (Date.now() - new Date(laptop.at).getTime()) / 3_600_000 : Infinity;
+    if (quietHours > 6) return <p style={warn}>Laptop: no search for {Number.isFinite(quietHours) ? `${Math.floor(quietHours)} h` : "a long time"} - is it on? Open Saudi Job Alert on it.</p>;
   }
-  return <p>Laptop: last search {ago(laptop.at)} · version {v}{latest ? " (up to date)" : ""}</p>;
+  if (v === "not a git copy") return <p style={warn}>Laptop: its folder is not a git copy, so it runs old code and cannot update - see docs/laptop-setup.md.</p>;
+  if (v && latest && !latest.startsWith(v) && !v.startsWith(latest)) {
+    return <p style={warn}>Laptop: online, but on an older version ({v}; the latest is {latest}) - it updates by itself within two hours, or press U in its launcher.</p>;
+  }
+  return (
+    <p>
+      Laptop: {laptop.seenAt ? "online" : `last search ${ago(laptop.at)}`}
+      {laptop.state ? ` · ${laptop.state}` : ""}
+      {laptop.seenAt && laptop.at ? ` · last search ${ago(laptop.at)}` : ""}
+      {v ? ` · version ${v}${latest ? " (up to date)" : ""}` : ""}
+    </p>
+  );
 }
 
 /** "5h ago", "2d ago" - when a platform was last read. */
