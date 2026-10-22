@@ -335,14 +335,21 @@ if (-not (Test-Path $shortcut)) {
 if (-not (Get-Command node -ErrorAction SilentlyContinue)) { Say "Node is not installed. Install Node LTS from nodejs.org, then open this again." Red; Read-Host "Press Enter to close"; exit 1 }
 if (-not ((Test-Path (Join-Path $repo ".env.local")) -or (Test-Path (Join-Path $repo ".env")))) { Say "No .env.local in this folder. Copy it from the PC, then open this again." Red; Read-Host "Press Enter to close"; exit 1 }
 if (-not (Test-Path $tsx)) {
-  Say "Installing the project's packages (first time only, a few minutes)..." Yellow
-  & npm.cmd ci
+  # Through the repair, which stops the worker first: installing here while
+  # the background loop kept starting the worker made it start on
+  # half-installed packages ("temporary-directory ... not found", 2026-10-22).
+  Say "The project's packages are missing - repairing: stop the worker, install them (a few minutes), start it." Yellow
+  Install-Or-Restart
+  $script:repaired = $true
 }
 
 $updated = Update-Code -Ask
 $loopV2 = (Test-Path $loopMarker) -and ((Get-Content $loopMarker -Raw) -like "loop v2*")
 $silent = Worker-Silent
-if (-not $loopV2) {
+if ($script:repaired) {
+  # Just repaired above (or the permission was declined): once is enough.
+  if (Worker-Running) { Say "Worker: running (last sign of life: $(Last-Beat))." Green } else { Say "The worker is not running - press R to try the repair again." Red }
+} elseif (-not $loopV2) {
   Say "One-time upgrade of the background task: it now reinstalls packages between runs, and Restart stops a stuck worker for good." Yellow
   Install-Or-Restart
 } elseif (-not (Worker-Running)) {
