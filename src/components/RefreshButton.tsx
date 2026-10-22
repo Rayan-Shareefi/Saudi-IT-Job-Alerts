@@ -44,7 +44,14 @@ function LaptopLine({ laptop, latest }: { laptop: NonNullable<State["laptop"]>; 
     const busy = laptop.busyUntil ? new Date(laptop.busyUntil).getTime() : 0;
     const online = Date.now() - seen < 10 * 60_000 || Date.now() < busy + 5 * 60_000;
     if (!online) {
-      return <p style={warn}>Laptop: offline since {riyadh(laptop.seenAt)} - asleep, switched off, or without internet. It carries on by itself once it is awake.</p>;
+      // The heartbeat cannot say why it stopped - an off laptop and a stuck
+      // worker look the same from here - so it says what it knows.
+      return (
+        <p style={warn}>
+          Laptop worker: no sign of life since {riyadh(laptop.seenAt)}. If the laptop is on, the worker has stopped: open Saudi Job Alert on it - it says why and
+          repairs it (or press R).
+        </p>
+      );
     }
   } else {
     const quietHours = laptop.at ? (Date.now() - new Date(laptop.at).getTime()) / 3_600_000 : Infinity;

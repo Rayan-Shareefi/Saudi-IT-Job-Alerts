@@ -59,6 +59,10 @@ const RUN_NOW = join("logs", "run-now");
 const RUN_FULL = join("logs", "run-full");
 /** The launcher, after updating the code: restart into it (the supervisor loop starts the new copy). */
 const RESTART = join("logs", "restart");
+/** The packages changed: the background loop runs `npm ci` before the next start (install-worker.ps1). */
+const NEEDS_INSTALL = join("logs", "needs-install");
+/** The worker's own heartbeat on disk, for the launcher: when it last showed life, and what it was doing. */
+const HEARTBEAT = join("logs", "heartbeat.json");
 /** LinkedIn is asked at most this often, whatever triggers a cycle. */
 const LINKEDIN_GAP_MS = 60 * 60_000;
 
@@ -158,6 +162,26 @@ function log(s: string): void {
 }
 
 /** Run a script as its own process; returns its exit code. */
+let lastBeatAt = Date.now();
+let promisedUntil = 0;
+
+/*
+ * The watchdog. A step blocks this process and has its own time limit; any
+ * other wait (a network call that never answers) must not hang the worker
+ * for good, the way it sat silent from 03:06 on 2026-10-22 with the laptop
+ * on. Twenty minutes past the last beat - or past the time a step promised -
+ * and it exits; the background loop starts a fresh copy.
+ */
+function startWatchdog(): void {
+  setInterval(() => {
+    const deadline = Math.max(lastBeatAt + 20 * 60_000, promisedUntil + 20 * 60_000);
+    if (Date.now() > deadline) {
+      log(`watchdog: no progress since ${new Date(lastBeatAt).toISOString().slice(11, 19)} - restarting the worker`);
+      process.exit(RESTART_FOR_UPDATE);
+    }
+  }, 60_000).unref();
+}
+
 /*
  * The heartbeat: what the worker is doing, every poll and before each step,
  * so the website can tell "online, busy" from "offline since 03:06" - a
@@ -166,6 +190,15 @@ function log(s: string): void {
  */
 async function beat(state: string, busyMin = 0, nextCycleAt: number | null = null): Promise<void> {
   const now = Date.now();
+  lastBeatAt = now;
+  promisedUntil = busyMin > 0 ? now + busyMin * 60_000 : 0;
+  // On disk first: the launcher reads it even when the internet is down.
+  try {
+    mkdirSync("logs", { recursive: true });
+    writeFileSync(HEARTBEAT, JSON.stringify({ seenAt: new Date(now).toISOString(), state, busyUntil: busyMin > 0 ? new Date(now + busyMin * 60_000).toISOString() : null }));
+  } catch {
+    /* a courtesy */
+  }
   try {
     await supabaseAdmin()
       .from("worker_status")
@@ -291,8 +324,18 @@ function selfUpdate(): void {
   }
   const lockAfter = existsSync("package-lock.json") ? readFileSync("package-lock.json", "utf8") : "";
   if (lockAfter !== lockBefore) {
-    log("dependencies changed - npm ci");
-    spawnSync(process.platform === "win32" ? "npm.cmd" : "npm", ["ci"], { stdio: "inherit", windowsHide: true, shell: process.platform === "win32" });
+    /*
+     * Never reinstall from inside the running worker. It ran `npm ci` here,
+     * with no time limit, while this very process held files in
+     * node_modules open: on 2026-10-22 the laptop went silent at 03:06, right
+     * after an update that changed the packages, and stayed silent with the
+     * laptop on. The note below makes the background loop reinstall between
+     * runs, when nothing holds the files (install-worker.ps1); the launcher's
+     * R does it too.
+     */
+    writeFileSync(NEEDS_INSTALL, new Date().toISOString());
+    log("the packages changed - restarting so they are reinstalled first (npm ci, between runs)");
+    if (!ONCE) process.exit(RESTART_FOR_UPDATE);
   }
   // The steps are child processes and already run the new code; the loop
   // itself does not, so it hands over to a fresh copy of itself.
@@ -521,6 +564,7 @@ async function cycle(full = false): Promise<void> {
 async function main(): Promise<void> {
   log(`worker starting (cycle every ${CYCLE_MS / 60_000} min) - version ${version()}`);
   await beat("starting");
+  if (!ONCE) startWatchdog();
   // Without these every database call fails, and a failure cannot be written
   // to the database - so say it here, where the log is the only witness.
   const missing = ["NEXT_PUBLIC_SUPABASE_URL", "SUPABASE_SERVICE_ROLE_KEY"].filter((k) => !envStr(k));

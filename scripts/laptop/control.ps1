@@ -48,6 +48,31 @@ function Worker-Running() {
   return [bool]($procs | Where-Object { $_.CommandLine -like "*local-worker.ts*" })
 }
 
+# The worker's own heartbeat (logs\heartbeat.json, written every 2 minutes and
+# before each step with how long the step may take).
+function Read-Beat() {
+  try { return Get-Content (Join-Path $repo "logs\heartbeat.json") -Raw -ErrorAction Stop | ConvertFrom-Json } catch { return $null }
+}
+
+function Last-Beat() {
+  $b = Read-Beat
+  if (-not $b) { return "none yet" }
+  return ("{0:ddd HH:mm} ({1})" -f [DateTime]::Parse($b.seenAt).ToLocalTime(), $b.state)
+}
+
+# When the worker last showed life, if that is too long ago; empty if it is fine.
+# "Running" in Task Scheduler only means the background loop exists: on
+# 2026-10-22 it said running while the worker had been stuck for ten hours.
+function Worker-Silent() {
+  $b = Read-Beat
+  if (-not $b) { return "" }  # a worker from before the heartbeat: nothing to compare
+  $seen = [DateTime]::Parse($b.seenAt).ToLocalTime()
+  $allowed = $seen.AddMinutes(15)
+  if ($b.busyUntil) { $busy = [DateTime]::Parse($b.busyUntil).ToLocalTime().AddMinutes(10); if ($busy -gt $allowed) { $allowed = $busy } }
+  if ((Get-Date) -gt $allowed) { return ("{0:ddd HH:mm} ({1})" -f $seen, $b.state) }
+  return ""
+}
+
 function Install-Or-Restart() {
   Say "Starting the worker. Windows will ask for permission - click Yes." Yellow
   $script = Join-Path $repo "scripts\laptop\install-worker.ps1"
@@ -78,7 +103,7 @@ function LinkedIn-Login() {
 
 function Show-Keys() {
   Say "Keys:  N = search now (LinkedIn, platforms, jury)   F = full search (also every company site, ~2 h)" DarkCyan
-  Say "       U = update now   R = restart worker   D = check everything   L = LinkedIn sign-in   Q = close" DarkCyan
+  Say "       U = update now   R = repair / restart the worker   D = check everything   L = LinkedIn sign-in   Q = close" DarkCyan
   Say "JSearch (the metered API) is not in N or F: GitHub runs it twice a week to stay inside its free quota." DarkGray
   Say "Closing this window does not stop the worker." DarkGray
   Line
@@ -315,13 +340,19 @@ if (-not (Test-Path $tsx)) {
 }
 
 $updated = Update-Code -Ask
-if (-not (Test-Path $loopMarker)) {
-  Say "One-time upgrade of the background task, so updates restart the worker by themselves." Yellow
+$loopV2 = (Test-Path $loopMarker) -and ((Get-Content $loopMarker -Raw) -like "loop v2*")
+$silent = Worker-Silent
+if (-not $loopV2) {
+  Say "One-time upgrade of the background task: it now reinstalls packages between runs, and Restart stops a stuck worker for good." Yellow
   Install-Or-Restart
 } elseif (-not (Worker-Running)) {
   Install-Or-Restart
+} elseif ($silent) {
+  # The task says "running", but the worker has not shown life: hung or crashing.
+  Say "The worker is NOT responding - last sign of life: $silent. Repairing it (stop everything, reinstall if needed, start)." Red
+  Install-Or-Restart
 } else {
-  Say "Worker: running in the background." Green
+  Say "Worker: running and responding (last sign of life: $(Last-Beat))." Green
   if ($updated) { Restart-Into-New-Code }
 }
 Show-Schedule

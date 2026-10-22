@@ -149,6 +149,17 @@ private (the background task cannot sign in to GitHub by itself).
 Typing commands yourself: PowerShell refuses `npm` on a fresh Windows (script
 policy). Type `npm.cmd` instead, e.g. `npm.cmd run doctor`.
 
+**The launcher does not need to stay open.** The worker is a background task;
+the window is only for watching. The website's status panel shows the
+worker's heartbeat ("Laptop: online · …"), sent every 2 minutes.
+
+**"No sign of life" with the laptop on** means the worker stopped or hung.
+Open Saudi Job Alert: it compares the heartbeat with the clock, says "NOT
+responding" in red, and repairs it - or press **R**. Repair stops the
+background loop and everything it started (a stuck install included),
+reinstalls the packages when they are out of date, starts the worker again,
+and reports RUNNING only once the worker answers.
+
 - **Turn it off:** `Stop-ScheduledTask SaudiJobAlertWorker` (Administrator PowerShell)
 - **Turn it back on:** `Start-ScheduledTask SaudiJobAlertWorker`
 - **Remove it:** `Unregister-ScheduledTask -TaskName SaudiJobAlertWorker -Confirm:$false`

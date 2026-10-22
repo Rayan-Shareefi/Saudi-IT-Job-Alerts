@@ -348,6 +348,15 @@ npm run fix:bytes         # repair regex escapes mangled by shell edits
 24. **`page.content()` throws while a page is still navigating** (boards that
     redirect after loading: MongoDB, Parsons, GIB). The browser reader waits
     for the page to settle and asks again (`settledContent`).
+25. **Never reinstall packages from inside the running worker.** It ran
+    `npm ci` in-process with no time limit after an update changed
+    package-lock.json; on Windows its own open files in node_modules stalled
+    it, and the laptop sat on and silent from 03:06 on 2026-10-22. The worker
+    now leaves `logs/needs-install` and restarts; the background loop (v2,
+    install-worker.ps1) reinstalls between runs. A watchdog restarts a worker
+    with no progress for 20 minutes past its promise, and Task Scheduler's
+    "running" is no longer trusted: the heartbeat (`logs/heartbeat.json`,
+    table `worker_status`) is.
 
 ## State on 2026-10-15
 
