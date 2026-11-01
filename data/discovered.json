@@ -1,6 +1,6 @@
 {
-  "generatedAt": "2026-09-03T19:11:53.195Z",
-  "companies": 513,
+  "generatedAt": "2026-11-01T10:35:50.926Z",
+  "companies": 483,
   "sources": [
     {
       "id": "workable-qiddiya",
@@ -39,6 +39,27 @@
       "kind": "career-page",
       "adapter": "browser",
       "handle": "https://fa-eueh-saasfaprod1.fa.ocs.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "oraclecloud-nhc-national-housing-company",
+      "label": "NHC (National Housing Company)",
+      "company": "NHC (National Housing Company)",
+      "kind": "ats",
+      "adapter": "oraclecloud",
+      "handle": "eghj.fa.em2.oraclecloud.com|CX_3001|CX_3001",
+      "region": "ksa",
+      "enabled": true
+    },
+    {
+      "id": "alt1-nhc-national-housing-company",
+      "label": "NHC (National Housing Company) (board 2)",
+      "company": "NHC (National Housing Company)",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.nhc.sa/ar/investment-opportunities",
       "region": "ksa",
       "needsBrowser": true,
       "enabled": true
@@ -104,16 +125,6 @@
       "handle": "https://careers.tahakom.com/go/Fresh-Graduates/7763523/",
       "region": "ksa",
       "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "ashby-lean-technologies",
-      "label": "Lean Technologies",
-      "company": "Lean Technologies",
-      "kind": "ats",
-      "adapter": "ashby",
-      "handle": "LeanTech",
-      "region": "ksa",
       "enabled": true
     },
     {
@@ -223,6 +234,16 @@
       "enabled": true
     },
     {
+      "id": "workday-oliver-wyman",
+      "label": "Oliver Wyman",
+      "company": "Oliver Wyman",
+      "kind": "ats",
+      "adapter": "workday",
+      "handle": "mmc.wd1.myworkdayjobs.com/MMC",
+      "region": "global",
+      "enabled": true
+    },
+    {
       "id": "workday-dxc-technology",
       "label": "DXC Technology",
       "company": "DXC Technology",
@@ -261,69 +282,6 @@
       "kind": "career-page",
       "adapter": "browser",
       "handle": "https://careers.dxc.com/profile/join",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "workday-oliver-wyman",
-      "label": "Oliver Wyman",
-      "company": "Oliver Wyman",
-      "kind": "ats",
-      "adapter": "workday",
-      "handle": "mmc.wd1.myworkdayjobs.com/MMC",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "greenhouse-hala",
-      "label": "Hala",
-      "company": "Hala",
-      "kind": "ats",
-      "adapter": "greenhouse",
-      "handle": "hala",
-      "region": "ksa",
-      "enabled": true
-    },
-    {
-      "id": "successfactors-sap",
-      "label": "SAP",
-      "company": "SAP",
-      "kind": "ats",
-      "adapter": "successfactors",
-      "handle": "https://career5.successfactors.eu/career?career_company=SAP&lang=en_US&company=SAP&site=&loginFlowRequired=true&_s.crb=FPX8lbWGt3yk6uxsmGyYBKLyRl2Q6jqtQoTRBxl4aco%3d",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "alt1-sap",
-      "label": "SAP (board 2)",
-      "company": "SAP",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://jobs.sap.com/content/Students-and-Graduates/?locale=en_US",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt2-sap",
-      "label": "SAP (board 3)",
-      "company": "SAP",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://performancemanager5.successfactors.eu/sf/careers?company=SAP",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt3-sap",
-      "label": "SAP (board 4)",
-      "company": "SAP",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://jobs.sap.com/content/students/",
       "region": "global",
       "needsBrowser": true,
       "enabled": true
@@ -382,6 +340,48 @@
       "enabled": true
     },
     {
+      "id": "taleo-schneider-electric",
+      "label": "Schneider Electric",
+      "company": "Schneider Electric",
+      "kind": "ats",
+      "adapter": "taleo",
+      "handle": "schneiderele.taleo.net|iam",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "successfactors-netapp",
+      "label": "NetApp",
+      "company": "NetApp",
+      "kind": "ats",
+      "adapter": "successfactors",
+      "handle": "https://career4.successfactors.com/career?career_company=netappinc&lang=en_US&company=netappinc&site=&loginFlowRequired=true&_s.crb=yXIBMpntObR%2b8xuPeuNxjntM379KUKpg9FjSJRFACBw%3d",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "alt1-netapp",
+      "label": "NetApp (board 2)",
+      "company": "NetApp",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://careers.netapp.com/category/internships-jobs/27600/8608640/1",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "alt2-netapp",
+      "label": "NetApp (board 3)",
+      "company": "NetApp",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://careers.netapp.com/en/temporaryopportunities",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
       "id": "greenhouse-pure-storage",
       "label": "Pure Storage",
       "company": "Pure Storage",
@@ -425,45 +425,46 @@
       "enabled": true
     },
     {
-      "id": "successfactors-netapp",
-      "label": "NetApp",
-      "company": "NetApp",
+      "id": "workday-palo-alto-networks",
+      "label": "Palo Alto Networks",
+      "company": "Palo Alto Networks",
       "kind": "ats",
-      "adapter": "successfactors",
-      "handle": "https://career4.successfactors.com/career?career_company=netappinc&lang=en_US&company=netappinc&site=&loginFlowRequired=true&_s.crb=yXIBMpntObR%2b8xuPeuNxjntM379KUKpg9FjSJRFACBw%3d",
+      "adapter": "workday",
+      "handle": "paloaltonetworks.wd5.myworkdayjobs.com/panwexternalcareers",
       "region": "global",
       "enabled": true
     },
     {
-      "id": "alt1-netapp",
-      "label": "NetApp (board 2)",
-      "company": "NetApp",
+      "id": "alt1-palo-alto-networks",
+      "label": "Palo Alto Networks (board 2)",
+      "company": "Palo Alto Networks",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://careers.netapp.com/category/internships-jobs/27600/8608640/1",
+      "handle": "https://jobs.paloaltonetworks.com/early-in-career",
       "region": "global",
       "needsBrowser": true,
       "enabled": true
     },
     {
-      "id": "alt2-netapp",
-      "label": "NetApp (board 3)",
-      "company": "NetApp",
+      "id": "alt2-palo-alto-networks",
+      "label": "Palo Alto Networks (board 3)",
+      "company": "Palo Alto Networks",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://careers.netapp.com/en/temporaryopportunities",
+      "handle": "https://jobs.paloaltonetworks.com/en/Must-Know-Facts-from-an-Early-Career-Product-Manager",
       "region": "global",
       "needsBrowser": true,
       "enabled": true
     },
     {
-      "id": "taleo-schneider-electric",
-      "label": "Schneider Electric",
-      "company": "Schneider Electric",
-      "kind": "ats",
-      "adapter": "taleo",
-      "handle": "schneiderele.taleo.net|iam",
+      "id": "alt3-palo-alto-networks",
+      "label": "Palo Alto Networks (board 4)",
+      "company": "Palo Alto Networks",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://paloaltonetworks.wd5.myworkdayjobs.com/en-US/panwexternalcareers/introduceYourself?clientRequestID=06f06ca6dae2441d99391ed600fc2265",
       "region": "global",
+      "needsBrowser": true,
       "enabled": true
     },
     {
@@ -572,80 +573,6 @@
       "enabled": true
     },
     {
-      "id": "workday-palo-alto-networks",
-      "label": "Palo Alto Networks",
-      "company": "Palo Alto Networks",
-      "kind": "ats",
-      "adapter": "workday",
-      "handle": "paloaltonetworks.wd5.myworkdayjobs.com/panwexternalcareers",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "alt1-palo-alto-networks",
-      "label": "Palo Alto Networks (board 2)",
-      "company": "Palo Alto Networks",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://jobs.paloaltonetworks.com/early-in-career",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt2-palo-alto-networks",
-      "label": "Palo Alto Networks (board 3)",
-      "company": "Palo Alto Networks",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://jobs.paloaltonetworks.com/en/Must-Know-Facts-from-an-Early-Career-Product-Manager",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt3-palo-alto-networks",
-      "label": "Palo Alto Networks (board 4)",
-      "company": "Palo Alto Networks",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://paloaltonetworks.wd5.myworkdayjobs.com/en-US/panwexternalcareers/introduceYourself?clientRequestID=06f06ca6dae2441d99391ed600fc2265",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "lever-sophos",
-      "label": "Sophos",
-      "company": "Sophos",
-      "kind": "ats",
-      "adapter": "lever",
-      "handle": "sophos",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "workday-proofpoint",
-      "label": "Proofpoint",
-      "company": "Proofpoint",
-      "kind": "ats",
-      "adapter": "workday",
-      "handle": "proofpoint.wd5.myworkdayjobs.com/proofpointcareers",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "alt1-proofpoint",
-      "label": "Proofpoint (board 2)",
-      "company": "Proofpoint",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://proofpoint.wd5.myworkdayjobs.com/proofpointcareers",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
       "id": "workday-f5",
       "label": "F5",
       "company": "F5",
@@ -684,6 +611,27 @@
       "kind": "career-page",
       "adapter": "browser",
       "handle": "https://ffive.wd5.myworkdayjobs.com/en-US/f5jobs/introduceYourself",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "workday-proofpoint",
+      "label": "Proofpoint",
+      "company": "Proofpoint",
+      "kind": "ats",
+      "adapter": "workday",
+      "handle": "proofpoint.wd5.myworkdayjobs.com/proofpointcareers",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "alt1-proofpoint",
+      "label": "Proofpoint (board 2)",
+      "company": "Proofpoint",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://proofpoint.wd5.myworkdayjobs.com/proofpointcareers",
       "region": "global",
       "needsBrowser": true,
       "enabled": true
@@ -732,32 +680,12 @@
       "enabled": true
     },
     {
-      "id": "lever-secureworks",
-      "label": "Secureworks",
-      "company": "Secureworks",
-      "kind": "ats",
-      "adapter": "lever",
-      "handle": "sophos",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "successfactors-riyadh-airports",
-      "label": "Riyadh Airports",
-      "company": "Riyadh Airports",
-      "kind": "ats",
-      "adapter": "successfactors",
-      "handle": "https://career23.sapsf.com/careers?company=riyadhairp",
-      "region": "ksa",
-      "enabled": true
-    },
-    {
-      "id": "workable-mozn",
-      "label": "Mozn",
-      "company": "Mozn",
+      "id": "workable-lucidya",
+      "label": "Lucidya",
+      "company": "Lucidya",
       "kind": "ats",
       "adapter": "workable",
-      "handle": "mozn-ai",
+      "handle": "lucidya",
       "region": "ksa",
       "enabled": true
     },
@@ -772,12 +700,12 @@
       "enabled": true
     },
     {
-      "id": "workable-lucidya",
-      "label": "Lucidya",
-      "company": "Lucidya",
+      "id": "workable-mozn",
+      "label": "Mozn",
+      "company": "Mozn",
       "kind": "ats",
       "adapter": "workable",
-      "handle": "lucidya",
+      "handle": "mozn-ai",
       "region": "ksa",
       "enabled": true
     },
@@ -929,16 +857,6 @@
       "enabled": true
     },
     {
-      "id": "ashby-delinea",
-      "label": "Delinea",
-      "company": "Delinea",
-      "kind": "ats",
-      "adapter": "ashby",
-      "handle": "delinea",
-      "region": "global",
-      "enabled": true
-    },
-    {
       "id": "workday-sailpoint",
       "label": "SailPoint",
       "company": "SailPoint",
@@ -982,88 +900,13 @@
       "enabled": true
     },
     {
-      "id": "oraclecloud-infoblox",
-      "label": "Infoblox",
-      "company": "Infoblox",
+      "id": "ashby-delinea",
+      "label": "Delinea",
+      "company": "Delinea",
       "kind": "ats",
-      "adapter": "oraclecloud",
-      "handle": "efpv.fa.us6.oraclecloud.com|CX_1|CX_1",
+      "adapter": "ashby",
+      "handle": "delinea",
       "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "alt1-infoblox",
-      "label": "Infoblox (board 2)",
-      "company": "Infoblox",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://efpv.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/join-talent-community",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "workday-cyberark",
-      "label": "CyberArk",
-      "company": "CyberArk",
-      "kind": "ats",
-      "adapter": "workday",
-      "handle": "paloaltonetworks.wd5.myworkdayjobs.com/panwexternalcareers",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "alt1-cyberark",
-      "label": "CyberArk (board 2)",
-      "company": "CyberArk",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://jobs.paloaltonetworks.com/early-in-career",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt2-cyberark",
-      "label": "CyberArk (board 3)",
-      "company": "CyberArk",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://jobs.paloaltonetworks.com/en/Must-Know-Facts-from-an-Early-Career-Product-Manager",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt3-cyberark",
-      "label": "CyberArk (board 4)",
-      "company": "CyberArk",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://paloaltonetworks.wd5.myworkdayjobs.com/en-US/panwexternalcareers/introduceYourself?clientRequestID=06f06ca6dae2441d99391ed600fc2265",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "oraclecloud-nov",
-      "label": "NOV",
-      "company": "NOV",
-      "kind": "ats",
-      "adapter": "oraclecloud",
-      "handle": "egay.fa.us6.oraclecloud.com|CX_2001|CX_2001",
-      "region": "ksa",
-      "enabled": true
-    },
-    {
-      "id": "alt1-nov",
-      "label": "NOV (board 2)",
-      "company": "NOV",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.nov.com/careers/early-career-development",
-      "region": "ksa",
-      "needsBrowser": true,
       "enabled": true
     },
     {
@@ -1088,44 +931,64 @@
       "enabled": true
     },
     {
-      "id": "workday-rockwell-automation",
-      "label": "Rockwell Automation",
-      "company": "Rockwell Automation",
+      "id": "oraclecloud-infoblox",
+      "label": "Infoblox",
+      "company": "Infoblox",
+      "kind": "ats",
+      "adapter": "oraclecloud",
+      "handle": "efpv.fa.us6.oraclecloud.com|CX_1|CX_1",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "alt1-infoblox",
+      "label": "Infoblox (board 2)",
+      "company": "Infoblox",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://efpv.fa.us6.oraclecloud.com/hcmUI/CandidateExperience/en/sites/CX_1/join-talent-community",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "workday-baker-hughes",
+      "label": "Baker Hughes",
+      "company": "Baker Hughes",
       "kind": "ats",
       "adapter": "workday",
-      "handle": "rockwellautomation.wd1.myworkdayjobs.com/External_Rockwell_Automation",
+      "handle": "bakerhughes.wd5.myworkdayjobs.com/BakerHughes",
       "region": "ksa",
       "enabled": true
     },
     {
-      "id": "alt1-rockwell-automation",
-      "label": "Rockwell Automation (board 2)",
-      "company": "Rockwell Automation",
+      "id": "alt1-baker-hughes",
+      "label": "Baker Hughes (board 2)",
+      "company": "Baker Hughes",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://www.rockwellautomation.com/en-us/company/careers/edge-student-early-career.html",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt2-rockwell-automation",
-      "label": "Rockwell Automation (board 3)",
-      "company": "Rockwell Automation",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.rockwellautomation.com/en-us/company/careers/edge-student-early-career/edge-student-programs.html",
+      "handle": "https://careers.bakerhughes.com/global/en/Early-Careers-BakerHughes",
       "region": "ksa",
       "needsBrowser": true,
       "enabled": true
     },
     {
-      "id": "alt3-rockwell-automation",
-      "label": "Rockwell Automation (board 4)",
-      "company": "Rockwell Automation",
+      "id": "oraclecloud-nov",
+      "label": "NOV",
+      "company": "NOV",
+      "kind": "ats",
+      "adapter": "oraclecloud",
+      "handle": "egay.fa.us6.oraclecloud.com|CX_2001|CX_2001",
+      "region": "ksa",
+      "enabled": true
+    },
+    {
+      "id": "alt1-nov",
+      "label": "NOV (board 2)",
+      "company": "NOV",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://www.rockwellautomation.com/en-us/company/careers/edge-student-early-career/edge-early-career.html",
+      "handle": "https://www.nov.com/careers/early-career-development",
       "region": "ksa",
       "needsBrowser": true,
       "enabled": true
@@ -1206,16 +1069,6 @@
       "enabled": true
     },
     {
-      "id": "oraclecloud-national-water-company",
-      "label": "National Water Company",
-      "company": "National Water Company",
-      "kind": "ats",
-      "adapter": "oraclecloud",
-      "handle": "fa-esst-saasfaprod1.fa.ocs.oraclecloud.com|CX_1|CX_1",
-      "region": "ksa",
-      "enabled": true
-    },
-    {
       "id": "oraclecloud-savola-group",
       "label": "Savola Group",
       "company": "Savola Group",
@@ -1257,16 +1110,6 @@
       "enabled": true
     },
     {
-      "id": "lever-asfar",
-      "label": "Asfar",
-      "company": "Asfar",
-      "kind": "ats",
-      "adapter": "lever",
-      "handle": "Asfar",
-      "region": "ksa",
-      "enabled": true
-    },
-    {
       "id": "workday-nasdaq-gulf-technology",
       "label": "Nasdaq Gulf Technology",
       "company": "Nasdaq Gulf Technology",
@@ -1274,80 +1117,6 @@
       "adapter": "workday",
       "handle": "nasdaq.wd1.myworkdayjobs.com/Global_External_Site",
       "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "successfactors-al-fanar-electric",
-      "label": "Al Fanar Electric",
-      "company": "Al Fanar Electric",
-      "kind": "ats",
-      "adapter": "successfactors",
-      "handle": "https://career5.successfactors.eu//career?company=AlFanarP&site=&lang=en_GB&requestParams=&navBarLevel=MY_PROFILE",
-      "region": "ksa",
-      "enabled": true
-    },
-    {
-      "id": "workday-accenture-saudi-advanced-technology",
-      "label": "Accenture Saudi Advanced Technology",
-      "company": "Accenture Saudi Advanced Technology",
-      "kind": "ats",
-      "adapter": "workday",
-      "handle": "accenture.wd103.myworkdayjobs.com/AccentureCareers",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "alt1-accenture-saudi-advanced-technology",
-      "label": "Accenture Saudi Advanced Technology (board 2)",
-      "company": "Accenture Saudi Advanced Technology",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.accenture.com/sa-en/careers/life-at-accenture/internships-students",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt2-accenture-saudi-advanced-technology",
-      "label": "Accenture Saudi Advanced Technology (board 3)",
-      "company": "Accenture Saudi Advanced Technology",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.accenture.com/sa-en/careers/life-at-accenture/entry-level",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "successfactors-sap-saudi-arabia",
-      "label": "SAP Saudi Arabia",
-      "company": "SAP Saudi Arabia",
-      "kind": "ats",
-      "adapter": "successfactors",
-      "handle": "https://career5.successfactors.eu/career?career_company=SAP&lang=en_US&company=SAP&site=&loginFlowRequired=true&_s.crb=FPX8lbWGt3yk6uxsmGyYBKLyRl2Q6jqtQoTRBxl4aco%3d",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "alt1-sap-saudi-arabia",
-      "label": "SAP Saudi Arabia (board 2)",
-      "company": "SAP Saudi Arabia",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://jobs.sap.com/content/Students-and-Graduates/?locale=en_US",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt2-sap-saudi-arabia",
-      "label": "SAP Saudi Arabia (board 3)",
-      "company": "SAP Saudi Arabia",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://performancemanager5.successfactors.eu/sf/careers?company=SAP",
-      "region": "global",
-      "needsBrowser": true,
       "enabled": true
     },
     {
@@ -1383,24 +1152,13 @@
       "enabled": true
     },
     {
-      "id": "successfactors-ericsson-saudi",
-      "label": "Ericsson Saudi",
-      "company": "Ericsson Saudi",
+      "id": "workday-ntt-data",
+      "label": "NTT DATA",
+      "company": "NTT DATA",
       "kind": "ats",
-      "adapter": "successfactors",
-      "handle": "https://career2.successfactors.eu/career?company=Ericsson&career_ns=job_application&src=Eightfold&career_job_req_id={{job_id}}&#34;,",
+      "adapter": "workday",
+      "handle": "nttglobaldatacenters.wd501.myworkdayjobs.com/External",
       "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "alt1-ericsson-saudi",
-      "label": "Ericsson Saudi (board 2)",
-      "company": "Ericsson Saudi",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://jobs.ericsson.com/careers/join?domain=ericsson.com",
-      "region": "global",
-      "needsBrowser": true,
       "enabled": true
     },
     {
@@ -1443,37 +1201,6 @@
       "handle": "https://www.palantir.com/careers/meritocracy-fellowship/",
       "region": "global",
       "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "oraclecloud-fortinet-saudi",
-      "label": "Fortinet Saudi",
-      "company": "Fortinet Saudi",
-      "kind": "ats",
-      "adapter": "oraclecloud",
-      "handle": "edel.fa.us2.oraclecloud.com|CX_2001|CX_2001",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "alt1-fortinet-saudi",
-      "label": "Fortinet Saudi (board 2)",
-      "company": "Fortinet Saudi",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.fortinet.com/customers/coop",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "workday-suse",
-      "label": "SUSE",
-      "company": "SUSE",
-      "kind": "ats",
-      "adapter": "workday",
-      "handle": "suse.wd3.myworkdayjobs.com/Jobsatsuse",
-      "region": "global",
       "enabled": true
     },
     {
@@ -1520,6 +1247,16 @@
       "enabled": true
     },
     {
+      "id": "workday-suse",
+      "label": "SUSE",
+      "company": "SUSE",
+      "kind": "ats",
+      "adapter": "workday",
+      "handle": "suse.wd3.myworkdayjobs.com/Jobsatsuse",
+      "region": "global",
+      "enabled": true
+    },
+    {
       "id": "greenhouse-lucid-motors",
       "label": "Lucid Motors",
       "company": "Lucid Motors",
@@ -1538,16 +1275,6 @@
       "handle": "https://lucidmotors.com/careers/search",
       "region": "global",
       "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "recruitee-unifonic",
-      "label": "Unifonic",
-      "company": "Unifonic",
-      "kind": "ats",
-      "adapter": "recruitee",
-      "handle": "unifonic",
-      "region": "ksa",
       "enabled": true
     },
     {
@@ -1581,44 +1308,34 @@
       "enabled": true
     },
     {
-      "id": "workable-bupa-arabia",
-      "label": "Bupa Arabia",
-      "company": "Bupa Arabia",
+      "id": "bamboohr-kpmg-saudi-arabia",
+      "label": "KPMG Saudi Arabia",
+      "company": "KPMG Saudi Arabia",
       "kind": "ats",
-      "adapter": "workable",
-      "handle": "bupa",
+      "adapter": "bamboohr",
+      "handle": "kpmg",
       "region": "ksa",
       "enabled": true
     },
     {
-      "id": "alt1-bupa-arabia",
-      "label": "Bupa Arabia (board 2)",
-      "company": "Bupa Arabia",
+      "id": "alt1-kpmg-saudi-arabia",
+      "label": "KPMG Saudi Arabia (board 2)",
+      "company": "KPMG Saudi Arabia",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://www.bupa.com.sa/en/careers#",
+      "handle": "https://kpmg.com/sa/en/careers/graduates.html",
       "region": "ksa",
       "needsBrowser": true,
       "enabled": true
     },
     {
-      "id": "recruitee-google",
-      "label": "Google",
-      "company": "Google",
-      "kind": "ats",
-      "adapter": "recruitee",
-      "handle": "google",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "alt1-google",
-      "label": "Google (board 2)",
-      "company": "Google",
+      "id": "alt2-kpmg-saudi-arabia",
+      "label": "KPMG Saudi Arabia (board 3)",
+      "company": "KPMG Saudi Arabia",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://www.google.com/about/careers/applications/students",
-      "region": "global",
+      "handle": "https://kpmg.com/sa/en/careers/coop-and-internship-programs.html",
+      "region": "ksa",
       "needsBrowser": true,
       "enabled": true
     },
@@ -1730,16 +1447,6 @@
       "enabled": true
     },
     {
-      "id": "greenhouse-elastic",
-      "label": "Elastic",
-      "company": "Elastic",
-      "kind": "ats",
-      "adapter": "greenhouse",
-      "handle": "elastic",
-      "region": "global",
-      "enabled": true
-    },
-    {
       "id": "greenhouse-mongodb",
       "label": "MongoDB",
       "company": "MongoDB",
@@ -1780,6 +1487,16 @@
       "handle": "https://www.mongodb.com/careers/departments/campus",
       "region": "global",
       "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "greenhouse-elastic",
+      "label": "Elastic",
+      "company": "Elastic",
+      "kind": "ats",
+      "adapter": "greenhouse",
+      "handle": "elastic",
+      "region": "global",
       "enabled": true
     },
     {
@@ -1858,6 +1575,27 @@
       "enabled": true
     },
     {
+      "id": "greenhouse-zscaler",
+      "label": "Zscaler",
+      "company": "Zscaler",
+      "kind": "ats",
+      "adapter": "greenhouse",
+      "handle": "zscaler",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "alt1-zscaler",
+      "label": "Zscaler (board 2)",
+      "company": "Zscaler",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.zscaler.com/careers/search",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
       "id": "greenhouse-netskope",
       "label": "Netskope",
       "company": "Netskope",
@@ -1878,12 +1616,12 @@
       "enabled": true
     },
     {
-      "id": "ashby-confluent",
-      "label": "Confluent",
-      "company": "Confluent",
+      "id": "lever-sophos",
+      "label": "Sophos",
+      "company": "Sophos",
       "kind": "ats",
-      "adapter": "ashby",
-      "handle": "confluent",
+      "adapter": "lever",
+      "handle": "sophos",
       "region": "global",
       "enabled": true
     },
@@ -1919,6 +1657,16 @@
       "enabled": true
     },
     {
+      "id": "bamboohr-barq",
+      "label": "Barq",
+      "company": "Barq",
+      "kind": "ats",
+      "adapter": "bamboohr",
+      "handle": "barq",
+      "region": "ksa",
+      "enabled": true
+    },
+    {
       "id": "greenhouse-arabian-shield",
       "label": "Arabian Shield",
       "company": "Arabian Shield",
@@ -1929,13 +1677,24 @@
       "enabled": true
     },
     {
-      "id": "smartrecruiters-almosafer",
-      "label": "Almosafer",
-      "company": "Almosafer",
+      "id": "bamboohr-king-fahad-medical-city",
+      "label": "King Fahad Medical City",
+      "company": "King Fahad Medical City",
       "kind": "ats",
-      "adapter": "smartrecruiters",
-      "handle": "almosafer",
+      "adapter": "bamboohr",
+      "handle": "kfmc",
       "region": "ksa",
+      "enabled": true
+    },
+    {
+      "id": "alt1-king-fahad-medical-city",
+      "label": "King Fahad Medical City (board 2)",
+      "company": "King Fahad Medical City",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.kfmc.med.sa/EN/ATS/Pages/Internship.aspx%20",
+      "region": "ksa",
+      "needsBrowser": true,
       "enabled": true
     },
     {
@@ -1949,34 +1708,13 @@
       "enabled": true
     },
     {
-      "id": "smartrecruiters-seera-group",
-      "label": "Seera Group",
-      "company": "Seera Group",
+      "id": "smartrecruiters-almosafer",
+      "label": "Almosafer",
+      "company": "Almosafer",
       "kind": "ats",
       "adapter": "smartrecruiters",
-      "handle": "seera",
+      "handle": "almosafer",
       "region": "ksa",
-      "enabled": true
-    },
-    {
-      "id": "recruitee-meta",
-      "label": "Meta",
-      "company": "Meta",
-      "kind": "ats",
-      "adapter": "recruitee",
-      "handle": "meta",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "alt1-meta",
-      "label": "Meta (board 2)",
-      "company": "Meta",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.metacareers.com/careerprograms/students/",
-      "region": "global",
-      "needsBrowser": true,
       "enabled": true
     },
     {
@@ -2008,6 +1746,16 @@
       "handle": "https://www.commvault.com/careers/internships",
       "region": "global",
       "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "smartrecruiters-seera-group",
+      "label": "Seera Group",
+      "company": "Seera Group",
+      "kind": "ats",
+      "adapter": "smartrecruiters",
+      "handle": "seera",
+      "region": "ksa",
       "enabled": true
     },
     {
@@ -2064,36 +1812,6 @@
       "enabled": true
     },
     {
-      "id": "recruitee-alfa-technologies",
-      "label": "Alfa Technologies",
-      "company": "Alfa Technologies",
-      "kind": "ats",
-      "adapter": "recruitee",
-      "handle": "alfa",
-      "region": "ksa",
-      "enabled": true
-    },
-    {
-      "id": "smartrecruiters-nesma-trading",
-      "label": "Nesma Trading",
-      "company": "Nesma Trading",
-      "kind": "ats",
-      "adapter": "smartrecruiters",
-      "handle": "nesmatrading",
-      "region": "ksa",
-      "enabled": true
-    },
-    {
-      "id": "greenhouse-cloudflare-saudi",
-      "label": "Cloudflare Saudi",
-      "company": "Cloudflare Saudi",
-      "kind": "ats",
-      "adapter": "greenhouse",
-      "handle": "cloudflare",
-      "region": "global",
-      "enabled": true
-    },
-    {
       "id": "greenhouse-datadog",
       "label": "Datadog",
       "company": "Datadog",
@@ -2136,6 +1854,36 @@
       "enabled": true
     },
     {
+      "id": "greenhouse-recorded-future",
+      "label": "Recorded Future",
+      "company": "Recorded Future",
+      "kind": "ats",
+      "adapter": "greenhouse",
+      "handle": "recordedfuture",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "greenhouse-spire-solutions",
+      "label": "Spire Solutions",
+      "company": "Spire Solutions",
+      "kind": "ats",
+      "adapter": "greenhouse",
+      "handle": "spire",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "recruitee-protiviti",
+      "label": "Protiviti",
+      "company": "Protiviti",
+      "kind": "ats",
+      "adapter": "recruitee",
+      "handle": "protiviti",
+      "region": "global",
+      "enabled": true
+    },
+    {
       "id": "oraclecloud-public-investment-fund-pif",
       "label": "Public Investment Fund (PIF)",
       "company": "Public Investment Fund (PIF)",
@@ -2168,43 +1916,32 @@
       "enabled": true
     },
     {
-      "id": "oraclecloud-nhc-national-housing-company",
-      "label": "NHC (National Housing Company)",
-      "company": "NHC (National Housing Company)",
-      "kind": "ats",
-      "adapter": "oraclecloud",
-      "handle": "eghj.fa.em2.oraclecloud.com|CX_3001|CX_3001",
-      "region": "ksa",
-      "enabled": true
-    },
-    {
-      "id": "alt1-nhc-national-housing-company",
-      "label": "NHC (National Housing Company) (board 2)",
-      "company": "NHC (National Housing Company)",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.nhc.sa/ar/investment-opportunities",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "successfactors-sipchem",
-      "label": "Sipchem",
-      "company": "Sipchem",
-      "kind": "ats",
-      "adapter": "successfactors",
-      "handle": "https://career23.sapsf.com/career?company=C0002480584P&site=&lang=en_GB&requestParams=b4j8PDDwZLKgts70qq193SB3E5x42m2Qz0rDQBDGx9bS9A%2biCN4En6DEtkLAg9pia6DFUlEQD3Gz%0aGdMt6266u2krgk%2bkDyE%2bgR59AfHgO7jVSyMOzBxmvvl%2bwzx%2bQUEr2BiTKamlhvHaCdGjPkkKxffn%0al63r1zzkOlDmkkQdQo1UPpTMSKEeSR7Nk4NDWER15ti6brNioCLItEVUD6fIUwWbV70fc05EXDsz%0aiol4%2f%2bnt4uNz%2b76bA5gndmvFQLl%2fGQyGpx2%2fd2xgVTOD6QQeIP87BQMO5QyF8aPlvjOWoa7PMLRY%0aLSkj%2fChJ%2bN2ypHBDuEY7t9IBS5AzkbGuDtv9nSFGTCE1BtaoVAo5MUyKIAsrNd1dr%2bG59YaVMe0L%0ag0oQfq5R%2fQcsUnmbEJE5ptp2Xbfe9Nw9rzmwjpQoRBUIneHoNNRUsdCaOFzGTPwROApjpi3dfmrx%0a1gwdRdBtzb8BxJmCrA%3d%3d&career_ns=subscribe&navBarLevel=MY%5fPROFILE&_s.crb=zJSDl8Z1cD1n4IO0OQcc5N9XNiBXxs9VMmmOx8YgdSI%3d",
-      "region": "ksa",
-      "enabled": true
-    },
-    {
       "id": "oraclecloud-tawal",
       "label": "TAWAL",
       "company": "TAWAL",
       "kind": "ats",
       "adapter": "oraclecloud",
       "handle": "ialegs.fa.ocs.oraclecloud.com|CX_2001|CX_2001",
+      "region": "ksa",
+      "enabled": true
+    },
+    {
+      "id": "ashby-lean-technologies",
+      "label": "Lean Technologies",
+      "company": "Lean Technologies",
+      "kind": "ats",
+      "adapter": "ashby",
+      "handle": "LeanTech",
+      "region": "ksa",
+      "enabled": true
+    },
+    {
+      "id": "greenhouse-hala",
+      "label": "Hala",
+      "company": "Hala",
+      "kind": "ats",
+      "adapter": "greenhouse",
+      "handle": "hala",
       "region": "ksa",
       "enabled": true
     },
@@ -2226,59 +1963,6 @@
       "adapter": "workable",
       "handle": "mrsool-3",
       "region": "ksa",
-      "enabled": true
-    },
-    {
-      "id": "successfactors-wipro",
-      "label": "Wipro",
-      "company": "Wipro",
-      "kind": "ats",
-      "adapter": "successfactors",
-      "handle": "https://hcm55.sapsf.eu/messagebundle/_/vmod_3/common!/verp/ui/common-messagebundles/resources/i18n/common-components/messagebundle.properties&quot;},&quot;manifest&quot;:{&quot;async&quot;:true,&quot;path&quot;:&quot;asset-manifest-entrypoints.json?tag=b2605.26&quot;},&quot;root&quot;:{&quot;verp&quot;:{&quot;baseUrl&quot;:&quot;https://hcm55.sapsf.eu/verp/vmod_3&quot;,&quot;module&quot;:&quot;rmk-jobs-search&quot;,&quot;tag&quot;:&quot;b2605.26&quot;}}}}",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "alt1-wipro",
-      "label": "Wipro (board 2)",
-      "company": "Wipro",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://careers.wipro.com/content/Early-Careers/?locale=en_US",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt2-wipro",
-      "label": "Wipro (board 3)",
-      "company": "Wipro",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://careers.wipro.com/talentcommunity/subscribe/?locale=en_US",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "jsonld-microsoft",
-      "label": "Microsoft",
-      "company": "Microsoft",
-      "kind": "career-page",
-      "adapter": "jsonld",
-      "handle": "https://apply.careers.microsoft.com/careers?start=0&pid=1970393556972152&sort_by=timestamp",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "alt1-microsoft",
-      "label": "Microsoft (board 2)",
-      "company": "Microsoft",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://apply.careers.microsoft.com/careers/join",
-      "region": "global",
-      "needsBrowser": true,
       "enabled": true
     },
     {
@@ -2374,16 +2058,6 @@
       "enabled": true
     },
     {
-      "id": "oraclecloud-general-entertainment-authority",
-      "label": "General Entertainment Authority",
-      "company": "General Entertainment Authority",
-      "kind": "ats",
-      "adapter": "oraclecloud",
-      "handle": "fa-ewnz-saasfaprod1.fa.ocs.oraclecloud.com|CX_1|CX_1",
-      "region": "ksa",
-      "enabled": true
-    },
-    {
       "id": "oraclecloud-saudi-pro-league",
       "label": "Saudi Pro League",
       "company": "Saudi Pro League",
@@ -2420,27 +2094,6 @@
       "kind": "career-page",
       "adapter": "browser",
       "handle": "https://corporate.visa.com/en/careers/early-careers.html",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "jsonld-qualcomm",
-      "label": "Qualcomm",
-      "company": "Qualcomm",
-      "kind": "career-page",
-      "adapter": "jsonld",
-      "handle": "https://careers.qualcomm.com/careers?start=0&pid=446719884008&sort_by=timestamp",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "alt1-qualcomm",
-      "label": "Qualcomm (board 2)",
-      "company": "Qualcomm",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://careers.qualcomm.com/careers/join",
       "region": "global",
       "needsBrowser": true,
       "enabled": true
@@ -2568,17 +2221,7 @@
       "company": "Aramco Digital",
       "kind": "ats",
       "adapter": "oraclecloud",
-      "handle": "fa-exrn-saasfaprod1.fa.ocs.oraclecloud.com|CX_3001|CX_3001",
-      "region": "ksa",
-      "enabled": true
-    },
-    {
-      "id": "oraclecloud-weatherford",
-      "label": "Weatherford",
-      "company": "Weatherford",
-      "kind": "ats",
-      "adapter": "oraclecloud",
-      "handle": "fa-exmi-saasfaprod1.fa.ocs.oraclecloud.com|CX_1|CX_1",
+      "handle": "fa-exrn-saasfaprod1.fa.ocs.oraclecloud.com|CX_5001|CX_5001",
       "region": "ksa",
       "enabled": true
     },
@@ -2636,48 +2279,6 @@
       "enabled": true
     },
     {
-      "id": "jsonld-microsoft-arabia",
-      "label": "Microsoft Arabia",
-      "company": "Microsoft Arabia",
-      "kind": "career-page",
-      "adapter": "jsonld",
-      "handle": "https://apply.careers.microsoft.com/careers?start=0&pid=1970393556961344&sort_by=timestamp",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "alt1-microsoft-arabia",
-      "label": "Microsoft Arabia (board 2)",
-      "company": "Microsoft Arabia",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://apply.careers.microsoft.com/careers/join",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "successfactors-fujitsu",
-      "label": "Fujitsu",
-      "company": "Fujitsu",
-      "kind": "ats",
-      "adapter": "successfactors",
-      "handle": "https://hcm50.sapsf.com/messagebundle/_/vmod_3/common!/verp/ui/common-messagebundles/resources/i18n/common-components/messagebundle.properties&quot;},&quot;manifest&quot;:{&quot;async&quot;:true,&quot;path&quot;:&quot;asset-manifest-entrypoints.json?tag=b2605.26&quot;},&quot;root&quot;:{&quot;verp&quot;:{&quot;baseUrl&quot;:&quot;https://hcm50.sapsf.com/verp/vmod_3&quot;,&quot;module&quot;:&quot;rmk-jobs-search&quot;,&quot;tag&quot;:&quot;b2605.26&quot;}}}}",
-      "region": "global",
-      "enabled": true
-    },
-    {
-      "id": "alt1-fujitsu",
-      "label": "Fujitsu (board 2)",
-      "company": "Fujitsu",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://global.fujitsu/en-global/careers#opportunities",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
       "id": "successfactors-dynatrace",
       "label": "Dynatrace",
       "company": "Dynatrace",
@@ -2696,16 +2297,6 @@
       "handle": "https://www.dynatrace.com/careers/early-careers/",
       "region": "global",
       "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "workday-cloudera-saudi",
-      "label": "Cloudera Saudi",
-      "company": "Cloudera Saudi",
-      "kind": "ats",
-      "adapter": "workday",
-      "handle": "cloudera.wd5.myworkdayjobs.com/External_Career",
-      "region": "global",
       "enabled": true
     },
     {
@@ -2960,6 +2551,17 @@
       "region": "ksa",
       "needsBrowser": true,
       "enabled": true
+    },
+    {
+      "id": "browser-sipchem",
+      "label": "Sipchem",
+      "company": "Sipchem",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.sipchem.com/careers",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": false
     },
     {
       "id": "browser-advanced-petrochemical",
@@ -3231,7 +2833,7 @@
       "company": "AlJammaz Technologies",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://www.aljammaztechnologies.com/jobs",
+      "handle": "https://www.aljammaztechnologies.com/careers",
       "region": "ksa",
       "needsBrowser": true,
       "enabled": false
@@ -3243,6 +2845,17 @@
       "kind": "career-page",
       "adapter": "browser",
       "handle": "https://www.cipher.com.sa/careers",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "browser-unifonic",
+      "label": "Unifonic",
+      "company": "Unifonic",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.unifonic.com/en/careers",
       "region": "ksa",
       "needsBrowser": true,
       "enabled": true
@@ -3473,7 +3086,7 @@
       "company": "Moyasar",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://moyasar.com/en/resources/careers/",
+      "handle": "https://moyasar.com/en/careers",
       "region": "ksa",
       "needsBrowser": true,
       "enabled": false
@@ -3627,7 +3240,7 @@
       "company": "Abdul Latif Jameel",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://alj.com/en/about/careers/",
+      "handle": "https://alj.com/en/careers",
       "region": "ksa",
       "needsBrowser": true,
       "enabled": true
@@ -3974,6 +3587,28 @@
       "enabled": true
     },
     {
+      "id": "browser-bupa-arabia",
+      "label": "Bupa Arabia",
+      "company": "Bupa Arabia",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://careers.bupa.com.sa/en/job-search-results/",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "alt1-bupa-arabia",
+      "label": "Bupa Arabia (board 2)",
+      "company": "Bupa Arabia",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.bupa.com.sa/en/careers#",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
       "id": "browser-tawuniya",
       "label": "Tawuniya",
       "company": "Tawuniya",
@@ -4106,39 +3741,6 @@
       "enabled": true
     },
     {
-      "id": "browser-kpmg-saudi-arabia",
-      "label": "KPMG Saudi Arabia",
-      "company": "KPMG Saudi Arabia",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://kpmg.com/sa/en/careers.html",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt1-kpmg-saudi-arabia",
-      "label": "KPMG Saudi Arabia (board 2)",
-      "company": "KPMG Saudi Arabia",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://kpmg.com/sa/en/careers/graduates.html",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt2-kpmg-saudi-arabia",
-      "label": "KPMG Saudi Arabia (board 3)",
-      "company": "KPMG Saudi Arabia",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://kpmg.com/sa/en/careers/coop-and-internship-programs.html",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
       "id": "browser-mckinsey-company",
       "label": "McKinsey & Company",
       "company": "McKinsey & Company",
@@ -4260,6 +3862,39 @@
       "enabled": true
     },
     {
+      "id": "browser-wipro",
+      "label": "Wipro",
+      "company": "Wipro",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://careers.wipro.com/search/?searchResultView=LIST",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "alt1-wipro",
+      "label": "Wipro (board 2)",
+      "company": "Wipro",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://careers.wipro.com/content/Early-Careers/?locale=en_US",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "alt2-wipro",
+      "label": "Wipro (board 3)",
+      "company": "Wipro",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://careers.wipro.com/talentcommunity/subscribe/?locale=en_US",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
       "id": "browser-infosys",
       "label": "Infosys",
       "company": "Infosys",
@@ -4301,8 +3936,7 @@
       "handle": "https://careers.hcltech.com/go/NonTPDemand/9558355/",
       "region": "global",
       "needsBrowser": true,
-      "enabled": false,
-      "note": "blocks automation: posting pages render no description or location"
+      "enabled": true
     },
     {
       "id": "alt2-hcltech",
@@ -4313,8 +3947,7 @@
       "handle": "https://careers.hcltech.com/talentcommunity/subscribe/?locale=en_US",
       "region": "global",
       "needsBrowser": true,
-      "enabled": false,
-      "note": "blocks automation: posting pages render no description or location"
+      "enabled": true
     },
     {
       "id": "browser-atos",
@@ -4372,6 +4005,28 @@
       "enabled": false
     },
     {
+      "id": "browser-microsoft",
+      "label": "Microsoft",
+      "company": "Microsoft",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://apply.careers.microsoft.com/careers?start=0&pid=1970393556972152&sort_by=timestamp",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "alt1-microsoft",
+      "label": "Microsoft (board 2)",
+      "company": "Microsoft",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://apply.careers.microsoft.com/careers/join",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
       "id": "browser-amazon-web-services",
       "label": "Amazon Web Services",
       "company": "Amazon Web Services",
@@ -4383,12 +4038,78 @@
       "enabled": true
     },
     {
+      "id": "browser-google",
+      "label": "Google",
+      "company": "Google",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.google.com/about/careers/applications/",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "alt1-google",
+      "label": "Google (board 2)",
+      "company": "Google",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.google.com/about/careers/applications/students",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
       "id": "browser-oracle",
       "label": "Oracle",
       "company": "Oracle",
       "kind": "career-page",
       "adapter": "browser",
       "handle": "https://careers.oracle.com/en/sites/jobsearch",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "browser-sap",
+      "label": "SAP",
+      "company": "SAP",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://jobs.sap.com/",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "alt1-sap",
+      "label": "SAP (board 2)",
+      "company": "SAP",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://jobs.sap.com/content/Students-and-Graduates/?locale=en_US",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "alt2-sap",
+      "label": "SAP (board 3)",
+      "company": "SAP",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://performancemanager5.successfactors.eu/sf/careers?company=SAP",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "alt3-sap",
+      "label": "SAP (board 4)",
+      "company": "SAP",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://jobs.sap.com/content/students/",
       "region": "global",
       "needsBrowser": true,
       "enabled": true
@@ -4680,45 +4401,12 @@
       "enabled": true
     },
     {
-      "id": "browser-hashicorp",
-      "label": "HashiCorp",
-      "company": "HashiCorp",
+      "id": "browser-confluent",
+      "label": "Confluent",
+      "company": "Confluent",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://www.ibm.com/careers/search?q=hashicorp",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": false
-    },
-    {
-      "id": "alt1-hashicorp",
-      "label": "HashiCorp (board 2)",
-      "company": "HashiCorp",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.ibm.com/careers/career-opportunities",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt2-hashicorp",
-      "label": "HashiCorp (board 3)",
-      "company": "HashiCorp",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.ibm.com/careers/internships",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "browser-informatica",
-      "label": "Informatica",
-      "company": "Informatica",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.salesforce.com/company/careers/jobs/?search=informatica&pagesize=20",
+      "handle": "https://www.confluent.io/careers/",
       "region": "global",
       "needsBrowser": true,
       "enabled": false
@@ -4766,28 +4454,6 @@
       "region": "global",
       "needsBrowser": true,
       "enabled": false
-    },
-    {
-      "id": "browser-zscaler",
-      "label": "Zscaler",
-      "company": "Zscaler",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.zscaler.com/careers",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt1-zscaler",
-      "label": "Zscaler (board 2)",
-      "company": "Zscaler",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.zscaler.com/careers/search",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
     },
     {
       "id": "browser-akamai",
@@ -5109,6 +4775,17 @@
       "enabled": false
     },
     {
+      "id": "browser-riyadh-airports",
+      "label": "Riyadh Airports",
+      "company": "Riyadh Airports",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.riyadhairports.com/en/careers",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": false
+    },
+    {
       "id": "browser-jadwa-investment",
       "label": "Jadwa Investment",
       "company": "Jadwa Investment",
@@ -5318,17 +4995,6 @@
       "enabled": true
     },
     {
-      "id": "browser-barq",
-      "label": "Barq",
-      "company": "Barq",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://barq.io/jobs",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": false
-    },
-    {
       "id": "browser-alinma-investment",
       "label": "Alinma Investment",
       "company": "Alinma Investment",
@@ -5343,28 +5009,6 @@
       "id": "browser-wamid",
       "label": "Wamid",
       "company": "Wamid",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://careers.tadawulgroup.sa/?lang=en",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": false
-    },
-    {
-      "id": "browser-muqassa",
-      "label": "Muqassa",
-      "company": "Muqassa",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://careers.tadawulgroup.sa/?lang=en",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": false
-    },
-    {
-      "id": "browser-edaa",
-      "label": "Edaa",
-      "company": "Edaa",
       "kind": "career-page",
       "adapter": "browser",
       "handle": "https://careers.tadawulgroup.sa/?lang=en",
@@ -5637,6 +5281,17 @@
       "enabled": false
     },
     {
+      "id": "browser-general-entertainment-authority",
+      "label": "General Entertainment Authority",
+      "company": "General Entertainment Authority",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.gea.gov.sa/careers",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": false
+    },
+    {
       "id": "browser-royal-commission-for-alula",
       "label": "Royal Commission for AlUla",
       "company": "Royal Commission for AlUla",
@@ -5686,7 +5341,7 @@
       "company": "Ministry of Energy",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://www.moenergy.gov.sa/careers",
+      "handle": "https://www.moenergy.gov.sa/ar/recruitment",
       "region": "ksa",
       "needsBrowser": true,
       "enabled": false
@@ -6000,28 +5655,6 @@
       "enabled": false
     },
     {
-      "id": "browser-king-fahad-medical-city",
-      "label": "King Fahad Medical City",
-      "company": "King Fahad Medical City",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.kfmc.med.sa/EN/Page/Pages/JoinUs.aspx",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": false
-    },
-    {
-      "id": "alt1-king-fahad-medical-city",
-      "label": "King Fahad Medical City (board 2)",
-      "company": "King Fahad Medical City",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.kfmc.med.sa/EN/ATS/Pages/Internship.aspx%20",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
       "id": "browser-magrabi-hospitals",
       "label": "Magrabi Hospitals",
       "company": "Magrabi Hospitals",
@@ -6187,12 +5820,23 @@
       "enabled": false
     },
     {
-      "id": "browser-amazon",
-      "label": "Amazon",
-      "company": "Amazon",
+      "id": "browser-meta",
+      "label": "Meta",
+      "company": "Meta",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://www.amazon.jobs/en/",
+      "handle": "https://www.metacareers.com/jobsearch/",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": false
+    },
+    {
+      "id": "alt1-meta",
+      "label": "Meta (board 2)",
+      "company": "Meta",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.metacareers.com/careerprograms/students/",
       "region": "global",
       "needsBrowser": true,
       "enabled": true
@@ -6226,6 +5870,28 @@
       "kind": "career-page",
       "adapter": "browser",
       "handle": "https://careers.pypl.com/university-hiring/University-Overview/default.aspx#university-job-tiles-container-interns",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "browser-qualcomm",
+      "label": "Qualcomm",
+      "company": "Qualcomm",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://careers.qualcomm.com/careers?start=0&pid=446719884008&sort_by=timestamp",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": false
+    },
+    {
+      "id": "alt1-qualcomm",
+      "label": "Qualcomm (board 2)",
+      "company": "Qualcomm",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://careers.qualcomm.com/careers/join",
       "region": "global",
       "needsBrowser": true,
       "enabled": true
@@ -6396,26 +6062,15 @@
       "enabled": true
     },
     {
-      "id": "browser-baker-hughes",
-      "label": "Baker Hughes",
-      "company": "Baker Hughes",
+      "id": "browser-weatherford",
+      "label": "Weatherford",
+      "company": "Weatherford",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://careers.bakerhughes.com/en/careers",
+      "handle": "https://careers.weatherford.com/#en/sites/CX_1",
       "region": "ksa",
       "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt1-baker-hughes",
-      "label": "Baker Hughes (board 2)",
-      "company": "Baker Hughes",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://careers.bakerhughes.com/global/en/Early-Careers-BakerHughes",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
+      "enabled": false
     },
     {
       "id": "browser-siemens-energy",
@@ -6473,6 +6128,50 @@
       "enabled": false
     },
     {
+      "id": "browser-rockwell-automation",
+      "label": "Rockwell Automation",
+      "company": "Rockwell Automation",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.rockwellautomation.com/en-us/careers.html",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": false
+    },
+    {
+      "id": "alt1-rockwell-automation",
+      "label": "Rockwell Automation (board 2)",
+      "company": "Rockwell Automation",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.rockwellautomation.com/en-us/company/careers/edge-student-early-career.html",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "alt2-rockwell-automation",
+      "label": "Rockwell Automation (board 3)",
+      "company": "Rockwell Automation",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.rockwellautomation.com/en-us/company/careers/edge-student-early-career/edge-student-programs.html",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "alt3-rockwell-automation",
+      "label": "Rockwell Automation (board 4)",
+      "company": "Rockwell Automation",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.rockwellautomation.com/en-us/company/careers/edge-student-early-career/edge-early-career.html",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
       "id": "browser-yokogawa",
       "label": "Yokogawa",
       "company": "Yokogawa",
@@ -6526,6 +6225,17 @@
       "region": "ksa",
       "needsBrowser": true,
       "enabled": true
+    },
+    {
+      "id": "browser-national-water-company",
+      "label": "National Water Company",
+      "company": "National Water Company",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.nwc.com.sa/AR/OurCompany/Careers/Pages/default.aspx",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": false
     },
     {
       "id": "browser-sal-saudi-logistics",
@@ -6605,89 +6315,12 @@
       "enabled": false
     },
     {
-      "id": "browser-saudi-arabian-mining-services",
-      "label": "Saudi Arabian Mining Services",
-      "company": "Saudi Arabian Mining Services",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://careers.maaden.com/gb/en",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": false
-    },
-    {
-      "id": "alt1-saudi-arabian-mining-services",
-      "label": "Saudi Arabian Mining Services (board 2)",
-      "company": "Saudi Arabian Mining Services",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://careers.maaden.com/gb/en/jointalentcommunity",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "browser-elm-academy",
-      "label": "Elm Academy",
-      "company": "Elm Academy",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://elm.sa/ar/recruitment/sectors/Pages/default.aspx",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
       "id": "browser-national-information-center",
       "label": "National Information Center",
       "company": "National Information Center",
       "kind": "career-page",
       "adapter": "browser",
       "handle": "https://nic.gov.sa/careers",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "browser-saudi-aramco-base-oil",
-      "label": "Saudi Aramco Base Oil",
-      "company": "Saudi Aramco Base Oil",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.luberef.com/careers",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": false
-    },
-    {
-      "id": "browser-riyadh-metro-rcrc",
-      "label": "Riyadh Metro (RCRC)",
-      "company": "Riyadh Metro (RCRC)",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.rcrc.gov.sa/careers",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": false
-    },
-    {
-      "id": "browser-kaust-innovation",
-      "label": "KAUST Innovation",
-      "company": "KAUST Innovation",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.kaust.edu.sa/en/error/404?404;https://www.kaust.edu.sa:443/en/careers",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": false
-    },
-    {
-      "id": "alt1-kaust-innovation",
-      "label": "KAUST Innovation (board 2)",
-      "company": "KAUST Innovation",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.kaust.edu.sa/ar/study/student-central",
       "region": "ksa",
       "needsBrowser": true,
       "enabled": true
@@ -6757,28 +6390,6 @@
       "region": "ksa",
       "needsBrowser": true,
       "enabled": false
-    },
-    {
-      "id": "browser-bupa-labs",
-      "label": "Bupa Labs",
-      "company": "Bupa Labs",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://careers.bupa.com.sa/en/job-search-results/",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": false
-    },
-    {
-      "id": "alt1-bupa-labs",
-      "label": "Bupa Labs (board 2)",
-      "company": "Bupa Labs",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.bupa.com.sa/en/careers#",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
     },
     {
       "id": "browser-saudi-aramco-nabors-drilling",
@@ -6957,17 +6568,6 @@
       "enabled": true
     },
     {
-      "id": "browser-saudi-data-and-ai-authority-academy",
-      "label": "Saudi Data and AI Authority Academy",
-      "company": "Saudi Data and AI Authority Academy",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://sdaia.gov.sa/ar/SDAIA/SdaiaStrategies/Pages/EmploymentStrategy.aspx",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
       "id": "browser-national-debt-management-center",
       "label": "National Debt Management Center",
       "company": "National Debt Management Center",
@@ -7029,17 +6629,6 @@
       "kind": "career-page",
       "adapter": "browser",
       "handle": "https://www.vision2030.gov.sa/careers",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": false
-    },
-    {
-      "id": "browser-saudi-standards-metrology-authority",
-      "label": "Saudi Standards Metrology Authority",
-      "company": "Saudi Standards Metrology Authority",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.saso.gov.sa/ar/mediacenter/Pages/JoinOurTeam.aspx",
       "region": "ksa",
       "needsBrowser": true,
       "enabled": false
@@ -7144,6 +6733,17 @@
       "enabled": true
     },
     {
+      "id": "browser-asfar",
+      "label": "Asfar",
+      "company": "Asfar",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://asfar.com/careers/",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": false
+    },
+    {
       "id": "browser-saudi-coffee-company",
       "label": "Saudi Coffee Company",
       "company": "Saudi Coffee Company",
@@ -7221,28 +6821,6 @@
       "enabled": false
     },
     {
-      "id": "browser-neom-tech-and-digital",
-      "label": "NEOM Tech and Digital",
-      "company": "NEOM Tech and Digital",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://careers.neom.com/careers",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt1-neom-tech-and-digital",
-      "label": "NEOM Tech and Digital (board 2)",
-      "company": "NEOM Tech and Digital",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://careers.neom.com/careers/join?domain=neom.com&hl=en",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
       "id": "browser-tonomus",
       "label": "Tonomus",
       "company": "Tonomus",
@@ -7254,45 +6832,12 @@
       "enabled": true
     },
     {
-      "id": "browser-alat-semiconductors",
-      "label": "Alat Semiconductors",
-      "company": "Alat Semiconductors",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://alat.com/en/careers/",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
       "id": "browser-humain",
       "label": "Humain",
       "company": "Humain",
       "kind": "career-page",
       "adapter": "browser",
       "handle": "https://www.humain.com/careers",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "browser-saudi-awwal-bank-digital",
-      "label": "Saudi Awwal Bank Digital",
-      "company": "Saudi Awwal Bank Digital",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.sab.com/en/about-us/careers/",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt1-saudi-awwal-bank-digital",
-      "label": "Saudi Awwal Bank Digital (board 2)",
-      "company": "Saudi Awwal Bank Digital",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.sab.com/en/about-us/careers/graduate-opportunities/",
       "region": "ksa",
       "needsBrowser": true,
       "enabled": true
@@ -7380,7 +6925,7 @@
       "company": "Saudi Home Loans",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://www.saudihomeloans.com/careers",
+      "handle": "https://www.saudihomeloans.com/en/careers",
       "region": "ksa",
       "needsBrowser": true,
       "enabled": false
@@ -7529,17 +7074,6 @@
       "enabled": false
     },
     {
-      "id": "browser-cipher-saudi",
-      "label": "Cipher Saudi",
-      "company": "Cipher Saudi",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.cipher.com.sa/careers",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
       "id": "browser-saudi-technology-ventures",
       "label": "Saudi Technology Ventures",
       "company": "Saudi Technology Ventures",
@@ -7556,7 +7090,7 @@
       "company": "Wa'ed Ventures Portfolio",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://waedventures.com/jobs",
+      "handle": "https://waedventures.com/careers",
       "region": "ksa",
       "needsBrowser": true,
       "enabled": false
@@ -7582,17 +7116,6 @@
       "region": "ksa",
       "needsBrowser": true,
       "enabled": true
-    },
-    {
-      "id": "browser-sary-technology",
-      "label": "Sary Technology",
-      "company": "Sary Technology",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://sary.zenats.com/en",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": false
     },
     {
       "id": "browser-tarabut",
@@ -7639,17 +7162,6 @@
       "enabled": false
     },
     {
-      "id": "browser-takamol-business-services",
-      "label": "Takamol Business Services",
-      "company": "Takamol Business Services",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.takamolholding.com/en/careers",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
       "id": "browser-bayanat-al-oula",
       "label": "Bayanat Al-Oula",
       "company": "Bayanat Al-Oula",
@@ -7661,37 +7173,15 @@
       "enabled": false
     },
     {
-      "id": "browser-etihad-etisalat-digital",
-      "label": "Etihad Etisalat Digital",
-      "company": "Etihad Etisalat Digital",
+      "id": "browser-alfa-technologies",
+      "label": "Alfa Technologies",
+      "company": "Alfa Technologies",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://careers.mobily.com.sa/en/sites/opportunities",
+      "handle": "https://alfa-tech.sa/careers",
       "region": "ksa",
       "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "browser-saudi-telecom-solutions",
-      "label": "Saudi Telecom Solutions",
-      "company": "Saudi Telecom Solutions",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://careers.solutions.com.sa/viewalljobs/",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt1-saudi-telecom-solutions",
-      "label": "Saudi Telecom Solutions (board 2)",
-      "company": "Saudi Telecom Solutions",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://careers.solutions.com.sa/go/Trainee/7764123/",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
+      "enabled": false
     },
     {
       "id": "browser-rakiza",
@@ -7703,39 +7193,6 @@
       "region": "ksa",
       "needsBrowser": true,
       "enabled": false
-    },
-    {
-      "id": "browser-zain-business",
-      "label": "Zain Business",
-      "company": "Zain Business",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://sa.zain.com/about/careers/",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt1-zain-business",
-      "label": "Zain Business (board 2)",
-      "company": "Zain Business",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://sa.zain.com/about/join-zain/",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt2-zain-business",
-      "label": "Zain Business (board 3)",
-      "company": "Zain Business",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://sa.zain.com/about/co-op-program/",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
     },
     {
       "id": "browser-integrated-digital-systems",
@@ -7780,28 +7237,6 @@
       "region": "ksa",
       "needsBrowser": true,
       "enabled": false
-    },
-    {
-      "id": "browser-alfaisal-university-research",
-      "label": "Alfaisal University Research",
-      "company": "Alfaisal University Research",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://jobs.alfaisal.edu/",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": false
-    },
-    {
-      "id": "alt1-alfaisal-university-research",
-      "label": "Alfaisal University Research (board 2)",
-      "company": "Alfaisal University Research",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://jobs.alfaisal.edu/col/",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
     },
     {
       "id": "browser-dar-al-hekma-university",
@@ -7881,17 +7316,6 @@
       "enabled": false
     },
     {
-      "id": "browser-elm-education",
-      "label": "Elm Education",
-      "company": "Elm Education",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://elm.sa/ar/recruitment/sectors/Pages/default.aspx",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
       "id": "browser-riyadh-schools",
       "label": "Riyadh Schools",
       "company": "Riyadh Schools",
@@ -7901,50 +7325,6 @@
       "region": "ksa",
       "needsBrowser": true,
       "enabled": false
-    },
-    {
-      "id": "browser-saudi-arabian-parsons",
-      "label": "Saudi Arabian Parsons",
-      "company": "Saudi Arabian Parsons",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://jobs.parsons.com/",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": false
-    },
-    {
-      "id": "alt1-saudi-arabian-parsons",
-      "label": "Saudi Arabian Parsons (board 2)",
-      "company": "Saudi Arabian Parsons",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://jobs.parsons.com/internships",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt2-saudi-arabian-parsons",
-      "label": "Saudi Arabian Parsons (board 3)",
-      "company": "Saudi Arabian Parsons",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://jobs.parsons.com/career-search?search=intern",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt3-saudi-arabian-parsons",
-      "label": "Saudi Arabian Parsons (board 4)",
-      "company": "Saudi Arabian Parsons",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://jobs.parsons.com/talent-community",
-      "region": "ksa",
-      "needsBrowser": true,
-      "enabled": true
     },
     {
       "id": "browser-al-bawani",
@@ -8145,68 +7525,35 @@
       "enabled": false
     },
     {
-      "id": "browser-ibm-saudi-arabia",
-      "label": "IBM Saudi Arabia",
-      "company": "IBM Saudi Arabia",
+      "id": "browser-sap-saudi-arabia",
+      "label": "SAP Saudi Arabia",
+      "company": "SAP Saudi Arabia",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://www.ibm.com/careers/search",
-      "region": "global",
+      "handle": "https://jobs.sap.com/viewalljobs/",
+      "region": "ksa",
       "needsBrowser": true,
       "enabled": true
     },
     {
-      "id": "alt1-ibm-saudi-arabia",
-      "label": "IBM Saudi Arabia (board 2)",
-      "company": "IBM Saudi Arabia",
+      "id": "alt1-sap-saudi-arabia",
+      "label": "SAP Saudi Arabia (board 2)",
+      "company": "SAP Saudi Arabia",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://www.ibm.com/careers/career-opportunities",
-      "region": "global",
+      "handle": "https://jobs.sap.com/content/Students-and-Graduates/?locale=en_US",
+      "region": "ksa",
       "needsBrowser": true,
       "enabled": true
     },
     {
-      "id": "alt2-ibm-saudi-arabia",
-      "label": "IBM Saudi Arabia (board 3)",
-      "company": "IBM Saudi Arabia",
+      "id": "alt2-sap-saudi-arabia",
+      "label": "SAP Saudi Arabia (board 3)",
+      "company": "SAP Saudi Arabia",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://www.ibm.com/careers/internships",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "browser-google-cloud-saudi",
-      "label": "Google Cloud Saudi",
-      "company": "Google Cloud Saudi",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.google.com/about/careers/applications/",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "alt1-google-cloud-saudi",
-      "label": "Google Cloud Saudi (board 2)",
-      "company": "Google Cloud Saudi",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.google.com/about/careers/applications/students",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
-    },
-    {
-      "id": "browser-oracle-saudi-arabia",
-      "label": "Oracle Saudi Arabia",
-      "company": "Oracle Saudi Arabia",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://careers.oracle.com/en/sites/jobsearch",
-      "region": "global",
+      "handle": "https://performancemanager5.successfactors.eu/sf/careers?company=SAP",
+      "region": "ksa",
       "needsBrowser": true,
       "enabled": true
     },
@@ -8266,15 +7613,26 @@
       "enabled": false
     },
     {
-      "id": "browser-ntt-data",
-      "label": "NTT DATA",
-      "company": "NTT DATA",
+      "id": "browser-fujitsu",
+      "label": "Fujitsu",
+      "company": "Fujitsu",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://careers.nttdata.com/",
+      "handle": "https://www.jobs.global.fujitsu.com/search?searchResultView=LIST",
       "region": "global",
       "needsBrowser": true,
       "enabled": false
+    },
+    {
+      "id": "alt1-fujitsu",
+      "label": "Fujitsu (board 2)",
+      "company": "Fujitsu",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://global.fujitsu/en-global/careers#opportunities",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
     },
     {
       "id": "browser-hitachi-vantara",
@@ -8286,17 +7644,6 @@
       "region": "global",
       "needsBrowser": true,
       "enabled": false
-    },
-    {
-      "id": "browser-nokia-saudi",
-      "label": "Nokia Saudi",
-      "company": "Nokia Saudi",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://www.nokia.com/careers/",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": true
     },
     {
       "id": "browser-zte",
@@ -8382,18 +7729,7 @@
       "kind": "career-page",
       "adapter": "browser",
       "handle": "https://careers.cisco.com/global/en/splunk",
-      "region": "global",
-      "needsBrowser": true,
-      "enabled": false
-    },
-    {
-      "id": "browser-nutanix-arabia",
-      "label": "Nutanix Arabia",
-      "company": "Nutanix Arabia",
-      "kind": "career-page",
-      "adapter": "browser",
-      "handle": "https://careers.nutanix.com/en/",
-      "region": "global",
+      "region": "ksa",
       "needsBrowser": true,
       "enabled": false
     },
@@ -8442,13 +7778,90 @@
       "enabled": true
     },
     {
-      "id": "browser-red-hat-saudi",
-      "label": "Red Hat Saudi",
-      "company": "Red Hat Saudi",
+      "id": "browser-check-point",
+      "label": "Check Point",
+      "company": "Check Point",
       "kind": "career-page",
       "adapter": "browser",
-      "handle": "https://www.redhat.com/en/jobs",
+      "handle": "https://www.checkpoint.com/careers/",
       "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "browser-inspira-enterprise",
+      "label": "Inspira Enterprise",
+      "company": "Inspira Enterprise",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://inspiraenterprise.com/careers",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "browser-seclore",
+      "label": "Seclore",
+      "company": "Seclore",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.seclore.com/en/careers",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": false
+    },
+    {
+      "id": "browser-saudi-cloud-computing-company-sccc",
+      "label": "Saudi Cloud Computing Company (SCCC)",
+      "company": "Saudi Cloud Computing Company (SCCC)",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://sccc.sa/en",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "browser-ezditek",
+      "label": "EzdiTek",
+      "company": "EzdiTek",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://ezditek.com/",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "browser-taqnia",
+      "label": "TAQNIA",
+      "company": "TAQNIA",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.taqnia.com/",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "browser-gulf-business-machines-gbm",
+      "label": "Gulf Business Machines (GBM)",
+      "company": "Gulf Business Machines (GBM)",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.gbmme.com/",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "browser-saudi-federation-for-cybersecurity-and-p",
+      "label": "Saudi Federation for Cybersecurity and Programming (SAFCSP)",
+      "company": "Saudi Federation for Cybersecurity and Programming (SAFCSP)",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://safcsp.org.sa/",
+      "region": "ksa",
       "needsBrowser": true,
       "enabled": true
     }
