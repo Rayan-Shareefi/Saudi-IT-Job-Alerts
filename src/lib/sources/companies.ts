@@ -162,7 +162,9 @@ export const COMPANIES: CompanySeed[] = [
 
   /* --------------------------- telecom & tech ---------------------------- */
   { name: "stc", careersUrl: "https://careers.stc.com.sa/", sector: "telecom-tech", priority: 1, altUrls: ["https://careers.stc.com.sa/go/Cooperative-Training/7736023/", "https://careers.stc.com.sa/go/Early-Career/7735923/", "https://careers.stc.com.sa/content/COOP/?locale=en_US"] },
-  { name: "solutions by stc", careersUrl: "https://careers.solutions.com.sa/viewalljobs/", sector: "telecom-tech", priority: 1 },
+  // The Trainee board was under the old name "Saudi Telecom Solutions" and
+  // was lost when the employer was renamed (2026-11-01 rediscovery).
+  { name: "solutions by stc", careersUrl: "https://careers.solutions.com.sa/viewalljobs/", sector: "telecom-tech", priority: 1, altUrls: ["https://careers.solutions.com.sa/go/Trainee/7764123/"] },
   { name: "sirar by stc", careersUrl: "https://www.linkedin.com/company/sirarbystc/jobs/", sector: "security-vendor", priority: 1 },
   { name: "center3", careersUrl: "https://www.center3.com/careers", sector: "telecom-tech", priority: 2 },
   { name: "Mobily", careersUrl: "https://careers.mobily.com.sa/en/sites/opportunities", sector: "telecom-tech", priority: 1 },

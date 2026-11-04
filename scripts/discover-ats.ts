@@ -22,7 +22,7 @@
 // Needed for the accepted-URL overrides below: without it isConfigured() is
 // false when this runs from the CLI and your decisions are silently skipped.
 import "./load-env";
-import { writeFileSync, mkdirSync, existsSync } from "node:fs";
+import { writeFileSync, mkdirSync, existsSync, readFileSync } from "node:fs";
 import { COMPANIES, isGlobalEmployer, type CompanySeed } from "../src/lib/sources/companies";
 import { acceptedUrlOverrides, isConfigured } from "../src/lib/db";
 import { getText, mapLimit, request } from "../src/lib/http";
@@ -662,6 +662,26 @@ function careersUrlKey(raw: string): string {
   if (!existsSync("data")) mkdirSync("data", { recursive: true });
   const all = [...results.values()];
   const sources = all.flatMap((r) => r.found);
+
+  /*
+   * Keep what this pass did not find again. The monthly pass of 2026-11-01
+   * dropped 30 boards it failed to rediscover that night - 10 of them working
+   * (Unifonic, Rockwell Automation, Bupa Arabia, HashiCorp's careers page...) -
+   * and their postings left the board with them. (60 more ids went, but those
+   * were boards listed twice, still read under one id: no loss - which is why
+   * the same board, by adapter and address, is not kept twice.) A board
+   * missed on one pass is not gone: it stays while its employer is listed,
+   * and if it really broke, Failing sources and the repair checker deal with it.
+   */
+  const previous = existsSync("data/discovered.json")
+    ? ((JSON.parse(readFileSync("data/discovered.json", "utf8")) as { sources?: SourceDefinition[] }).sources ?? [])
+    : [];
+  const listed = new Set(COMPANIES.map((c) => c.name));
+  const foundIds = new Set(sources.map((s) => s.id));
+  const foundBoards = new Set(sources.map((s) => `${s.adapter}|${s.handle}`));
+  const kept = previous.filter((p) => !foundIds.has(p.id) && listed.has(p.company ?? p.label) && !foundBoards.has(`${p.adapter}|${p.handle}`));
+  sources.push(...kept);
+  if (kept.length > 0) console.log(`kept ${kept.length} board(s) from the previous discovery that this pass did not find again`);
 
   writeFileSync(
     "data/discovered.json",

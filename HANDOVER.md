@@ -353,6 +353,19 @@ npm run fix:bytes         # repair regex escapes mangled by shell edits
 24. **`page.content()` throws while a page is still navigating** (boards that
     redirect after loading: MongoDB, Parsons, GIB). The browser reader waits
     for the page to settle and asks again (`settledContent`).
+26. **A board missed on one rediscovery pass is not gone.** The monthly
+    `sources:discover` (rediscover.yml) wrote only what that night's pass
+    found. On 2026-11-01, 91 ids disappeared: 60 were boards listed twice
+    (employers sharing one board, or acquired - CyberArk's now Palo Alto's,
+    HashiCorp's IBM's), still read under one id, no loss; 30 were truly
+    dropped, 10 of them working (Unifonic, Rockwell Automation, Bupa Arabia,
+    HashiCorp's careers page...), and their postings left the board; and a
+    renamed employer ("Saudi Telecom Solutions" -> "solutions by stc") lost
+    its Trainee board. It now keeps every previous board while its employer
+    is listed and nothing found now is the same board (by adapter and
+    address); the 30 and the Trainee board (now an altUrl) were put back.
+    Failing sources and the repair checker deal with ones that really broke.
+    A renamed employer must carry its altUrls over.
 25. **Never reinstall packages from inside the running worker.** It ran
     `npm ci` in-process with no time limit after an update changed
     package-lock.json; on Windows its own open files in node_modules stalled

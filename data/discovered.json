@@ -7864,6 +7864,326 @@
       "region": "ksa",
       "needsBrowser": true,
       "enabled": true
+    },
+    {
+      "id": "successfactors-sap",
+      "label": "SAP",
+      "company": "SAP",
+      "kind": "ats",
+      "adapter": "successfactors",
+      "handle": "https://career5.successfactors.eu/career?career_company=SAP&lang=en_US&company=SAP&site=&loginFlowRequired=true&_s.crb=FPX8lbWGt3yk6uxsmGyYBKLyRl2Q6jqtQoTRBxl4aco%3d",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "successfactors-riyadh-airports",
+      "label": "Riyadh Airports",
+      "company": "Riyadh Airports",
+      "kind": "ats",
+      "adapter": "successfactors",
+      "handle": "https://career23.sapsf.com/careers?company=riyadhairp",
+      "region": "ksa",
+      "enabled": true
+    },
+    {
+      "id": "workday-rockwell-automation",
+      "label": "Rockwell Automation",
+      "company": "Rockwell Automation",
+      "kind": "ats",
+      "adapter": "workday",
+      "handle": "rockwellautomation.wd1.myworkdayjobs.com/External_Rockwell_Automation",
+      "region": "ksa",
+      "enabled": true
+    },
+    {
+      "id": "oraclecloud-national-water-company",
+      "label": "National Water Company",
+      "company": "National Water Company",
+      "kind": "ats",
+      "adapter": "oraclecloud",
+      "handle": "fa-esst-saasfaprod1.fa.ocs.oraclecloud.com|CX_1|CX_1",
+      "region": "ksa",
+      "enabled": true
+    },
+    {
+      "id": "lever-asfar",
+      "label": "Asfar",
+      "company": "Asfar",
+      "kind": "ats",
+      "adapter": "lever",
+      "handle": "Asfar",
+      "region": "ksa",
+      "enabled": true
+    },
+    {
+      "id": "successfactors-sap-saudi-arabia",
+      "label": "SAP Saudi Arabia",
+      "company": "SAP Saudi Arabia",
+      "kind": "ats",
+      "adapter": "successfactors",
+      "handle": "https://career5.successfactors.eu/career?career_company=SAP&lang=en_US&company=SAP&site=&loginFlowRequired=true&_s.crb=FPX8lbWGt3yk6uxsmGyYBKLyRl2Q6jqtQoTRBxl4aco%3d",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "recruitee-unifonic",
+      "label": "Unifonic",
+      "company": "Unifonic",
+      "kind": "ats",
+      "adapter": "recruitee",
+      "handle": "unifonic",
+      "region": "ksa",
+      "enabled": true
+    },
+    {
+      "id": "workable-bupa-arabia",
+      "label": "Bupa Arabia",
+      "company": "Bupa Arabia",
+      "kind": "ats",
+      "adapter": "workable",
+      "handle": "bupa",
+      "region": "ksa",
+      "enabled": true
+    },
+    {
+      "id": "recruitee-google",
+      "label": "Google",
+      "company": "Google",
+      "kind": "ats",
+      "adapter": "recruitee",
+      "handle": "google",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "ashby-confluent",
+      "label": "Confluent",
+      "company": "Confluent",
+      "kind": "ats",
+      "adapter": "ashby",
+      "handle": "confluent",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "recruitee-meta",
+      "label": "Meta",
+      "company": "Meta",
+      "kind": "ats",
+      "adapter": "recruitee",
+      "handle": "meta",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "recruitee-alfa-technologies",
+      "label": "Alfa Technologies",
+      "company": "Alfa Technologies",
+      "kind": "ats",
+      "adapter": "recruitee",
+      "handle": "alfa",
+      "region": "ksa",
+      "enabled": true
+    },
+    {
+      "id": "smartrecruiters-nesma-trading",
+      "label": "Nesma Trading",
+      "company": "Nesma Trading",
+      "kind": "ats",
+      "adapter": "smartrecruiters",
+      "handle": "nesmatrading",
+      "region": "ksa",
+      "enabled": true
+    },
+    {
+      "id": "successfactors-sipchem",
+      "label": "Sipchem",
+      "company": "Sipchem",
+      "kind": "ats",
+      "adapter": "successfactors",
+      "handle": "https://career23.sapsf.com/career?company=C0002480584P&site=&lang=en_GB&requestParams=b4j8PDDwZLKgts70qq193SB3E5x42m2Qz0rDQBDGx9bS9A%2biCN4En6DEtkLAg9pia6DFUlEQD3Gz%0aGdMt6266u2krgk%2bkDyE%2bgR59AfHgO7jVSyMOzBxmvvl%2bwzx%2bQUEr2BiTKamlhvHaCdGjPkkKxffn%0al63r1zzkOlDmkkQdQo1UPpTMSKEeSR7Nk4NDWER15ti6brNioCLItEVUD6fIUwWbV70fc05EXDsz%0aiol4%2f%2bnt4uNz%2b76bA5gndmvFQLl%2fGQyGpx2%2fd2xgVTOD6QQeIP87BQMO5QyF8aPlvjOWoa7PMLRY%0aLSkj%2fChJ%2bN2ypHBDuEY7t9IBS5AzkbGuDtv9nSFGTCE1BtaoVAo5MUyKIAsrNd1dr%2bG59YaVMe0L%0ag0oQfq5R%2fQcsUnmbEJE5ptp2Xbfe9Nw9rzmwjpQoRBUIneHoNNRUsdCaOFzGTPwROApjpi3dfmrx%0a1gwdRdBtzb8BxJmCrA%3d%3d&career_ns=subscribe&navBarLevel=MY%5fPROFILE&_s.crb=zJSDl8Z1cD1n4IO0OQcc5N9XNiBXxs9VMmmOx8YgdSI%3d",
+      "region": "ksa",
+      "enabled": true
+    },
+    {
+      "id": "successfactors-wipro",
+      "label": "Wipro",
+      "company": "Wipro",
+      "kind": "ats",
+      "adapter": "successfactors",
+      "handle": "https://hcm55.sapsf.eu/messagebundle/_/vmod_3/common!/verp/ui/common-messagebundles/resources/i18n/common-components/messagebundle.properties&quot;},&quot;manifest&quot;:{&quot;async&quot;:true,&quot;path&quot;:&quot;asset-manifest-entrypoints.json?tag=b2605.26&quot;},&quot;root&quot;:{&quot;verp&quot;:{&quot;baseUrl&quot;:&quot;https://hcm55.sapsf.eu/verp/vmod_3&quot;,&quot;module&quot;:&quot;rmk-jobs-search&quot;,&quot;tag&quot;:&quot;b2605.26&quot;}}}}",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "jsonld-microsoft",
+      "label": "Microsoft",
+      "company": "Microsoft",
+      "kind": "career-page",
+      "adapter": "jsonld",
+      "handle": "https://apply.careers.microsoft.com/careers?start=0&pid=1970393556972152&sort_by=timestamp",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "oraclecloud-general-entertainment-authority",
+      "label": "General Entertainment Authority",
+      "company": "General Entertainment Authority",
+      "kind": "ats",
+      "adapter": "oraclecloud",
+      "handle": "fa-ewnz-saasfaprod1.fa.ocs.oraclecloud.com|CX_1|CX_1",
+      "region": "ksa",
+      "enabled": true
+    },
+    {
+      "id": "jsonld-qualcomm",
+      "label": "Qualcomm",
+      "company": "Qualcomm",
+      "kind": "career-page",
+      "adapter": "jsonld",
+      "handle": "https://careers.qualcomm.com/careers?start=0&pid=446719884008&sort_by=timestamp",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "oraclecloud-weatherford",
+      "label": "Weatherford",
+      "company": "Weatherford",
+      "kind": "ats",
+      "adapter": "oraclecloud",
+      "handle": "fa-exmi-saasfaprod1.fa.ocs.oraclecloud.com|CX_1|CX_1",
+      "region": "ksa",
+      "enabled": true
+    },
+    {
+      "id": "jsonld-microsoft-arabia",
+      "label": "Microsoft Arabia",
+      "company": "Microsoft Arabia",
+      "kind": "career-page",
+      "adapter": "jsonld",
+      "handle": "https://apply.careers.microsoft.com/careers?start=0&pid=1970393556961344&sort_by=timestamp",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "successfactors-fujitsu",
+      "label": "Fujitsu",
+      "company": "Fujitsu",
+      "kind": "ats",
+      "adapter": "successfactors",
+      "handle": "https://hcm50.sapsf.com/messagebundle/_/vmod_3/common!/verp/ui/common-messagebundles/resources/i18n/common-components/messagebundle.properties&quot;},&quot;manifest&quot;:{&quot;async&quot;:true,&quot;path&quot;:&quot;asset-manifest-entrypoints.json?tag=b2605.26&quot;},&quot;root&quot;:{&quot;verp&quot;:{&quot;baseUrl&quot;:&quot;https://hcm50.sapsf.com/verp/vmod_3&quot;,&quot;module&quot;:&quot;rmk-jobs-search&quot;,&quot;tag&quot;:&quot;b2605.26&quot;}}}}",
+      "region": "global",
+      "enabled": true
+    },
+    {
+      "id": "browser-kpmg-saudi-arabia",
+      "label": "KPMG Saudi Arabia",
+      "company": "KPMG Saudi Arabia",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://kpmg.com/sa/en/careers.html",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "browser-hashicorp",
+      "label": "HashiCorp",
+      "company": "HashiCorp",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.ibm.com/careers/search?q=hashicorp",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": false
+    },
+    {
+      "id": "browser-informatica",
+      "label": "Informatica",
+      "company": "Informatica",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.salesforce.com/company/careers/jobs/?search=informatica&pagesize=20",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": false
+    },
+    {
+      "id": "browser-zscaler",
+      "label": "Zscaler",
+      "company": "Zscaler",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.zscaler.com/careers",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "browser-barq",
+      "label": "Barq",
+      "company": "Barq",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://barq.io/jobs",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": false
+    },
+    {
+      "id": "browser-king-fahad-medical-city",
+      "label": "King Fahad Medical City",
+      "company": "King Fahad Medical City",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.kfmc.med.sa/EN/Page/Pages/JoinUs.aspx",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": false
+    },
+    {
+      "id": "browser-baker-hughes",
+      "label": "Baker Hughes",
+      "company": "Baker Hughes",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://careers.bakerhughes.com/en/careers",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": true
+    },
+    {
+      "id": "browser-riyadh-metro-rcrc",
+      "label": "Riyadh Metro (RCRC)",
+      "company": "Riyadh Metro (RCRC)",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://www.rcrc.gov.sa/careers",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": false
+    },
+    {
+      "id": "browser-ntt-data",
+      "label": "NTT DATA",
+      "company": "NTT DATA",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://careers.nttdata.com/",
+      "region": "global",
+      "needsBrowser": true,
+      "enabled": false
+    },
+    {
+      "id": "alt1-solutions-by-stc",
+      "label": "solutions by stc (board 2)",
+      "company": "solutions by stc",
+      "kind": "career-page",
+      "adapter": "browser",
+      "handle": "https://careers.solutions.com.sa/go/Trainee/7764123/",
+      "region": "ksa",
+      "needsBrowser": true,
+      "enabled": true
     }
   ]
 }
