@@ -37,6 +37,8 @@ jobs:
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           JSEARCH_OPENWEBNINJA_KEY: ${{ secrets.JSEARCH_OPENWEBNINJA_KEY }}
           JSEARCH_RAPIDAPI_KEY: ${{ secrets.JSEARCH_RAPIDAPI_KEY }}
+          # Google Jobs through SerpApi (free 250 a month), the same "jsearch" kind.
+          SERPAPI_KEY: ${{ secrets.SERPAPI_KEY }}
           JSEARCH_PAGES: "1"
           APP_URL: ${{ secrets.APP_URL }}
         run: npx tsx scripts/ingest.ts --kind jsearch

@@ -38,7 +38,7 @@ interface ExtractedJob {
   description: string | null;
 }
 
-const INSTRUCTIONS = `You extract job vacancies from the text of a company careers page.
+export const INSTRUCTIONS = `You extract job vacancies from the text of a company careers page.
 
 Return only roles the page advertises as individually open and applicable-for.
 

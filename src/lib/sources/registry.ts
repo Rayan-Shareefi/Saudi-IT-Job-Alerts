@@ -41,6 +41,17 @@ export const AGGREGATOR_SOURCES: SourceDefinition[] = [
     enabled: true,
   },
   {
+    // Google Jobs through SerpApi, for the employers whose own site cannot be
+    // read (adapters/serpapi.ts). Metered like JSearch: kind "jsearch".
+    id: "serpapi-companies",
+    label: "Google Jobs (SerpApi)",
+    kind: "jsearch",
+    adapter: "serpapi",
+    handle: "Riyadh",
+    region: "ksa",
+    enabled: true,
+  },
+  {
     id: "jooble-riyadh",
     label: "Jooble",
     kind: "jooble",

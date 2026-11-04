@@ -33,6 +33,7 @@ const KEYS: Check[] = [
   { name: "JSEARCH_RAPIDAPI_KEY", what: "JSearch bought on RapidAPI", optional: true },
   { name: "JSEARCH_RAPIDAPI_KEY_2", what: "second RapidAPI account", optional: true },
   { name: "JSEARCH_PROVIDER", what: "reads the legacy names as OpenWeb Ninja keys", optional: true },
+  { name: "SERPAPI_KEY", what: "Google Jobs for unreadable employers (free: serpapi.com, 250/month)", optional: true },
   { name: "JOOBLE_API_KEY", what: "Jooble tab", optional: true },
   { name: "CAREERJET_AFFID", what: "Careerjet tab", optional: true },
   { name: "RESEND_API_KEY", what: "the email digest", optional: true },

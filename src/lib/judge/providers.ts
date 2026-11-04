@@ -24,8 +24,11 @@ export interface JudgeProvider {
   model: string;
   role: Role;
   available(): boolean;
-  /** Returns the raw text of the model's reply. */
-  call(prompt: string): Promise<string>;
+  /**
+   * Returns the raw text of the model's reply. `schema`: the answer's JSON
+   * shape when it is not the jury's (the AI page reader, ai-reader.ts).
+   */
+  call(prompt: string, opts?: { schema?: object }): Promise<string>;
 }
 
 /**
@@ -162,7 +165,7 @@ function geminiProvider(id: string, budget: BudgetName, models: string[], role: 
       return liveModel(id, models) ?? models[models.length - 1];
     },
     available: () => Boolean(envStr("GEMINI_API_KEY")),
-    async call(prompt) {
+    async call(prompt, opts) {
       const key = envStr("GEMINI_API_KEY");
       if (!key) throw new ProviderUnavailable(id, "GEMINI_API_KEY not set");
       let waits = 0;
@@ -186,7 +189,7 @@ function geminiProvider(id: string, budget: BudgetName, models: string[], role: 
               temperature: 0,
               // Thinking models spend output tokens on reasoning before answering.
               maxOutputTokens: limit,
-              ...(plain ? {} : { responseMimeType: "application/json", responseSchema: role === "senior" ? SENIOR_SCHEMA : ANSWER_SCHEMA }),
+              ...(plain ? {} : { responseMimeType: "application/json", responseSchema: opts?.schema ?? (role === "senior" ? SENIOR_SCHEMA : ANSWER_SCHEMA) }),
             },
           },
           { "x-goog-api-key": key },
@@ -334,7 +337,7 @@ function ollamaProvider(): JudgeProvider {
     role: "juror",
     // Decided asynchronously by ollamaAvailable() before a run starts.
     available: () => ollamaUp === true,
-    async call(prompt) {
+    async call(prompt, opts) {
       const base = envStr("OLLAMA_URL") ?? "http://127.0.0.1:11434";
       // CPU inference on the laptop is slow; give it time rather than fail.
       const { status, json, text } = await postJson(
@@ -342,7 +345,7 @@ function ollamaProvider(): JudgeProvider {
         {
           model,
           stream: false,
-          format: ANSWER_SCHEMA,
+          format: opts?.schema ?? ANSWER_SCHEMA,
           options: { temperature: 0, num_ctx: 8192 },
           messages: [{ role: "user", content: prompt }],
         },

@@ -21,7 +21,7 @@ import { writeFileSync, mkdirSync, existsSync } from "node:fs";
 import { orderStaleFirst, runIngest, runSource } from "../src/lib/ingest";
 import { ALL_SOURCES, dynamicSources, enabledSources, sourceById, sourceStats } from "../src/lib/sources/registry";
 import { COMPANIES } from "../src/lib/sources/companies";
-import { AGGREGATOR_KINDS, isConfigured, lastRunTimes, retireOrphanedSources } from "../src/lib/db";
+import { AGGREGATOR_KINDS, isConfigured, lastRunTimes, retireOrphanedSources, supabaseAdmin } from "../src/lib/db";
 import { rebuildDuplicates } from "../src/lib/dedupe";
 import { recomputeStates } from "../src/lib/review";
 import type { EnrichedJob, IngestResult, SourceDefinition } from "../src/lib/types";
@@ -65,6 +65,18 @@ async function main(): Promise<void> {
   // JSearch alone. The scheduled nightly run passed no flag at all and spent
   // ~24 requests every day, exhausting the ~200/month plan on 2026-10-11.
   const noMetered = has("no-metered") || noApi;
+  /*
+   * The "include JSearch" tick on the website travels with the run itself
+   * (trigger "button+jsearch"). GitHub's workflow cannot see it, so it used to
+   * run every button search without JSearch, the tick doing nothing
+   * (2026-11-04). SerpApi rides on the same tick.
+   */
+  let withMetered = has("with-jsearch");
+  const runIdArg = arg("run-id");
+  if (!withMetered && runIdArg && configured) {
+    const { data } = await supabaseAdmin().from("ingest_runs").select("trigger").eq("id", runIdArg).maybeSingle();
+    withMetered = /jsearch/i.test(String(data?.trigger ?? ""));
+  }
   const deadlineMin = Number(arg("deadline-min") ?? 0);
   const deadlineAt = deadlineMin > 0 ? Date.now() + deadlineMin * 60_000 : undefined;
   const shard = parseShard(arg("shard"));
@@ -114,7 +126,7 @@ async function main(): Promise<void> {
     if (scope === "company") sources = sources.filter((s) => !isApi(s.kind));
     if (scope === "api") sources = sources.filter((s) => isApi(s.kind));
     // JSearch only when asked for by name: it is the one that costs quota.
-    if (noMetered || (scope === "api" && !has("with-jsearch"))) sources = sources.filter((s) => !METERED_KINDS.includes(s.kind));
+    if (noMetered || (scope === "api" && !withMetered)) sources = sources.filter((s) => !METERED_KINDS.includes(s.kind));
     if (has("order") && arg("order") === "stale-first" && configured) {
       sources = orderStaleFirst(sources, await lastRunTimes());
     }

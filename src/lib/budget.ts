@@ -25,6 +25,8 @@ export type Provider =
   | "sabbar"
   | "sabbar-sitemap"
   | "telegram"
+  | "serpapi"
+  | "page-reader"
   | "resend-alert"
   | "resend-system";
 
@@ -51,6 +53,12 @@ function caps(): Record<Provider, Cap> {
     sabbar: { period: "day", requests: envInt("BUDGET_SABBAR_DAY", 200), tokens: 0 },
     // Telegram: ~8 channel pages a pass plus the articles they link to.
     telegram: { period: "day", requests: envInt("BUDGET_TELEGRAM_DAY", 500), tokens: 0 },
+    // SerpApi free plan: 250 searches a month, no card; leave headroom.
+    serpapi: { period: "month", requests: envInt("BUDGET_SERPAPI_MONTH", 230), tokens: 0 },
+    // The AI page reader (ai-reader.ts): careers pages whose list the browser
+    // reader could not find. Each is one model call, from the same free
+    // allowances as the jury, so it stays well below them.
+    "page-reader": { period: "day", requests: envInt("BUDGET_PAGE_READER_DAY", 120), tokens: 0 },
     // Instant alerts: Resend free is 100/day; alerts are capped at 20 so the
     // digest and system mails always fit (see HANDOVER, email maths).
     "resend-alert": { period: "day", requests: envInt("BUDGET_ALERT_EMAILS_DAY", 20), tokens: 0 },

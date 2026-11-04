@@ -18,6 +18,7 @@ import { linkedinPosts } from "./linkedin-posts";
 import { workableSearch } from "./workable-search";
 import { sabbar } from "./sabbar";
 import { telegram } from "./telegram";
+import { serpapi } from "./serpapi";
 import { linkedinCompanies } from "./linkedin-companies";
 
 export const ADAPTERS: Record<string, Adapter> = {
@@ -57,6 +58,8 @@ export const ADAPTERS: Record<string, Adapter> = {
   sabbar,
   // Saudi job channels on Telegram (public channel pages), with their articles
   telegram,
+  // Google Jobs through SerpApi (free 250 a month), for employers whose site cannot be read
+  serpapi,
 };
 
 export type { Adapter };

@@ -16,6 +16,7 @@ import { isPlausiblePosting } from "../plausible";
 import { isTechnologyRole } from "../relevance";
 import { storedTexts } from "../db";
 import { obviouslyPrivate } from "../net-guard";
+import { aiListLink, aiReadJobs, listLinkIn } from "../ai-reader";
 import type { Adapter } from "./ats";
 import {
   REPEATED_BLOCK_SCRIPT,
@@ -462,7 +463,7 @@ function nextPageUrl(currentUrl: string, hrefs: string[]): string | null {
 }
 
 const REVEAL_BUTTON =
-  /^(search|search jobs|view all|view all jobs|see all jobs|all jobs|browse jobs|show all|find jobs|بحث|عرض الكل)$/i;
+  /^(search|search jobs?|view all|view all jobs|see all jobs|all jobs|browse jobs|show all|find jobs|بحث|عرض الكل)$/i;
 
 /**
  * Last resort for client-rendered boards.
@@ -1208,11 +1209,50 @@ async function fillFromDetailPages(
       }
     }
 
+    /*
+     * Nothing the patterns recognise, anywhere: the AI page reader reads the
+     * landing page as a person would (ai-reader.ts) - a free model lists the
+     * jobs, and only titles found word for word on the page are kept. About
+     * 110 main boards opened and read nothing on 2026-10-22.
+     */
+    if (best.length === 0 && (await visit(source.handle).catch(() => false))) {
+      type Seen = { text: string; links: Array<{ text: string; href: string }> };
+      const seen = (await page.evaluate(PAGE_TEXT_AND_LINKS).catch(() => null)) as Seen | null;
+      if (seen) {
+        const landing = { ...seen, pageUrl: page.url() };
+        best = await aiReadJobs(landing, source).catch(() => []);
+        /*
+         * A landing page whose list is one link away - KAFD's careers page
+         * leads to careers.kafd.sa through "Explore Opportunities". Its words
+         * or its address say which link, or a model picks one of the page's
+         * own; that page is then read the usual way, and by the AI after.
+         */
+        if (best.length === 0) {
+          const next = listLinkIn(seen.links, landing.pageUrl) ?? (await aiListLink(landing, source).catch(() => null));
+          if (next && (await visit(next).catch(() => false))) {
+            if (consider(await collectAllPages())) return await finish();
+            // careers.kafd.sa lists nothing until its search is submitted.
+            if ((await clickReveal()) && consider(await collectAllPages())) return await finish();
+            const there = (await page.evaluate(PAGE_TEXT_AND_LINKS).catch(() => null)) as Seen | null;
+            if (there) best = await aiReadJobs({ ...there, pageUrl: page.url() }, source).catch(() => []);
+          }
+        }
+      }
+    }
+
     return await finish();
   } finally {
     await b.close();
   }
 };
+
+/** The page's visible text and its links. A string, not a function: esbuild's __name breaks page.evaluate(fn). */
+const PAGE_TEXT_AND_LINKS = `(() => ({
+  text: document.body ? document.body.innerText : "",
+  links: Array.from(document.querySelectorAll("a[href]")).map(function (a) {
+    return { text: (a.textContent || "").replace(/\\s+/g, " ").trim(), href: a.href };
+  })
+}))()`;
 
 /* ------------------------- anchor-sweep heuristics ------------------------ */
 

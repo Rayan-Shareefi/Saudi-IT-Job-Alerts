@@ -16,7 +16,9 @@ Read it before changing any rule, adapter or the checker.
    `src/lib/budget.ts`.
 3. **JSearch is metered** (~200 requests/month per key, one per page). Never
    in a frequent schedule (`jsearch.yml` runs twice a week, ~130 of the 150 cap: 15 requests a run, the five broadest sweeps read 2 pages). Test with
-   `npm run test:jsearch` - the local mock, zero real requests.
+   `npm run test:jsearch` - the local mock, zero real requests. SerpApi (Google
+   Jobs, free 250/month) is metered the same way: kind "jsearch", capped at 230
+   by `budget.ts`, tested with `npm run test:serpapi` (a mock, zero searches).
 4. **Do not bypass bot protection.** Blocked sites go to the Site report and
    are covered through LinkedIn / JSearch. LinkedIn, from the laptop: public
    listings and public company pages (no login); the signed-in post search

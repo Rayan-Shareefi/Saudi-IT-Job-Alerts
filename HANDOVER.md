@@ -93,10 +93,12 @@ cloud work, and the date the full posting was read.
 |---|---|
 | **LinkedIn** | From the laptop, no login: public job listings (rotating keyword searches, plus each known company's own jobs by its LinkedIn id) and **company pages** - their hiring, co-op and internship posts, pictures read by OCR. The company list fills itself from every job card (`linkedin_companies`). The signed-in post search is off unless `LINKEDIN_SEARCH_POSTS=1`. Also arrives through JSearch |
 | **Indeed, Glassdoor, Bayt, Naukrigulf** | They block automated readers (security checks; Naukrigulf's data needs its app's private ids), so through **JSearch** (Google's job listings), twice a week: ten searches, the five broadest two pages deep, ~130 of the 150 free requests a month. A JSearch result also says which other sites carry the same job |
+| **Google Jobs (SerpApi)** | Free plan, 250 searches a month (no card). Searches "<employer> jobs" for the employers whose own site cannot be read (the Site report), longest-searched-ago first; runs with JSearch twice a week and from "include JSearch". Key: `SERPAPI_KEY` |
 | **Jooble, Careerjet** | Their free APIs |
 | **Sabbar** | Its public job sitemap (robots.txt allows it), then the job pages; twice a day |
 | **Workable** | Its free public job search, every employer hiring in Riyadh through Workable |
 | **Telegram** | Saudi job channels @ewdifh, @cd4cd, @jobzaty, @fu1sa through their public channel pages (no login), 4 pages (80 posts) each per pass, 15 on a full search. An announcement's linked article is read *before* deciding (jobzaty.com and wdeftksa.com list the fields there), the post's picture (OCR) otherwise; only technology and training posts are kept. These four only link to each other - no further large channel was found (2026-10-21). Change the list with `TELEGRAM_CHANNELS=handle,handle` |
+| **AI page reader** | Not a platform: when the browser reader finds no job list on a careers page, a free model (the laptop's Ollama first, then Gemini, Gemma, Groq) reads the page and lists the jobs - only titles found word for word on the page are kept, links only from the page. It also follows a landing page's link to its list ("Explore Opportunities"). ~120 pages a day (`BUDGET_PAGE_READER_DAY`); `AI_PAGE_READER=0` turns it off. Firecrawl was considered: its self-hosted version reads with the same browser engine, and its extra reach is getting past bot protection |
 | **Company sites** | ~560 employer boards and career pages (525 employers), plus the ones the worker discovers and the repairs. GitHub's quick pass every few hours reads the ~170 that need no browser; the nightly pass (6 shards) and the laptop's **F** read all of them |
 
 Every posting from every platform goes through the same rules, jury and
@@ -144,6 +146,7 @@ its own board added (`discover-employers`).
 | `JSEARCH_RAPIDAPI_KEY`, `JSEARCH_OPENWEBNINJA_KEY` | `.env.local`, GitHub secrets | rapidapi.com (free plan, hard limit) |
 | `CRON_SECRET` | `.env.local`, GitHub secrets, Vercel | any long random string; it is also the website's editing key |
 | `GH_DISPATCH_TOKEN`, `GH_REPO` | Vercel | github.com > Settings > Developer settings > fine-grained token, this repo, Actions: read and write |
+| `SERPAPI_KEY` | `.env.local`, GitHub secrets | serpapi.com (free plan, 250 a month, no card) |
 | `LINKEDIN_*` | the laptop's `.env.local` only | the secondary account |
 
 To rotate a key: replace it in every place listed, then press a Search button
@@ -243,6 +246,8 @@ then `npm run reclassify -- --dry` and read the "moves" before applying.
 | `src/lib/resume.ts` | CV match ("Recommended") | `test:matching` | 7 |
 | `src/lib/source-fix.ts`, `scripts/fix-sources.ts` | Source repairs: robots.txt, bot protection, learned choices, overrides | `test:fixes` | 33 |
 | `src/lib/recommended-company.ts` | "Recommended Company" badge | `test:badges` | 18 |
+| `src/lib/ai-reader.ts` | AI page reader: grounding, the link to a list | `test:ai-reader` | 18 |
+| `src/lib/adapters/serpapi.ts` | Google Jobs through SerpApi | `test:serpapi` (mock) | 14 |
 | `scripts/accuracy-check.ts` | Weekly re-read of shown jobs ("Double-check" badge, one email) | - | live |
 
 Other key files: `src/lib/review.ts` (recompute states), `src/lib/board.ts`
