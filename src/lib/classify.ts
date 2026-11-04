@@ -6,6 +6,7 @@ import { companyKey, shortHash } from "./company-key";
 import { textQualityOf } from "./scope";
 import { applyKindOf, formLinkIn } from "./apply-link";
 import { safeLink } from "./safe-link";
+import { deadlineEnd } from "./deadline";
 
 export { normalize };
 import type {
@@ -669,7 +670,8 @@ export function detectClosingDate(body: string, explicit?: string | null): strin
     const now = Date.now();
     if (t > now + 550 * 86_400_000) continue;
     if (t < now - 180 * 86_400_000) continue;
-    return iso;
+    // A date means the whole day (deadline.ts), not its first minute.
+    return deadlineEnd(iso);
   }
   return null;
 }

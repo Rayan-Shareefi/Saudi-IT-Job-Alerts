@@ -22,6 +22,7 @@ import {
   supabasePublic,
 } from "../src/lib/db";
 import { judgePosting } from "../src/lib/plausible";
+import { detectExperience } from "../src/lib/experience";
 import { effectivePostedAt } from "../src/lib/types";
 
 let failures = 0;
@@ -295,11 +296,14 @@ async function main(): Promise<void> {
         .eq("review_state", "show")
         .is("duplicate_of", null)
         .in("source_kind", [...AGGREGATOR_KINDS])
+        // As the board itself (queryJobs): past its deadline is not shown,
+        // even a job you kept.
+        .or(`closes_at.is.null,closes_at.gte.${new Date().toISOString()}`)
         .range(from, to),
     "aggregator company scan",
   );
   const aggCompanies = [...new Set(aggRows.map((r) => r.company))];
-  let emptyPages = 0;
+  const emptyNames: string[] = [];
   for (const name of aggCompanies) {
     const page = await queryJobs({
       city: "all",
@@ -307,12 +311,12 @@ async function main(): Promise<void> {
       sort: "newest",
       company: name,
     });
-    if (page.jobs.length === 0) emptyPages++;
+    if (page.jobs.length === 0) emptyNames.push(name);
   }
   check(
     "every aggregator employer's page returns its roles",
-    emptyPages === 0,
-    `(${aggCompanies.length} checked, ${emptyPages} empty)`,
+    emptyNames.length === 0,
+    `(${aggCompanies.length} checked, ${emptyNames.length} empty${emptyNames.length ? `: ${emptyNames.slice(0, 4).map((n) => JSON.stringify(n)).join(", ")}` : ""})`,
   );
 
   /* ---------------------------------------------------------------- */
@@ -347,13 +351,13 @@ async function verifiedBoardChecks(): Promise<void> {
     id: string; title: string; url: string; description_text: string | null; source_kind: string;
     min_years: number | null; experience_source: string | null; experience_evidence: string | null;
     scope_evidence: string[] | null; posted_at: string | null; last_refreshed_at: string | null;
-    first_seen_at: string; closes_at: string | null; duplicate_of: string | null;
+    first_seen_at: string; closes_at: string | null; duplicate_of: string | null; human_override: string | null;
   };
   const shown = await fetchAllRows<Row>(
     (from, to) =>
       db
         .from("jobs")
-        .select("id,title,url,description_text,source_kind,min_years,experience_source,experience_evidence,scope_evidence,posted_at,last_refreshed_at,first_seen_at,closes_at,duplicate_of")
+        .select("id,title,url,description_text,source_kind,min_years,experience_source,experience_evidence,scope_evidence,posted_at,last_refreshed_at,first_seen_at,closes_at,duplicate_of,human_override")
         .eq("is_active", true)
         .is("removed_at", null)
         .eq("review_state", "show")
@@ -363,8 +367,17 @@ async function verifiedBoardChecks(): Promise<void> {
   const { loose } = await import("../src/lib/judge/verify");
   const now = Date.now();
 
-  check("no verified job states a required 5+ years", !shown.some((r) => r.experience_source === "stated" && (r.min_years ?? 0) >= 5),
-    `(${shown.filter((r) => r.experience_source === "stated" && (r.min_years ?? 0) >= 5).length} found)`);
+  // Required, not preferred ("6 years ... highly preferred" stays on the board,
+  // state.ts step 6), and not a job you kept: your Keep is final.
+  const fivePlus = shown.filter(
+    (r) =>
+      r.experience_source === "stated" &&
+      (r.min_years ?? 0) >= 5 &&
+      r.human_override !== "show" &&
+      !detectExperience(r.title, r.description_text ?? "").preferredOnly,
+  );
+  check("no verified job states a required 5+ years", fivePlus.length === 0,
+    `(${fivePlus.length} found${fivePlus.length ? `: ${fivePlus.slice(0, 3).map((r) => `"${r.title}"`).join(", ")}` : ""})`);
   const bad = shown.filter((r) => !judgePosting(r.title, r.description_text, r.url).ok);
   check("no cookie, button or profile text among verified jobs", bad.length === 0, bad.slice(0, 3).map((r) => `"${r.title}"`).join(", "));
   // A copy is hidden behind its primary; if the primary went away the copy
@@ -378,12 +391,16 @@ async function verifiedBoardChecks(): Promise<void> {
   }
   const orphaned = copies.filter((r) => !livePrimaries.has(r.duplicate_of as string));
   check("every hidden duplicate points at a live primary", orphaned.length === 0, `(${copies.length} copies, ${orphaned.length} orphaned)`);
-  const stale = shown.filter((r) => {
+  const old = shown.filter((r) => {
     const t = Math.max(...[r.posted_at, r.last_refreshed_at].map((d) => (d ? new Date(d).getTime() : 0)).filter((n) => n <= now + 3_600_000), r.posted_at || r.last_refreshed_at ? 0 : new Date(r.first_seen_at).getTime());
     const ahead = r.closes_at ? new Date(r.closes_at).getTime() >= now : false;
     return (now - t) / 86_400_000 > 30 && !ahead;
   });
-  check("nothing older than 30 days is shown (unless its deadline is ahead)", stale.length === 0, `(${stale.length} found)`);
+  // A job you kept stays until you hide it (state.ts): reported, not a fault.
+  const stale = old.filter((r) => r.human_override !== "show");
+  const keptOld = old.length - stale.length;
+  check("nothing older than 30 days is shown (unless its deadline is ahead)", stale.length === 0,
+    `(${stale.length} found${keptOld ? `; ${keptOld} more you kept - Hide them if they are over` : ""})`);
   const unquoted = shown.filter((r) => {
     const text = loose(`${r.title}\n${r.description_text ?? ""}`);
     const quotes = [...(r.scope_evidence ?? []), ...(r.experience_source === "stated" && r.experience_evidence ? [r.experience_evidence] : [])];

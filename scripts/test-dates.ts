@@ -7,6 +7,8 @@
  */
 import { byPostTime } from "../src/lib/post-time";
 import { relativeToIso } from "../src/lib/relative-date";
+import { deadlineEnd } from "../src/lib/deadline";
+import { detectClosingDate } from "../src/lib/classify";
 
 let total = 0;
 let failures = 0;
@@ -79,6 +81,34 @@ days("الرياض", null);
   check("an undated job never passes a dated one", order(job("undated-found-today", null, 0), job("dated-25-days", 25, 25)), "dated-25-days,undated-found-today");
   check("undated jobs among themselves: newest found first", order(job("u-old", null, 9), job("u-new", null, 2)), "u-new,u-old");
   check("a date in the future is not trusted", order(job("future", -5, 1), job("today", 0, 1)), "today,future");
+}
+
+/*
+ * A deadline given as a date lasts the whole of that day in Riyadh. "Closes 4
+ * November" was stored as its first minute, and an Elm co-op announcement
+ * left the board at the start of its last day (2026-11-04).
+ */
+{
+  const same = (name: string, got: string | null, want: string | null) => {
+    total++;
+    if (got !== want) {
+      failures++;
+      console.log(`FAIL ${name}: wanted ${want}, got ${got}`);
+    }
+  };
+  const END_4_NOV = "2026-11-04T20:59:59.000Z"; // 23:59:59 in Riyadh
+  same("a date parsed on GitHub (UTC midnight) ends with the day in Riyadh", deadlineEnd("2026-11-04T00:00:00.000Z"), END_4_NOV);
+  same("a date parsed on the laptop (Riyadh midnight) ends with the same day", deadlineEnd("2026-11-03T21:00:00.000Z"), END_4_NOV);
+  same("a deadline with a time keeps its time", deadlineEnd("2026-11-04T14:30:00.000Z"), "2026-11-04T14:30:00.000Z");
+  same("already the end of the day: unchanged", deadlineEnd(END_4_NOV), END_4_NOV);
+  same("the last day of a month rolls over correctly", deadlineEnd("2026-11-30T00:00:00.000Z"), "2026-11-30T20:59:59.000Z");
+  same("not a date: unchanged", deadlineEnd("soon"), "soon");
+  // Through the detector, as every adapter's dates go. Written relative to
+  // today so the believable window (6 months back, 18 ahead) always holds.
+  const soon = new Date(Date.now() + 10 * DAY);
+  const ymd = soon.toISOString().slice(0, 10);
+  same("an ISO date in the text lasts its whole day", detectClosingDate(`Application deadline: ${ymd}`), `${ymd}T20:59:59.000Z`);
+  same("an explicit date-only deadline lasts its whole day", detectClosingDate("", ymd), `${ymd}T20:59:59.000Z`);
 }
 
 console.log(`dates: ${total - failures}/${total} correct`);

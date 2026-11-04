@@ -260,7 +260,7 @@ Other key files: `src/lib/review.ts` (recompute states), `src/lib/board.ts`
 
 ```bash
 npm run verify            # live end-to-end checks
-npm run test              # every suite above (767 cases)
+npm run test              # every suite above (782 cases)
 npm run reclassify        # recompute states (no fetching, no model calls); --dry to preview
 npm run dedupe            # rebuild duplicate groups; --dry to preview
 npm run judge             # run the AI jury; --max N, --deadline-min N
@@ -386,6 +386,18 @@ npm run fix:bytes         # repair regex escapes mangled by shell edits
     (`retireEnded`, undone by the upsert if it is listed again); any other
     failure is noted and that page waits for the next pass, and only a third
     failure in one pass stops the asking.
+28. **"Preferred" belongs to its own clause.** The experience reader called
+    years "preferred" when the word was anywhere within 60 characters, so
+    "7+ years of relevant experience, preferably with vendors" (Cyberknight)
+    and "Master's ... is preferred Experience Minimum 5 years" (ZATCA) sat
+    on the main board instead of the 5+ tab. Now only the number's own
+    clause counts (commas, "and", "but" end a clause) and a requirement
+    word ("minimum", "at least", "required") wins (`statedAsPreferred`).
+29. **A deadline date lasts the whole day.** 328 of 350 stored deadlines
+    were a date's first minute - UTC midnight on GitHub, Riyadh midnight
+    (21:00 UTC the day before) on the laptop - so a posting left the board
+    at the start of its last day (an Elm co-op post, 2026-11-04). Dates now
+    end at 23:59:59 Riyadh time (`deadlineEnd`); the stored ones were moved.
 
 ## State on 2026-10-15
 

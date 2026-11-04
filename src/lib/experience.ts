@@ -201,6 +201,34 @@ const ADDRESSES_APPLICANT =
   /\b(you|your|candidate|applicant|must|require|required|requires|requirements?|minimum|qualifications?|need|needs|should|ideal|looking for|seeking|someone|hire)\b|يجب|المتقدم|المرشح|متطلبات|المؤهلات|نبحث/;
 
 const PREFERRED = /\b(preferred|preferably|is a plus|a plus|nice to have|desirable|desired|an advantage|advantageous|ideally|bonus)\b|يفضل|ميزه/;
+/** A requirement word: it beats a preference word in the same clause. */
+const REQUIRED_WORD = /\b(required|requires?|mandatory|minimum|min|at least|at minimum|no less than|not less than|must)\b|لا تقل|لا يقل|علي الاقل/;
+const NOT_REQUIRED = /\bnot (strictly |necessarily )?(required|mandatory|a must)\b/;
+/** Where one clause of a sentence ends: "7+ years of experience, preferably with vendors". */
+const CLAUSE_BREAK = /,|،|\band\b|\bbut\b|\bwhile\b|\bwhereas\b/;
+
+/**
+ * Whether these years are only preferred, judged on the number's own clause,
+ * not on everything within 60 characters. Requirements the wider window
+ * misread (2026-11-04):
+ *
+ *   - "7+ years of relevant experience, preferably with vendors/large
+ *     resellers" (Cyberknight): the preference is the kind of employer;
+ *   - "Master's degree ... or equivalent is preferred Experience Minimum 5
+ *     years" (ZATCA): the preference is the degree, and "minimum" says so.
+ *
+ * "6 years technical sales or equivalent experience highly preferred" (Palo
+ * Alto) and "Preferably 5 years" stay preferences. A requirement word wins:
+ * a wrong "preferred" puts a 5+ role on the main board.
+ */
+function statedAsPreferred(prepared: string, index: number, length: number, sentenceStart: number, sentenceEnd: number): boolean {
+  const match = prepared.slice(index, index + length);
+  const before = prepared.slice(Math.max(sentenceStart, index - 60), index).split(CLAUSE_BREAK).pop() ?? "";
+  const after = prepared.slice(index + length, Math.min(sentenceEnd, index + length + 60)).split(CLAUSE_BREAK)[0];
+  if (NOT_REQUIRED.test(after)) return true;
+  if (REQUIRED_WORD.test(match) || REQUIRED_WORD.test(before) || REQUIRED_WORD.test(after)) return false;
+  return PREFERRED.test(before) || PREFERRED.test(after);
+}
 const ALTERNATIVES = /\bor\b|او/;
 const DEGREE = /\b(bachelor|master|phd|doctorate|diploma|degree)\b|بكالوريوس|ماجستير|دبلوم|دكتوراه/;
 
@@ -258,9 +286,7 @@ function candidates(prepared: string): Candidate[] {
         max: hi,
         index,
         length,
-        preferred: PREFERRED.test(
-          prepared.slice(Math.max(sentenceStart, index - 60), Math.min(sentenceEnd, index + length + 60)),
-        ),
+        preferred: statedAsPreferred(prepared, index, length, sentenceStart, sentenceEnd),
         sentence: si,
       });
       taken.push([index, index + length]);

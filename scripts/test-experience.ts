@@ -64,6 +64,20 @@ const CASES: Array<[string, string, string, Want]> = [
   /* ---- choosing among several numbers ---------------------------------- */
   ["required beats preferred", "Security Engineer", "2+ years of experience required. 5 years preferred.", { band: "1-2", min: 2, preferredOnly: false }],
   ["preferred only", "Security Engineer", "5 years of experience preferred.", { band: "3-5", min: 5, preferredOnly: true }],
+  // The preference is judged on the number's own clause (2026-11-04, three
+  // postings verify found on the main board with a stated 5+).
+  ["Cyberknight: 'preferably with vendors' is the employer, not the years", "Cybersecurity Consultant, KSA",
+    "Requirements: • 7+ years of relevant experience, preferably with vendors/large resellers/system integrators or distribution companies • Bachelor’s degree in Engineering, Computer Science, or equivalent",
+    { band: "6-9", min: 7, preferredOnly: false }],
+  ["ZATCA: a preferred degree, then 'Minimum 5 years'", "IT Security Architecture Supervisor",
+    "Master’s degree in Information Technology, Computer Science, Business Administration, or equivalent is preferred Experience Minimum 5 years of relevant experience.",
+    { band: "3-5", min: 5, preferredOnly: false }],
+  ["Palo Alto: years 'highly preferred' stay preferred", "Cloud Security Specialist (presales)",
+    "6 years technical sales or equivalent experience highly preferred", { band: "6-9", min: 6, preferredOnly: true }],
+  ["'a plus' about something else in the sentence", "SOC Analyst", "3+ years of experience in a SOC and a cloud certification is a plus.", { band: "3-5", min: 3, preferredOnly: false }],
+  ["required, then a preferred higher number, one sentence", "Security Engineer", "Minimum 3 years of experience required, 5 years of experience preferred.", { band: "3-5", min: 3, preferredOnly: false }],
+  ["'preferred but not required'", "SOC Analyst", "2 years of experience is preferred but not required.", { band: "1-2", min: 2, preferredOnly: true }],
+  ["'preferably' before the number", "Cloud Engineer", "Preferably 5 years of AWS experience.", { band: "3-5", min: 5, preferredOnly: true }],
   ["largest required minimum", "Cloud Engineer", "5+ years of IT experience, including 2 years in AWS.", { band: "3-5", min: 5 }],
   ["degree alternatives take the easier path", "Security Engineer", "Bachelor's degree with 5 years of experience or Master's degree with 3 years of experience.", { band: "3-5", min: 3 }],
   ["bachelor's in the same sentence is not degree length", "SOC Analyst", "Bachelor's degree in Computer Science with 2+ years of experience in a SOC.", { band: "1-2", min: 2 }],
