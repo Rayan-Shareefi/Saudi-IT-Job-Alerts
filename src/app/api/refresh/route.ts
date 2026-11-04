@@ -33,6 +33,7 @@ const PLATFORMS: Array<[string, string]> = [
   ["sabbar-riyadh", "Sabbar"],
   ["workable-riyadh", "Workable"],
   ["jsearch-riyadh", "JSearch (Indeed, Bayt, Glassdoor…)"],
+  ["serpapi-companies", "Google Jobs (SerpApi)"],
   ["jooble-riyadh", "Jooble"],
   ["careerjet-riyadh", "Careerjet"],
 ];
@@ -45,8 +46,10 @@ async function platforms(): Promise<Array<{ label: string; lastRunAt: string | n
   const byId = new Map((data ?? []).map((r) => [String(r.source_id), r]));
   return PLATFORMS.map(([id, label]) => {
     const r = byId.get(id);
-    // A skip or a partial run is the rules working, not a problem to show.
-    const problem = r && !r.ok ? String(r.error ?? "failed").slice(0, 120) : null;
+    // A skip or a partial run is the rules working, not a problem to show -
+    // except a missing key: that platform reads nothing until it is set.
+    const missingKey = r && /\bmissing\b/i.test(String(r.error ?? ""));
+    const problem = r && (!r.ok || missingKey) ? String(r.error ?? "failed").slice(0, 120) : null;
     return { label, lastRunAt: (r?.last_run_at as string) ?? null, kept: Number(r?.kept ?? 0), problem };
   });
 }

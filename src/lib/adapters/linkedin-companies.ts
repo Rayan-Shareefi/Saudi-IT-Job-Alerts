@@ -4,7 +4,7 @@ import { imageText, stopOcr } from "../ocr";
 import { announcesOpenings } from "../plausible";
 import type { RawJob, SourceDefinition } from "../types";
 import { MissingCredential } from "./aggregators";
-import { LinkedInRefused, gentleGet, withNote } from "./linkedin";
+import { LinkedInGone, LinkedInRefused, gentleGet, withNote } from "./linkedin";
 import { HIRING, postTitle } from "./linkedin-posts";
 
 /**
@@ -104,7 +104,7 @@ export const linkedinCompanies = async (source: SourceDefinition): Promise<RawJo
           break;
         }
         // A page that is not there (renamed, removed): not asked for again.
-        if (/HTTP 404/.test(String(err))) await db.from("linkedin_companies").update({ status: "dead", last_visited_at: new Date().toISOString() }).eq("slug", c.slug);
+        if (err instanceof LinkedInGone) await db.from("linkedin_companies").update({ status: "dead", last_visited_at: new Date().toISOString() }).eq("slug", c.slug);
         continue;
       }
       visited++;

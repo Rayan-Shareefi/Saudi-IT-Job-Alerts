@@ -300,6 +300,25 @@ export async function deactivateMissing(
 }
 
 /**
+ * Retires postings the source itself said have ended (LinkedIn: taken down,
+ * or closed to applications), instead of their being asked for on every pass
+ * until ten days unseen. Not a deletion: the upsert sets is_active again if
+ * the source lists one again.
+ */
+export async function retireEnded(sourceId: string, externalIds: string[]): Promise<number> {
+  if (externalIds.length === 0) return 0;
+  const { data, error } = await supabaseAdmin()
+    .from("jobs")
+    .update({ is_active: false })
+    .eq("source_id", sourceId)
+    .eq("is_active", true)
+    .in("external_id", externalIds)
+    .select("id");
+  if (error) throw new Error(`retire failed: ${error.message}`);
+  return data?.length ?? 0;
+}
+
+/**
  * Retires postings whose source no longer exists.
  *
  * `deactivateMissing` only ever looks at sources that RAN, so a posting

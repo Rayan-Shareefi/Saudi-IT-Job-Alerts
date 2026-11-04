@@ -81,6 +81,70 @@ export class LinkedInRefused extends Error {
   }
 }
 
+/**
+ * LinkedIn says the page is not there (HTTP 404 or 410): a posting taken down,
+ * a company page renamed. Not a refusal - only that one page is over.
+ */
+export class LinkedInGone extends Error {
+  constructor(what: string, status: number) {
+    super(`LinkedIn HTTP ${status}: ${what} that is not there any more`);
+    this.name = "LinkedInGone";
+  }
+}
+
+/** Which kind of LinkedIn page an address is, so a status line says what failed. */
+function pageKind(url: string): string {
+  if (url.includes("/jobPosting/")) return "a posting";
+  if (url.includes("/seeMoreJobPostings/")) return "a search page";
+  if (url.includes("/company/")) return "a company page";
+  return "a page";
+}
+
+/** Failures in one pass after which asking stops: by then it is not one bad page. */
+const MAX_FAILURES = 3;
+
+/**
+ * How a pass asks LinkedIn, so that one bad page never costs the pass.
+ *
+ * A refusal stops the asking. A posting LinkedIn says is gone is set aside,
+ * to be retired (ingest.ts). Any other failure is noted and that page waits
+ * for the next pass - until the third failure, which stops the asking too.
+ *
+ * 2026-11-02..04: a posting taken down on LinkedIn answered 404, the error
+ * ended every pass before anything was saved, and the same never-opened
+ * posting came up first again on the next pass: twelve passes, nothing stored.
+ */
+export function makeAsker(get: (url: string) => Promise<string>) {
+  const state = {
+    refusal: null as LinkedInRefused | null,
+    failures: [] as string[],
+    /** Posting ids that have ended: taken down, or closed to applications. */
+    ended: new Set<string>(),
+  };
+  const stopped = () => state.refusal !== null || state.failures.length >= MAX_FAILURES;
+  const ask = async (url: string, postingId?: string): Promise<string | null> => {
+    if (stopped()) return null;
+    try {
+      return await get(url);
+    } catch (err) {
+      if (err instanceof LinkedInRefused) state.refusal = err;
+      else if (err instanceof LinkedInGone && postingId) state.ended.add(postingId);
+      else state.failures.push(err instanceof Error ? err.message : String(err));
+      return null;
+    }
+  };
+  return { ask, state, stopped };
+}
+
+/**
+ * Postings the source says have ended, carried on the batch like the note:
+ * ingest.ts retires them (not a deletion: the upsert brings one back if a
+ * search lists it again).
+ */
+export function withEnded(jobs: RawJob[], ended: string[]): RawJob[] {
+  return Object.assign(jobs, { ended });
+}
+
 /* ------------------------------- parsing ---------------------------------- */
 
 export interface LinkedInCard {
@@ -165,7 +229,8 @@ export async function gentleGet(url: string): Promise<string> {
   const res = await fetch(url, { headers: HEADERS, redirect: "follow" });
   if (res.status === 429 || res.status === 999) throw new LinkedInRefused(`HTTP ${res.status}`);
   if (/authwall|\/login|checkpoint|uas\/login/i.test(res.url)) throw new LinkedInRefused("redirected to a login page");
-  if (!res.ok) throw new Error(`LinkedIn HTTP ${res.status}`);
+  if (res.status === 404 || res.status === 410) throw new LinkedInGone(pageKind(url), res.status);
+  if (!res.ok) throw new Error(`LinkedIn HTTP ${res.status} on ${pageKind(url)}`);
   return res.text();
 }
 
@@ -265,20 +330,10 @@ export const linkedin = async (source: SourceDefinition): Promise<RawJob[]> => {
    * LinkedIn requests a day for four days (2026-10-17..20) and stored none.
    * Now what was read is returned, the rest is read on a later pass, and the
    * refusal is reported on the result so the worker waits before asking again.
+   * Any other failure is one page, not the pass (makeAsker).
    */
-  let refusal: LinkedInRefused | null = null;
-  const ask = async (url: string): Promise<string | null> => {
-    if (refusal) return null;
-    try {
-      return await gentleGet(url);
-    } catch (err) {
-      if (err instanceof LinkedInRefused) {
-        refusal = err;
-        return null;
-      }
-      throw err;
-    }
-  };
+  const asker = makeAsker(gentleGet);
+  const { ask, stopped } = asker;
 
   // A few searches per pass, carrying on where the last pass stopped: fewer
   // requests at a time is what keeps LinkedIn answering.
@@ -300,7 +355,7 @@ export const linkedin = async (source: SourceDefinition): Promise<RawJob[]> => {
     if (found.length === 0) {
       // Empty pages on searches that normally return results is what a soft
       // block looks like; stop rather than keep asking.
-      if (++emptyPages >= 4) refusal = new LinkedInRefused("several result pages came back empty");
+      if (++emptyPages >= 4) asker.state.refusal = new LinkedInRefused("several result pages came back empty");
       return 0;
     }
     emptyPages = 0;
@@ -313,15 +368,21 @@ export const linkedin = async (source: SourceDefinition): Promise<RawJob[]> => {
   /** Open a listing's posting (within the pass's allowance) and keep it. */
   const keep = async (c: LinkedInCard): Promise<void> => {
     const externalId = `li:${c.id}`;
-    if (out.has(externalId)) return;
+    if (out.has(externalId) || asker.state.ended.has(c.id)) return;
     let text = known.get(externalId) ?? "";
     let applyUrl: string | null = null;
     let employmentType: string | null = null;
-    if (!text && !settled.has(externalId) && opened < maxDetail && !refusal) {
+    if (!text && !settled.has(externalId) && opened < maxDetail && !stopped()) {
       opened++;
-      const html = await ask(`${BASE}/jobPosting/${c.id}`);
+      const html = await ask(`${BASE}/jobPosting/${c.id}`, c.id);
+      // Taken down, or closed to applications: not kept, and retired rather
+      // than opened again on every pass.
+      if (asker.state.ended.has(c.id)) return;
       const detail = html === null ? null : parseDetail(html);
-      if (detail?.closed) return;
+      if (detail?.closed) {
+        asker.state.ended.add(c.id);
+        return;
+      }
       if (detail) {
         // LinkedIn's own fields are appended as labelled lines, so the
         // experience reader can see "Employment type: Internship".
@@ -354,11 +415,11 @@ export const linkedin = async (source: SourceDefinition): Promise<RawJob[]> => {
    */
   if (queries.length) await search(queries[0], 0);
   for (const c of byUsefulness(unread)) {
-    if (refusal || opened >= maxDetail) break;
+    if (stopped() || opened >= maxDetail) break;
     await keep(c);
   }
   for (const [i, q] of queries.entries()) {
-    for (let page = i === 0 ? 1 : 0; page < pages && !refusal; page++) {
+    for (let page = i === 0 ? 1 : 0; page < pages && !stopped(); page++) {
       if ((await search(q, page)) < PAGE_SIZE) break;
     }
   }
@@ -375,9 +436,10 @@ export const linkedin = async (source: SourceDefinition): Promise<RawJob[]> => {
       .order("last_jobs_at", { ascending: true, nullsFirst: true })
       .limit(envInt("LINKEDIN_COMPANY_SEARCHES", 2));
     for (const c of companies ?? []) {
-      if (refusal) break;
+      if (stopped()) break;
       const html = await ask(`${BASE}/seeMoreJobPostings/search?f_C=${encodeURIComponent(String(c.org_id))}&location=${encodeURIComponent("Saudi Arabia")}&f_TPR=r2592000&start=0`);
-      if (html === null) break;
+      // Not marked as searched: that company comes round again next pass.
+      if (html === null) continue;
       for (const card of parseSearch(html)) cards.set(card.id, card);
       await supabaseAdmin().from("linkedin_companies").update({ last_jobs_at: new Date().toISOString() }).eq("slug", c.slug);
     }
@@ -396,12 +458,17 @@ export const linkedin = async (source: SourceDefinition): Promise<RawJob[]> => {
 
   for (const c of byUsefulness([...cards.values()])) await keep(c);
 
-  const jobs = [...out.values()];
-  const stopped = refusal as LinkedInRefused | null;
-  if (stopped) {
+  const jobs = withEnded([...out.values()], [...asker.state.ended].map((id) => `li:${id}`));
+  const { refusal, failures } = asker.state;
+  if (refusal) {
     // Nothing read at all: a plain refusal (a skip, see ingest.ts).
-    if (jobs.length === 0) throw stopped;
-    return withNote(jobs, `partial: ${stopped.message} - kept the ${jobs.length} listing(s) read before that`);
+    if (jobs.length === 0) throw refusal;
+    return withNote(jobs, `partial: ${refusal.message} - kept the ${jobs.length} listing(s) read before that`);
+  }
+  if (failures.length) {
+    // Nothing read, and pages failing: a fault, and shown as one.
+    if (jobs.length === 0) throw new Error(failures[0]);
+    return withNote(jobs, `partial: ${failures.length} page(s) could not be read (${failures[0]}) - kept ${jobs.length} listing(s); those pages are asked for again next pass`);
   }
   return jobs;
 };

@@ -3,7 +3,7 @@ import { enrich, normalize } from "./classify";
 import { nameSaysSaudi } from "./sources/companies";
 import { isPlausiblePosting, judgePosting, listingPageLabels } from "./plausible";
 import { isTechnologyRole } from "./relevance";
-import { deactivateMissing, recordSourceHealth, upsertJobs, existingExternalIds, storedTexts } from "./db";
+import { deactivateMissing, recordSourceHealth, retireEnded, upsertJobs, existingExternalIds, storedTexts } from "./db";
 import { mapLimit } from "./http";
 import type { EnrichedJob, IngestResult, RawJob, SourceDefinition } from "./types";
 
@@ -470,6 +470,9 @@ export async function runSource(
    */
   if (!opts.dryRun) {
     await deactivateMissing(source.id, runStartedAt, source.kind).catch(() => 0);
+    // What the source itself said has ended (linkedin.ts withEnded).
+    const ended = (raw as RawJob[] & { ended?: string[] }).ended;
+    if (ended?.length) await retireEnded(source.id, ended).catch(() => 0);
   }
 
   opts.onJobs?.(kept, source);

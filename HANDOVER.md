@@ -260,7 +260,7 @@ Other key files: `src/lib/review.ts` (recompute states), `src/lib/board.ts`
 
 ```bash
 npm run verify            # live end-to-end checks
-npm run test              # every suite above (722 cases)
+npm run test              # every suite above (767 cases)
 npm run reclassify        # recompute states (no fetching, no model calls); --dry to preview
 npm run dedupe            # rebuild duplicate groups; --dry to preview
 npm run judge             # run the AI jury; --max N, --deadline-min N
@@ -375,6 +375,17 @@ npm run fix:bytes         # repair regex escapes mangled by shell edits
     with no progress for 20 minutes past its promise, and Task Scheduler's
     "running" is no longer trusted: the heartbeat (`logs/heartbeat.json`,
     table `worker_status`) is.
+27. **One dead page must never end a pass.** A LinkedIn posting taken down
+    after it was listed ("Team Lead Networks & Information Security",
+    li:4482893290) answered 404, and the reader let that error end the pass
+    before anything was saved. The posting stayed "never opened", so it came
+    up first again on every pass: twelve laptop passes from 2026-11-02 to
+    11-04 stored nothing ("LinkedIn HTTP 404" on the status line). Now
+    (`makeAsker` in linkedin.ts): a refusal stops the asking as before; a
+    posting that is gone (404/410) or closed to applications is retired
+    (`retireEnded`, undone by the upsert if it is listed again); any other
+    failure is noted and that page waits for the next pass, and only a third
+    failure in one pass stops the asking.
 
 ## State on 2026-10-15
 

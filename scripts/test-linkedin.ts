@@ -8,7 +8,7 @@
  * fixtures, the selectors in src/lib/adapters/linkedin.ts need updating.
  */
 import { readFileSync } from "node:fs";
-import { byUsefulness, parseDetail, parseSearch } from "../src/lib/adapters/linkedin";
+import { LinkedInGone, LinkedInRefused, byUsefulness, makeAsker, parseDetail, parseSearch, withEnded, withNote } from "../src/lib/adapters/linkedin";
 import { EXTRACT, STRUCTURE, postTitle } from "../src/lib/adapters/linkedin-posts";
 import { parseCompanyPage } from "../src/lib/adapters/linkedin-companies";
 
@@ -158,10 +158,70 @@ async function domTests(): Promise<void> {
   }
 }
 
-domTests()
-  .catch((err) => check("browser tests ran", false, err instanceof Error ? err.message : String(err)))
-  .then(() => {
-    console.log(`linkedin: ${total - failures}/${total} correct`);
-    if (failures > 0) process.exit(1);
+/*
+ * One bad page never costs the pass. 2026-11-02..04: "Team Lead Networks &
+ * Information Security" (li:4482893290) was taken down on LinkedIn, its
+ * posting answered 404, and that error ended twelve laptop passes in a row
+ * before anything was saved - the posting stayed "never opened", so it came
+ * up again first on every pass. Zero network: the pages are stand-ins.
+ */
+async function askerTests(): Promise<void> {
+  let calls = 0;
+  const pages: Record<string, () => string> = {
+    search: () => "<html>ten cards</html>",
+    "posting/4482893290": () => {
+      throw new LinkedInGone("a posting", 404);
+    },
+    "posting/1": () => "<html>a posting</html>",
+    "search-404": () => {
+      throw new LinkedInGone("a search page", 404);
+    },
+    "posting/500": () => {
+      throw new Error("LinkedIn HTTP 500 on a posting");
+    },
+  };
+  const get = async (url: string) => {
+    calls++;
+    return pages[url]();
+  };
+
+  const a = makeAsker(get);
+  await a.ask("search");
+  const gone = await a.ask("posting/4482893290", "4482893290");
+  const next = await a.ask("posting/1", "1");
+  check("a taken-down posting gives no text", gone === null);
+  check("a taken-down posting does not end the pass", next === "<html>a posting</html>", String(next));
+  check("a taken-down posting is set aside to be retired", a.state.ended.has("4482893290"), JSON.stringify([...a.state.ended]));
+  check("a taken-down posting is not a failure", a.state.failures.length === 0 && !a.stopped(), JSON.stringify(a.state.failures));
+
+  // A search page answering 404 is not a posting that ended: a failure, noted.
+  await a.ask("search-404");
+  check("a search page's 404 is a failure, not an ended posting", a.state.failures.length === 1 && a.state.ended.size === 1, JSON.stringify(a.state));
+  check("one failure does not stop the pass", !a.stopped() && (await a.ask("search")) !== null);
+
+  // The third failure is not one bad page any more: asking stops.
+  await a.ask("posting/500", "500");
+  await a.ask("posting/500", "500");
+  check("three failures stop the asking", a.stopped());
+  const before = calls;
+  check("after that nothing more is asked", (await a.ask("search")) === null && calls === before, `(${calls - before} more)`);
+
+  // A refusal stops at once, and is kept for the status line.
+  const b = makeAsker(async () => {
+    throw new LinkedInRefused("HTTP 429");
   });
+  await b.ask("search");
+  check("a refusal stops the asking at once", b.stopped() && b.state.refusal !== null && b.state.failures.length === 0);
+
+  // The batch carries what ended and the note together, for ingest.ts.
+  const batch = withNote(withEnded([], ["li:4482893290"]), "partial: x") as unknown as { ended?: string[]; note?: string };
+  check("the batch carries the ended postings and the note", batch.ended?.[0] === "li:4482893290" && batch.note === "partial: x", JSON.stringify(batch));
+}
+
+(async () => {
+  await askerTests().catch((err) => check("asker tests ran", false, err instanceof Error ? err.message : String(err)));
+  await domTests().catch((err) => check("browser tests ran", false, err instanceof Error ? err.message : String(err)));
+  console.log(`linkedin: ${total - failures}/${total} correct`);
+  if (failures > 0) process.exit(1);
+})();
 
